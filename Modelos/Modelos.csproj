@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D0EA5FA-F055-4746-B616-024193B68419}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Modelos</RootNamespace>
+    <AssemblyName>Modelos</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Andamento.cs" />
+    <Compile Include="Assinatura.cs" />
+    <Compile Include="AtoOperacao.cs" />
+    <Compile Include="AtualizaCartao.cs" />
+    <Compile Include="Caixa.cs" />
+    <Compile Include="CartaoAssinatura.cs" />
+    <Compile Include="Cartorio.cs" />
+    <Compile Include="Cheque.cs" />
+    <Compile Include="Processo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TipoEscritura.cs" />
+    <Compile Include="Correntista.cs" />
+    <Compile Include="Escritura.cs" />
+    <Compile Include="Funcionalidade.cs" />
+    <Compile Include="HistoricoCaixa.cs" />
+    <Compile Include="ItemEscritura.cs" />
+    <Compile Include="ItemOrcamento.cs" />
+    <Compile Include="ItemPedido.cs" />
+    <Compile Include="LocaisCartorio.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="MenuPerfil.cs" />
+    <Compile Include="Mesa.cs" />
+    <Compile Include="MovimentoCaixa.cs" />
+    <Compile Include="MovimentoDeposito.cs" />
+    <Compile Include="Orcamento.cs" />
+    <Compile Include="PagamentoCorrentista.cs" />
+    <Compile Include="Pedido.cs" />
+    <Compile Include="PedidoCorrentista.cs" />
+    <Compile Include="Perfil.cs" />
+    <Compile Include="Pessoa.cs" />
+    <Compile Include="PessoaEscritura.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selo.cs" />
+    <Compile Include="SelosUsuario.cs" />
+    <Compile Include="Setor.cs" />
+    <Compile Include="TipoDocumento.cs" />
+    <Compile Include="TipoMovimento.cs" />
+    <Compile Include="TipoSelo.cs" />
+    <Compile Include="Usuario.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
