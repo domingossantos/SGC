@@ -872,6 +872,13 @@ namespace sgc.caixa
             if (MessageBox.Show("Deseja Fechar este Caixa?", "Atenção!", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString().Equals("Yes"))
             {
 
+                if (pedidoBLL.checaExistePedidoFechados(sessao.UsuarioSessao.DsLogin).Rows.Count > 0) {
+                    MessageBox.Show("Você possui pedidos ainda não pagos.\nFavor verifique a lista de pedidos não em aberto.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+
+
                 if (caixaBLL.getCaixaDia(sessao.UsuarioSessao.DsLogin))
                 {
                     caixaBLL.fechaCaixa(sessao.UsuarioSessao.DsLogin);

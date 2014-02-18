@@ -90,9 +90,15 @@ namespace sgc
 
         private void suporteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            utils.sqlForm SqlForm = new sqlForm();
-            SqlForm.MdiParent = this;
-            SqlForm.Show();
+            if (utils.sessao.UsuarioSessao.DsLogin.Equals("admin"))
+            {
+                utils.sqlForm SqlForm = new sqlForm();
+                SqlForm.MdiParent = this;
+                SqlForm.Show();
+            }
+            else {
+                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+            }
 
         }
 

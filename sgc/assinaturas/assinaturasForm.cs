@@ -445,10 +445,10 @@ namespace sgc.assinaturas
                 return;
             }
 
+
             int qtd = 0;
             String strQtd = "";
             Selo selo = null;
-            //String nome = "";
             string nrCartao = "0";
 
             //checa item do pedido

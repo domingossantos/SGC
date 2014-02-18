@@ -1536,6 +1536,11 @@ namespace BLL
         public DataTable checaExistePedidoAberto(String login) {
             return pedidoDAO.getPedidos(" and stPedido = 'A' and dsLogin = '"+login+"'");
         }
+
+        public DataTable checaExistePedidoFechados(String login)
+        {
+            return pedidoDAO.getPedidos(" and stPedido in('A','F') and dsLogin = '" + login + "'");
+        }
     }
 }
 
