@@ -19,7 +19,10 @@ namespace BLL
 
         public void incluir(int codigo, int perfil)
         {
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
             try
             {
                 MenuPerfil menu = new MenuPerfil();
@@ -40,7 +43,10 @@ namespace BLL
         public bool getMenuExistePerfil(int cdPerfil,int cdMenu) {
             bool st = false;
 
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
             if (menuPerfilDAO.getMenuPerfilUsuario(cdPerfil, cdMenu) > 0)
                 st = true;
             

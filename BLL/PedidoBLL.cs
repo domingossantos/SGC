@@ -51,7 +51,10 @@ namespace BLL
         {
             //PedidoDAO pedidoDAO = new PedidoDAO(con.ObjCon);
             Pedido p = new Pedido();
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
             try
             {
                 p = pedidoDAO.getNovoPedido(login);
@@ -70,7 +73,11 @@ namespace BLL
         public void gravaItemPedido(ItemPedido i)
         {
             //ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO(con.ObjCon);
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
+
             try
             {
                 itemPedidoDAO.addItemPedido(i);
@@ -90,7 +97,11 @@ namespace BLL
             try
             {
                 AtoOperacao ato = new AtoOperacao();
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+
                 ato = atoDAO.getAtoOperacao(codigo);
 
                 return ato;
@@ -108,7 +119,11 @@ namespace BLL
             try
             {
                 TipoDocumento tipoDoc = new TipoDocumento();
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+
                 tipoDoc = tipoDocDao.getTipoDocumento(codigo);
 
                 return tipoDoc;
@@ -125,14 +140,18 @@ namespace BLL
             {
                 DataTable dados = new DataTable();
                 //ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO(con.ObjCon);
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+
                 dados = itemPedidoDAO.getItensPedido(nrPedido);
 
                 return dados;
             }
             finally
             {
-                con.ObjCon.Close();
+                //con.ObjCon.Close();
             }
         }
 
@@ -142,7 +161,10 @@ namespace BLL
             {
                 DataTable dados = new DataTable();
                 //ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO(con.ObjCon);
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 dados = itemPedidoDAO.getItensPedidoEscritura(nrPedido);
 
                 return dados;
@@ -159,7 +181,10 @@ namespace BLL
             {
                 DataTable dados = new DataTable();
                 //ItemPedidoDAO itemPedidoDAO = new ItemPedidoDAO(con.ObjCon);
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 string pedidos = "";
                 for (int i = 0; i < nrPedidos.Count; i++)
                 {
@@ -183,7 +208,10 @@ namespace BLL
             try
             {
                 DataTable dados = new DataTable();
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 AtoOperacaoDAO atos = new AtoOperacaoDAO(con.ObjCon);
                 dados = atos.getAtosOperacoes(" and cdUso = 3");
 
@@ -206,8 +234,26 @@ namespace BLL
                 if (con.ObjCon.State == ConnectionState.Closed)
                     con.ObjCon.Open();
 
+                SqlCommand cmd = new SqlCommand("spFechaPedido", con.ObjCon);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter param = cmd.Parameters.Add(new SqlParameter("@pedido", SqlDbType.BigInt));
+                param.Direction = ParameterDirection.Input;
+                param.Value = nrPedido;
+                SqlDataReader dr = null;
+                Double valor = 0;
+                dr = cmd.ExecuteReader(CommandBehavior.SingleResult);
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    valor = Convert.ToDouble(dr["total"].ToString());
+                }
+
+                #region Fechamento Antigo
                 //ItemPedidoDAO itemDAO = new ItemPedidoDAO(con.ObjCon);
                 //SelosDAO seloDAO = new SelosDAO(con.ObjCon);
+                /*
                 DataTable dados = itemPedidoDAO.getItensPedido(nrPedido);
 
                 DataView dvDados = new DataView(dados);
@@ -218,14 +264,15 @@ namespace BLL
                     drDados = dvDados[i].Row;
                     //string nselo = drDados["nrSelo"].ToString();
                     valor += Convert.ToDouble(drDados["vlItem"].ToString());
-                    /*if (drDados["nrSelo"].ToString() != "")
-                    {
-                        seloDAO.mudarStatusSelo(Convert.ToInt16(drDados["nrSelo"].ToString()), Convert.ToInt16(drDados["cdTipoSelo"].ToString()),'U');
-                    }*/
+                    //if (drDados["nrSelo"].ToString() != "")
+                    //{
+                    //    seloDAO.mudarStatusSelo(Convert.ToInt16(drDados["nrSelo"].ToString()), Convert.ToInt16(drDados["cdTipoSelo"].ToString()),'U');
+                    //}
 
                 }
                 pedidoDAO.atualizaPedido(nrPedido, 'F', trans);
-
+                */
+                #endregion
                 return valor;
             }
             finally
@@ -236,7 +283,10 @@ namespace BLL
 
         public void cancelaPedido(int nrPedido)
         {
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
             SqlTransaction trans = con.ObjCon.BeginTransaction();
 
             try
@@ -274,14 +324,26 @@ namespace BLL
         }
 
         public void apagarPedido(int nrPedido) {
-            con.ObjCon.Open();
-            pedidoDAO.atualizaPedido(nrPedido, 'C', null);
-            con.ObjCon.Close();
+            try
+            {
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+                pedidoDAO.atualizaPedido(nrPedido, 'C', null);
+            }
+            finally
+            {
+                con.ObjCon.Close();
+            }
         }
         
         public void cancelaPedido(int nrPedido,Double valor, String login)
         {
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
             SqlTransaction trans = con.ObjCon.BeginTransaction();
 
             try
@@ -319,10 +381,13 @@ namespace BLL
             }
         }
 
-        public void pagaPedido(int nrPedido, HistoricoCaixa historico, int tpPagamento)
+        public void pagaPedido(int nrPedido, HistoricoCaixa historico, int tpPagamento, SqlTransaction trans = null)
         {
 
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
             DataTable dados = itemPedidoDAO.getItensPedido(nrPedido);
 
             double valor = 0;
@@ -341,14 +406,14 @@ namespace BLL
                     {
                         nrSelo = Convert.ToInt32(nselo);
                         cdTipo = Convert.ToInt32(drDados["cdTipoSelo"].ToString());
-                        seloDAO.mudarStatusSelo(nrSelo, cdTipo, 'U');
+                        seloDAO.mudarStatusSelo(nrSelo, cdTipo, 'U',trans);
                     }
 
                     valor += Convert.ToDouble(drDados["vlItem"].ToString());
 
                 }
 
-                pedidoDAO.atualizaPedido(nrPedido, 'P');
+                pedidoDAO.atualizaPedido(nrPedido, 'P',trans);
 
             }
             catch (Exception e)
@@ -367,7 +432,10 @@ namespace BLL
             {
                 //PedidoDAO pedidoDAO = new PedidoDAO(con.ObjCon);
                 DataTable dados = new DataTable();
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 dados = pedidoDAO.getPedidosItens(" and p.stPedido in ('A','F') " + filtro);
 
                 return dados;
@@ -385,7 +453,10 @@ namespace BLL
                 //PedidoDAO pedidoDAO = new PedidoDAO(con.ObjCon);
                 con.ObjCon.Open();
                 Pedido pedido = pedidoDAO.getPedido(nrPedido);
-                con.ObjCon.Close();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 return pedido;
             }
             finally
@@ -401,7 +472,10 @@ namespace BLL
             Selo selo = null;
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 selo = seloDAO.getUltimoSelo(atoDAO.getAtoOperacao(tipo).CdTipoDocumento, login);
                 return selo;
             }
@@ -421,7 +495,10 @@ namespace BLL
             //SelosDAO seloDAO = new SelosDAO(con.ObjCon);
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 seloDAO.mudarStatusSelo(nrSelo, tipo, status);
             }
             finally
@@ -459,7 +536,10 @@ namespace BLL
                 }
                 else
                 {
-                    con.ObjCon.Open();
+                    if (con.ObjCon.State == ConnectionState.Closed)
+                    {
+                        con.ObjCon.Open();
+                    }
                     cartao = cartaoDAO.getCartaoPorNumero(nrCartao);
                 }
                 return cartao;
@@ -553,7 +633,10 @@ namespace BLL
 
                 pedidos = pedidos.Substring(0, (pedidos.Length - 1));
 
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
 
                 DataTable dados = itemPedidoDAO.getItensPedidoImpressao(pedidos);
 
@@ -673,7 +756,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
 
 
                 Usuario usuario = usuarioDAO.getUsuario(historico.DsLogin);
@@ -1077,8 +1163,8 @@ namespace BLL
                     imp.PrintText(x++, 1,
                             drDados[2].ToString().PadLeft(3, '0') + " "
                             + drDados[1].ToString().PadRight(24, ' ')
-                            + drDados[3].ToString().PadLeft(8, '0')
-                            + " A " + drDados[4].ToString().PadLeft(8, '0')
+                            + drDados[5].ToString().PadLeft(8, '0')
+                            + " A " + drDados[6].ToString().PadLeft(8, '0')
                             );
                 }
 
@@ -1342,7 +1428,10 @@ namespace BLL
 
         public int repetirPedido(int nrPedido, string dsLogin, int nrRepeticoes)
         {
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
 
             SqlTransaction trans = con.ObjCon.BeginTransaction();
 
@@ -1420,7 +1509,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 int qtd = 0;
                 DataTable dados = seloDAO.getSelos("and t.cdTipoDocumento = " + tpSelo.ToString() + "  and s.stSelo = 'D' and s.dsLogin = '" + dsLogin + "'");
 
@@ -1438,10 +1530,10 @@ namespace BLL
         public DataTable getMovimentoDiario(int idHistorico)
         {
             DataTable dados = null;
-
-            con.ObjCon.Open();
-
-
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
 
             con.ObjCon.Close();
             return dados;
@@ -1451,7 +1543,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 itemPedidoDAO.delItemPedido(idItem);
             }
             catch (Exception ex)
@@ -1471,7 +1566,10 @@ namespace BLL
             {
                 DataTable dados = null;
 
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
 
                 dados = pedidoDAO.getPedidosMulti(login, nrPedidoIni, nrPedidoFim);
 
@@ -1489,7 +1587,10 @@ namespace BLL
             DataTable intervalo = new DataTable();
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 intervalo = pedidoDAO.getIntervaloSelos(login);
             }
             finally
@@ -1504,7 +1605,10 @@ namespace BLL
             string serie = "";
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 serie = tipoSeloDAO.getTipoSelo(cdTipoSelo).NrSerie;
             }
             catch (Exception ex)
@@ -1523,7 +1627,10 @@ namespace BLL
             DataTable intervalo = new DataTable();
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 intervalo = pedidoDAO.getPedidosCancelados(dtInicio,dtFim,login,nrPedido);
             }
             finally

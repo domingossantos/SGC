@@ -432,12 +432,13 @@ namespace sgc.assinaturas
 
         private void btInserirPedido_Click(object sender, EventArgs e)
         {
-
+            /*
             if (pedidoBLL.checaExistePedidoAberto(utils.sessao.UsuarioSessao.DsLogin).Rows.Count > 0) {
                 MessageBox.Show("Há pedidos em aberto no seu caixa.\nFavor confira esses pedidos para poder abrir outro.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
             }
-            
+            */
+
             if (cbOperacao.SelectedValue == null)
             {
                 MessageBox.Show("Selecione uma operação");

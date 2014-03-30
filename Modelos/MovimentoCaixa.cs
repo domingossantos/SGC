@@ -101,5 +101,12 @@ namespace Modelos
             get { return dsObservacao; }
             set { dsObservacao = value; }
         }
+
+        private int nrPedidoPagto;
+
+        public int NrPedidoPagto {
+            get { return nrPedidoPagto;  }
+            set { nrPedidoPagto = value; }
+        }
     }
 }

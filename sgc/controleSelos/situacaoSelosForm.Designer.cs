@@ -29,13 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.vwSituacaoSelosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sGCDataSet = new sgc.SGCDataSet();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbSituacao = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cbTipoDocumento = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbTipoSelo = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.txNumSelo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbSituacao = new System.Windows.Forms.RadioButton();
+            this.rbTipoDocSelo = new System.Windows.Forms.RadioButton();
+            this.rbTipoSelo = new System.Windows.Forms.RadioButton();
             this.rbNumSelo = new System.Windows.Forms.RadioButton();
             this.rbNome = new System.Windows.Forms.RadioButton();
             this.rbDataUsuario = new System.Windows.Forms.RadioButton();
@@ -53,34 +60,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtInicio = new System.Windows.Forms.DateTimePicker();
             this.btPesquisar = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.vwSituacaoSelosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sGCDataSet = new sgc.SGCDataSet();
             this.vwSituacaoSelosTableAdapter = new sgc.SGCDataSetTableAdapters.vwSituacaoSelosTableAdapter();
-            this.rbTipoSelo = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbTipoSelo = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cbTipoDocumento = new System.Windows.Forms.ComboBox();
-            this.rbTipoDocSelo = new System.Windows.Forms.RadioButton();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cbSituacao = new System.Windows.Forms.ComboBox();
-            this.rbSituacao = new System.Windows.Forms.RadioButton();
-            ((System.ComponentModel.ISupportInitialize)(this.vwSituacaoSelosBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sGCDataSet)).BeginInit();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vwSituacaoSelosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sGCDataSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // vwSituacaoSelosBindingSource
-            // 
-            this.vwSituacaoSelosBindingSource.DataMember = "vwSituacaoSelos";
-            this.vwSituacaoSelosBindingSource.DataSource = this.sGCDataSet;
-            // 
-            // sGCDataSet
-            // 
-            this.sGCDataSet.DataSetName = "SGCDataSet";
-            this.sGCDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // panel1
             // 
@@ -110,6 +98,62 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(791, 144);
             this.panel1.TabIndex = 0;
+            // 
+            // cbSituacao
+            // 
+            this.cbSituacao.FormattingEnabled = true;
+            this.cbSituacao.Items.AddRange(new object[] {
+            "DISPONIVEL",
+            "CANCELADO",
+            "TRANSFERIDO",
+            "USADO"});
+            this.cbSituacao.Location = new System.Drawing.Point(470, 110);
+            this.cbSituacao.Name = "cbSituacao";
+            this.cbSituacao.Size = new System.Drawing.Size(115, 21);
+            this.cbSituacao.TabIndex = 19;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(467, 94);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 13);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Situação";
+            // 
+            // cbTipoDocumento
+            // 
+            this.cbTipoDocumento.FormattingEnabled = true;
+            this.cbTipoDocumento.Location = new System.Drawing.Point(263, 110);
+            this.cbTipoDocumento.Name = "cbTipoDocumento";
+            this.cbTipoDocumento.Size = new System.Drawing.Size(189, 21);
+            this.cbTipoDocumento.TabIndex = 17;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(260, 94);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Tipo Documento";
+            // 
+            // cbTipoSelo
+            // 
+            this.cbTipoSelo.FormattingEnabled = true;
+            this.cbTipoSelo.Location = new System.Drawing.Point(263, 70);
+            this.cbTipoSelo.Name = "cbTipoSelo";
+            this.cbTipoSelo.Size = new System.Drawing.Size(189, 21);
+            this.cbTipoSelo.TabIndex = 15;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(260, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Tipo Selo";
             // 
             // txNumSelo
             // 
@@ -144,6 +188,39 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pesquisar Por";
+            // 
+            // rbSituacao
+            // 
+            this.rbSituacao.AutoSize = true;
+            this.rbSituacao.Location = new System.Drawing.Point(225, 65);
+            this.rbSituacao.Name = "rbSituacao";
+            this.rbSituacao.Size = new System.Drawing.Size(67, 17);
+            this.rbSituacao.TabIndex = 8;
+            this.rbSituacao.TabStop = true;
+            this.rbSituacao.Text = "Situação";
+            this.rbSituacao.UseVisualStyleBackColor = true;
+            // 
+            // rbTipoDocSelo
+            // 
+            this.rbTipoDocSelo.AutoSize = true;
+            this.rbTipoDocSelo.Location = new System.Drawing.Point(90, 65);
+            this.rbTipoDocSelo.Name = "rbTipoDocSelo";
+            this.rbTipoDocSelo.Size = new System.Drawing.Size(134, 17);
+            this.rbTipoDocSelo.TabIndex = 7;
+            this.rbTipoDocSelo.TabStop = true;
+            this.rbTipoDocSelo.Text = "Documento e Situação";
+            this.rbTipoDocSelo.UseVisualStyleBackColor = true;
+            // 
+            // rbTipoSelo
+            // 
+            this.rbTipoSelo.AutoSize = true;
+            this.rbTipoSelo.Location = new System.Drawing.Point(7, 63);
+            this.rbTipoSelo.Name = "rbTipoSelo";
+            this.rbTipoSelo.Size = new System.Drawing.Size(70, 17);
+            this.rbTipoSelo.TabIndex = 6;
+            this.rbTipoSelo.TabStop = true;
+            this.rbTipoSelo.Text = "Tipo Selo";
+            this.rbTipoSelo.UseVisualStyleBackColor = true;
             // 
             // rbNumSelo
             // 
@@ -309,137 +386,48 @@
             this.btPesquisar.UseVisualStyleBackColor = false;
             this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
             // 
-            // panel2
+            // vwSituacaoSelosBindingSource
             // 
-            this.panel2.Controls.Add(this.reportViewer1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 144);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(791, 291);
-            this.panel2.TabIndex = 1;
+            this.vwSituacaoSelosBindingSource.DataMember = "vwSituacaoSelos";
+            this.vwSituacaoSelosBindingSource.DataSource = this.sGCDataSet;
             // 
-            // reportViewer1
+            // sGCDataSet
             // 
-            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource2.Name = "dsSituacaoSelos";
-            reportDataSource2.Value = this.vwSituacaoSelosBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "sgc.relatorios.relSituacaoSelos.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(791, 291);
-            this.reportViewer1.TabIndex = 0;
+            this.sGCDataSet.DataSetName = "SGCDataSet";
+            this.sGCDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // vwSituacaoSelosTableAdapter
             // 
             this.vwSituacaoSelosTableAdapter.ClearBeforeFill = true;
             // 
-            // rbTipoSelo
+            // reportViewer1
             // 
-            this.rbTipoSelo.AutoSize = true;
-            this.rbTipoSelo.Location = new System.Drawing.Point(7, 63);
-            this.rbTipoSelo.Name = "rbTipoSelo";
-            this.rbTipoSelo.Size = new System.Drawing.Size(70, 17);
-            this.rbTipoSelo.TabIndex = 6;
-            this.rbTipoSelo.TabStop = true;
-            this.rbTipoSelo.Text = "Tipo Selo";
-            this.rbTipoSelo.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(260, 54);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Tipo Selo";
-            // 
-            // cbTipoSelo
-            // 
-            this.cbTipoSelo.FormattingEnabled = true;
-            this.cbTipoSelo.Location = new System.Drawing.Point(263, 70);
-            this.cbTipoSelo.Name = "cbTipoSelo";
-            this.cbTipoSelo.Size = new System.Drawing.Size(189, 21);
-            this.cbTipoSelo.TabIndex = 15;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(260, 94);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Tipo Documento";
-            // 
-            // cbTipoDocumento
-            // 
-            this.cbTipoDocumento.FormattingEnabled = true;
-            this.cbTipoDocumento.Location = new System.Drawing.Point(263, 110);
-            this.cbTipoDocumento.Name = "cbTipoDocumento";
-            this.cbTipoDocumento.Size = new System.Drawing.Size(189, 21);
-            this.cbTipoDocumento.TabIndex = 17;
-            // 
-            // rbTipoDocSelo
-            // 
-            this.rbTipoDocSelo.AutoSize = true;
-            this.rbTipoDocSelo.Location = new System.Drawing.Point(90, 65);
-            this.rbTipoDocSelo.Name = "rbTipoDocSelo";
-            this.rbTipoDocSelo.Size = new System.Drawing.Size(134, 17);
-            this.rbTipoDocSelo.TabIndex = 7;
-            this.rbTipoDocSelo.TabStop = true;
-            this.rbTipoDocSelo.Text = "Documento e Situação";
-            this.rbTipoDocSelo.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(467, 94);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(49, 13);
-            this.label9.TabIndex = 18;
-            this.label9.Text = "Situação";
-            // 
-            // cbSituacao
-            // 
-            this.cbSituacao.FormattingEnabled = true;
-            this.cbSituacao.Items.AddRange(new object[] {
-            "DISPONIVEL",
-            "CANCELADO",
-            "TRANSFERIDO",
-            "USADO"});
-            this.cbSituacao.Location = new System.Drawing.Point(470, 110);
-            this.cbSituacao.Name = "cbSituacao";
-            this.cbSituacao.Size = new System.Drawing.Size(115, 21);
-            this.cbSituacao.TabIndex = 19;
-            // 
-            // rbSituacao
-            // 
-            this.rbSituacao.AutoSize = true;
-            this.rbSituacao.Location = new System.Drawing.Point(225, 65);
-            this.rbSituacao.Name = "rbSituacao";
-            this.rbSituacao.Size = new System.Drawing.Size(67, 17);
-            this.rbSituacao.TabIndex = 8;
-            this.rbSituacao.TabStop = true;
-            this.rbSituacao.Text = "Situação";
-            this.rbSituacao.UseVisualStyleBackColor = true;
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            reportDataSource1.Name = "dsSituacaoSelos";
+            reportDataSource1.Value = this.vwSituacaoSelosBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "sgc.relatorios.relSituacaoSelos.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(0, 144);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.Size = new System.Drawing.Size(791, 291);
+            this.reportViewer1.TabIndex = 1;
             // 
             // situacaoSelosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 435);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.reportViewer1);
             this.Controls.Add(this.panel1);
             this.Name = "situacaoSelosForm";
             this.Text = "Situação Selos";
             this.Load += new System.EventHandler(this.situacaoSelosForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.vwSituacaoSelosBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sGCDataSet)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.vwSituacaoSelosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sGCDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -447,18 +435,12 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private SGCDataSet sGCDataSet;
-        private System.Windows.Forms.BindingSource vwSituacaoSelosBindingSource;
-        private SGCDataSetTableAdapters.vwSituacaoSelosTableAdapter vwSituacaoSelosTableAdapter;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbUsuario;
         private System.Windows.Forms.DateTimePicker dtFim;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtInicio;
-        private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbNome;
         private System.Windows.Forms.RadioButton rbDataUsuario;
@@ -481,5 +463,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cbSituacao;
         private System.Windows.Forms.RadioButton rbSituacao;
+        private SGCDataSet sGCDataSet;
+        private System.Windows.Forms.BindingSource vwSituacaoSelosBindingSource;
+        private SGCDataSetTableAdapters.vwSituacaoSelosTableAdapter vwSituacaoSelosTableAdapter;
+        private System.Windows.Forms.Button btPesquisar;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }

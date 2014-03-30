@@ -27,13 +27,10 @@ namespace sgc.controleSelos
 
         private void situacaoSelosForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'sGCDataSet.vwSituacaoSelos' table. You can move, or remove it, as needed.
-            //this.vwSituacaoSelosTableAdapter.Fill(this.sGCDataSet.vwSituacaoSelos);
-
-            //this.reportViewer1.RefreshReport();
             getUsuarios();
             getTipoSelo();
             getTipoDocumento();
+            
         }
 
         private void getUsuarios() {
@@ -104,13 +101,12 @@ namespace sgc.controleSelos
 
 
             vwSituacaoSelosTableAdapter.Connection.ConnectionString = DAO.Dados.strConexao;
+
             switch (getTipoPesquisa()) { 
                 case 1:
                     this.vwSituacaoSelosTableAdapter.FillByDataUso(
                                 this.sGCDataSet.vwSituacaoSelos
                                 ,oDtInicio,oDtFim);
-
-                    
                     break;
                 case 2:
                     this.vwSituacaoSelosTableAdapter.FillByPedido(
@@ -154,7 +150,7 @@ namespace sgc.controleSelos
                     break;
             }
 
-            this.reportViewer1.RefreshReport();
+            this.reportViewer1.RefreshReport();   
         }
     }
 }
