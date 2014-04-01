@@ -156,6 +156,7 @@ namespace sgc.controleSelos
                 this.reportViewer1.RefreshReport();
             }
             catch (Exception ex) {
+                // COmentario
                 MessageBox.Show("Erro ao gerar relatório\n"+ex.Message);
             }
         }

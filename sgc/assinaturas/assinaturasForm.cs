@@ -617,6 +617,7 @@ namespace sgc.assinaturas
         {
             try
             {
+                // Adicionar 
                 double valor = pedidoBLL.fechaPedido(utils.sessao.NrPedido);
 
                 resumoPedidoFechado(utils.sessao.NrPedido);

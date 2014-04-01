@@ -576,7 +576,8 @@ namespace sgc.caixa
                                     , int nrCaixa
                                     , int tipoPagamento
                                     , double vlDesconto
-                                    , string dsLoginDesconto */
+                                    , string dsLoginDesconto 
+             */
             try
             {
                 bool stPgtoPedido = caixaBLL.registraPagamentoPedido(vlPago
