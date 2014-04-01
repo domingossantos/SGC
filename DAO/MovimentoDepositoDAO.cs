@@ -78,13 +78,16 @@ namespace DAO
             }
         }
 
-        public void altStatusMovimento(int idx,char status) {
+        public void altStatusMovimento(int idx,char status,SqlTransaction trans = null) {
             try
             {
                 SqlCommand cmd = new SqlCommand();
                 String sql;
                 cmd.Connection = con;
-
+                if (trans != null)
+                {
+                    cmd.Transaction = trans;
+                }
                 sql = "UPDATE tblMovimentoDeposito set stRegistro = @status where idMovimentoBanco = @id";
 
                 cmd.CommandText = sql;

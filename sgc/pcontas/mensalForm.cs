@@ -115,7 +115,11 @@ namespace sgc.pcontas
         public String getDatasMes(string mes, int ano)
         {
             String datas = "";
-            int bisexto = ano % 4; 
+            int bisexto = ano % 4;
+
+            
+
+
             switch (mes)
             {
                 case "JAN":
@@ -124,7 +128,7 @@ namespace sgc.pcontas
                 case "FEV":
                     if (bisexto == 0)
                     {
-                        datas = "02-01@02-28";
+                        datas = "02-01@02-29";
                     }
                     else 
                     {

@@ -42,7 +42,10 @@ namespace BLL
 
             if (!remoto)
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 try
                 {
                     switch (tipo)
@@ -120,7 +123,10 @@ namespace BLL
 
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 img = assinaturaDAO.getAssinatura(nrCartao, data);
                 
                 return img;
@@ -164,7 +170,10 @@ namespace BLL
             {
                 int i = 0;
 
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
 
                 i = assinaturaDAO.getExisteAssinatura(nrCartao, dtAssinatura);
                 
@@ -181,7 +190,10 @@ namespace BLL
             try
             {
                 DateTime data;
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 data = assinaturaDAO.getDataUltimaAssinatura(nrCartao);
 
                 return data;
@@ -198,7 +210,10 @@ namespace BLL
             try
             {
                 DateTime data;
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 data = assinaturaDAO.getDataUltimaAssinaturaAtualiza();
 
                 return data;
@@ -214,7 +229,10 @@ namespace BLL
             {
                 DataTable dados = new DataTable();
 
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 //AtoOperacaoDAO atosDAO = new AtoOperacaoDAO(con.ObjCon);
                 dados = atosDAO.getAtosOperacoesValores("and cdUso in(1,3) and stRegistro = 'A'");
 
@@ -231,7 +249,10 @@ namespace BLL
             try
             {
                 DataTable dados = null;
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 //CartaoAssinaturaDAO cartaoDAO = new CartaoAssinaturaDAO(con.ObjCon);
 
                 switch (tipo)
@@ -290,7 +311,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 CartaoAssinatura cartao = null;
 
                 if (cartaoDAO.existeCartao(nrCartao, tipo))
@@ -351,7 +375,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 CartaoAssinatura cartao = null;
 
                 DataTable dados = cartaoDAO.getCartao(" and nrCartao = '" + nrCartao + "'");
@@ -407,7 +434,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 CartaoAssinatura cartao = null;
 
                 DataTable dados = cartaoDAO.getCartao(" and nrCpf = '" + nrCpf + "'");
@@ -464,7 +494,10 @@ namespace BLL
             try
             {
                 DataTable dados = new DataTable();
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 //AssinaturaDAO assinaturaDAO = new AssinaturaDAO(con.ObjCon);
                 dados = assinaturaDAO.getAssinaturas(nrCartao);
 
@@ -483,7 +516,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 //AssinaturaDAO assinaturaDAO = new AssinaturaDAO(con.ObjCon);
                 assinaturaDAO.addAssinatura(assin);
             }
@@ -501,7 +537,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 DataTable dados = mesaDAO.getMesa();
                 return dados;
             }
@@ -518,7 +557,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 mesaDAO.addMesa(nrCartao, dsLogin);
             }
             catch (Exception e)
@@ -535,7 +577,10 @@ namespace BLL
 
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 mesaDAO.delMesa();
             }
             catch (Exception ex)
@@ -553,7 +598,10 @@ namespace BLL
             try
             {
                 DataTable dados = new DataTable();
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 dados = assinaturaDAO.getCartoes(nrCartaoIni, nrCartaoFim);
                 return dados;
             }
@@ -572,7 +620,10 @@ namespace BLL
             {
                 DataTable vDados = new DataTable();
 
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
 
                 vDados = assinaturaDAO.getAssinaturasParaAtualizacao(dtAtualizacao);
 
@@ -593,7 +644,10 @@ namespace BLL
             {
                 DataTable vDados = new DataTable();
 
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 vDados = tipoRGDAO.getTipoRG();
                 return vDados;
             }
@@ -613,7 +667,10 @@ namespace BLL
             {
                 DataTable vDados = new DataTable();
 
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
 
                 vDados = cartorioDAO.getListaCartorio("idCartorio not in (0, 2)");
 
@@ -633,7 +690,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
 
                 assinaturaDAO.delAssinatura(dtAssin,nrCartao);
             }
@@ -648,7 +708,10 @@ namespace BLL
         }
 
         public void delCartaoAssinatura(string nrCartao) {
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
             SqlTransaction trans = con.ObjCon.BeginTransaction();
             try {
 
@@ -671,7 +734,10 @@ namespace BLL
         }
 
         public String getDesricaoTipoRG(int id) {
-            con.ObjCon.Open();
+            if (con.ObjCon.State == ConnectionState.Closed)
+            {
+                con.ObjCon.Open();
+            }
             String desc = tipoRGDAO.getDescricao(id);
             con.ObjCon.Close();
 

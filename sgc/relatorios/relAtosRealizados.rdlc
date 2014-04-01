@@ -1,73 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="SGCDataSet">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>d6d40370-1d2b-4244-8a0a-04c3894f6526</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="dsRelAtosRealizados">
-      <Fields>
-        <Field Name="cdAto">
-          <DataField>cdAto</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="dsAto">
-          <DataField>dsAto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="qtAtos">
-          <DataField>qtAtos</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="vlTotal">
-          <DataField>vlTotal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="vlAto">
-          <DataField>vlAto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>SGCDataSet</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>SGCDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\Projetos\Conduru\SGC\app\sgc\sgc\SGCDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>tblItensPedido</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>tblItensPedidoTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Tablix Name="Tablix2">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.98983in</Width>
+              <Width>10.13417cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>2.49999cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.50509in</Width>
+              <Width>1.28293cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.23425in</Width>
+              <Width>3.13499cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -196,7 +149,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -352,7 +305,7 @@
         <Top>0.41487cm</Top>
         <Left>0.15028cm</Left>
         <Height>1.2cm</Height>
-        <Width>17.05208cm</Width>
+        <Width>17.05209cm</Width>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -518,7 +471,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Certório Condurú</Value>
+                  <Value>Cartório Condurú</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -589,6 +542,54 @@
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="SGCDataSet">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>d6d40370-1d2b-4244-8a0a-04c3894f6526</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dsRelAtosRealizados">
+      <Query>
+        <DataSourceName>SGCDataSet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="cdAto">
+          <DataField>cdAto</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="dsAto">
+          <DataField>dsAto</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="qtAtos">
+          <DataField>qtAtos</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="vlTotal">
+          <DataField>vlTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="vlAto">
+          <DataField>vlAto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>SGCDataSet</rd:DataSetName>
+        <rd:SchemaPath>D:\Projetos\Conduru\SGC\app\sgc\sgc\SGCDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>tblItensPedido</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>tblItensPedidoTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <EmbeddedImages>
     <EmbeddedImage Name="logo_cartorio">
       <MIMEType>image/jpeg</MIMEType>
@@ -600,6 +601,6 @@ uT52t0rk+Zrbyo7P8S5Hx+XZlrGS3UmiTU3RN+jItVP16syUOuKsyRrrlEavVXVnPk15jMLjM8RnesJQ
 BHHFHHJIzv8AiUk2rsVhXbGT100kcAQiJHAEVRVFxTOfz3GubWdYYsE0EsxguNizm0ki8ony/t7nGuWMUPWuXEFD1qPx/EORix4ujY+5SSHIzS3SNbzgwRs8G1pPg6AiMnXpkFvUrGRtTboQhyq1nteS5SGZSki3UpowKmjOWU0YA0KkEa7xn6QuzDVoVtvlT7Z3PHOMT8mycXl5HPKhto26NHZr8SV9RkY7vdTWN5tnBNL9PlbYPiUxw4G4dN5+A9tad99Y2l9aS2d3GJradSksbeBB939Oliq0kGqXGX7YZW2JfEzrexCtIJj5cwHoAf7D/Tt00h5o5tjxi6dKGkyUbjVpwdo8R2oVyFjkscduRtZrPrTdMpEZ90g3Rn/W0xjz8T/up12IN+QlbaBiH8bfn2LnBBAINQfAjw0WhEJd2DTgGU9oi/5q68+5v5N712y/n2qulpksjZhhaXU1uHoXEUjJWnhXaRXTgtBvRhAK+/8A5Dn/APud39/J+1rzht1LzANS7cXcc2y1ytri5slfXDGixW7zytU+xSdcJpYYxV5a1dWZcvubVWB7MfLNk7m/j5N3ERwY3D2+HmbfJKy02vctVvhHoTxPp9Ws7zDm+McOKxuk6+gIuOMRW3u7B4nsVolVVUKoCqooAOgAGkSqSvdRRZqKLxlVlKsAVPQg9QRqKIdynb/jN/vdLb8FcP8AxrU+X19ZTrGfpXXWKZ8flNO7YvX0f5wHdd+29JrvD235YOM3OLx9o+Va+khitJbZepYyr0lT+H0/Ort9o8NNYOaNs4lhBBs0oduRGKrDZqOjxHb0Li4F8neNiiiu+a5B7icgM2NsTsjX+y8xG5v1QPfr3M88lfZGMA2nwRIjjb/I9nj7XJtYvsX2kxm023GLNmWlHnVrg9P98z6VyZqV/mc4+9WbIRdQe4Ixx+JxWNi8nHWcFlF/s7eNIl+pAND0XjpHOvNV1a9VFmoov//Z</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportID>280bbe55-6666-4a95-8c6e-0c033afcca28</rd:ReportID>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>280bbe55-6666-4a95-8c6e-0c033afcca28</rd:ReportID>
 </Report>

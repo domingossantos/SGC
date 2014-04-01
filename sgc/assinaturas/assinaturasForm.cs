@@ -432,12 +432,13 @@ namespace sgc.assinaturas
 
         private void btInserirPedido_Click(object sender, EventArgs e)
         {
-
+            /*
             if (pedidoBLL.checaExistePedidoAberto(utils.sessao.UsuarioSessao.DsLogin).Rows.Count > 0) {
                 MessageBox.Show("Há pedidos em aberto no seu caixa.\nFavor confira esses pedidos para poder abrir outro.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                 return;
             }
-            
+            */
+
             if (cbOperacao.SelectedValue == null)
             {
                 MessageBox.Show("Selecione uma operação");
@@ -614,11 +615,17 @@ namespace sgc.assinaturas
 
         private void btFecharPedido_Click(object sender, EventArgs e)
         {
-            double valor = pedidoBLL.fechaPedido(utils.sessao.NrPedido);
+            try
+            {
+                double valor = pedidoBLL.fechaPedido(utils.sessao.NrPedido);
 
-            resumoPedidoFechado(utils.sessao.NrPedido);
-            limparDados();
-            Clipboard.SetText(utils.sessao.NrPedido.ToString());
+                resumoPedidoFechado(utils.sessao.NrPedido);
+                limparDados();
+                Clipboard.SetText(utils.sessao.NrPedido.ToString());
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Erro ao Fchar Pedido\n Erro:"+ex.Message);
+            }
             //utils.sessao.NrPedido = 0;
             /*
             if (utils.sessao.UsuarioSessao.CdSetor != 2 )

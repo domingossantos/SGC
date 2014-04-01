@@ -379,7 +379,7 @@ namespace DAO
 
             try
             {
-
+                
                 cmd.Parameters.AddWithValue("@inicio", inicio);
                 cmd.Parameters.AddWithValue("@fim", fim);
                 cmd.Parameters.AddWithValue("@tipo", tipo);
@@ -395,6 +395,7 @@ namespace DAO
         public DataTable getSelosPestacao(String dtIni, String dtFim)
         {
 
+            #region Comando Antigo
             String sql = "";
             
             sql = sql + "   select nrSelo  \n ";
@@ -459,7 +460,7 @@ namespace DAO
             sql = sql + " 			inner join tblAtosOperacoes a on a.cdAto = i.cdAto  \n ";
             sql = sql + " 			inner join tblMovimentoCaixa m on m.nrPedido = i.nrPedido \n ";
             sql = sql + " 			where 1 = 1 \n ";
-            sql = sql + " 			and p.stPedido = 'P'  \n ";
+            //sql = sql + " 			and p.stPedido = 'P'  \n ";
             // auteração novo docigo tj
             //sql = sql + " 			and a.cdTjAto in('61','62','63')  \n ";
             sql = sql + " 			and a.cdTjAto in('104','106')  \n ";
@@ -469,16 +470,24 @@ namespace DAO
             sql = sql + " 	) tab  \n ";
             sql = sql + "   group by nrSelo, nrSerie, cdTJAto  \n ";
             sql = sql + "   having count(*) < 2	order by dtPedido  \n ";
-            
-                
+            #endregion
+
 
             try
             {
+                DateTime dataInicio = Convert.ToDateTime(dtIni+" 00:00:00");
+                DateTime dataFim = Convert.ToDateTime(dtFim+" 20:00:00");
+                SqlCommand cmd = new SqlCommand("spPesquisaSelosPrestacao", con);
                 
-                SqlDataAdapter da = new SqlDataAdapter(sql, con);
-                
+                SqlDataAdapter da = new SqlDataAdapter();
                 DataTable dt = new DataTable();
 
+                
+                cmd.Parameters.Add(new SqlParameter("@dtInicio",dataInicio));
+                cmd.Parameters.Add(new SqlParameter("@dtFim",dataFim));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 200;
+                da.SelectCommand = cmd;
                 da.Fill(dt);
                 return dt;
             }

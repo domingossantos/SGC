@@ -287,7 +287,7 @@ namespace sgc.caixa
             txDesconto.Text = "";
             grid.Rows.Clear();
             lbPedidos.Text = "0;";
-            txPedido.Focus();
+            
             valor = 0;
             rbDinheiro.Checked = true;
             str = "";
@@ -302,6 +302,8 @@ namespace sgc.caixa
             txDtResgate.Text = "";
             txRG.Text = "";
             ckPedidosMulti.Checked = false;
+
+            txPedido.Focus();
         }
 
         private void carregaCorrentista()
@@ -473,6 +475,7 @@ namespace sgc.caixa
             }
         }
 
+        
         private void btPagamento_Click(object sender, EventArgs e)
         {
             if (!caixaBLL.getCaixaDia(utils.sessao.UsuarioSessao.DsLogin))
@@ -486,6 +489,7 @@ namespace sgc.caixa
             if (!MessageBox.Show("Deseja efetuar esse pagamento?", "Atenção!", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString().Equals("Yes"))
             {
                 MessageBox.Show("Pagamento Cancelado!");
+                limparDados();
                 return;
             }
 
@@ -505,6 +509,7 @@ namespace sgc.caixa
                 txPedido.Focus();
                 return;
             }
+
 
             if (Convert.ToDouble(txPago.Text.Replace("R$", "")) < Convert.ToDouble(txTotal.Text.Replace("R$", "")))
             {
@@ -546,18 +551,149 @@ namespace sgc.caixa
 
             string nmBoleto = (Microsoft.VisualBasic.Interaction.InputBox("Nome impresso no boleto", "Cartorio Conduru", "0", 150, 150));
 
-            double vlPago = Convert.ToDouble(txPago.Text.Replace("R$", ""));
+            double vlPago = Convert.ToDouble(txTotal.Text.Replace("R$", ""));
 
             List<int> lPedidos = new List<int>();
-                       
+
+            
+
             int i;
             for (i = 1; i < pedidos.Length -1; i++)
             {
-                pedidoBLL.pagaPedido(Convert.ToInt32(pedidos[i]),sessao.Historico,getTipoPagamento());
+                //pedidoBLL.pagaPedido(Convert.ToInt32(pedidos[i]),sessao.Historico,getTipoPagamento(),trans);
                 lPedidos.Add(Convert.ToInt32(pedidos[i]));   
             }
 
-            
+            if (txDesconto.Text.Equals(""))
+                txDesconto.Text = "0";
+            /*
+             * double vlPago
+                                    , List<int> PedidosList
+                                    , HistoricoCaixa historico
+                                    , int tpPagamento
+                                    , String dsLogin
+                                    , int idTipoMovimento
+                                    , int nrCaixa
+                                    , int tipoPagamento
+                                    , double vlDesconto
+                                    , string dsLoginDesconto */
+            try
+            {
+                bool stPgtoPedido = caixaBLL.registraPagamentoPedido(vlPago
+                                                , lPedidos
+                                                , sessao.Historico
+                                                , sessao.UsuarioSessao.DsLogin
+                                                , sessao.CdAtoPedido
+                                                , sessao.NrCaixa
+                                                , getTipoPagamento()
+                                                , Convert.ToDouble(txDesconto.Text.Replace("R$", ""))
+                                                , dsLoginDesconto);
+                if (stPgtoPedido) {
+
+                    int nrPedidoPagto = lPedidos[0];
+
+                    if (getTipoPagamento() == 2)
+                    {
+                        PedidoCorrentista pedidoCorrentista = new PedidoCorrentista();
+                        pedidoCorrentista.DtPedido = DateTime.Now;
+                        pedidoCorrentista.DsAutorizacao = "";
+                        pedidoCorrentista.NrCPFCNPJ = cbCorrentista.SelectedValue.ToString();
+                        pedidoCorrentista.StPedido = 'A';
+                        pedidoCorrentista.VlPedido = vlPago;
+                        pedidoCorrentista.NrPedido = nrPedidoPagto;
+                        nmCorrentista = cbCorrentista.Text;
+                        caixaBLL.salvaPedidoCorrentista(pedidoCorrentista);
+                    }
+
+                    if (getTipoPagamento() == 3)
+                    {
+                        Cheque cheque = new Cheque();
+                        cheque.DtCheque = Convert.ToDateTime(txDtResgate.Text);
+                        cheque.NrPedido = nrPedidoPagto;
+                        cheque.NrRG = txRG.Text;
+                        cheque.StCheque = 'A';
+                        cheque.NrCheque = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txNrCheque.Text));
+                        cheque.NrBanco = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txBanco.Text));
+                        cheque.NrAgencia = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txAgencia.Text));
+                        cheque.NrConta = utils.formatos.getValorCampoNumerico(txContaCorrente.Text);
+                        cheque.StDeposito = 'C';
+
+                        caixaBLL.salvaCheque(cheque);
+
+                    }
+
+                    if (getTipoPagamento() == 4)
+                    {
+                        for (int x = 0; x < lPedidos.Count; x++)
+                        {
+                            DataTable dadosItens = new DataTable();
+                            dadosItens = pedidoBLL.getItensPedidos(Convert.ToInt32(lPedidos[x]));
+
+                            DataView dvDados = new DataView(dadosItens);
+                            DataRow drDados;
+                            for (int y = 0; y < dvDados.Count; y++)
+                            {
+                                drDados = dvDados[y].Row;
+                                MovimentoDeposito movimentoDp = new MovimentoDeposito();
+                                movimentoDp.IdEscritura = Convert.ToInt32(txNrEscritura.Text);
+                                movimentoDp.CdAto = Convert.ToInt32(drDados["cdAto"].ToString());
+                                movimentoDp.VlMovimento = Convert.ToDouble(drDados["vlItem"].ToString());
+                                movimentoDp.DsMovimento = "PAGAMENTO CAIXA";
+                                movimentoDp.DtMovimento = DateTime.Now;
+                                movimentoDp.DsLogin = utils.sessao.UsuarioSessao.DsLogin;
+                                movimentoDp.TpMovimento = 'D';
+                                movimentoDp.StRegistro = 'P';
+                                escrituraBLL.solicitaPagamento(movimentoDp);
+                            }
+
+                        }
+                    }
+
+                    if (getTipoPagamento() == 5)
+                    {
+                        Cheque cheque = new Cheque();
+                        cheque.DtCheque = Convert.ToDateTime(txDtResgate.Text);
+                        cheque.NrPedido = nrPedidoPagto;
+                        cheque.NrRG = "";
+                        cheque.StCheque = 'P';
+                        cheque.NrCheque = 0;
+                        cheque.NrBanco = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txBanco.Text));
+                        cheque.NrAgencia = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txAgencia.Text));
+                        cheque.NrConta = utils.formatos.getValorCampoNumerico(txContaCorrente.Text);
+                        cheque.StDeposito = 'D';
+
+                        caixaBLL.salvaCheque(cheque);
+
+                    }
+                    vlPago = Convert.ToDouble(txPago.Text.Replace("R$", ""));
+                    ckPedidosMulti.Checked = false;
+
+                    pedidoBLL.imprimePedido(lPedidos,
+                                            sessao.NrCaixa,
+                                            nmBoleto,
+                                            sessao.PathIniFile,
+                                            sessao.UsuarioSessao.NmUsuario,
+                                            getTipoPagamento(),
+                                            vlPago,
+                                            nmCorrentista);
+
+                    MessageBox.Show("Pedido(s) Pago(s)!\nImprimindo Recibo.");
+
+
+                    foreach (int nPedido in lPedidos) {
+                        pedidoBLL.pagaPedido(nPedido);
+                    }
+
+                    limparDados();
+                }
+                
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Erro: "+ex.Message);
+            }
+                
+                #region Codigo antigo
+                /*
             MovimentoCaixa movimento = new MovimentoCaixa();
 
             movimento.IdHitoricoCaixa = sessao.Historico.IdHistoricocaixa;
@@ -569,7 +705,13 @@ namespace sgc.caixa
             movimento.TpOperacao = 'C';
             movimento.TpPagamento = getTipoPagamento();
             movimento.VlMovimento = Convert.ToDouble(txTotal.Text.Replace("R$", ""));
+            movimento.NrPedidoPagto = 0;
 
+            int nrPedidoPagamentoPai = 0;
+            if(lPedidos.Count > 0){
+                nrPedidoPagamentoPai = movimento.NrPedido;
+            }
+            
 
             if (txDesconto.Text.Equals(""))
                 txDesconto.Text = "0";
@@ -577,7 +719,7 @@ namespace sgc.caixa
             movimento.VlDesconto = Convert.ToDouble(txDesconto.Text.Replace("R$", ""));
             movimento.DsLoginAutDesconto = dsLoginDesconto;
 
-            caixaBLL.salvaMovimento(movimento);
+            caixaBLL.salvaMovimento(movimento,trans);
 
             for (i = 1; i < lPedidos.Count; i++)
             {
@@ -590,15 +732,15 @@ namespace sgc.caixa
                 movimento.TpOperacao = 'C';
                 movimento.TpPagamento = getTipoPagamento();
                 movimento.VlMovimento = 0;
-
+                movimento.NrPedidoPagto = nrPedidoPagamentoPai;
                 txDesconto.Text = "0";
 
                 movimento.VlDesconto = 0;
                 movimento.DsLoginAutDesconto = "";
-                caixaBLL.salvaMovimento(movimento);
+                caixaBLL.salvaMovimento(movimento,trans);
             }
 
-            //Verifica se o pedid vem da escritura
+            //Verifica se o pedido vem da escritura
             for (int n = 0; n < lPedidos.Count; n++)
             {
                 DataTable dadosItens = new DataTable();
@@ -614,94 +756,10 @@ namespace sgc.caixa
                     } 
                 }
             }
-            
+            */
+                #endregion
 
-
-            if (getTipoPagamento() == 2)
-            {
-                PedidoCorrentista pedidoCorrentista = new PedidoCorrentista();
-                pedidoCorrentista.DtPedido = movimento.DtMovimento;
-                pedidoCorrentista.DsAutorizacao = "";
-                pedidoCorrentista.NrCPFCNPJ = cbCorrentista.SelectedValue.ToString();
-                pedidoCorrentista.StPedido = 'A';
-                pedidoCorrentista.VlPedido = movimento.VlMovimento;
-                pedidoCorrentista.NrPedido = movimento.NrPedido;
-                nmCorrentista = cbCorrentista.Text;
-                caixaBLL.salvaPedidoCorrentista(pedidoCorrentista);
-            }
-
-            if (getTipoPagamento() == 3)
-            {
-                Cheque cheque = new Cheque();
-                cheque.DtCheque = Convert.ToDateTime(txDtResgate.Text);
-                cheque.NrPedido = movimento.NrPedido;
-                cheque.NrRG = txRG.Text;
-                cheque.StCheque = 'A';
-                cheque.NrCheque = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txNrCheque.Text));
-                cheque.NrBanco = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txBanco.Text));
-                cheque.NrAgencia = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txAgencia.Text));
-                cheque.NrConta = utils.formatos.getValorCampoNumerico(txContaCorrente.Text);
-                cheque.StDeposito = 'C';
-
-                caixaBLL.salvaCheque(cheque);
-
-            }
-
-            if (getTipoPagamento() == 4)
-            {
-                for (int x = 0; x < lPedidos.Count; x++)
-                {
-                    DataTable dadosItens = new DataTable();
-                    dadosItens =  pedidoBLL.getItensPedidos(Convert.ToInt32(lPedidos[x]));
-
-                    DataView dvDados = new DataView(dadosItens);
-                    DataRow drDados;
-                    for (int y = 0; y < dvDados.Count; y++){
-                        drDados = dvDados[y].Row;
-                        MovimentoDeposito movimentoDp = new MovimentoDeposito();
-                        movimentoDp.IdEscritura = Convert.ToInt32(txNrEscritura.Text);
-                        movimentoDp.CdAto = Convert.ToInt32(drDados["cdAto"].ToString());
-                        movimentoDp.VlMovimento = Convert.ToDouble(drDados["vlItem"].ToString());
-                        movimentoDp.DsMovimento = "PAGAMENTO CAIXA";
-                        movimentoDp.DtMovimento = DateTime.Now;
-                        movimentoDp.DsLogin = utils.sessao.UsuarioSessao.DsLogin;
-                        movimentoDp.TpMovimento = 'D';
-                        movimentoDp.StRegistro = 'P';
-                        escrituraBLL.solicitaPagamento(movimentoDp);
-                    }
-                    
-                }
-            }
-
-            if (getTipoPagamento() == 5)
-            {
-                Cheque cheque = new Cheque();
-                cheque.DtCheque = Convert.ToDateTime(txDtResgate.Text);
-                cheque.NrPedido = movimento.NrPedido;
-                cheque.NrRG = "";
-                cheque.StCheque = 'P';
-                cheque.NrCheque = 0;
-                cheque.NrBanco = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txBanco.Text));
-                cheque.NrAgencia = Convert.ToInt32(utils.formatos.getValorCampoNumerico(txAgencia.Text));
-                cheque.NrConta = utils.formatos.getValorCampoNumerico(txContaCorrente.Text);
-                cheque.StDeposito = 'D';
-
-                caixaBLL.salvaCheque(cheque);
-
-            }
-            ckPedidosMulti.Checked = false;
-            pedidoBLL.imprimePedido(lPedidos,
-                                    sessao.NrCaixa, 
-                                    nmBoleto, 
-                                    sessao.PathIniFile,
-                                    sessao.UsuarioSessao.NmUsuario,
-                                    getTipoPagamento(),
-                                    vlPago,
-                                    nmCorrentista);
-
-            MessageBox.Show("Pedido(s) Pago(s)!\nImprimindo Recibo.");
-            
-            limparDados();
+                
         }
 
         private void caixaForm_Load(object sender, EventArgs e)

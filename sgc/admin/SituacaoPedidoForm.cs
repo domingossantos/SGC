@@ -52,7 +52,7 @@ namespace sgc.admin
         public void getMovimentoCaixa() {
             try
             {
-                String sql = "select dsLogin ,vlMovimento,vlDesconto, ";
+                String sql = "select idMovimento,dsLogin ,vlMovimento,vlDesconto, ";
                 sql+= "case tpPagamento ";
 	                    sql+= "when 1 then 'Dinheiro' ";
                         sql+= "	when 2 then 'Correntista' ";
@@ -117,6 +117,67 @@ namespace sgc.admin
                 throw new Exception("Erro: " + e.Message);
             }
             finally {
+                con.ObjCon.Close();
+            }
+        }
+
+        private void apagarMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String idMovimento = gridPagto[0, gridPagto.CurrentRow.Index].Value.ToString();
+
+                String sql = "delete from tblMovimentoCaixa where idMovimento = " + idMovimento;
+
+                con.ObjCon.Open();
+                SqlCommand cmd = new SqlCommand(sql, con.ObjCon);
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Movimento apagado!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao apagar movimento.\nErro " + ex.Message);
+            }
+            finally {
+                con.ObjCon.Close();
+            }
+
+        }
+
+        private void alterarValorMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strValor = (Microsoft.VisualBasic.Interaction.InputBox("Novo Valor", "Cartorio Conduru", "1", 150, 150));
+                
+                String idMovimento = gridPagto[0, gridPagto.CurrentRow.Index].Value.ToString();
+
+                double valor = Convert.ToDouble(strValor);
+
+
+                if (valor > 0)
+                {
+
+                    String sql = "update tblMovimentoCaixa set vlMovimento = @valor where idMovimento = " + idMovimento;
+
+
+
+                    con.ObjCon.Open();
+                    SqlCommand cmd = new SqlCommand(sql, con.ObjCon);
+                    cmd.Parameters.AddWithValue("@valor", valor);
+
+
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Movimento alterado!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao alterar valor de movimento.\nErro " + ex.Message);
+            }
+            finally
+            {
                 con.ObjCon.Close();
             }
         }

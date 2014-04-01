@@ -115,7 +115,7 @@ namespace DAO
         }
 
 
-        public Pedido getPedido(String numPedido)
+        public Pedido getPedido(String numPedido,SqlTransaction trans = null)
         {
             String sql = "select p.nrPedido,p.dtPedido,p.dsLogin,p.stPedido,"
                     +"(select SUM(i.vlItem) from tblItensPedido i "
@@ -126,7 +126,7 @@ namespace DAO
             Pedido p = null;
             try
             {
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, con, trans);
                 SqlDataReader dr = cmd.ExecuteReader();
                 
                 if (dr.HasRows)
@@ -299,11 +299,34 @@ namespace DAO
 
         }
 
+        public void atualizaPedido(int nrPedido, DateTime data, SqlTransaction trans = null)
+        {
+            String sql = "update tblPedidos set dtPedido = @data where nrPedido = @nrPedido";
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, con, trans);
+
+                cmd.Parameters.AddWithValue("@data", data);
+                cmd.Parameters.AddWithValue("@nrPedido", nrPedido);
+
+                cmd.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao alterar status " + e.Message);
+            }
+
+        }
+
+
         public DataTable resumoSelosPedidosDia(string data,  string dataF = "",int caixa=0, int idHistorico=0,string login="",bool stDesconto = false)
         {
             data = data.Substring(6, 4) + "-" + data.Substring(3, 2) + "-" + data.Substring(0, 2);
             dataF = data.Substring(6, 4) + "-" + data.Substring(3, 2) + "-" + data.Substring(0, 2);
 
+
+            /*
             String sql = "select i.cdTipoSelo, \n"
                                 + "(select dsTipoSelo from tblTipoSelo where cdTipoSelo = i.cdtipoSelo) as descricao, \n"
                                 + "count(i.idItemPedido) as qtd, \n"
@@ -331,11 +354,38 @@ namespace DAO
                             }
                             sql +=" group by i.cdTipoSelo";  
             
+                */
 
+            StringBuilder sql = new StringBuilder();
+            sql.Append("select i.cdTipoSelo, t.dsTipoSelo, count(i.cdAto) qtd \n");
+            sql.Append(", sum(m.vlDesconto) vlDesconto, sum(i.vlItem) vlItens \n ");
+            sql.Append(" ,min(i.nrSelo), max(i.nrSelo) \n");
+            sql.Append("from tblPedidos p \n ");
+            sql.Append("inner join tblMovimentoCaixa m on m.nrPedido = p.nrPedido \n ");
+            sql.Append("inner join tblItensPedido i on i.nrPedido = p.nrPedido \n  ");
+            sql.Append("inner join tblTipoSelo t on t.cdTipoSelo = i.cdTipoSelo \n ");
+            sql.Append("where p.dtPedido between  '" + data + " 00:00:00' and '" + data + " 23:59:59' \n ");
+            sql.Append("and p.stPedido = 'P' \n  ");
             
+            if (caixa > 0)
+            {
+                sql.Append("and m.nrCaixa = " + caixa.ToString() + " \n");
+            }
+            if (idHistorico > 0)
+            {
+                sql.Append("and m.idHistoricoCaixa = " + idHistorico + " \n ");
+            }
+            if (stDesconto)
+            {
+                sql.Append(" and m.vlDesconto > 0 \n");
+            }
+            
+            sql.Append("and i.nrSelo is not null \n  ");
+            sql.Append("group by i.cdTipoSelo,t.dsTipoSelo order by 2 ");
+
             try
             {
-                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+                SqlDataAdapter da = new SqlDataAdapter(sql.ToString(), con);
                 DataTable dt = new DataTable();
 
                 da.Fill(dt);
@@ -480,7 +530,7 @@ namespace DAO
         }   
 
         public DataTable getIntervaloSelos(string login) {
-            string sql = "select t.dsTipoSelo, min(s.nrSelo) inicio, max(s.nrSelo) fim, COUNT(s.nrSelo) + 1 qtd "
+            string sql = "select t.dsTipoSelo, min(s.nrSelo) inicio, max(s.nrSelo) fim, COUNT(s.nrSelo)  qtd "
                         +" from tblSelos s inner join tblTipoSelo t on t.cdTipoSelo = s.cdTipoSelo "
                         +" where s.dsLogin = '"+login+"' and s.stSelo = 'D' group by t.dsTipoSelo";
 

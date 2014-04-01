@@ -20,7 +20,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 AtoOperacaoDAO ato = new AtoOperacaoDAO(this.con.ObjCon);
                 string where = "";
                 if (uso != 0) {
@@ -44,7 +47,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 TipoDocumentoDAO tipoDoc = new TipoDocumentoDAO(con.ObjCon);
                 DataTable dados = tipoDoc.getTiposDocumentos();
                 
@@ -63,7 +69,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 AtoOperacaoDAO ato = new AtoOperacaoDAO(this.con.ObjCon);
                 String where = " and a.cdTipoDocumento = " + tipo.ToString();
 
@@ -93,7 +102,10 @@ namespace BLL
             try
             {
                 AtoOperacaoDAO atoDAO = new AtoOperacaoDAO(this.con.ObjCon);
-                this.con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 AtoOperacao ato = atoDAO.getAtoOperacao(cdAto);
 
                 return ato;
@@ -112,7 +124,10 @@ namespace BLL
             try
             {
                 AtoOperacaoDAO atoDAO = new AtoOperacaoDAO(this.con.ObjCon);
-                this.con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 AtoOperacao ato = atoDAO.getAtoOperacaoPlano(cdPlano);
 
                 return ato;
@@ -132,7 +147,10 @@ namespace BLL
             try
             {
                 AtoOperacaoDAO atoADO = new AtoOperacaoDAO(this.con.ObjCon);
-                this.con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 if (ato.DsAto.Trim().Length == 0)
                 {
                     throw new Exception("Campo Descrição é obrigatório");
@@ -164,7 +182,10 @@ namespace BLL
         {
             try
             {
-                con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 AtoOperacaoDAO ato = new AtoOperacaoDAO(this.con.ObjCon);
                 ato.delAtoOperacao(codigo);
             }
@@ -183,7 +204,10 @@ namespace BLL
             try
             {
                 AtoOperacaoDAO atoADO = new AtoOperacaoDAO(this.con.ObjCon);
-                this.con.ObjCon.Open();
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
                 if (ato.DsAto.Trim().Length == 0)
                 {
                     throw new Exception("Campo Descrição é obrigatório");

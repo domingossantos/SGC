@@ -27,10 +27,10 @@ namespace DAO
 
                 sql = "INSERT INTO tblMovimentoCaixa"
                         +"(idHistoricoCaixa,dsLogin,nrCaixa"
-                        +",idTipoMovimento,tpOperacao,vlMovimento,dtMovimento,"
-                        +"tpPagamento,nrPedido,vlDesconto,dsLoginAutDesconto)"
+                        + ",idTipoMovimento,tpOperacao,vlMovimento,dtMovimento,nrPedidoPagto"
+                        +",tpPagamento,nrPedido,vlDesconto,dsLoginAutDesconto)"
                         +"VALUES(@idHistoricoCaixa,@dsLogin,@nrCaixa,@idTipoMovimento"
-                        +",@tpOperacao,@vlMovimento,@dtMovimento,"
+                        + ",@tpOperacao,@vlMovimento,@dtMovimento,@nrPedidoPagto, "
                         + "@tpPagamento,@nrPedido,@vlDesconto,@dsLoginAutDesconto); select @@IDENTITY;";
 
 
@@ -47,6 +47,7 @@ namespace DAO
                 cmd.Parameters.AddWithValue("@nrPedido", movimento.NrPedido);
                 cmd.Parameters.AddWithValue("@vlDesconto", movimento.VlDesconto);
                 cmd.Parameters.AddWithValue("@dsLoginAutDesconto", movimento.DsLoginAutDesconto);
+                cmd.Parameters.AddWithValue("@nrPedidoPagto", movimento.NrPedidoPagto);
 
                 movimento.IdMovimentoCaixa = Convert.ToInt32( cmd.ExecuteScalar().ToString());
             }

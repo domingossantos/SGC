@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.lbValor = new System.Windows.Forms.Label();
             this.lbStatus = new System.Windows.Forms.Label();
             this.lbUsuario = new System.Windows.Forms.Label();
@@ -45,10 +47,13 @@
             this.gridPedido = new System.Windows.Forms.DataGridView();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.gridPagto = new System.Windows.Forms.DataGridView();
-            this.label8 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.apagarMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alterarValorMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPedido)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPagto)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,6 +77,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(733, 86);
             this.panel1.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(463, 33);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(116, 13);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "Pedidos Relacionados:";
             // 
             // lbValor
             // 
@@ -214,20 +228,34 @@
             // gridPagto
             // 
             this.gridPagto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridPagto.ContextMenuStrip = this.contextMenuStrip1;
             this.gridPagto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridPagto.Location = new System.Drawing.Point(279, 86);
             this.gridPagto.Name = "gridPagto";
             this.gridPagto.Size = new System.Drawing.Size(454, 360);
             this.gridPagto.TabIndex = 3;
             // 
-            // label8
+            // contextMenuStrip1
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(463, 33);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(116, 13);
-            this.label8.TabIndex = 33;
-            this.label8.Text = "Pedidos Relacionados:";
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.apagarMovimentoToolStripMenuItem,
+            this.alterarValorMovimentoToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(205, 70);
+            // 
+            // apagarMovimentoToolStripMenuItem
+            // 
+            this.apagarMovimentoToolStripMenuItem.Name = "apagarMovimentoToolStripMenuItem";
+            this.apagarMovimentoToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.apagarMovimentoToolStripMenuItem.Text = "Apagar Movimento";
+            this.apagarMovimentoToolStripMenuItem.Click += new System.EventHandler(this.apagarMovimentoToolStripMenuItem_Click);
+            // 
+            // alterarValorMovimentoToolStripMenuItem
+            // 
+            this.alterarValorMovimentoToolStripMenuItem.Name = "alterarValorMovimentoToolStripMenuItem";
+            this.alterarValorMovimentoToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.alterarValorMovimentoToolStripMenuItem.Text = "Alterar Valor Movimento";
+            this.alterarValorMovimentoToolStripMenuItem.Click += new System.EventHandler(this.alterarValorMovimentoToolStripMenuItem_Click);
             // 
             // SituacaoPedidoForm
             // 
@@ -244,6 +272,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPedido)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPagto)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -268,5 +297,8 @@
         private System.Windows.Forms.Label lbUsuario;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem apagarMovimentoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alterarValorMovimentoToolStripMenuItem;
     }
 }
