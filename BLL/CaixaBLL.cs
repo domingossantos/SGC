@@ -501,6 +501,29 @@ namespace BLL
                 {
                     if (nrPedido > 0)
                     {
+
+                        Pedido pedido = pedidoDAO.getPedido(nrPedido.ToString(),transacao);
+
+                        DateTime dataPedido = new DateTime(pedido.DtPedido.Year
+                                                            , pedido.DtPedido.Month
+                                                            , pedido.DtPedido.Day, 0, 0, 0);
+
+                        DateTime dataHistorico = new DateTime(historico.DtAbertura.Year
+                                                            , historico.DtAbertura.Month
+                                                            , historico.DtAbertura.Day, 0, 0, 0);
+
+                        int diferencaDatas = DateTime.Compare(dataPedido, dataHistorico);
+                        
+                       if(diferencaDatas != 0){
+                           DateTime novaDataPedido = new DateTime(historico.DtAbertura.Year
+                                                           , historico.DtAbertura.Month
+                                                           , historico.DtAbertura.Day
+                                                           , pedido.DtPedido.Hour
+                                                           , pedido.DtPedido.Minute
+                                                           , pedido.DtPedido.Second);
+                           pedidoDAO.atualizaPedido(nrPedido, novaDataPedido, transacao);
+                        }
+                        
                         DataTable dados = itemPedidoDAO.getItensPedido(nrPedido,transacao);
 
 

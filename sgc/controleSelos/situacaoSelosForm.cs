@@ -96,61 +96,68 @@ namespace sgc.controleSelos
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
-            DateTime oDtInicio = Convert.ToDateTime(dtInicio.Value.ToShortDateString()+ " 00:00:00");
-            DateTime oDtFim = Convert.ToDateTime(dtFim.Value.ToShortDateString() + " 23:59:59");
+            try
+            {
+                DateTime oDtInicio = Convert.ToDateTime(dtInicio.Value.ToShortDateString() + " 00:00:00");
+                DateTime oDtFim = Convert.ToDateTime(dtFim.Value.ToShortDateString() + " 23:59:59");
 
 
-            vwSituacaoSelosTableAdapter.Connection.ConnectionString = DAO.Dados.strConexao;
+                vwSituacaoSelosTableAdapter.Connection.ConnectionString = DAO.Dados.strConexao;
 
-            switch (getTipoPesquisa()) { 
-                case 1:
-                    this.vwSituacaoSelosTableAdapter.FillByDataUso(
-                                this.sGCDataSet.vwSituacaoSelos
-                                ,oDtInicio,oDtFim);
-                    break;
-                case 2:
-                    this.vwSituacaoSelosTableAdapter.FillByPedido(
-                                this.sGCDataSet.vwSituacaoSelos, 
-                                Convert.ToInt32(txNumPedido.Text));
-                    break;
-                case 3:
-                    this.vwSituacaoSelosTableAdapter.FillBy(
-                                this.sGCDataSet.vwSituacaoSelos,
-                                cbUsuario.SelectedValue.ToString());
-                    break;
-                case 4:
-                    this.vwSituacaoSelosTableAdapter.FillByLoginEData(
-                                this.sGCDataSet.vwSituacaoSelos,
-                                cbUsuario.SelectedValue.ToString(),
-                                oDtInicio, oDtFim);
-                    break;
-                case 5:
-                    this.vwSituacaoSelosTableAdapter.FillByNome (
-                                this.sGCDataSet.vwSituacaoSelos,
-                                txNome.Text);
-                    break;
-                case 6:
-                    this.vwSituacaoSelosTableAdapter.FillByNumSelo(
-                                this.sGCDataSet.vwSituacaoSelos,
-                                Convert.ToInt32(txNumSelo.Text));
-                    break;
-                case 7:
-                    this.vwSituacaoSelosTableAdapter.FillByTipoSelo(
-                                this.sGCDataSet.vwSituacaoSelos,
-                                Convert.ToInt32(cbTipoSelo.SelectedValue.ToString()));
-                    break;
-                case 8:
-                    this.vwSituacaoSelosTableAdapter.FillByTipoDocumentoStatus(
-                                this.sGCDataSet.vwSituacaoSelos, cbSituacao.Text.Substring(0, 1),
-                                Convert.ToInt32(cbTipoSelo.SelectedValue.ToString()));
-                    break;
-                case 9:
-                    this.vwSituacaoSelosTableAdapter.FillBySituacao(
-                                this.sGCDataSet.vwSituacaoSelos, cbSituacao.Text.Substring(0, 1));
-                    break;
+                switch (getTipoPesquisa())
+                {
+                    case 1:
+                        this.vwSituacaoSelosTableAdapter.FillByDataUso(
+                                    this.sGCDataSet.vwSituacaoSelos
+                                    , oDtInicio, oDtFim);
+                        break;
+                    case 2:
+                        this.vwSituacaoSelosTableAdapter.FillByPedido(
+                                    this.sGCDataSet.vwSituacaoSelos,
+                                    Convert.ToInt32(txNumPedido.Text));
+                        break;
+                    case 3:
+                        this.vwSituacaoSelosTableAdapter.FillBy(
+                                    this.sGCDataSet.vwSituacaoSelos,
+                                    cbUsuario.SelectedValue.ToString());
+                        break;
+                    case 4:
+                        this.vwSituacaoSelosTableAdapter.FillByLoginEData(
+                                    this.sGCDataSet.vwSituacaoSelos,
+                                    cbUsuario.SelectedValue.ToString(),
+                                    oDtInicio, oDtFim);
+                        break;
+                    case 5:
+                        this.vwSituacaoSelosTableAdapter.FillByNome(
+                                    this.sGCDataSet.vwSituacaoSelos,
+                                    txNome.Text);
+                        break;
+                    case 6:
+                        this.vwSituacaoSelosTableAdapter.FillByNumSelo(
+                                    this.sGCDataSet.vwSituacaoSelos,
+                                    Convert.ToInt32(txNumSelo.Text));
+                        break;
+                    case 7:
+                        this.vwSituacaoSelosTableAdapter.FillByTipoSelo(
+                                    this.sGCDataSet.vwSituacaoSelos,
+                                    Convert.ToInt32(cbTipoSelo.SelectedValue.ToString()));
+                        break;
+                    case 8:
+                        this.vwSituacaoSelosTableAdapter.FillByTipoDocumentoStatus(
+                                    this.sGCDataSet.vwSituacaoSelos, cbSituacao.Text.Substring(0, 1),
+                                    Convert.ToInt32(cbTipoSelo.SelectedValue.ToString()));
+                        break;
+                    case 9:
+                        this.vwSituacaoSelosTableAdapter.FillBySituacao(
+                                    this.sGCDataSet.vwSituacaoSelos, cbSituacao.Text.Substring(0, 1));
+                        break;
+                }
+
+                this.reportViewer1.RefreshReport();
             }
-
-            this.reportViewer1.RefreshReport();   
+            catch (Exception ex) {
+                MessageBox.Show("Erro ao gerar relatório\n"+ex.Message);
+            }
         }
     }
 }

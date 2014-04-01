@@ -115,7 +115,7 @@ namespace DAO
         }
 
 
-        public Pedido getPedido(String numPedido)
+        public Pedido getPedido(String numPedido,SqlTransaction trans = null)
         {
             String sql = "select p.nrPedido,p.dtPedido,p.dsLogin,p.stPedido,"
                     +"(select SUM(i.vlItem) from tblItensPedido i "
@@ -126,7 +126,7 @@ namespace DAO
             Pedido p = null;
             try
             {
-                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlCommand cmd = new SqlCommand(sql, con, trans);
                 SqlDataReader dr = cmd.ExecuteReader();
                 
                 if (dr.HasRows)
@@ -298,6 +298,27 @@ namespace DAO
             }
 
         }
+
+        public void atualizaPedido(int nrPedido, DateTime data, SqlTransaction trans = null)
+        {
+            String sql = "update tblPedidos set dtPedido = @data where nrPedido = @nrPedido";
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, con, trans);
+
+                cmd.Parameters.AddWithValue("@data", data);
+                cmd.Parameters.AddWithValue("@nrPedido", nrPedido);
+
+                cmd.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao alterar status " + e.Message);
+            }
+
+        }
+
 
         public DataTable resumoSelosPedidosDia(string data,  string dataF = "",int caixa=0, int idHistorico=0,string login="",bool stDesconto = false)
         {

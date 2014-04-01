@@ -225,6 +225,24 @@ namespace BLL
 
         }
 
+        public void pagaPedido(int nrPedido) {
+            try
+            {
+                if (con.ObjCon.State == ConnectionState.Closed)
+                    con.ObjCon.Open();
+
+                pedidoDAO.atualizaPedido(nrPedido, 'P');
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally {
+                con.ObjCon.Close();
+            }
+        }
+
         public double fechaPedido(int nrPedido, SqlTransaction trans = null)
         {
             try

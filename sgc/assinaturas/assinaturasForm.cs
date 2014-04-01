@@ -615,11 +615,17 @@ namespace sgc.assinaturas
 
         private void btFecharPedido_Click(object sender, EventArgs e)
         {
-            double valor = pedidoBLL.fechaPedido(utils.sessao.NrPedido);
+            try
+            {
+                double valor = pedidoBLL.fechaPedido(utils.sessao.NrPedido);
 
-            resumoPedidoFechado(utils.sessao.NrPedido);
-            limparDados();
-            Clipboard.SetText(utils.sessao.NrPedido.ToString());
+                resumoPedidoFechado(utils.sessao.NrPedido);
+                limparDados();
+                Clipboard.SetText(utils.sessao.NrPedido.ToString());
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Erro ao Fchar Pedido\n Erro:"+ex.Message);
+            }
             //utils.sessao.NrPedido = 0;
             /*
             if (utils.sessao.UsuarioSessao.CdSetor != 2 )

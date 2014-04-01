@@ -551,7 +551,7 @@ namespace sgc.caixa
 
             string nmBoleto = (Microsoft.VisualBasic.Interaction.InputBox("Nome impresso no boleto", "Cartorio Conduru", "0", 150, 150));
 
-            double vlPago = Convert.ToDouble(txPago.Text.Replace("R$", ""));
+            double vlPago = Convert.ToDouble(txTotal.Text.Replace("R$", ""));
 
             List<int> lPedidos = new List<int>();
 
@@ -665,7 +665,7 @@ namespace sgc.caixa
                         caixaBLL.salvaCheque(cheque);
 
                     }
-
+                    vlPago = Convert.ToDouble(txPago.Text.Replace("R$", ""));
                     ckPedidosMulti.Checked = false;
 
                     pedidoBLL.imprimePedido(lPedidos,
@@ -678,6 +678,11 @@ namespace sgc.caixa
                                             nmCorrentista);
 
                     MessageBox.Show("Pedido(s) Pago(s)!\nImprimindo Recibo.");
+
+
+                    foreach (int nPedido in lPedidos) {
+                        pedidoBLL.pagaPedido(nPedido);
+                    }
 
                     limparDados();
                 }
