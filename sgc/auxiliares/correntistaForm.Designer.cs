@@ -57,9 +57,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnNovo
+            // 
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
+            // 
             // btnSalvar
             // 
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnPesquisar
             // 
@@ -108,6 +116,7 @@
             // txCpfCnpj
             // 
             this.txCpfCnpj.Location = new System.Drawing.Point(14, 18);
+            this.txCpfCnpj.MaxLength = 20;
             this.txCpfCnpj.Name = "txCpfCnpj";
             this.txCpfCnpj.Size = new System.Drawing.Size(120, 20);
             this.txCpfCnpj.TabIndex = 1;
@@ -123,7 +132,9 @@
             // 
             // txNome
             // 
+            this.txNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txNome.Location = new System.Drawing.Point(143, 18);
+            this.txNome.MaxLength = 100;
             this.txNome.Name = "txNome";
             this.txNome.Size = new System.Drawing.Size(350, 20);
             this.txNome.TabIndex = 3;
@@ -206,28 +217,36 @@
             // 
             // txEndereco
             // 
+            this.txEndereco.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txEndereco.Location = new System.Drawing.Point(14, 57);
+            this.txEndereco.MaxLength = 80;
             this.txEndereco.Name = "txEndereco";
             this.txEndereco.Size = new System.Drawing.Size(350, 20);
             this.txEndereco.TabIndex = 12;
             // 
             // txBairro
             // 
+            this.txBairro.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txBairro.Location = new System.Drawing.Point(374, 57);
+            this.txBairro.MaxLength = 50;
             this.txBairro.Name = "txBairro";
             this.txBairro.Size = new System.Drawing.Size(190, 20);
             this.txBairro.TabIndex = 13;
             // 
             // txCidade
             // 
+            this.txCidade.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txCidade.Location = new System.Drawing.Point(14, 96);
+            this.txCidade.MaxLength = 50;
             this.txCidade.Name = "txCidade";
             this.txCidade.Size = new System.Drawing.Size(180, 20);
             this.txCidade.TabIndex = 15;
             // 
             // txUF
             // 
+            this.txUF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txUF.Location = new System.Drawing.Point(207, 96);
+            this.txUF.MaxLength = 2;
             this.txUF.Name = "txUF";
             this.txUF.Size = new System.Drawing.Size(50, 20);
             this.txUF.TabIndex = 16;
@@ -235,6 +254,7 @@
             // txEmail
             // 
             this.txEmail.Location = new System.Drawing.Point(272, 96);
+            this.txEmail.MaxLength = 100;
             this.txEmail.Name = "txEmail";
             this.txEmail.Size = new System.Drawing.Size(230, 20);
             this.txEmail.TabIndex = 17;

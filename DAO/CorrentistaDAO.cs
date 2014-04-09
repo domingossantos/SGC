@@ -74,7 +74,7 @@ namespace DAO
 
                     if (dr["stCorrentista"].ToString().Length == 1)
                     {
-                        oConrrentista.StCorrentista = Convert.ToChar(dr["stCorrentista"].ToString().Substring(1));
+                        oConrrentista.StCorrentista = Convert.ToChar(dr["stCorrentista"].ToString());
                     }
                     else {
                         oConrrentista.StCorrentista = 'A';
@@ -93,19 +93,19 @@ namespace DAO
         public void novoCorrentista(Correntista oCorrentista) {
             try
             {
-                Correntista oConrrentista = new Correntista();
+                
                 String sql = "INSERT INTO tblCorrentistas "
-                             +"  (@nrCPFCNPJ"
-                             +"  ,@nmNome"
-                             +"  ,@dsEndereco"
-                             +"  ,@dsBairro"
-                             +"  ,@nrCEP"
-                             +"  ,@dsCidade"
-                             +"  ,@sgUF"
-                             +"  ,@dsEmail"
-                             +"  ,@nrFone"
-                             +"  ,@dtInclusao"
-                             +"  ,@stCorrentista)"
+                             +"  (nrCPFCNPJ"
+                             +"  ,nmNome"
+                             +"  ,dsEndereco"
+                             +"  ,dsBairro"
+                             +"  ,nrCEP"
+                             +"  ,dsCidade"
+                             +"  ,sgUF"
+                             +"  ,dsEmail"
+                             +"  ,nrFone"
+                             +"  ,dtInclusao"
+                             +"  ,stCorrentista)"
                          +" VALUES "
                              +"  (@nrCPFCNPJ"
                              +"  ,@nmNome"
@@ -119,15 +119,15 @@ namespace DAO
                              +"  ,GETDATE()"
                              +"  ,'A')";
                 SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@nrCpfCnpj", oConrrentista.NrCPFCPNJ);
-                cmd.Parameters.AddWithValue("@nmNome", oConrrentista.NmCorrentista);
-                cmd.Parameters.AddWithValue("@dsEndereco", oConrrentista.DsEndereco);
-                cmd.Parameters.AddWithValue("@dsBairro", oConrrentista.DsBairro);
-                cmd.Parameters.AddWithValue("@nrCEP", oConrrentista.NrCEP);
-                cmd.Parameters.AddWithValue("@sgUF", oConrrentista.SgUF);
-                cmd.Parameters.AddWithValue("@dsEmail", oConrrentista.DsEmail);
-                cmd.Parameters.AddWithValue("@dsCidade", oConrrentista.DsCidade);
-                cmd.Parameters.AddWithValue("@nrFone", oConrrentista.NrCPFCPNJ);
+                cmd.Parameters.AddWithValue("@nrCpfCnpj", oCorrentista.NrCPFCPNJ);
+                cmd.Parameters.AddWithValue("@nmNome", oCorrentista.NmCorrentista);
+                cmd.Parameters.AddWithValue("@dsEndereco", oCorrentista.DsEndereco);
+                cmd.Parameters.AddWithValue("@dsBairro", oCorrentista.DsBairro);
+                cmd.Parameters.AddWithValue("@nrCEP", oCorrentista.NrCEP);
+                cmd.Parameters.AddWithValue("@sgUF", oCorrentista.SgUF);
+                cmd.Parameters.AddWithValue("@dsEmail", oCorrentista.DsEmail);
+                cmd.Parameters.AddWithValue("@dsCidade", oCorrentista.DsCidade);
+                cmd.Parameters.AddWithValue("@nrFone", oCorrentista.NrCPFCPNJ);
                 
 
                 cmd.ExecuteNonQuery();
@@ -143,7 +143,7 @@ namespace DAO
         public void salvaCorrentista(Correntista oCorrentista) {
             try
             {
-                Correntista oConrrentista = new Correntista();
+                
                 String sql = "UPDATE dbo.tblCorrentistas "
                              +"  SET nmNome = @nmNome "
                              +"     ,dsEndereco = @dsEndereco "
@@ -155,17 +155,19 @@ namespace DAO
                              +"     ,nrFone = @nrFone "
                              +"     ,stCorrentista = @stCorrentista "
                              +" where nrCPFCNPJ = @nrCpfCnpj";
+
                 SqlCommand cmd = new SqlCommand(sql, con);
-                cmd.Parameters.AddWithValue("@nrCpfCnpj", oConrrentista.NrCPFCPNJ);
-                cmd.Parameters.AddWithValue("@nmNome", oConrrentista.NmCorrentista);
-                cmd.Parameters.AddWithValue("@dsEndereco", oConrrentista.DsEndereco);
-                cmd.Parameters.AddWithValue("@dsBairro", oConrrentista.DsBairro);
-                cmd.Parameters.AddWithValue("@nrCEP", oConrrentista.NrCEP);
-                cmd.Parameters.AddWithValue("@sgUF", oConrrentista.SgUF);
-                cmd.Parameters.AddWithValue("@dsEmail", oConrrentista.DsEmail);
-                cmd.Parameters.AddWithValue("@dsCidade", oConrrentista.DsCidade);
-                cmd.Parameters.AddWithValue("@nrFone", oConrrentista.NrCPFCPNJ);
-                cmd.Parameters.AddWithValue("@stCorrentista", oConrrentista.NrCPFCPNJ);
+
+                cmd.Parameters.AddWithValue("@nrCpfCnpj", oCorrentista.NrCPFCPNJ);
+                cmd.Parameters.AddWithValue("@nmNome", oCorrentista.NmCorrentista);
+                cmd.Parameters.AddWithValue("@dsEndereco", oCorrentista.DsEndereco);
+                cmd.Parameters.AddWithValue("@dsBairro", oCorrentista.DsBairro);
+                cmd.Parameters.AddWithValue("@nrCEP", oCorrentista.NrCEP);
+                cmd.Parameters.AddWithValue("@sgUF", oCorrentista.SgUF);
+                cmd.Parameters.AddWithValue("@dsEmail", oCorrentista.DsEmail);
+                cmd.Parameters.AddWithValue("@dsCidade", oCorrentista.DsCidade);
+                cmd.Parameters.AddWithValue("@nrFone", oCorrentista.NrFone);
+                cmd.Parameters.AddWithValue("@stCorrentista", oCorrentista.StCorrentista);
 
                 cmd.ExecuteNonQuery();
                 

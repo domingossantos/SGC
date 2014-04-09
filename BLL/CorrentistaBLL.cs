@@ -17,7 +17,10 @@ namespace BLL
         }
 
         public DataTable getCorrentistas(String argumento="") {
-            oCon.ObjCon.Open();
+            if (oCon.ObjCon.State == ConnectionState.Closed)
+            {
+                oCon.ObjCon.Open();
+            }
             DataTable vDados = oCorrentistaDao.getCorrentistas(argumento);
             oCon.ObjCon.Close();
             return vDados;
@@ -46,8 +49,12 @@ namespace BLL
                 }
                 oCon.ObjCon.Close();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
+            }
+            finally {
+                oCon.ObjCon.Close();
             }
         }
 
