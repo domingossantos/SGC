@@ -44,5 +44,12 @@ namespace Modelos
             get { return cdTipoDocumento; }
             set { cdTipoDocumento = value; }
         }
+
+        private char stTipoSelo;
+
+        public char StTipoSelo {
+            get { return stTipoSelo; }
+            set { stTipoSelo = value; }
+        }
     }
 }

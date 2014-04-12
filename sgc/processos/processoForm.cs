@@ -281,18 +281,26 @@ namespace sgc.processos
 
                 Selo selo = new Selo();
                 TipoSelo tipoSelo = new TipoSelo();
-                if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 5)
+
+                if (ckGratuito.Checked)
                 {
-                    tipoSelo.CdTipoSelo = 0;
-                    
-                    selo.NrSelo = 0;
-                    selo.CdTipoSelo = 0;
+                    // Busca se selo gratuito
+
                 }
                 else
                 {
+                    if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 5)
+                    {
+                        tipoSelo.CdTipoSelo = 0;
 
-                    #region codigo antigo
-                    /*
+                        selo.NrSelo = 0;
+                        selo.CdTipoSelo = 0;
+                    }
+                    else
+                    {
+
+                        #region codigo antigo
+                        /*
                     if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 4)
                     {
                         tipoSelo = seloBLL.getTipoSeloPorDocumento(2);
@@ -311,25 +319,26 @@ namespace sgc.processos
 
                     selo = seloBLL.getSeloTipo(tipoSelo.CdTipoSelo);
                      */
-                    #endregion
+                        #endregion
 
-                    if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 4)
-                    {
-                        selo = seloBLL.getSeloTipo(2);
-                    }
-                    else
-                    {
-                        selo = seloBLL.getSeloTipo(Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()));
-                    }
+                        if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 4)
+                        {
+                            selo = seloBLL.getSeloTipo(2);
+                        }
+                        else
+                        {
+                            selo = seloBLL.getSeloTipo(Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()));
+                        }
 
 
-                    if (selo == null)
-                    {
-                        MessageBox.Show("Não há selos disponiveis para esta operação!");
-                        return;
+                        if (selo == null)
+                        {
+                            MessageBox.Show("Não há selos disponiveis para esta operação!");
+                            return;
+                        }
                     }
+
                 }
-
 
                 panelTipoProcesso.Enabled = false;
                 panelProcesso.Enabled = true;

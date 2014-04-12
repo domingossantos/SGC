@@ -59,6 +59,8 @@ namespace sgc.controleSelos
             grid.Columns[3].Width = 50;
             grid.Columns[4].HeaderText = "Tipo Documento";
             grid.Columns[4].Width = 200;
+            grid.Columns[5].HeaderText = "Gatuito";
+            grid.Columns[5].Width = 60;
              
 
 
@@ -166,6 +168,27 @@ namespace sgc.controleSelos
             str = "";
         }
 
+        public char getGratuidade() { 
+            char retorno = 'N';
+            if (ckGratuito.Checked) {
+                retorno = 'S';
+            }
+
+            return retorno;
+        }
+
+
+        public void setGratuidade(char status) {
+            
+            if (status.Equals('S'))
+            {
+                ckGratuito.Checked = true;
+            }
+            else
+            {
+                ckGratuito.Checked = false;
+            }
+        }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
@@ -207,7 +230,7 @@ namespace sgc.controleSelos
                 tipoSelo.DsTipoSelo = txDescricao.Text;
                 tipoSelo.NrSerie = txSerie.Text;
                 tipoSelo.VlSelo = Convert.ToDouble(txValor.Text);
-
+                tipoSelo.StTipoSelo = getGratuidade();
 
                 tipoSeloBLL.addTipoSelo(tipoSelo);
                 MessageBox.Show("Registro salvo");
@@ -225,6 +248,7 @@ namespace sgc.controleSelos
                 tipoSelo.NrSerie = txSerie.Text;
                 tipoSelo.VlSelo = Convert.ToDouble(txValor.Text);
                 tipoSelo.CdTipoSelo = Convert.ToInt32(lbCodigo.Text);
+                tipoSelo.StTipoSelo = getGratuidade();
 
                 tipoSeloBLL.saveTipoSelo(tipoSelo);
                 MessageBox.Show("Registro salvo");
@@ -244,6 +268,8 @@ namespace sgc.controleSelos
             txDescricao.Text = tipoSelo.DsTipoSelo;
             txValor.Text = tipoSelo.VlSelo.ToString();
             cbTipoDoc.SelectedValue = Convert.ToString(tipoSelo.CdTipoDocumento);
+            setGratuidade(tipoSelo.StTipoSelo);
+            
 
             op = 2;
         }

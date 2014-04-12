@@ -17,7 +17,7 @@ namespace DAO
 
         public DataTable getTipoSelos(String filtro = "")
         {
-            String sql = "Select s.cdTipoSelo,s.nrSerie,s.dsTipoSelo,s.vlSelo,d.nmTipoDocumento from tblTipoSelo s";
+            String sql = "Select s.cdTipoSelo,s.nrSerie,s.dsTipoSelo,s.vlSelo,d.nmTipoDocumento,s.stTipoSelo from tblTipoSelo s";
             sql += " inner join tblTipoDocumento d on s.cdTipoDocumento = d.cdTipoDocumento where 1 = 1 " + filtro;
             sql += " order by s.dsTipoSelo";
 
@@ -42,7 +42,7 @@ namespace DAO
         public TipoSelo getTipoSelo(int codigo)
         {
             TipoSelo tipo = new TipoSelo();
-            String sql = "Select cdTipoSelo,nrSerie,dsTipoSelo,vlSelo,cdTipoDocumento from tblTipoSelo"
+            String sql = "Select cdTipoSelo,nrSerie,dsTipoSelo,vlSelo,cdTipoDocumento,stTipoSelo from tblTipoSelo"
                     + " where cdTipoSelo = @tipo";
 
             try
@@ -61,7 +61,15 @@ namespace DAO
                 tipo.DsTipoSelo = dr["dsTipoSelo"].ToString();
                 tipo.VlSelo = Convert.ToDouble(dr["vlSelo"].ToString());
                 tipo.CdTipoDocumento = Convert.ToInt32(dr["cdTipoDocumento"].ToString());
-     
+
+                if (dr["stTipoSelo"].ToString().Equals(""))
+                {
+                    tipo.StTipoSelo = 'F';
+                }
+                else
+                {
+                    tipo.StTipoSelo = dr["stTipoSelo"].ToString().ToCharArray()[0];
+                }
                 return tipo;
             }
             catch (SqlException ex)
@@ -110,13 +118,14 @@ namespace DAO
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
-                String sql = "insert into tblTipoSelo (nrSerie,dsTipoSelo,vlSelo,cdTipoDocumento) ";
-                       sql+= " values(@serie,@descricao,@valor,@tipo); select @@IDENTITY;";
+                String sql = "insert into tblTipoSelo (nrSerie,dsTipoSelo,vlSelo,cdTipoDocumento,stTipoSelo) ";
+                       sql+= " values(@serie,@descricao,@valor,@tipo,@status); select @@IDENTITY;";
                 cmd.CommandText = sql;
                 cmd.Parameters.AddWithValue("@serie", tipo.NrSerie);
                 cmd.Parameters.AddWithValue("@descricao", tipo.DsTipoSelo);
                 cmd.Parameters.AddWithValue("@valor", tipo.VlSelo);
                 cmd.Parameters.AddWithValue("@tipo", tipo.CdTipoDocumento);
+                cmd.Parameters.AddWithValue("@status", tipo.StTipoSelo);
                 
                 tipo.CdTipoSelo = Convert.ToInt32(cmd.ExecuteScalar());
             }
@@ -137,7 +146,7 @@ namespace DAO
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
 
-                String sql = "UPDATE tblTipoSelo SET nrSerie = @serie, dsTipoSelo = @descricao, ";
+                String sql = "UPDATE tblTipoSelo SET nrSerie = @serie, dsTipoSelo = @descricao, stTipoSelo = @status, ";
                         sql += " vlSelo = @valor, cdTipoDocumento = @tipo where cdTipoSelo = @codigo";
                         cmd.CommandText = sql;
 
@@ -146,6 +155,7 @@ namespace DAO
                 cmd.Parameters.AddWithValue("@valor", tipo.VlSelo);
                 cmd.Parameters.AddWithValue("@codigo", tipo.CdTipoSelo);
                 cmd.Parameters.AddWithValue("@tipo", tipo.CdTipoDocumento);
+                cmd.Parameters.AddWithValue("@status", tipo.StTipoSelo);
                 
 
                 int result = cmd.ExecuteNonQuery();

@@ -160,6 +160,7 @@
             // txCpfCnpj
             // 
             this.txCpfCnpj.Location = new System.Drawing.Point(14, 21);
+            this.txCpfCnpj.MaxLength = 20;
             this.txCpfCnpj.Name = "txCpfCnpj";
             this.txCpfCnpj.Size = new System.Drawing.Size(120, 20);
             this.txCpfCnpj.TabIndex = 0;
@@ -179,6 +180,7 @@
             // 
             this.txNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txNome.Location = new System.Drawing.Point(149, 21);
+            this.txNome.MaxLength = 80;
             this.txNome.Name = "txNome";
             this.txNome.Size = new System.Drawing.Size(220, 20);
             this.txNome.TabIndex = 1;
@@ -196,6 +198,7 @@
             // 
             this.txEndereco.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txEndereco.Location = new System.Drawing.Point(276, 100);
+            this.txEndereco.MaxLength = 150;
             this.txEndereco.Name = "txEndereco";
             this.txEndereco.Size = new System.Drawing.Size(290, 20);
             this.txEndereco.TabIndex = 11;
@@ -221,6 +224,7 @@
             // txEmail
             // 
             this.txEmail.Location = new System.Drawing.Point(524, 20);
+            this.txEmail.MaxLength = 80;
             this.txEmail.Name = "txEmail";
             this.txEmail.Size = new System.Drawing.Size(240, 20);
             this.txEmail.TabIndex = 4;
@@ -238,6 +242,7 @@
             // 
             this.txDocumento.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txDocumento.Location = new System.Drawing.Point(334, 149);
+            this.txDocumento.MaxLength = 40;
             this.txDocumento.Name = "txDocumento";
             this.txDocumento.Size = new System.Drawing.Size(100, 20);
             this.txDocumento.TabIndex = 15;
@@ -282,6 +287,7 @@
             // 
             this.txPai.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txPai.Location = new System.Drawing.Point(15, 188);
+            this.txPai.MaxLength = 150;
             this.txPai.Name = "txPai";
             this.txPai.Size = new System.Drawing.Size(250, 20);
             this.txPai.TabIndex = 18;
@@ -299,6 +305,7 @@
             // 
             this.txMae.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txMae.Location = new System.Drawing.Point(271, 188);
+            this.txMae.MaxLength = 150;
             this.txMae.Name = "txMae";
             this.txMae.Size = new System.Drawing.Size(250, 20);
             this.txMae.TabIndex = 19;
@@ -463,6 +470,7 @@
             // 
             this.txBairro.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txBairro.Location = new System.Drawing.Point(573, 100);
+            this.txBairro.MaxLength = 50;
             this.txBairro.Name = "txBairro";
             this.txBairro.Size = new System.Drawing.Size(100, 20);
             this.txBairro.TabIndex = 12;
@@ -479,6 +487,7 @@
             // txNrRG
             // 
             this.txNrRG.Location = new System.Drawing.Point(118, 60);
+            this.txNrRG.MaxLength = 20;
             this.txNrRG.Name = "txNrRG";
             this.txNrRG.Size = new System.Drawing.Size(100, 20);
             this.txNrRG.TabIndex = 6;
@@ -495,6 +504,7 @@
             // txOrgaoExp
             // 
             this.txOrgaoExp.Location = new System.Drawing.Point(227, 60);
+            this.txOrgaoExp.MaxLength = 20;
             this.txOrgaoExp.Name = "txOrgaoExp";
             this.txOrgaoExp.Size = new System.Drawing.Size(100, 20);
             this.txOrgaoExp.TabIndex = 7;
@@ -530,6 +540,7 @@
             // 
             this.txPaisNasc.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txPaisNasc.Location = new System.Drawing.Point(15, 149);
+            this.txPaisNasc.MaxLength = 30;
             this.txPaisNasc.Name = "txPaisNasc";
             this.txPaisNasc.Size = new System.Drawing.Size(100, 20);
             this.txPaisNasc.TabIndex = 13;

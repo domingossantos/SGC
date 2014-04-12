@@ -39,6 +39,7 @@
             this.txDescricao = new System.Windows.Forms.TextBox();
             this.txValor = new System.Windows.Forms.TextBox();
             this.cbTipoDoc = new System.Windows.Forms.ComboBox();
+            this.ckGratuito = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spContainer)).BeginInit();
             this.spContainer.Panel1.SuspendLayout();
@@ -68,6 +69,7 @@
             // 
             // spContainer.Panel1
             // 
+            this.spContainer.Panel1.Controls.Add(this.ckGratuito);
             this.spContainer.Panel1.Controls.Add(this.cbTipoDoc);
             this.spContainer.Panel1.Controls.Add(this.txValor);
             this.spContainer.Panel1.Controls.Add(this.txDescricao);
@@ -182,6 +184,16 @@
             this.cbTipoDoc.Size = new System.Drawing.Size(250, 21);
             this.cbTipoDoc.TabIndex = 6;
             // 
+            // ckGratuito
+            // 
+            this.ckGratuito.AutoSize = true;
+            this.ckGratuito.Location = new System.Drawing.Point(546, 75);
+            this.ckGratuito.Name = "ckGratuito";
+            this.ckGratuito.Size = new System.Drawing.Size(78, 17);
+            this.ckGratuito.TabIndex = 14;
+            this.ckGratuito.Text = "Gratuidade";
+            this.ckGratuito.UseVisualStyleBackColor = true;
+            // 
             // tipoSeloForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,5 +226,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbTipoDoc;
+        private System.Windows.Forms.CheckBox ckGratuito;
     }
 }
