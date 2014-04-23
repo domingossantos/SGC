@@ -95,7 +95,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Vintasoft.Twain, Version=8.2.3.1, Culture=neutral, PublicKeyToken=153caf29a10d2e31, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\VintaSoft\VintaSoftTwain.NET v8.2\Bin-Registered\v4.0\x86\Vintasoft.Twain.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\VintaSoftTwain\Bin-Registered\v4.0\AnyCPU\Vintasoft.Twain.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>

@@ -54,7 +54,7 @@ namespace sgc
             {
                 if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, idForm))
                 {
-                    MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                    utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                     return;
                 }
             }
@@ -97,7 +97,7 @@ namespace sgc
                 SqlForm.Show();
             }
             else {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
             }
 
         }
@@ -154,7 +154,7 @@ namespace sgc
                 caixaBLL = new CaixaBLL(con);
             }
             catch (Exception ex) {
-                MessageBox.Show("Erro ao carregar confgurações iniciais.\n"+ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao carregar confgurações iniciais.\n" + ex.Message,3);
             }
 
         }
@@ -172,7 +172,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 1100))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -187,7 +187,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 1410))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -203,7 +203,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 2100))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -218,7 +218,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 4100))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -234,7 +234,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 2200))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -249,7 +249,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 4200))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -265,7 +265,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 4100))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -339,7 +339,7 @@ namespace sgc
 
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 5100))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -359,7 +359,7 @@ namespace sgc
                 {
                     if (strCaixa.Equals("0"))
                     {
-                        MessageBox.Show("Informe No. do Caixa");
+                        utils.MessagensExcept.funMsgSistema("Informe No. do Caixa",2);
                         caixaToolStripMenuItem2_Click(null, null);
                         return;
                     }
@@ -372,7 +372,7 @@ namespace sgc
                     
                 if (c == null) 
                 {
-                    MessageBox.Show("Caixa Não Existe");
+                    utils.MessagensExcept.funMsgSistema("Caixa Não Existe",3);
                     return;
                 }
 
@@ -384,25 +384,25 @@ namespace sgc
                     historico = caixaBLL.getUltimoHistorioPorCaixa(Convert.ToInt32(strCaixa));
 
                     if (historico == null) {
-                        MessageBox.Show("Caixa Aberto.\nPor favor Feche este caixa antes de utilizá-lo!");
+                        utils.MessagensExcept.funMsgSistema("Caixa Aberto.\nPor favor Feche este caixa antes de utilizá-lo!",2);
                         return;
                     }
 
                     if (!historico.DsLogin.Equals(sessao.UsuarioSessao.DsLogin))
                     {
-                        MessageBox.Show("Caixa No. " + strCaixa + " aberto pelo usuário " + historico.DsLogin + "\nFavor utilizar outro no. de caixa.");
+                        utils.MessagensExcept.funMsgSistema("Caixa No. " + strCaixa + " aberto pelo usuário " + historico.DsLogin + "\nFavor utilizar outro no. de caixa.",2);
                         return;
                     }
                     else
                     {
                         if (historico.DtAbertura.ToShortDateString() != DateTime.Now.ToShortDateString())
                         {
-                            MessageBox.Show("Este caixa esta aberto desde o dia " + historico.DtAbertura.ToShortDateString() + "\nFavor feche-o para então utilizá-lo novamente.");
+                            utils.MessagensExcept.funMsgSistema("Este caixa esta aberto desde o dia " + historico.DtAbertura.ToShortDateString() + "\nFavor feche-o para então utilizá-lo novamente.",2);
                             return;
                         }
                         else
                         {
-                            MessageBox.Show("Caixa já aberto.");
+                            utils.MessagensExcept.funMsgSistema("Caixa já aberto.",2);
                             sessao.Historico = historico;
                             sessao.NrCaixa = Convert.ToInt32(strCaixa);
 
@@ -458,7 +458,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 5400))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -473,7 +473,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 5300))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -498,7 +498,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 3400))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -524,7 +524,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 1330))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -538,7 +538,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 3300))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -553,7 +553,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 1210))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -566,18 +566,18 @@ namespace sgc
 
                 if (nrAtend != "0")
                 {
-                    MessageBox.Show("Ficha Chamada No." + nrAtend.PadLeft(3, '0'));
+                    utils.MessagensExcept.funMsgSistema("Ficha Chamada No." + nrAtend.PadLeft(3, '0'),2);
                     DialogResult dlgR = MessageBox.Show("Iniciar atendimento?", "Cartorio Conduru", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dlgR == DialogResult.Yes)
                     {
                         filaDAO.iniciaAtendimento(nrAtend);
-                        MessageBox.Show("Atendimento Iniciado!");
+                        utils.MessagensExcept.funMsgSistema("Atendimento Iniciado!",2);
                     }
 
                 }
                 else
                 {
-                    MessageBox.Show("Não há clientes para atendimento!");
+                    utils.MessagensExcept.funMsgSistema("Não há clientes para atendimento!",2);
                 }
                 con.ObjCon.Close();
 
@@ -588,7 +588,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 2300))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else
@@ -603,7 +603,7 @@ namespace sgc
         {
             if (!acessoMenu(sessao.UsuarioSessao.CdPerfil, 3500))
             {
-                MessageBox.Show("Você não tem permissão de acesso a esta opção de menu");
+                utils.MessagensExcept.funMsgSistema("Você não tem permissão de acesso a esta opção de menu",3);
                 return;
             }
             else

@@ -22,7 +22,7 @@ namespace sgc.caixa
         private CaixaBLL caixaBLL;
         private EscrituraBLL escrituraBLL;
         private Conexao con;
-        private Pedido p;
+        private Pedido oPedido;
         private double valor = 0;
         private Reporter impressora;
         private EpsonCodes pc;
@@ -36,7 +36,7 @@ namespace sgc.caixa
             caixaBLL = new CaixaBLL(con);
             usuarioBLL = new UsuarioBLL(con);
             escrituraBLL = new EscrituraBLL(con);
-            p = null;
+            oPedido = null;
             impressora = new Reporter();
             pc = new EpsonCodes();
             dsLoginDesconto = "";
@@ -366,67 +366,71 @@ namespace sgc.caixa
 
         private void btProcurar_Click(object sender, EventArgs e)
         {
-            if (txPedido.Text.Equals("")) {
-                MessageBox.Show("Dgite um No. de Pedido");
-                txPedido.Focus();
-                return;
-            }
-
-            if (grid.RowCount > 0) {
-                if (!ckPedidosMulti.Checked)
-                {
-                    MessageBox.Show("Já existem pedidos relacionados!");
-                    return;
-                }
-            }
-
-
-            p = pedidoBLL.getUltimoPedido(txPedido.Text);
-            if (p == null)
-            {
-                MessageBox.Show("Pedido não encontrado!");
-                return;
-            }
-
-            switch (p.StPedido)
-	        {
-                case 'C':
-                    MessageBox.Show("Pedido Cancelado!");
-                    txPedido.Focus();
-                    return;
-		        break;
-                case 'A':
-                    MessageBox.Show("Pedido Aberto!");
-                    txPedido.Focus();
-                    return;
-                break;
-                case 'P':
-                    MessageBox.Show("Pedido já pago!");
-                    txPedido.Focus();
-                    return;
-                break;
-	        }
-
-
-            if (lbPedidos.Text.Contains(txPedido.Text))
-            {
-                MessageBox.Show("Pedido já está relacionado!");
-                txPedido.Focus();
-                return;
-            }
-
-            lbPedidos.Text += txPedido.Text + ";";
-            String[] pedidos = lbPedidos.Text.Split(new char[] { ';' });
-            List<int> lPedidos = new List<int>();
-            
-            int i;
-            for (i = 1; i < pedidos.Length - 1; i++)
-            {
-                lPedidos.Add(Convert.ToInt32(pedidos[i]));
-            }
-
             try
             {
+                if (txPedido.Text.Equals(""))
+                {
+                    utils.MessagensExcept.funMsgSistema("Digite um No. de Pedido", 3);
+                    txPedido.Focus();
+                    return;
+                }
+
+                if (grid.RowCount > 0)
+                {
+                    if (!ckPedidosMulti.Checked)
+                    {
+                        utils.MessagensExcept.funMsgSistema("Já existem pedidos relacionados!", 3);
+                        return;
+                    }
+                }
+
+                oPedido = pedidoBLL.getUltimoPedido(txPedido.Text);
+               
+                if (oPedido == null)
+                {
+                    utils.MessagensExcept.funMsgSistema("Pedido não encontrado!", 3);
+                    return;
+                }
+
+                switch (oPedido.StPedido)
+                {
+                    case 'C':
+                        utils.MessagensExcept.funMsgSistema("Pedido Cancelado!", 2);
+                        txPedido.Focus();
+                        return;
+                        break;
+                    case 'A':
+                        utils.MessagensExcept.funMsgSistema("Pedido Aberto!", 2);
+                        txPedido.Focus();
+                        return;
+                        break;
+                    case 'P':
+                        utils.MessagensExcept.funMsgSistema("Pedido já pago!", 2);
+                        txPedido.Focus();
+                        return;
+                        break;
+                }
+
+                
+                if (lbPedidos.Text.Contains(txPedido.Text))
+                {
+                    utils.MessagensExcept.funMsgSistema("Pedido já está relacionado!", 2);
+                    txPedido.Focus();
+                    return;
+                }
+
+                lbPedidos.Text += txPedido.Text + ";";
+                String[] pedidos = lbPedidos.Text.Split(new char[] { ';' });
+                List<int> lPedidos = new List<int>();
+
+                int i;
+                for (i = 1; i < pedidos.Length - 1; i++)
+                {
+                    lPedidos.Add(Convert.ToInt32(pedidos[i]));
+                }
+
+
+            
                 DataTable dados = pedidoBLL.getItensPedidosImpressao(lPedidos);
                 DataView dvDados = new DataView(dados);
                 DataRow drDados;
@@ -444,8 +448,14 @@ namespace sgc.caixa
             }
             catch (Exception ex) 
             {
-                MessageBox.Show("Erro ao pesquisar pedido.\n"+ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao pesquisar pedido.\n" + ex.Message,1);
             }
+        }
+
+        private void checaStatusPgto(Pedido pedido)
+        {
+            
+            
         }
 
         private void txPago_Leave(object sender, EventArgs e)
@@ -464,7 +474,7 @@ namespace sgc.caixa
                 txTotal.Text = String.Format("R$ {0:N2}", valor);
                 if (pago < valor)
                 {
-                    MessageBox.Show("Valor informato é menor que o necessário.");
+                    utils.MessagensExcept.funMsgSistema("Valor informato é menor que o necessário.",3);
                     txPago.Focus();
                     return;
                 }
@@ -480,7 +490,7 @@ namespace sgc.caixa
         {
             if (!caixaBLL.getCaixaDia(utils.sessao.UsuarioSessao.DsLogin))
             {
-                MessageBox.Show("Você não pode registrar pagamentos sem\nantes fechar o caixa do dia anterior!");
+                utils.MessagensExcept.funMsgSistema("Você não pode registrar pagamentos sem\nantes fechar o caixa do dia anterior!",3);
                 return;
             }
 
@@ -488,7 +498,7 @@ namespace sgc.caixa
 
             if (!MessageBox.Show("Deseja efetuar esse pagamento?", "Atenção!", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString().Equals("Yes"))
             {
-                MessageBox.Show("Pagamento Cancelado!");
+                utils.MessagensExcept.funMsgSistema("Pagamento Cancelado!",3);
                 limparDados();
                 return;
             }
@@ -496,7 +506,7 @@ namespace sgc.caixa
 
             if (txPago.Text.Equals(""))
             {
-                MessageBox.Show("Informe valor de pagamento");
+                utils.MessagensExcept.funMsgSistema("Informe valor de pagamento",3);
                 txPago.Focus();
                 return;
             }
@@ -505,7 +515,7 @@ namespace sgc.caixa
 
             if (pedidos.Length == 2)
             {
-                MessageBox.Show("Digite numero do pedido");
+                utils.MessagensExcept.funMsgSistema("Digite numero do pedido",2);
                 txPedido.Focus();
                 return;
             }
@@ -513,7 +523,7 @@ namespace sgc.caixa
 
             if (Convert.ToDouble(txPago.Text.Replace("R$", "")) < Convert.ToDouble(txTotal.Text.Replace("R$", "")))
             {
-                MessageBox.Show("Valor de pagamento não pode ser menor que o\nvalor total do pedido.");
+                utils.MessagensExcept.funMsgSistema("Valor de pagamento não pode ser menor que o\nvalor total do pedido.",2);
                 txPago.Focus();
                 return;
             }
@@ -523,7 +533,7 @@ namespace sgc.caixa
             {
                 if (cbCorrentista.SelectedValue == null) 
                 {
-                    MessageBox.Show("Selecione um Correntista!");
+                    utils.MessagensExcept.funMsgSistema("Selecione um Correntista!",3);
                     cbCorrentista.Focus();
                     return;
                 }
@@ -533,7 +543,7 @@ namespace sgc.caixa
             {
                 if (txBanco.Text.Equals("") || txAgencia.Text.Equals("") || txNrCheque.Text.Equals("") || txContaCorrente.Text.Equals(""))
                 {
-                    MessageBox.Show("Preencha as informações do cheque");
+                    utils.MessagensExcept.funMsgSistema("Preencha as informações do cheque",3);
                     txBanco.Focus();
                     return;
                 }
@@ -543,7 +553,7 @@ namespace sgc.caixa
             {
                 if (txBanco.Text.Equals("") || txAgencia.Text.Equals("") || txContaCorrente.Text.Equals(""))
                 {
-                    MessageBox.Show("Preencha as informações do Deposito");
+                    utils.MessagensExcept.funMsgSistema("Preencha as informações do Deposito",3);
                     txBanco.Focus();
                     return;
                 }
@@ -669,6 +679,16 @@ namespace sgc.caixa
                     vlPago = Convert.ToDouble(txPago.Text.Replace("R$", ""));
                     ckPedidosMulti.Checked = false;
 
+                    
+
+                    foreach (int nPedido in lPedidos) {
+                        pedidoBLL.pagaPedido(nPedido);
+                    }
+
+                    utils.MessagensExcept.funMsgSistema("Pedido(s) Pago(s)!\n Iniciando impressão do recibo.",2);
+                    limparDados();
+
+
                     pedidoBLL.imprimePedido(lPedidos,
                                             sessao.NrCaixa,
                                             nmBoleto,
@@ -678,19 +698,13 @@ namespace sgc.caixa
                                             vlPago,
                                             nmCorrentista);
 
-                    MessageBox.Show("Pedido(s) Pago(s)!\nImprimindo Recibo.");
 
-
-                    foreach (int nPedido in lPedidos) {
-                        pedidoBLL.pagaPedido(nPedido);
-                    }
-
-                    limparDados();
+                    
                 }
                 
             }
             catch (Exception ex) {
-                MessageBox.Show("Erro: "+ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro: " + ex.Message,1);
             }
                 
                 #region Codigo antigo
@@ -932,7 +946,7 @@ namespace sgc.caixa
             {
 
                 if (pedidoBLL.checaExistePedidoFechados(sessao.UsuarioSessao.DsLogin).Rows.Count > 0) {
-                    MessageBox.Show("Você possui pedidos ainda não pagos.\nFavor verifique a lista de pedidos não em aberto.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    utils.MessagensExcept.funMsgSistema("Você possui pedidos ainda não pagos.\nFavor verifique a lista de pedidos não em aberto.",3);
                     return;
                 }
 
@@ -941,7 +955,7 @@ namespace sgc.caixa
                 if (caixaBLL.getCaixaDia(sessao.UsuarioSessao.DsLogin))
                 {
                     caixaBLL.fechaCaixa(sessao.UsuarioSessao.DsLogin);
-                    MessageBox.Show("Caixa Fechado\nIniciando impressão!");
+                    utils.MessagensExcept.funMsgSistema("Caixa Fechado\nIniciando impressão!",2);
                     try
                     {
                         HistoricoCaixa historico = caixaBLL.getUltimoHistorioPorUsuario(sessao.UsuarioSessao.DsLogin);
@@ -951,7 +965,7 @@ namespace sgc.caixa
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Erro ao imprimir fechamento do caixa.\n" + ex.Message);
+                        utils.MessagensExcept.funMsgSistema("Erro ao imprimir fechamento do caixa.\n" + ex.Message,1);
                     }
                 }
             }   
@@ -959,15 +973,21 @@ namespace sgc.caixa
 
         private void btReimprimir_Click(object sender, EventArgs e)
         {
-            string nrPedido = (Microsoft.VisualBasic.Interaction.InputBox("Digite no. do pedido", "Cartorio Conduru", "0", 150, 150));
-            
-            if (nrPedido != "")
+            try
             {
-                List<int> lPedidos = new List<int>();
-                lPedidos.Add(Convert.ToInt32(nrPedido));
+                string nrPedido = (Microsoft.VisualBasic.Interaction.InputBox("Digite no. do pedido", "Cartorio Conduru", "0", 150, 150));
 
-                pedidoBLL.imprimePedido(lPedidos, sessao.NrCaixa, "Reimpressao", sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario,0,0,"",true);
-                MessageBox.Show("Pedido enviado a impressora!");
+                if (nrPedido != "")
+                {
+                    List<int> lPedidos = new List<int>();
+                    lPedidos.Add(Convert.ToInt32(nrPedido));
+
+                    pedidoBLL.imprimePedido(lPedidos, sessao.NrCaixa, "Reimpressao", sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario, 0, 0, "", true);
+                    utils.MessagensExcept.funMsgSistema("Pedido enviado a impressora!", 2);
+                }
+            }
+            catch (Exception ex) {
+                utils.MessagensExcept.funMsgSistema(ex.Message, 1);
             }
         }
 
@@ -1021,21 +1041,21 @@ namespace sgc.caixa
         {
             if (txLogin.Text.Equals(""))
             {
-                MessageBox.Show("Digite o nome de Usuário");
+                utils.MessagensExcept.funMsgSistema("Digite o nome de Usuário",2);
                 txLogin.Focus();
                 return;
             }
 
             if (txSenha.Text.Equals(""))
             {
-                MessageBox.Show("Digite uma senha");
+                utils.MessagensExcept.funMsgSistema("Digite uma senha",2);
                 txSenha.Focus();
                 return;
             }
 
             if (txValorDesconto.Text.Equals(""))
             {
-                MessageBox.Show("Digite um valor de desconto");
+                utils.MessagensExcept.funMsgSistema("Digite um valor de desconto",2);
                 txValorDesconto.Focus();
                 return;
             }
@@ -1064,7 +1084,7 @@ namespace sgc.caixa
 
                     if (rbTipoDinheiro.Checked && (valorDesconto > Convert.ToDouble(txTotal.Text)))
                     {
-                        MessageBox.Show("Valor de desconto não pode ser maior que o valor a pagar!");
+                        utils.MessagensExcept.funMsgSistema("Valor de desconto não pode ser maior que o valor a pagar!",1);
                         txValorDesconto.Focus();
                         return;
                     }
@@ -1085,7 +1105,7 @@ namespace sgc.caixa
             }
             else
             {
-                MessageBox.Show("Usuário não encontrado!");
+                utils.MessagensExcept.funMsgSistema("Usuário não encontrado!",3);
                 txLogin.Focus();
             }
         }
@@ -1180,7 +1200,7 @@ namespace sgc.caixa
         {
             if (escrituraBLL.getValorCliente(Convert.ToInt32(txNrEscritura.Text), 'C') <= 0)
             {
-                MessageBox.Show("Cliente sem saldo!");
+                utils.MessagensExcept.funMsgSistema("Cliente sem saldo!",3);
                 return;
             }
             else {

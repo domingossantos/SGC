@@ -8,7 +8,7 @@ namespace sgc.utils
 {
     static class MessagensExcept
     {
-        public static void funMsgSistema(string txtMsg, Int16 nrMsg)
+        public static void funMsgSistema(String txtMsg, Int16 nrMsg)
         {
             switch (nrMsg)
             {

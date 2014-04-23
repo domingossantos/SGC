@@ -762,7 +762,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Erro ao imprimir fita.\nFavor tente reimprimir usando a opção CTRL+R.\n"+ex.Message);
             }
             finally
             {
