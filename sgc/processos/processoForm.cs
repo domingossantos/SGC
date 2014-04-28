@@ -262,6 +262,16 @@ namespace sgc.processos
             }*/
         }
 
+        public char getGratuidade() {
+            char gratuido = 'N';
+
+            if (ckGratuito.Checked)
+                gratuido = 'S';
+
+
+            return gratuido;
+        }
+
         private void btAbriProcesso_Click(object sender, EventArgs e)
         {
             try
@@ -287,20 +297,19 @@ namespace sgc.processos
                     // Busca se selo gratuito
 
                 }
+                
+                if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 5)
+                {
+                    tipoSelo.CdTipoSelo = 0;
+
+                    selo.NrSelo = 0;
+                    selo.CdTipoSelo = 0;
+                }
                 else
                 {
-                    if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 5)
-                    {
-                        tipoSelo.CdTipoSelo = 0;
 
-                        selo.NrSelo = 0;
-                        selo.CdTipoSelo = 0;
-                    }
-                    else
-                    {
-
-                        #region codigo antigo
-                        /*
+                    #region codigo antigo
+                    /*
                     if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 4)
                     {
                         tipoSelo = seloBLL.getTipoSeloPorDocumento(2);
@@ -319,26 +328,26 @@ namespace sgc.processos
 
                     selo = seloBLL.getSeloTipo(tipoSelo.CdTipoSelo);
                      */
-                        #endregion
+                    #endregion
 
-                        if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 4)
-                        {
-                            selo = seloBLL.getSeloTipo(2);
-                        }
-                        else
-                        {
-                            selo = seloBLL.getSeloTipo(Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()));
-                        }
-
-
-                        if (selo == null)
-                        {
-                            MessageBox.Show("Não há selos disponiveis para esta operação!");
-                            return;
-                        }
+                    if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 4)
+                    {
+                        selo = seloBLL.getSeloTipo(2,getGratuidade());
+                    }
+                    else
+                    {
+                        selo = seloBLL.getSeloTipo(Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()),getGratuidade());
                     }
 
+
+                    if (selo == null)
+                    {
+                        MessageBox.Show("Não há selos disponiveis para esta operação!");
+                        return;
+                    }
                 }
+
+
 
                 panelTipoProcesso.Enabled = false;
                 panelProcesso.Enabled = true;
@@ -346,13 +355,11 @@ namespace sgc.processos
 
                 int idSub = 0;
 
-                if (cbSubClasse.Text.Equals(""))
+                if (!cbSubClasse.Text.Equals(""))
                 {
-                    idSub = 0;
+                    idSub = Convert.ToInt32(cbSubClasse.SelectedValue.ToString()); ;
                 }
-                else {
-                    Convert.ToInt32(cbSubClasse.SelectedValue.ToString());
-                }
+                
 
                 processoBLL.novoProcesso(usuario,
                                 lbNumProcesso.Text,
@@ -501,7 +508,11 @@ namespace sgc.processos
             processo.DsRefLivro = txRefLivro.Text;
             processo.DsRefLivroComp = txRefLivroComp.Text;
             processo.DsRefUfOrigem = cbEstadoRef.Text;
-            processo.DsRefCidade = cbCidade.SelectedValue.ToString();
+
+            if (cbCidade.SelectedValue != null) {
+                processo.DsRefCidade = cbCidade.SelectedValue.ToString();
+            }
+            
 
 
             processoBLL.setProcesso(processo);

@@ -117,11 +117,10 @@ namespace DAO
 
         }
 
-        public Selo getSeloTipo(int tipo)
+        public Selo getSeloTipo(int tipo,char stGratuido = 'N')
         {
             Selo selo = null;
-            //String sql = "Select top 1 nrSelo,cdTipoSelo,dtLancamento"
-            //        + ",stSelo from tblSelos where cdTipoSelo = @tipo and stSelo = 'D'";
+            
 
             String sql = "Select top 1 nrSelo,cdTipoSelo,dtLancamento,stSelo " +
                          "from tblSelos " +
@@ -130,7 +129,7 @@ namespace DAO
                             "Select min(t.cdTipoSelo) " +
                             "from tblTipoSelo t " +
                             "inner join tblSelos s on s.cdTipoSelo = t.cdTipoSelo and s.stSelo = 'D' " +
-                            "where t.cdTipoDocumento = @tipo " +
+                            "where t.cdTipoDocumento = @tipo and t.stTipoSelo = '"+stGratuido.ToString() +"'" +
                             "group by t.cdTipoSelo,t.nrSerie,t.dsTipoSelo,t.vlSelo,t.cdTipoDocumento) ";
 
             try

@@ -278,16 +278,21 @@ namespace sgc.caixa
         }
 
 
-        private void limparDados()
+        private void limparDados(bool stTroco = false)
         {
             txPedido.Text = "";
-            txPago.Text = "";
-            txTotal.Text = "";
-            txTroco.Text = "";
+            
             txDesconto.Text = "";
             grid.Rows.Clear();
             lbPedidos.Text = "0;";
-            
+
+            if (!stTroco) {
+                txPago.Text = "";
+                txTotal.Text = "";
+                txTroco.Text = "";
+            }
+
+
             valor = 0;
             rbDinheiro.Checked = true;
             str = "";
@@ -686,15 +691,15 @@ namespace sgc.caixa
                     }
 
                     utils.MessagensExcept.funMsgSistema("Pedido(s) Pago(s)!\n Iniciando impressão do recibo.",2);
-                    limparDados();
-
+                    int tipoPgto = getTipoPagamento();
+                    limparDados(true);
 
                     pedidoBLL.imprimePedido(lPedidos,
                                             sessao.NrCaixa,
                                             nmBoleto,
                                             sessao.PathIniFile,
                                             sessao.UsuarioSessao.NmUsuario,
-                                            getTipoPagamento(),
+                                            tipoPgto,
                                             vlPago,
                                             nmCorrentista);
 

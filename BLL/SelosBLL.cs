@@ -261,12 +261,12 @@ namespace BLL
             }
         }
 
-        public Selo getSeloTipo(int cdTipo)
+        public Selo getSeloTipo(int cdTipo,char gratuidade = 'N')
         {
             try
             {
                 con.ObjCon.Open();
-                Selo s = seloDAO.getSeloTipo(cdTipo);
+                Selo s = seloDAO.getSeloTipo(cdTipo,gratuidade);
 
                 return s;
             }

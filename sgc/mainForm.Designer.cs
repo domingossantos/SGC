@@ -94,6 +94,8 @@
             this.situaçãoDePagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tamanhoDeImagensToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.imprimirFitaDeArquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualDeOperaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sobreOSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -580,7 +582,9 @@
             this.relatóriosToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tamanhoDeImagensToolStripMenuItem,
             this.pedidosToolStripMenuItem1,
-            this.relatóriosToolStripMenuItem2});
+            this.relatóriosToolStripMenuItem2,
+            this.toolStripMenuItem5,
+            this.imprimirFitaDeArquivoToolStripMenuItem});
             this.relatóriosToolStripMenuItem1.Name = "relatóriosToolStripMenuItem1";
             this.relatóriosToolStripMenuItem1.Size = new System.Drawing.Size(86, 20);
             this.relatóriosToolStripMenuItem1.Text = "Administração";
@@ -591,7 +595,7 @@
             this.cancelarSeloToolStripMenuItem,
             this.históricoDeMovimentoDeSelosToolStripMenuItem});
             this.tamanhoDeImagensToolStripMenuItem.Name = "tamanhoDeImagensToolStripMenuItem";
-            this.tamanhoDeImagensToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.tamanhoDeImagensToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.tamanhoDeImagensToolStripMenuItem.Text = "Selos";
             this.tamanhoDeImagensToolStripMenuItem.Click += new System.EventHandler(this.tamanhoDeImagensToolStripMenuItem_Click);
             // 
@@ -615,7 +619,7 @@
             this.históricoDeCancelamentoToolStripMenuItem,
             this.situaçãoDePagamentoToolStripMenuItem});
             this.pedidosToolStripMenuItem1.Name = "pedidosToolStripMenuItem1";
-            this.pedidosToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
+            this.pedidosToolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
             this.pedidosToolStripMenuItem1.Text = "Pedidos";
             // 
             // históricoDeCancelamentoToolStripMenuItem
@@ -637,7 +641,7 @@
             this.relatóriosToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tamanhoDeImagensToolStripMenuItem1});
             this.relatóriosToolStripMenuItem2.Name = "relatóriosToolStripMenuItem2";
-            this.relatóriosToolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
+            this.relatóriosToolStripMenuItem2.Size = new System.Drawing.Size(188, 22);
             this.relatóriosToolStripMenuItem2.Text = "Relatórios";
             // 
             // tamanhoDeImagensToolStripMenuItem1
@@ -646,6 +650,18 @@
             this.tamanhoDeImagensToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
             this.tamanhoDeImagensToolStripMenuItem1.Text = "Tamanho de Imagens";
             this.tamanhoDeImagensToolStripMenuItem1.Click += new System.EventHandler(this.tamanhoDeImagensToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(185, 6);
+            // 
+            // imprimirFitaDeArquivoToolStripMenuItem
+            // 
+            this.imprimirFitaDeArquivoToolStripMenuItem.Name = "imprimirFitaDeArquivoToolStripMenuItem";
+            this.imprimirFitaDeArquivoToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.imprimirFitaDeArquivoToolStripMenuItem.Text = "Imprimir Fita de Arquivo";
+            this.imprimirFitaDeArquivoToolStripMenuItem.Click += new System.EventHandler(this.imprimirFitaDeArquivoToolStripMenuItem_Click);
             // 
             // ajudaToolStripMenuItem
             // 
@@ -853,7 +869,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu01;
             this.Name = "mainForm";
-            this.Text = "Sistema de Gestão do Cartório Conduru - SGC - V1.6.4.3";
+            this.Text = "Sistema de Gestão do Cartório Conduru - SGC - V1.6.4.4";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainForm_KeyDown);
@@ -961,6 +977,8 @@
         private System.Windows.Forms.ToolStripMenuItem pedidosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem históricoDeCancelamentoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem situaçãoDePagamentoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem imprimirFitaDeArquivoToolStripMenuItem;
 
     }
 }

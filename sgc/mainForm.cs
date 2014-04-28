@@ -797,6 +797,19 @@ namespace sgc
             }
         }
 
+        private void imprimirFitaDeArquivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (utils.sessao.UsuarioSessao.DsLogin == "admin")
+            {
+                admin.ImprimirFitaArquivoForm imprimeFitaArquivoForm = new admin.ImprimirFitaArquivoForm();
+                abrirFormFilho(imprimeFitaArquivoForm);
+            }
+            else
+            {
+                utils.MessagensExcept.funMsgSistema("Você não tem previlégio para acessar esta opção", 3);
+            }
+        }
+
        
 
 

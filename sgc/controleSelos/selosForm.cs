@@ -76,20 +76,20 @@ namespace sgc.controleSelos
         {
             if (txSeqInicio.Text.Equals(""))
             {
-                MessageBox.Show("Informe número inicial da sequencia");
+                utils.MessagensExcept.funMsgSistema("Informe número inicial da sequencia",3);
                 txSeqInicio.Focus();
                 return;
             }
 
             if (txSeqFinal.Text.Equals(""))
             {
-                MessageBox.Show("Informe número final da sequencia");
+                utils.MessagensExcept.funMsgSistema("Informe número final da sequencia",3);
                 txSeqFinal.Focus();
                 return;
             }
             if (cbTipoSelo.SelectedValue == null)
             {
-                MessageBox.Show("Informe Tipo de Selo!");
+                utils.MessagensExcept.funMsgSistema("Informe Tipo de Selo!",3);
                 cbTipoSelo.Focus();
                 return;
             }
@@ -114,7 +114,7 @@ namespace sgc.controleSelos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao listar selos: "+ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao listar selos: "+ex.Message,1);
             }
             
         }
@@ -124,13 +124,13 @@ namespace sgc.controleSelos
             try
             {
                 seloBLL.incluir(Convert.ToInt32(txSeqInicio.Text), Convert.ToInt32(txSeqFinal.Text), Convert.ToInt32(cbTipoSelo.SelectedValue.ToString()));
-                MessageBox.Show("Selos Registrados");
+                utils.MessagensExcept.funMsgSistema("Selos Registrados",3);
                 btPesquisar_Click(sender,e);
                 //atualizaGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao Registrat selos.\n"+ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao Registra selos.\n" + ex.Message,1);
             }
         }
 
@@ -199,18 +199,18 @@ namespace sgc.controleSelos
             {
                 if (seloBLL.checaStatusSelos(seloBLL.getSelos(Convert.ToInt32(txSeqInicio.Text), Convert.ToInt32(txSeqFinal.Text), Convert.ToInt32(cbTipoSelo.SelectedValue.ToString()))))
                 {
-                    MessageBox.Show("Existe selos já Atribuidos, Usados ou Transferidos neste intervalo\nVerifique antes de tentar utilizá-los!");
+                    utils.MessagensExcept.funMsgSistema("Existe selos já Atribuidos, Usados ou Transferidos neste intervalo\nVerifique antes de tentar utilizá-los!",3);
                 }
                 else
                 {
                     seloBLL.setSelosUsuario(Convert.ToInt32(txSeqInicio.Text), Convert.ToInt32(txSeqFinal.Text), cbUsuario.SelectedValue.ToString(), Convert.ToInt32(cbTipoSelo.SelectedValue.ToString()));
                     btPesquisar_Click(sender, e);
-                    MessageBox.Show("Selos atribuidos com sucesso!");
+                    utils.MessagensExcept.funMsgSistema("Selos atribuidos com sucesso!",2);
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao atribuir selos "+ ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao atribuir selos "+ ex.Message,1);
             }
             finally
             {
