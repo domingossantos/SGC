@@ -189,14 +189,13 @@ namespace sgc.caixa
             }
 
             
-
+            MovimentoCaixa movimento = new MovimentoCaixa();
 
             if (rbCorrentista.Checked) 
             {
                 try
                 {
-                    MovimentoCaixa movimento = new MovimentoCaixa();
-
+                    
                     movimento.IdHitoricoCaixa = utils.sessao.Historico.IdHistoricocaixa;
                     movimento.IdTipoMovimento = utils.sessao.IdPedidoPagtoCorrentista;
                     movimento.NrCaixa = utils.sessao.Historico.NrCaixa;
@@ -222,6 +221,7 @@ namespace sgc.caixa
                     mensagem = "Recebemos os valores abaixo descritos do Sr(a).";
 
                     
+                    
                     MessageBox.Show("Pagamento registrado.\nImprimindo Recibo.");
                     trans.Commit();
 
@@ -241,7 +241,7 @@ namespace sgc.caixa
             {
                 try
                 {
-                    MovimentoCaixa movimento = new MovimentoCaixa();
+                    
 
                     AtoOperacao ato = getAtoPlano(cbOpcao.SelectedValue.ToString(),trans);
 
@@ -278,9 +278,10 @@ namespace sgc.caixa
 
             if (rbOutros.Checked)
             {
+
                 try
                 {
-                    MovimentoCaixa movimento = new MovimentoCaixa();
+                    
                     AtoOperacao ato = getAtoPlano(cbOpcao.SelectedValue.ToString(), trans);
 
                     movimento.IdHitoricoCaixa = utils.sessao.Historico.IdHistoricocaixa;
@@ -310,26 +311,32 @@ namespace sgc.caixa
                     con.ObjCon.Close();
                 }
             }
+
+            
             imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA");
             imp.StartJob();
-            imp.PrintText(1, 1, iniFile.IniReadValue("HBOLETO", "LINHA1"));
-            imp.PrintText(2, 1, iniFile.IniReadValue("HBOLETO", "LINHA2"));
-            imp.PrintText(3, 1, iniFile.IniReadValue("HBOLETO", "LINHA3"));
-            imp.PrintText(4, 1, iniFile.IniReadValue("HBOLETO", "LINHA4"));
-            imp.PrintText(5, 1, iniFile.IniReadValue("HBOLETO", "LINHA5"));
-            imp.PrintText(6, 1, "################### RECIBO ####################");
-            imp.PrintText(7, 1, mensagem);
-            imp.PrintText(8, 1, "OBS.: "+txObservacao.Text);
-            imp.PrintText(9, 1, cbOpcao.Text);
-            imp.PrintText(10, 1, "");
-            imp.PrintText(11, 1, "VALOR:");
-            imp.PrintText(12, 30, txValor.Text.PadLeft(8, ' '));
-            imp.PrintText(13, 1, "Impresso em........: " + DateTime.Now.ToShortDateString());
-            imp.PrintText(14, 1, "Recebido por.......: " + utils.sessao.UsuarioSessao.NmUsuario);
-            int x = 14;
+            int i = 1;
+            
+
+            imp.PrintText(i, 1, iniFile.IniReadValue("HBOLETO", "LINHA1"));
+            imp.PrintText(i++, 1, iniFile.IniReadValue("HBOLETO", "LINHA2"));
+            imp.PrintText(i++, 1, iniFile.IniReadValue("HBOLETO", "LINHA3"));
+            imp.PrintText(i++, 1, iniFile.IniReadValue("HBOLETO", "LINHA4"));
+            imp.PrintText(i++, 1, iniFile.IniReadValue("HBOLETO", "LINHA5"));
+            imp.PrintText(i++, 1, "################### RECIBO ####################");
+            imp.PrintText(i++, 1, "No. Movimento:" +movimento.IdMovimentoCaixa.ToString().PadLeft(6, '0'));
+            imp.PrintText(i++, 1, mensagem);
+            imp.PrintText(i++, 1, "OBS.: " + txObservacao.Text);
+            imp.PrintText(i++, 1, cbOpcao.Text);
+            imp.PrintText(i++, 1, "");
+            imp.PrintText(i++, 1, "VALOR:");
+            imp.PrintText(i++, 30, txValor.Text.PadLeft(8, ' '));
+            imp.PrintText(i++, 1, "Impresso em........: " + DateTime.Now.ToShortDateString());
+            imp.PrintText(i++, 1, "Recebido por.......: " + utils.sessao.UsuarioSessao.NmUsuario);
+            int x = i++;
             int qtdLinhas = Convert.ToInt32(iniFile.IniReadValue("FBOLETO", "QTDFIM"));
 
-            for (int i = 0; i < qtdLinhas; i++)
+            for (int v = 0; v < qtdLinhas; v++)
             {
                 imp.PrintText(x++, 1, "");
             }

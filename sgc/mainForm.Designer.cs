@@ -73,6 +73,8 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeCaixasToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.cadastroDeCaixasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.reimpressãoDeUsoInternoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estornoDePagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.financeiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solicitaçãoDePagamentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movimentoCaixasPorDiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -290,7 +292,7 @@
             // selosUsadosPorPeríodoToolStripMenuItem
             // 
             this.selosUsadosPorPeríodoToolStripMenuItem.Name = "selosUsadosPorPeríodoToolStripMenuItem";
-            this.selosUsadosPorPeríodoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.selosUsadosPorPeríodoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.selosUsadosPorPeríodoToolStripMenuItem.Text = "Situação Selos";
             this.selosUsadosPorPeríodoToolStripMenuItem.Click += new System.EventHandler(this.selosUsadosPorPeríodoToolStripMenuItem_Click);
             // 
@@ -438,7 +440,9 @@
             this.pesquisaSituaçãoCaixaToolStripMenuItem,
             this.toolStripMenuItem4,
             this.cadastroDeCaixasToolStripMenuItem,
-            this.cadastroDeCaixasToolStripMenuItem1});
+            this.cadastroDeCaixasToolStripMenuItem1,
+            this.reimpressãoDeUsoInternoToolStripMenuItem,
+            this.estornoDePagamentoToolStripMenuItem});
             this.caixaToolStripMenuItem1.Name = "caixaToolStripMenuItem1";
             this.caixaToolStripMenuItem1.Size = new System.Drawing.Size(46, 20);
             this.caixaToolStripMenuItem1.Text = "Caixa";
@@ -483,6 +487,19 @@
             this.cadastroDeCaixasToolStripMenuItem1.Size = new System.Drawing.Size(190, 22);
             this.cadastroDeCaixasToolStripMenuItem1.Text = "Cadastro de Caixas";
             this.cadastroDeCaixasToolStripMenuItem1.Click += new System.EventHandler(this.cadastroDeCaixasToolStripMenuItem1_Click);
+            // 
+            // reimpressãoDeUsoInternoToolStripMenuItem
+            // 
+            this.reimpressãoDeUsoInternoToolStripMenuItem.Name = "reimpressãoDeUsoInternoToolStripMenuItem";
+            this.reimpressãoDeUsoInternoToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.reimpressãoDeUsoInternoToolStripMenuItem.Text = "Reimpressão Sangria";
+            this.reimpressãoDeUsoInternoToolStripMenuItem.Click += new System.EventHandler(this.reimpressãoDeUsoInternoToolStripMenuItem_Click);
+            // 
+            // estornoDePagamentoToolStripMenuItem
+            // 
+            this.estornoDePagamentoToolStripMenuItem.Name = "estornoDePagamentoToolStripMenuItem";
+            this.estornoDePagamentoToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.estornoDePagamentoToolStripMenuItem.Text = "Estorno de Pagamento";
             // 
             // financeiroToolStripMenuItem
             // 
@@ -869,7 +886,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu01;
             this.Name = "mainForm";
-            this.Text = "Sistema de Gestão do Cartório Conduru - SGC - V1.6.4.4";
+            this.Text = "Sistema de Gestão do Cartório Conduru - SGC - V1.6.4.5";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainForm_KeyDown);
@@ -979,6 +996,8 @@
         private System.Windows.Forms.ToolStripMenuItem situaçãoDePagamentoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem imprimirFitaDeArquivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reimpressãoDeUsoInternoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estornoDePagamentoToolStripMenuItem;
 
     }
 }

@@ -50,6 +50,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.apagarMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarValorMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btEstorno = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPedido)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPagto)).BeginInit();
@@ -58,6 +59,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btEstorno);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.lbValor);
             this.panel1.Controls.Add(this.lbStatus);
@@ -75,7 +77,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(733, 86);
+            this.panel1.Size = new System.Drawing.Size(733, 97);
             this.panel1.TabIndex = 0;
             // 
             // label8
@@ -164,7 +166,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(543, 58);
+            this.label2.Location = new System.Drawing.Point(539, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 25);
             this.label2.TabIndex = 24;
@@ -175,7 +177,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 59);
+            this.label1.Location = new System.Drawing.Point(3, 68);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(161, 25);
             this.label1.TabIndex = 23;
@@ -183,9 +185,9 @@
             // 
             // btPesquisar
             // 
-            this.btPesquisar.Location = new System.Drawing.Point(111, 23);
+            this.btPesquisar.Location = new System.Drawing.Point(89, 33);
             this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(98, 23);
+            this.btPesquisar.Size = new System.Drawing.Size(75, 23);
             this.btPesquisar.TabIndex = 22;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
@@ -193,7 +195,7 @@
             // 
             // txNrPedido
             // 
-            this.txNrPedido.Location = new System.Drawing.Point(18, 25);
+            this.txNrPedido.Location = new System.Drawing.Point(81, 7);
             this.txNrPedido.MaxLength = 10;
             this.txNrPedido.Name = "txNrPedido";
             this.txNrPedido.Size = new System.Drawing.Size(75, 20);
@@ -212,16 +214,16 @@
             // 
             this.gridPedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridPedido.Dock = System.Windows.Forms.DockStyle.Left;
-            this.gridPedido.Location = new System.Drawing.Point(0, 86);
+            this.gridPedido.Location = new System.Drawing.Point(0, 97);
             this.gridPedido.Name = "gridPedido";
-            this.gridPedido.Size = new System.Drawing.Size(276, 360);
+            this.gridPedido.Size = new System.Drawing.Size(276, 349);
             this.gridPedido.TabIndex = 1;
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(276, 86);
+            this.splitter1.Location = new System.Drawing.Point(276, 97);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 360);
+            this.splitter1.Size = new System.Drawing.Size(3, 349);
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
             // 
@@ -230,9 +232,9 @@
             this.gridPagto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridPagto.ContextMenuStrip = this.contextMenuStrip1;
             this.gridPagto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridPagto.Location = new System.Drawing.Point(279, 86);
+            this.gridPagto.Location = new System.Drawing.Point(279, 97);
             this.gridPagto.Name = "gridPagto";
-            this.gridPagto.Size = new System.Drawing.Size(454, 360);
+            this.gridPagto.Size = new System.Drawing.Size(454, 349);
             this.gridPagto.TabIndex = 3;
             // 
             // contextMenuStrip1
@@ -241,21 +243,31 @@
             this.apagarMovimentoToolStripMenuItem,
             this.alterarValorMovimentoToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(205, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 48);
             // 
             // apagarMovimentoToolStripMenuItem
             // 
             this.apagarMovimentoToolStripMenuItem.Name = "apagarMovimentoToolStripMenuItem";
-            this.apagarMovimentoToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.apagarMovimentoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.apagarMovimentoToolStripMenuItem.Text = "Apagar Movimento";
             this.apagarMovimentoToolStripMenuItem.Click += new System.EventHandler(this.apagarMovimentoToolStripMenuItem_Click);
             // 
             // alterarValorMovimentoToolStripMenuItem
             // 
             this.alterarValorMovimentoToolStripMenuItem.Name = "alterarValorMovimentoToolStripMenuItem";
-            this.alterarValorMovimentoToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.alterarValorMovimentoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.alterarValorMovimentoToolStripMenuItem.Text = "Alterar Valor Movimento";
             this.alterarValorMovimentoToolStripMenuItem.Click += new System.EventHandler(this.alterarValorMovimentoToolStripMenuItem_Click);
+            // 
+            // btEstorno
+            // 
+            this.btEstorno.Location = new System.Drawing.Point(8, 33);
+            this.btEstorno.Name = "btEstorno";
+            this.btEstorno.Size = new System.Drawing.Size(75, 23);
+            this.btEstorno.TabIndex = 34;
+            this.btEstorno.Text = "Estornar";
+            this.btEstorno.UseVisualStyleBackColor = true;
+            this.btEstorno.Click += new System.EventHandler(this.btEstorno_Click);
             // 
             // SituacaoPedidoForm
             // 
@@ -300,5 +312,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem apagarMovimentoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alterarValorMovimentoToolStripMenuItem;
+        private System.Windows.Forms.Button btEstorno;
     }
 }

@@ -8,12 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DAO;
+using sgc.utils;
 
 namespace sgc.admin
 {
     public partial class SituacaoPedidoForm : Form
     {
         Conexao con = new Conexao(Dados.strConexao);
+        ConexaoDB conn = new ConexaoDB(Dados.strConexao);
         public SituacaoPedidoForm()
         {
             InitializeComponent();
@@ -58,7 +60,7 @@ namespace sgc.admin
                         sql+= "	when 2 then 'Correntista' ";
                         sql+= "	when 3 then 'Cheque' ";
                         sql+= "	else 'Deposito' end tipoPagamento ";
-                sql += ",CONVERT(VARCHAR(10), dtMovimento, 103) +' '+CONVERT(VARCHAR(12), dtMovimento, 114) as dtMovimento ";
+                        sql += ",CONVERT(VARCHAR(10), dtMovimento, 103) +' '+CONVERT(VARCHAR(12), dtMovimento, 114) as dtMovimento ,tpPagamento";
                 sql += "from tblMovimentoCaixa where nrPedido =" + txNrPedido.Text;
                 sql += "order by dtMovimento";
 
@@ -181,5 +183,61 @@ namespace sgc.admin
                 con.ObjCon.Close();
             }
         }
+
+        private void btEstorno_Click(object sender, EventArgs e)
+        {
+            /*
+            SqlTransaction trans = null;
+            try
+            {
+                conn.abreBanco();
+
+                trans = conn.conexao.BeginTransaction();
+
+
+                String sql = "select idMovimento,tpPagamento from tblMovimentoCaixao where nrPedido = " + txNrPedido.Text;
+
+
+
+                SqlDataReader tbMovimento = conn.retornoDataReader(sql);
+
+                if (tbMovimento.HasRows) {
+
+                    while (tbMovimento.Read())
+                    {
+                        Int16 idx = Convert.ToInt16(tbMovimento[1]);
+                        switch (idx)
+                        {
+                            case 1: 
+                                {
+                                    sql = "delete from tblMovimentoCaixa where idMovimento = " + tbMovimento[0].ToString();
+                                    break;
+                                }
+
+
+                        }
+
+                        conn.executaSemRetorno(sql);
+
+                    }
+
+                }
+
+
+
+
+
+
+                trans.Commit();
+                conn.fechaBanco();
+            }
+            catch (Exception ex) {
+                trans.Rollback();
+                utils.MessagensExcept.funMsgSistema("Erro ao estornar pagamento.\n",1);
+            }
+             */ 
+        }
+
+        
     }
 }

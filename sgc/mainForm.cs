@@ -414,39 +414,45 @@ namespace sgc
                 }
                 else
                 {
-                    historico = new HistoricoCaixa();
-
-                    historico.DsLogin = sessao.UsuarioSessao.DsLogin;
-                    historico.DtAbertura = DateTime.Now;
-                    historico.NrCaixa = Convert.ToInt32(strCaixa);
-
-                    caixaBLL.abreCaixa(historico);
-
-                    string vlCaixa = (Microsoft.VisualBasic.Interaction.InputBox("Valor de Abertura de Caixa", "Cartorio Conduru", "0", 150, 150));
-
-                    if (vlCaixa != "")
+                    try
                     {
-                        MovimentoCaixa movimento = new MovimentoCaixa();
+                        historico = new HistoricoCaixa();
 
-                        movimento.IdHitoricoCaixa = historico.IdHistoricocaixa;
-                        movimento.IdTipoMovimento = 77;
-                        movimento.NrCaixa = historico.NrCaixa;
-                        movimento.TpOperacao = 'C';
-                        movimento.VlMovimento = Convert.ToDouble(vlCaixa);
-                        movimento.DsLogin = historico.DsLogin;
-                        movimento.DsLoginAutDesconto = "";
-                        movimento.NrCaixa = historico.NrCaixa;
-                        movimento.NrPedido = 0;
-                        movimento.VlDesconto = 0;
+                        historico.DsLogin = sessao.UsuarioSessao.DsLogin;
+                        historico.DtAbertura = DateTime.Now;
+                        historico.NrCaixa = Convert.ToInt32(strCaixa);
 
-                        caixaBLL.salvaMovimento(movimento);
+                        caixaBLL.abreCaixa(historico);
+
+                        string vlCaixa = (Microsoft.VisualBasic.Interaction.InputBox("Valor de Abertura de Caixa", "Cartorio Conduru", "0", 150, 150));
+
+                        if (vlCaixa != "")
+                        {
+                            MovimentoCaixa movimento = new MovimentoCaixa();
+
+                            movimento.IdHitoricoCaixa = historico.IdHistoricocaixa;
+                            movimento.IdTipoMovimento = 77;
+                            movimento.NrCaixa = historico.NrCaixa;
+                            movimento.TpOperacao = 'C';
+                            movimento.VlMovimento = Convert.ToDouble(vlCaixa);
+                            movimento.DsLogin = historico.DsLogin;
+                            movimento.DsLoginAutDesconto = "";
+                            movimento.NrCaixa = historico.NrCaixa;
+                            movimento.NrPedido = 0;
+                            movimento.VlDesconto = 0;
+
+                            caixaBLL.salvaMovimento(movimento);
+                        }
+                        sessao.NrCaixa = historico.NrCaixa;
+                        sessao.Historico = historico;
+
+                        caixaForm FormCaixa = new caixaForm();
+                        FormCaixa.MdiParent = this;
+                        FormCaixa.Show();
                     }
-                    sessao.NrCaixa = historico.NrCaixa;
-                    sessao.Historico = historico;
-
-                    caixaForm FormCaixa = new caixaForm();
-                    FormCaixa.MdiParent = this;
-                    FormCaixa.Show();
+                    catch (Exception ex) {
+                        utils.MessagensExcept.funMsgSistema("Erro ao abrir caixa.\n" + ex.Message, 1);
+                    }
                 }
             }
             
@@ -808,6 +814,12 @@ namespace sgc
             {
                 utils.MessagensExcept.funMsgSistema("Você não tem previlégio para acessar esta opção", 3);
             }
+        }
+
+        private void reimpressãoDeUsoInternoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            caixa.ReimpressaoSangriaForm reimpressaoSangriaForm = new ReimpressaoSangriaForm();
+            abrirFormFilho(reimpressaoSangriaForm);
         }
 
        

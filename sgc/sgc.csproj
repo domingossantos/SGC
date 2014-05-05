@@ -268,6 +268,12 @@
     <Compile Include="caixa\movimentoCaixaUsuarioForm.Designer.cs">
       <DependentUpon>movimentoCaixaUsuarioForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="caixa\ReimpressaoSangriaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="caixa\ReimpressaoSangriaForm.Designer.cs">
+      <DependentUpon>ReimpressaoSangriaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="caixa\relMovimentoDiarioForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -599,6 +605,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="caixa\movimentoCaixaUsuarioForm.resx">
       <DependentUpon>movimentoCaixaUsuarioForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="caixa\ReimpressaoSangriaForm.resx">
+      <DependentUpon>ReimpressaoSangriaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="caixa\relMovimentoDiarioForm.resx">
       <DependentUpon>relMovimentoDiarioForm.cs</DependentUpon>
