@@ -54,13 +54,13 @@ namespace sgc.admin
         public void getMovimentoCaixa() {
             try
             {
-                String sql = "select idMovimento,dsLogin ,vlMovimento,vlDesconto, ";
+                String sql = "select idMovimento,dsLogin ,vlMovimento,vlDesconto,  tpPagamento, ";
                 sql+= "case tpPagamento ";
 	                    sql+= "when 1 then 'Dinheiro' ";
                         sql+= "	when 2 then 'Correntista' ";
                         sql+= "	when 3 then 'Cheque' ";
                         sql+= "	else 'Deposito' end tipoPagamento ";
-                        sql += ",CONVERT(VARCHAR(10), dtMovimento, 103) +' '+CONVERT(VARCHAR(12), dtMovimento, 114) as dtMovimento ,tpPagamento";
+                        sql += ",CONVERT(VARCHAR(10), dtMovimento, 103) +' '+CONVERT(VARCHAR(12), dtMovimento, 114) as dtMovimento ";
                 sql += "from tblMovimentoCaixa where nrPedido =" + txNrPedido.Text;
                 sql += "order by dtMovimento";
 
