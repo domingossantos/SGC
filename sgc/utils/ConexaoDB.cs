@@ -20,6 +20,12 @@ namespace sgc.utils
             this._dataSet = new DataSet();
         }
 
+        private SqlTransaction _trans;
+        public SqlTransaction trans {
+            set { this._trans = value;  }
+            get { return this.trans; }
+        }
+
         private SqlConnection _conexao;
         public SqlConnection conexao
         {
@@ -58,7 +64,7 @@ namespace sgc.utils
         public DataTable retornarDataSet(String sql)
         {
             _dataAdapter = new SqlDataAdapter(sql, _conexao);
-
+            
             DataTable tabela = new DataTable();
             _dataAdapter.Fill(tabela);
             _dataAdapter.Dispose();
@@ -70,6 +76,10 @@ namespace sgc.utils
             int num = 0;
 
             _cmd.CommandText = sql;
+
+            if (_trans != null) {
+                _cmd.Transaction = _trans;
+            }
 
             SqlDataReader dataReader = _cmd.ExecuteReader();
 
@@ -84,6 +94,12 @@ namespace sgc.utils
 
         public SqlDataReader retornoDataReader(String sql) {
             _cmd.CommandText = sql;
+            
+            if (_trans != null)
+            {
+                _cmd.Transaction = _trans;
+            }
+
             SqlDataReader dr = _cmd.ExecuteReader();
 
             return dr;
@@ -92,6 +108,10 @@ namespace sgc.utils
 
         public void executaSemRetorno(String sql)
         {
+            if (_trans != null)
+            {
+                _cmd.Transaction = _trans;
+            }
             _cmd.CommandText = sql;
             _cmd.ExecuteNonQuery();
         }

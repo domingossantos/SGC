@@ -44,6 +44,7 @@ namespace sgc.admin
                 da.Fill(dt);
 
                 gridPedido.DataSource = dt;
+                da.Dispose();
             }
             catch (Exception ex) {
                 utils.MessagensExcept.funMsgSistema("Erro ao consultar pedido.\n"+ex.Message,3);
@@ -163,8 +164,6 @@ namespace sgc.admin
 
                     String sql = "update tblMovimentoCaixa set vlMovimento = @valor where idMovimento = " + idMovimento;
 
-
-
                     con.ObjCon.Open();
                     SqlCommand cmd = new SqlCommand(sql, con.ObjCon);
                     cmd.Parameters.AddWithValue("@valor", valor);
@@ -186,35 +185,35 @@ namespace sgc.admin
 
         private void btEstorno_Click(object sender, EventArgs e)
         {
-            /*
-            SqlTransaction trans = null;
+
+
             try
             {
                 conn.abreBanco();
 
-                trans = conn.conexao.BeginTransaction();
+
+                //conn.trans = conn.conexao.BeginTransaction();
+
+                String sql = "select idMovimento,tpPagamento from tblMovimentoCaixa where nrPedido = " + txNrPedido.Text;
+
+                DataTable tbMovimento = conn.retornarDataSet(sql);
 
 
-                String sql = "select idMovimento,tpPagamento from tblMovimentoCaixao where nrPedido = " + txNrPedido.Text;
+                if (tbMovimento.Rows.Count > 0)
+                {
 
-
-
-                SqlDataReader tbMovimento = conn.retornoDataReader(sql);
-
-                if (tbMovimento.HasRows) {
-
-                    while (tbMovimento.Read())
+                    for (int i = 0; tbMovimento.Rows.Count > i;i++ )
                     {
-                        Int16 idx = Convert.ToInt16(tbMovimento[1]);
-                        switch (idx)
+                        sql = "delete from tblMovimentoCaixa where idMovimento = " + tbMovimento.Rows[i]["idMovimento"].ToString();
+                        conn.executaSemRetorno(sql);
+
+                        if (Convert.ToInt16(tbMovimento.Rows[i]["tpPagamento"]) == 2)
                         {
-                            case 1: 
-                                {
-                                    sql = "delete from tblMovimentoCaixa where idMovimento = " + tbMovimento[0].ToString();
-                                    break;
-                                }
-
-
+                            sql = "delete from tblPedidosCorrentista where nrPedido = " + txNrPedido.Text;
+                        }
+                        else
+                        {
+                            sql = "delete from tblCheque where nrPedido = " + txNrPedido.Text;
                         }
 
                         conn.executaSemRetorno(sql);
@@ -222,20 +221,22 @@ namespace sgc.admin
                     }
 
                 }
+                sql = "update tblPedidos set stPedido = 'F' where nrPedido = " + txNrPedido.Text;
+                conn.executaSemRetorno(sql);
 
-
-
-
-
-
-                trans.Commit();
+                //conn.trans.Commit();
+                
+                utils.MessagensExcept.funMsgSistema("Pedido estornado", 2);
+            }
+            catch (Exception ex)
+            {
+                //conn.trans.Rollback();
+                utils.MessagensExcept.funMsgSistema("Erro ao estornar pagamento.\n" + ex.Message, 1);
+            }
+            finally {
                 conn.fechaBanco();
             }
-            catch (Exception ex) {
-                trans.Rollback();
-                utils.MessagensExcept.funMsgSistema("Erro ao estornar pagamento.\n",1);
-            }
-             */ 
+              
         }
 
         

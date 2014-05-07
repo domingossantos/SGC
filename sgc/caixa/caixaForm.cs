@@ -575,24 +575,12 @@ namespace sgc.caixa
             int i;
             for (i = 1; i < pedidos.Length -1; i++)
             {
-                //pedidoBLL.pagaPedido(Convert.ToInt32(pedidos[i]),sessao.Historico,getTipoPagamento(),trans);
                 lPedidos.Add(Convert.ToInt32(pedidos[i]));   
             }
 
             if (txDesconto.Text.Equals(""))
                 txDesconto.Text = "0";
-            /*
-             * double vlPago
-                                    , List<int> PedidosList
-                                    , HistoricoCaixa historico
-                                    , int tpPagamento
-                                    , String dsLogin
-                                    , int idTipoMovimento
-                                    , int nrCaixa
-                                    , int tipoPagamento
-                                    , double vlDesconto
-                                    , string dsLoginDesconto 
-             */
+            
             try
             {
                 bool stPgtoPedido = caixaBLL.registraPagamentoPedido(vlPago
