@@ -972,7 +972,14 @@ namespace BLL
                 imp.PrintText(x++, 1, "########### DEMOSTRATIVO PAGAMENTO ############");
                 imp.PrintText(x++, 1, "TIPO PAGAMENTO                     VALOR");
 
-                DataTable dadosMovimento = movimentoDAO.getResumoMovimento("and m.idHistoricoCaixa = " + historico.IdHistoricocaixa + " and m.tpOperacao = 'C' ");
+                StringBuilder filtroResumo = new StringBuilder();
+
+                filtroResumo.Append(" and m.tpOperacao = 'C' ");
+                filtroResumo.Append("and m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa ");
+				filtroResumo.Append(" where idHistoricoCaixa = "+historico.IdHistoricocaixa);
+                filtroResumo.Append(" group by nrPedido)  ");
+
+                DataTable dadosMovimento = movimentoDAO.getResumoMovimento(filtroResumo.ToString());
                 DataView dvMovimento = new DataView(dadosMovimento);
                 DataRow drMovimento;
                 double valorEntradas = 0;

@@ -326,36 +326,7 @@ namespace DAO
             dataF = data.Substring(6, 4) + "-" + data.Substring(3, 2) + "-" + data.Substring(0, 2);
 
 
-            /*
-            String sql = "select i.cdTipoSelo, \n"
-                                + "(select dsTipoSelo from tblTipoSelo where cdTipoSelo = i.cdtipoSelo) as descricao, \n"
-                                + "count(i.idItemPedido) as qtd, \n"
-                                + "min(i.nrSelo) as primerio, \n"
-                                + "MAX(i.nrSelo) as ultimo \n"
-                            + "from tblItensPedido i \n"
-                            + "inner join tblPedidos p on i.nrPedido = p.nrPedido \n"
-                            + "inner join tblSelos s on i.nrSelo = s.nrSelo and i.cdTipoSelo = s.cdTipoSelo \n"
-                            + "inner join tblMovimentoCaixa m on p.nrPedido= m.nrPedido \n"
-                            + "where p.dtPedido between '" + data + " 00:00:00' and '" + data + " 23:59:59' \n"
-                            + "and p.stPedido = 'P' \n"
-                           // + "and p.dsLogin = '" + login + "' "
-                            + "and s.stSelo = 'U' \n";
-                            if(caixa > 0)
-                            {
-                                sql +="and m.nrCaixa = " + caixa.ToString() +" \n";
-                            }
-
-                            if (idHistorico > 0)
-                            {
-                                sql +=" and m.idHistoricoCaixa = " + idHistorico.ToString()+" \n";
-                            }
-                            if (stDesconto) {
-                                sql += " and m.vlDesconto > 0 \n";
-                            }
-                            sql +=" group by i.cdTipoSelo";  
             
-                */
-
             StringBuilder sql = new StringBuilder();
             sql.Append("select i.cdTipoSelo, t.dsTipoSelo, count(i.cdAto) qtd \n");
             sql.Append(", sum(m.vlDesconto) vlDesconto, sum(i.vlItem) vlItens \n ");
@@ -366,7 +337,9 @@ namespace DAO
             sql.Append("inner join tblTipoSelo t on t.cdTipoSelo = i.cdTipoSelo \n ");
             sql.Append("where p.dtPedido between  '" + data + " 00:00:00' and '" + data + " 23:59:59' \n ");
             sql.Append("and p.stPedido = 'P' \n  ");
-            
+            sql.Append("and m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa \n");
+            sql.Append(" where dtMovimento between '" + data + " 00:00:00' and '" + data + " 23:59:59' \n");
+            sql.Append(" and nrPedido > 0 group by nrPedido) \n");
             if (caixa > 0)
             {
                 sql.Append("and m.nrCaixa = " + caixa.ToString() + " \n");
@@ -749,7 +722,12 @@ namespace DAO
             sql.Append("inner join tblTipoSelo t on t.cdTipoSelo = i.cdTipoSelo \n ");
             sql.Append("where p.dtPedido between  '"+data+" 00:00:00' and '"+data+" 23:59:59' \n ");
             sql.Append("and p.stPedido = 'P' \n  ");
-            sql.Append("and m.idHistoricoCaixa = "+idHistoricoCaixa+" \n ");
+            sql.Append("and m.idHistoricoCaixa = " + idHistoricoCaixa + "\n");
+            sql.Append("and m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa \n");
+            sql.Append("    where dtMovimento between '" + data + " 00:00:00' and '" + data + " 23:59:59' \n");
+            sql.Append("    and idHistoricoCaixa = " + idHistoricoCaixa + " and nrPedido > 0 group by nrPedido) \n");
+
+           
 
             if (tipoConsulta == 1)
             {
@@ -805,7 +783,12 @@ namespace DAO
             sql.Append("where p.dtPedido between '" + data + " 00:00:00' and '" + data + " 23:59:59'  \n");
             sql.Append("and p.stPedido = 'P' \n");
             sql.Append("and m.idHistoricoCaixa = "+idHistoricoCaixa+"  \n");
-            
+            sql.Append("and m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa \n");
+            sql.Append("    where dtMovimento between '" + data + " 00:00:00' and '" + data + " 23:59:59' \n");
+            sql.Append("    and idHistoricoCaixa = " + idHistoricoCaixa + " and nrPedido > 0 group by nrPedido) \n");
+
+
+
             if (tipoPagamento == 1)
             {
                 sql.Append("and m.tpPagamento <> 2 \n");

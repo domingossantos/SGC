@@ -51,7 +51,7 @@
             this.dtMovimento.Name = "dtMovimento";
             this.dtMovimento.Size = new System.Drawing.Size(115, 20);
             this.dtMovimento.TabIndex = 1;
-            this.dtMovimento.Value = new System.DateTime(2014, 2, 16, 0, 0, 0, 0);
+            this.dtMovimento.Value = new System.DateTime(2014, 5, 19, 0, 0, 0, 0);
             // 
             // btImprimir
             // 
@@ -74,7 +74,7 @@
             this.dtFim.Name = "dtFim";
             this.dtFim.Size = new System.Drawing.Size(115, 20);
             this.dtFim.TabIndex = 3;
-            this.dtFim.Value = new System.DateTime(2014, 2, 16, 0, 0, 0, 0);
+            this.dtFim.Value = new System.DateTime(2014, 5, 19, 0, 0, 0, 0);
             // 
             // label2
             // 
