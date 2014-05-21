@@ -132,7 +132,8 @@ namespace DAO
                             + " where t.cdAto = m.idTipoMovimento) as dsTipoMovimento ,"
                         + " SUM(m.vlMovimento) as vlMovimento"
                     + " FROM tblMovimentoCaixa m "
-                    + " where m.idHistoricoCaixa = " + idHistorico.ToString()
+                    + " where m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
+                    + "      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) "
                     + " and m.tpOperacao = 'D' and tpPagamento <> 2"
                     + "group by m.idTipoMovimento";
 
@@ -213,7 +214,8 @@ namespace DAO
                             + " where t.cdAto = m.idTipoMovimento) as dsTipoMovimento ,"
                         + " SUM(m.vlMovimento) as vlMovimento"
                     + " FROM tblMovimentoCaixa m "
-                    + " where m.idHistoricoCaixa = " + idHistorico.ToString()
+                    + " where m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
+                    + "      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) "
                     + " and m.tpOperacao = '" + op + "' and tpPagamento = " + tipo.ToString()
                     + "group by m.idTipoMovimento";
 
@@ -246,9 +248,11 @@ namespace DAO
 		                     + " when 1 then CAST(SUM(m.vlDesconto) AS MONEY) " 
 		                     + " when 2 then CAST(SUM(m.vlMovimento) AS MONEY) "
 	                         + " end vlDesconto  "
-                            + " FROM tblMovimentoCaixa m "
-                            + " where m.tpPagamento in(1) AND  m.idHistoricoCaixa = " + idHistorico.ToString()
-                            + " group by m.tpPagamento";
+                             + " FROM tblMovimentoCaixa m "
+                             + " where m.tpPagamento in(1) AND  "
+                             + " m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
+                             + "      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) "
+                             + " group by m.tpPagamento";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 DataTable dados = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -337,8 +341,10 @@ namespace DAO
 
             try
             {
+                
                 string sql = "select sum(vlDesconto) soma from tblMovimentoCaixa"
-                            +" where idHistoricoCaixa = "+idHistorico.ToString();
+                            + " where idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
+                            + " where idHistoricoCaixa = "+idHistorico.ToString() +" group by nrPedido)  ";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 double total = 0;
@@ -395,7 +401,9 @@ namespace DAO
             try
             {
                 string sql = "select sum(vlMovimento) soma from tblMovimentoCaixa"
-                            + " where idHistoricoCaixa = " + idHistorico.ToString() + " and tpPagamento = "+tipo.ToString();
+                            + " where idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
+                            + "      where idHistoricoCaixa = " + idHistorico.ToString() 
+                            + " group by nrPedido)  and tpPagamento = " + tipo.ToString();
                 SqlCommand cmd = new SqlCommand(sql, con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 double total = 0;
@@ -493,7 +501,10 @@ namespace DAO
                 string sql = "select m.vlMovimento,p.nrCPFCNPJ, c.nmNome from tblMovimentoCaixa m " 
                                 +"inner join tblPagamentoCorrentista p on p.idMovimento = m.idMovimento "
                                 +"inner join tblCorrentistas c on c.nrCPFCNPJ = p.nrCPFCNPJ "
-                                +"where m.idHistoricoCaixa = "+idHistorico.ToString();
+                                +"where m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
+                                +"      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) ";
+
+                
                 SqlCommand cmd = new SqlCommand(sql, con);
                 DataTable dados = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
@@ -562,7 +573,8 @@ namespace DAO
 		                        +"    inner join tblCorrentistas c on c.nrCPFCNPJ = pc.nrCPFCNPJ "
 		                        +"    where pc.nrPedido = m.nrPedido) "
                                 +"from tblMovimentoCaixa m "
-                                +"where tpPagamento = 2 and m.idHistoricoCaixa = "+idHistorico.ToString();
+                                + "where tpPagamento = 2 and m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
+                                + "      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) ";
                                  
                 SqlCommand cmd = new SqlCommand(sql, con);
                 DataTable dados = new DataTable();
