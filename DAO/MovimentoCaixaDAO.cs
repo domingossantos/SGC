@@ -132,10 +132,9 @@ namespace DAO
                             + " where t.cdAto = m.idTipoMovimento) as dsTipoMovimento ,"
                         + " SUM(m.vlMovimento) as vlMovimento"
                     + " FROM tblMovimentoCaixa m "
-                    + " where m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
-                    + "      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) "
-                    + " and m.tpOperacao = 'D' and tpPagamento <> 2"
-                    + "group by m.idTipoMovimento";
+                    + " where m.idHistoricoCaixa = " + idHistorico.ToString() 
+                    + " and m.tpOperacao = 'D' and tpPagamento <> 2 "
+                    + " group by m.idTipoMovimento";
 
             try
             {
@@ -501,8 +500,7 @@ namespace DAO
                 string sql = "select m.vlMovimento,p.nrCPFCNPJ, c.nmNome from tblMovimentoCaixa m " 
                                 +"inner join tblPagamentoCorrentista p on p.idMovimento = m.idMovimento "
                                 +"inner join tblCorrentistas c on c.nrCPFCNPJ = p.nrCPFCNPJ "
-                                +"where m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
-                                +"      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) ";
+                                +"where m.idHistoricoCaixa = " + idHistorico.ToString();
 
                 
                 SqlCommand cmd = new SqlCommand(sql, con);

@@ -34,7 +34,10 @@ namespace sgc.assinaturas
             try
             {
                 txDtNasc.Text = Convert.ToString(oCartao.DtNascimento).Substring(0,10);
-                txDtRenovacao.Text = Convert.ToString(oCartao.DtRenovacao).Substring(0, 10);
+                if (oCartao.DtRenovacao != null) {
+                    txDtRenovacao.Text = Convert.ToString(oCartao.DtRenovacao).Substring(0, 10);
+                }
+                
                 txEndereco.Text = oCartao.DsEndereco;
 
                 txNome.Text = oCartao.NmCartao;
@@ -42,17 +45,27 @@ namespace sgc.assinaturas
                 txBairro.Text = oCartao.DsBairro;
                 txCidade.Text = oCartao.NmCidade;
                 txCPF.Text = oCartao.NrCPF;
-                txDtExpedicao.Text = Convert.ToString(oCartao.DtExpedicao).Substring(0, 10); ;
+
+                if (oCartao.DtExpedicao != null)
+                {
+                    txDtExpedicao.Text = Convert.ToString(oCartao.DtExpedicao).Substring(0, 10); ;
+                }
 
                 txOrgaoEmissor.Text = oCartao.DsOrgaoEmissor;
                 txRG.Text = oCartao.NrRG;
                 txUF.Text = oCartao.SgUF;
-                txDtCadastro.Text = Convert.ToString(oCartao.DtCadastro.ToShortDateString());
+                if (oCartao.DtCadastro != null)
+                {
+                    txDtCadastro.Text = Convert.ToString(oCartao.DtCadastro.ToShortDateString());
+                }
                 txEmail.Text = oCartao.DsEmail;
                 txFone.Text = oCartao.NrFones;
                 txCep.Text = oCartao.NrCEP;
                 lbTIpoIdent.Text = assinaturaBLL.getDesricaoTipoRG(oCartao.CdTipoRG);
-                txDtRenovacao.Text = Convert.ToString(oCartao.DtRenovacao).Substring(0, 10); 
+                if (oCartao.DtRenovacao != null)
+                {
+                    txDtRenovacao.Text = Convert.ToString(oCartao.DtRenovacao).Substring(0, 10);
+                }
             }
             catch (Exception ex)
             {
