@@ -320,7 +320,7 @@
             this.brGravarDesc.Location = new System.Drawing.Point(170, 137);
             this.brGravarDesc.Name = "brGravarDesc";
             this.brGravarDesc.Size = new System.Drawing.Size(109, 40);
-            this.brGravarDesc.TabIndex = 11;
+            this.brGravarDesc.TabIndex = 5;
             this.brGravarDesc.Text = "Confirmar";
             this.brGravarDesc.UseVisualStyleBackColor = false;
             this.brGravarDesc.Click += new System.EventHandler(this.brGravarDesc_Click);
@@ -333,7 +333,7 @@
             this.btCancelarDesc.Location = new System.Drawing.Point(21, 137);
             this.btCancelarDesc.Name = "btCancelarDesc";
             this.btCancelarDesc.Size = new System.Drawing.Size(113, 40);
-            this.btCancelarDesc.TabIndex = 10;
+            this.btCancelarDesc.TabIndex = 6;
             this.btCancelarDesc.Text = "Cancelar";
             this.btCancelarDesc.UseVisualStyleBackColor = false;
             this.btCancelarDesc.Click += new System.EventHandler(this.btCancelarDesc_Click);
@@ -345,7 +345,7 @@
             this.txSenha.Name = "txSenha";
             this.txSenha.PasswordChar = '*';
             this.txSenha.Size = new System.Drawing.Size(100, 26);
-            this.txSenha.TabIndex = 9;
+            this.txSenha.TabIndex = 1;
             // 
             // txLogin
             // 
@@ -353,7 +353,7 @@
             this.txLogin.Location = new System.Drawing.Point(11, 35);
             this.txLogin.Name = "txLogin";
             this.txLogin.Size = new System.Drawing.Size(100, 26);
-            this.txLogin.TabIndex = 8;
+            this.txLogin.TabIndex = 0;
             // 
             // txValorDesconto
             // 
@@ -362,7 +362,7 @@
             this.txValorDesconto.Name = "txValorDesconto";
             this.txValorDesconto.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txValorDesconto.Size = new System.Drawing.Size(100, 26);
-            this.txValorDesconto.TabIndex = 7;
+            this.txValorDesconto.TabIndex = 4;
             this.txValorDesconto.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txValorDesconto_KeyDown);
             this.txValorDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txValorDesconto_KeyPress);
             // 
@@ -390,7 +390,7 @@
             this.rbTipoPercent.Location = new System.Drawing.Point(23, 116);
             this.rbTipoPercent.Name = "rbTipoPercent";
             this.rbTipoPercent.Size = new System.Drawing.Size(76, 17);
-            this.rbTipoPercent.TabIndex = 4;
+            this.rbTipoPercent.TabIndex = 3;
             this.rbTipoPercent.Text = "Percentual";
             this.rbTipoPercent.UseVisualStyleBackColor = true;
             // 
@@ -401,7 +401,7 @@
             this.rbTipoDinheiro.Location = new System.Drawing.Point(23, 92);
             this.rbTipoDinheiro.Name = "rbTipoDinheiro";
             this.rbTipoDinheiro.Size = new System.Drawing.Size(64, 17);
-            this.rbTipoDinheiro.TabIndex = 3;
+            this.rbTipoDinheiro.TabIndex = 2;
             this.rbTipoDinheiro.TabStop = true;
             this.rbTipoDinheiro.Text = "Dinheiro";
             this.rbTipoDinheiro.UseVisualStyleBackColor = true;

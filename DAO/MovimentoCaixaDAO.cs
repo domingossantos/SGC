@@ -28,10 +28,11 @@ namespace DAO
                 sql = "INSERT INTO tblMovimentoCaixa"
                         +"(idHistoricoCaixa,dsLogin,nrCaixa"
                         + ",idTipoMovimento,tpOperacao,vlMovimento,dtMovimento,nrPedidoPagto"
-                        +",tpPagamento,nrPedido,vlDesconto,dsLoginAutDesconto)"
+                        +",tpPagamento,nrPedido,vlDesconto,dsLoginAutDesconto,vlDinheiro,nmRecibo)"
                         +"VALUES(@idHistoricoCaixa,@dsLogin,@nrCaixa,@idTipoMovimento"
                         + ",@tpOperacao,@vlMovimento,@dtMovimento,@nrPedidoPagto, "
-                        + "@tpPagamento,@nrPedido,@vlDesconto,@dsLoginAutDesconto); select @@IDENTITY;";
+                        + "@tpPagamento,@nrPedido,@vlDesconto,@dsLoginAutDesconto "
+                        + ",@vlDinheiro,@nmRecibo); select @@IDENTITY;";
 
 
                 cmd.CommandText = sql;
@@ -48,6 +49,8 @@ namespace DAO
                 cmd.Parameters.AddWithValue("@vlDesconto", movimento.VlDesconto);
                 cmd.Parameters.AddWithValue("@dsLoginAutDesconto", movimento.DsLoginAutDesconto);
                 cmd.Parameters.AddWithValue("@nrPedidoPagto", movimento.NrPedidoPagto);
+                cmd.Parameters.AddWithValue("@vlDinheiro", movimento.VlDinheiro);
+                cmd.Parameters.AddWithValue("@nmRecibo", movimento.NmRecibo);
 
                 movimento.IdMovimentoCaixa = Convert.ToInt32( cmd.ExecuteScalar().ToString());
             }
@@ -611,6 +614,50 @@ namespace DAO
             {
                 throw new Exception("Erro ao consultar recebimento correntista " + ex.Message);
             }
+        }
+
+        public MovimentoCaixa getMovimentoPorPedido(int nrPedido) {
+            MovimentoCaixa movimento = new MovimentoCaixa();
+            String sql = "SELECT top 1 idMovimento,idHistoricoCaixa,dsLogin,nrCaixa,idTipoMovimento,tpOperacao "
+                        + ",vlMovimento,dtMovimento,tpPagamento,nrPedido,vlDesconto,dsLoginAutDesconto "
+                        + ",dsObservacao,nrPedidoPagto,vlDinheiro,nmRecibo FROM tblMovimentoCaixa "
+                        + " where nrPedido = " + nrPedido.ToString();
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                
+                if (dr.HasRows)
+                {
+                    dr.Read();
+
+                    movimento.IdMovimentoCaixa = Convert.ToInt32(dr["idMovimento"]);
+                    movimento.IdHitoricoCaixa = Convert.ToInt32(dr["idHistoricoCaixa"]);
+                    movimento.DsLogin = dr["dsLogin"].ToString();
+                    movimento.NrCaixa = Convert.ToInt32(dr["nrCaixa"]);
+                    movimento.TpOperacao = Convert.ToChar(dr["tpOperacao"]);
+                    movimento.VlMovimento = Convert.ToDouble(dr["vlMovimento"]);
+                    movimento.DtMovimento = Convert.ToDateTime(dr["dtMovimento"]);
+                    movimento.TpPagamento = Convert.ToInt32(dr["tpPagamento"]);
+                    movimento.NrPedido = Convert.ToInt32(dr["nrPedido"]);
+                    movimento.VlDesconto = Convert.ToDouble(dr["vlDesconto"]);
+                    movimento.DsLoginAutDesconto = dr["dsLoginAutDesconto"].ToString();
+                    movimento.DsObservacao = dr["dsObservacao"].ToString();
+                    movimento.NrPedidoPagto = Convert.ToInt32(dr["nrPedidoPagto"]);
+                    movimento.VlDinheiro = Convert.ToDouble(dr["vlDinheiro"]);
+                    movimento.NmRecibo = dr["nmRecibo"].ToString();
+                  
+                }
+
+                dr.Close();
+
+            }
+            catch (Exception ex) { 
+                throw new Exception("Erro ao recuperar movimento \n"+ex.Message);
+            }
+
+            return movimento;
         }
     }
 }

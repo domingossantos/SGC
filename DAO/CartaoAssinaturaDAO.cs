@@ -309,6 +309,7 @@ namespace DAO
                         sql += ",sgUF = @sgUF ";
                         sql += ",dtNascimento = @dtNascimento ";
                         sql += ",dtRenovacao = @dtRenovacao ";
+                        sql += ",cdTipoRG = @cdTipoRG ";
                         sql += ",nrRG = @nrRG ";
                         sql += ",dtExpRG = @dtExpRG ";
                         sql += ",dsOrgaoExpRG = @dsOrgaoExpRG ";
@@ -340,6 +341,15 @@ namespace DAO
                             cmd.Parameters.AddWithValue("@dtRenovacao", DBNull.Value);
 
                         cmd.Parameters.AddWithValue("@nrRG", cartao.NrRG);
+
+                        if (cartao.CdTipoRG != null)
+                        {
+                            cmd.Parameters.AddWithValue("@cdTipoRG", cartao.CdTipoRG);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@cdTipoRG", DBNull.Value);
+                        }
 
                         if (cartao.DtExpedicao != null)
                             cmd.Parameters.AddWithValue("@dtExpRG", cartao.DtExpedicao);
@@ -373,10 +383,10 @@ namespace DAO
                 cmd.Connection = con;
                 string sql = "INSERT INTO tblCartaoAssinatura ";
                 sql += "(nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
-                sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG ";
+                sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
                 sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,idCartorio,dsObservacao,dsEmail)VALUES ";
                 sql += "(@nrCartao,@dtCadastro,@nmCartao,@nrCPF ,@dsEndereco ";
-                sql += ",@dsBairro,@nmCidade,@nrCEP,@sgUF,@dtNascimento,@nrRG ";
+                sql += ",@dsBairro,@nmCidade,@nrCEP,@sgUF,@dtNascimento,@nrRG,@cdTipoRG ";
                 sql += ",@dtExpRG,@dsOrgaoExpRG,@nrFones, @tpCartao,@idCartorio,@dsObservacao,@dsEmail)";
 
                 cmd.CommandText = sql;
@@ -390,11 +400,20 @@ namespace DAO
                 cmd.Parameters.AddWithValue("@nrCEP", cartao.NrCEP);
                 cmd.Parameters.AddWithValue("@sgUF", cartao.SgUF);
 
+
                 if (cartao.DtNascimento != null)
                     cmd.Parameters.AddWithValue("@dtNascimento", cartao.DtNascimento);
                 else
                     cmd.Parameters.AddWithValue("@dtNascimento", DBNull.Value);
 
+
+                if (cartao.CdTipoRG != null)
+                {
+                    cmd.Parameters.AddWithValue("@cdTipoRG", cartao.CdTipoRG);
+                }
+                else {
+                    cmd.Parameters.AddWithValue("@cdTipoRG", DBNull.Value);
+                }
 
                 cmd.Parameters.AddWithValue("@nrRG", cartao.NrRG);
 

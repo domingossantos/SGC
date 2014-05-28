@@ -206,6 +206,8 @@ namespace sgc.caixa
                     movimento.NrPedido = 0;
                     movimento.VlDesconto = 0;
                     movimento.TpPagamento = 1;
+                    movimento.VlDinheiro = Convert.ToDouble(txValor.Text.Replace("R$", ""));
+                    movimento.NmRecibo = "";
                     
                     movimentoCaixaDAO.addMovimentoCaixa(movimento, trans);
 
@@ -254,6 +256,8 @@ namespace sgc.caixa
                     movimento.DsLoginAutDesconto = "";
                     movimento.NrPedido = 0;
                     movimento.VlDesconto = 0;
+                    movimento.VlDinheiro = Convert.ToDouble(txValor.Text.Replace("R$", ""));
+                    movimento.NmRecibo = "";
                     
                     
                     mensagem = "SANGRIA DE CAIXA: ";
@@ -293,6 +297,8 @@ namespace sgc.caixa
                     movimento.DsLoginAutDesconto = "";
                     movimento.NrPedido = 0;
                     movimento.VlDesconto = 0;
+                    movimento.VlDinheiro = Convert.ToDouble(txValor.Text.Replace("R$", ""));
+                    movimento.NmRecibo = "";
                     
 
                     movimentoCaixaDAO.addMovimentoCaixa(movimento, trans);

@@ -440,6 +440,8 @@ namespace sgc
                             movimento.NrCaixa = historico.NrCaixa;
                             movimento.NrPedido = 0;
                             movimento.VlDesconto = 0;
+                            movimento.VlDinheiro = 0;
+                            movimento.NmRecibo = "";
 
                             caixaBLL.salvaMovimento(movimento);
                         }

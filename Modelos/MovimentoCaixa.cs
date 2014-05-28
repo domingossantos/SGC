@@ -108,5 +108,20 @@ namespace Modelos
             get { return nrPedidoPagto;  }
             set { nrPedidoPagto = value; }
         }
+
+        private double vlDinheiro;
+
+        public double VlDinheiro {
+            get { return vlDinheiro; }
+            set { vlDinheiro = value;  }
+
+        }
+
+        private String nmRecibo;
+
+        public String NmRecibo {
+            get { return nmRecibo; }
+            set { nmRecibo = value;  }
+        }
     }
 }

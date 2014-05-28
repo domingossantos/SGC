@@ -292,7 +292,7 @@
             // selosUsadosPorPeríodoToolStripMenuItem
             // 
             this.selosUsadosPorPeríodoToolStripMenuItem.Name = "selosUsadosPorPeríodoToolStripMenuItem";
-            this.selosUsadosPorPeríodoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.selosUsadosPorPeríodoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.selosUsadosPorPeríodoToolStripMenuItem.Text = "Situação Selos";
             this.selosUsadosPorPeríodoToolStripMenuItem.Click += new System.EventHandler(this.selosUsadosPorPeríodoToolStripMenuItem_Click);
             // 
@@ -886,7 +886,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu01;
             this.Name = "mainForm";
-            this.Text = "Sistema de Gestão do Cartório Conduru - SGC - V1.6.4.5";
+            this.Text = "Sistema de Gestão do Cartório Conduru - SGC - V1.6.4.6";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainForm_KeyDown);

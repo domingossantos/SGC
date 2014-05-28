@@ -282,7 +282,7 @@ namespace sgc.caixa
         {
             txPedido.Text = "";
             
-            txDesconto.Text = "";
+            
             grid.Rows.Clear();
             lbPedidos.Text = "0;";
 
@@ -290,6 +290,7 @@ namespace sgc.caixa
                 txPago.Text = "";
                 txTotal.Text = "";
                 txTroco.Text = "";
+                txDesconto.Text = "";
             }
 
 
@@ -566,7 +567,7 @@ namespace sgc.caixa
 
             string nmBoleto = (Microsoft.VisualBasic.Interaction.InputBox("Nome impresso no boleto", "Cartorio Conduru", "0", 150, 150));
 
-            double vlPago = Convert.ToDouble(txTotal.Text.Replace("R$", ""));
+            double vlPago = Convert.ToDouble(txPago.Text.Replace("R$", ""));
 
             List<int> lPedidos = new List<int>();
 
@@ -591,7 +592,8 @@ namespace sgc.caixa
                                                 , sessao.NrCaixa
                                                 , getTipoPagamento()
                                                 , Convert.ToDouble(txDesconto.Text.Replace("R$", ""))
-                                                , dsLoginDesconto);
+                                                , dsLoginDesconto
+                                                ,nmBoleto);
                 if (stPgtoPedido) {
 
                     int nrPedidoPagto = lPedidos[0];
@@ -682,14 +684,20 @@ namespace sgc.caixa
                     int tipoPgto = getTipoPagamento();
                     limparDados(true);
 
+
+
                     pedidoBLL.imprimePedido(lPedidos,
                                             sessao.NrCaixa,
                                             nmBoleto,
                                             sessao.PathIniFile,
                                             sessao.UsuarioSessao.NmUsuario,
                                             tipoPgto,
-                                            vlPago,
-                                            nmCorrentista);
+                                            Convert.ToDouble(txPago.Text.Replace("R$", "")),
+                                            nmCorrentista
+                                            ,false
+                                            , Convert.ToDouble(txDesconto.Text.Replace("R$", "")));
+
+
 
 
                     

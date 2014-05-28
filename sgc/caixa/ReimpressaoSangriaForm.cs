@@ -24,7 +24,7 @@ namespace sgc.caixa
         public DataTable getDados(String dsLogin = "", String dtInicio = "",String dtFim = "") {
             String sql = "select m.idMovimento,a.dsAto, m.dtMovimento,m.vlMovimento,m.tpOperacao,m.dsLogin from tblMovimentoCaixa m "
                         + "inner join tblAtosOperacoes a on a.cdAto = m.idTipoMovimento "
-                        + "where m.tpOperacao = 'D' ";
+                        + "where 1 = 1  ";
             
 
 
@@ -32,7 +32,7 @@ namespace sgc.caixa
                 sql += "and m.dsLogin = '"+dsLogin+"' ";
             }
 
-            sql += "and dtMovimento between '"+dtInicio+" 00:00:00' and '"+dtFim+" 20:00:00'";
+            sql += "and dtMovimento between '"+dtInicio+" 00:00:00' and '"+dtFim+" 23:59:00'";
 
             con.abreBanco();
             DataTable dados = con.retornarDataSet(sql);

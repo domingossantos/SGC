@@ -477,6 +477,21 @@ namespace BLL
             }
         }
 
+        public MovimentoCaixa getMovimentoPorPedido(int nrPedido) {
+            MovimentoCaixa movimento = new MovimentoCaixa();
+            try
+            {
+
+            }
+            catch (Exception ex) { 
+                throw new Exception("Erro ao carregar movimento.\n"+ex.Message);
+            }
+            finally{
+                con.ObjCon.Close();
+            }
+            return movimento;
+        }
+
         public bool registraPagamentoPedido(double vlPago
                                     , List<int> PedidosList
                                     , HistoricoCaixa historico
@@ -485,7 +500,8 @@ namespace BLL
                                     , int nrCaixa
                                     , int tipoPagamento
                                     , double vlDesconto
-                                    , string dsLoginDesconto)
+                                    , string dsLoginDesconto
+                                    ,string nomeRecibo)
         { 
             bool stFuncao = false;
             if(con.ObjCon.State == ConnectionState.Closed){
@@ -565,15 +581,18 @@ namespace BLL
                             movimento.VlMovimento = vlPago;
                             movimento.NrPedidoPagto = 0;
                             movimento.VlDesconto = vlDesconto;
+                            movimento.VlDinheiro = vlPago;
                         }
                         else 
                         {
                             movimento.VlMovimento = 0.0;
                             movimento.NrPedidoPagto = nrPedidoPagamentoPai;
                             movimento.VlDesconto = 0;
+                            movimento.VlDinheiro = 0;
+                            
                         }
 
-
+                        movimento.NmRecibo = nomeRecibo;
                         movimento.DsLoginAutDesconto = dsLoginDesconto;
                         movimento.NrPedidoPagto = nrPedidoPagamentoPai;
                         

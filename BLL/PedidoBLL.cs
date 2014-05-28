@@ -637,24 +637,97 @@ namespace BLL
             }
         }
 
-        public void imprimePedido(List<int> nrPedidos, int nrCaixa, string nomeBoleto, string pathIniFile, string nmUsuario, int forpaPagto, double vlPago = 0, string nmCorrentista = "", bool reimpressao = false)
-        {
+        public String getNomeCorrentistaPgto(int nrPedido) {
+            String nome = "";
             try
             {
-                IniFile iniFile = new IniFile(pathIniFile);
-
-                string pedidos = "";
-                for (int i = 0; i < nrPedidos.Count; i++)
-                {
-                    pedidos += nrPedidos[i].ToString() + ",";
-                }
-
-                pedidos = pedidos.Substring(0, (pedidos.Length - 1));
-
                 if (con.ObjCon.State == ConnectionState.Closed)
                 {
                     con.ObjCon.Open();
                 }
+                String sql = "select c.nmNome from tblPedidosCorrentista p "
+                            + "inner join tblCorrentistas c on c.nrCPFCNPJ = p.nrCPFCNPJ "
+                            + "where p.nrPedido = " + nrPedido.ToString();
+                SqlCommand cmd = new SqlCommand(sql, con.ObjCon);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    nome = dr["nmNome"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Erro: " + ex.Message);
+            }
+           
+            return nome;
+
+        }
+
+
+        public DataTable getPedidosFilhos(int nrPedido) {
+            DataTable dt = new DataTable();
+            try
+            {
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+                String sql = "select nrPedido from tblMovimentoCaixa where nrPedidoPagto = " + nrPedido.ToString();
+                SqlDataAdapter da = new SqlDataAdapter(sql, con.ObjCon);
+
+                da.Fill(dt);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Erro: " + ex.Message);
+            }
+
+            return dt;
+        }
+        
+        public void imprimePedido(List<int> nrPedidos, int nrCaixa, string nomeBoleto, string pathIniFile, string nmUsuario, int forpaPagto, double vlPago = 0, string nmCorrentista = "", bool reimpressao = false,double vlDesconto = 0)
+        {
+            try
+            {
+                IniFile iniFile = new IniFile(pathIniFile);
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+
+                string pedidos = nrPedidos[0]+",";
+                int nrPedido = nrPedidos[0];
+                MovimentoCaixa movimento = movimentoDAO.getMovimentoPorPedido(nrPedido);
+
+
+
+                //if (nrPedidos.Count > 1) {
+                    DataTable tbPedidos = getPedidosFilhos(nrPedido);
+                    DataView vPedidos = new DataView(tbPedidos);
+                    DataRow pedidoRow;
+                    for (int a = 0; a < vPedidos.Count; a++){
+                        pedidoRow = vPedidos[a].Row;
+                        pedidos += pedidoRow[0].ToString() + ",";
+                    }
+                //}
+
+
+                /*
+                for (int i = 0; i < nrPedidos.Count; i++)
+                {
+                    pedidos += nrPedidos[i].ToString() + ",";
+                }
+                */
+                pedidos = pedidos.Substring(0, (pedidos.Length - 1));
+                
+
+               
 
                 DataTable dados = itemPedidoDAO.getItensPedidoImpressao(pedidos);
 
@@ -673,7 +746,7 @@ namespace BLL
 
 
                 string strPgto = "";
-                switch (forpaPagto)
+                switch (movimento.TpPagamento)
                 {
                     case 1: strPgto = "Dinheiro"; break;
                     case 2: strPgto = "Correntista"; break;
@@ -689,13 +762,13 @@ namespace BLL
                 imp.PrintText(5, 1, iniFile.IniReadValue("HBOLETO", "LINHA5"));
                 imp.PrintText(6, 1, "################### RECIBO ####################");
                 imp.PrintText(7, 1, "Recebemos os valores abaixo descritos do Sr(a).");
-                imp.PrintText(8, 1, nomeBoleto);
+                imp.PrintText(8, 1, movimento.NmRecibo);
                 imp.PrintText(9, 1, "");
                 int x = 9;
                 imp.PrintText(x++, 1, "Forma de Pagamento......: " + strPgto);
-                if (forpaPagto.Equals(2))
+                if (movimento.TpPagamento == 2)
                 {
-                    imp.PrintText(x++, 1, nmCorrentista);
+                    imp.PrintText(x++, 1, getNomeCorrentistaPgto(nrPedido));
                 }
 
                 imp.PrintText(x++, 1, "N. do Pedido............: " + pedidos);
@@ -730,21 +803,30 @@ namespace BLL
                 else
                     imp.PrintText(x++, 1, "Impresso em........: " + DateTime.Now.ToShortDateString());
                 //x++;
+                
+
 
 
                 double troco = 0;
-                if (vlPago > 0)
-                    troco = vlPago - valor;
+                double valorAPagar = valor - movimento.VlDesconto;
 
+                if (vlPago > 0)
+                    troco = movimento.VlDinheiro - valorAPagar;
+
+                
                 imp.PrintText(x++, 1, "Funcionario(a).....: " + nmUsuario);
                 //x++;
                 imp.PrintText(x++, 1, "------------------------------------------------");
                 //x++;
-                imp.PrintText(x++, 1, "SUBTOTAL..........: R$ " + String.Format("{0:N2}", valor).PadLeft(11, ' '));
+                imp.PrintText(x++, 1, "A PAGAR ..........: R$ " + String.Format("{0:N2}", valor).PadLeft(11, ' '));
                 //x++;
-                imp.PrintText(x++, 1, "VALOR PAGO........: R$ " + String.Format("{0:N2}", vlPago).PadLeft(11, ' '));
+                imp.PrintText(x++, 1, "DESCONTO..........: R$ " + String.Format("{0:N2}", movimento.VlDesconto).PadLeft(11, ' '));
+
+                imp.PrintText(x++, 1, "VALOR PAGO........: R$ " + String.Format("{0:N2}", valorAPagar).PadLeft(11, ' '));
+                
                 //x++;
-                imp.PrintText(x++, 1, "TROCO.............: R$ " + String.Format("{0:N2}", troco).PadLeft(11, ' '));
+                //imp.PrintText(x++, 1, "TROCO.............: R$ " + String.Format("{0:N2}", troco).PadLeft(11, ' '));
+
 
                 //x++;
                 imp.PrintText(x++, 1, iniFile.IniReadValue("FBOLETO", "LINHA1"));
@@ -768,6 +850,20 @@ namespace BLL
             {
                 con.ObjCon.Close();
             }
+        }
+
+        public MovimentoCaixa getMovimentoPorPedido(int nrPedido) {
+            MovimentoCaixa movimento = new MovimentoCaixa();
+            try
+            {
+                con.ObjCon.Open();
+                movimento = movimentoDAO.getMovimentoPorPedido(nrPedido);
+
+            }
+            finally {
+                con.ObjCon.Close();
+            }
+            return movimento;
         }
 
         public void imprimeFechamentoCaixa(string pathIniFile, HistoricoCaixa historico)
