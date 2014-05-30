@@ -22,17 +22,18 @@ namespace sgc.caixa
         }
 
         public DataTable getDados(String dsLogin = "", String dtInicio = "",String dtFim = "") {
-            String sql = "select m.idMovimento,a.dsAto, m.dtMovimento,m.vlMovimento,m.tpOperacao,m.dsLogin from tblMovimentoCaixa m "
+            String sql = "select m.idMovimento,a.dsAto, m.dtMovimento,m.vlMovimento,m.tpOperacao,m.dsLogin, m.nmRecibo from tblMovimentoCaixa m "
                         + "inner join tblAtosOperacoes a on a.cdAto = m.idTipoMovimento "
-                        + "where 1 = 1  ";
+                        + "where 1 = 1  and m.vlMovimento > 0 and m.idTipoMovimento <> " + sgc.utils.sessao.CdAtoPedido;
+            
             
 
 
             if(!dsLogin.Equals("")){
-                sql += "and m.dsLogin = '"+dsLogin+"' ";
+                sql += " and m.dsLogin = '"+dsLogin+"' ";
             }
 
-            sql += "and dtMovimento between '"+dtInicio+" 00:00:00' and '"+dtFim+" 23:59:00'";
+            sql += " and dtMovimento between '"+dtInicio+" 00:00:00' and '"+dtFim+" 23:59:00'";
 
             con.abreBanco();
             DataTable dados = con.retornarDataSet(sql);
@@ -73,7 +74,7 @@ namespace sgc.caixa
                 MatrixReporter.Reporter imp = new MatrixReporter.Reporter();
                 sgc.utils.IniFile iniFile = new sgc.utils.IniFile(utils.sessao.PathIniFile);
                 bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
-                string mensagem = "";
+                
                 if (arquivo)
                 {
                     if (System.IO.File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA")))
@@ -97,18 +98,23 @@ namespace sgc.caixa
                 imp.PrintText(i++, 1, "No. Movimento:" + grid[0, grid.CurrentRow.Index].Value.ToString().PadLeft(6, '0'));
                 imp.PrintText(i++, 1, "REIMPRESSAO DE NOTA");
                 imp.PrintText(i++, 1, "OBS.: " + grid[1, grid.CurrentRow.Index].Value.ToString());
+                if (grid[4, grid.CurrentRow.Index].Value.ToString().Equals("C"))
+                {
+                    imp.PrintText(i++, 1,"Correntista:");
+                    imp.PrintText(i++, 1, "" + grid[6, grid.CurrentRow.Index].Value.ToString());
+                }
                 imp.PrintText(i++, 1, "");
                 imp.PrintText(i++, 1, "DATA REGISTRO: " + grid[2, grid.CurrentRow.Index].Value.ToString());
                 imp.PrintText(i++, 1, "VALOR:");
                 imp.PrintText(i++, 30, utils.formatos.formataMoeda(valor).PadLeft(8, ' '));
                 imp.PrintText(i++, 1, "Impresso em........: " + DateTime.Now.ToShortDateString());
                 imp.PrintText(i++, 1, "Recebido por.......: " + grid[5, grid.CurrentRow.Index].Value.ToString());
-                int x = i++;
+                
                 int qtdLinhas = Convert.ToInt32(iniFile.IniReadValue("FBOLETO", "QTDFIM"));
 
                 for (int v = 0; v < qtdLinhas; v++)
                 {
-                    imp.PrintText(x++, 1, "");
+                    imp.PrintText(i++, 1, "");
                 }
 
                 imp.PrintJob();

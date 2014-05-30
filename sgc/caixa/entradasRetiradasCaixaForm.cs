@@ -207,7 +207,7 @@ namespace sgc.caixa
                     movimento.VlDesconto = 0;
                     movimento.TpPagamento = 1;
                     movimento.VlDinheiro = Convert.ToDouble(txValor.Text.Replace("R$", ""));
-                    movimento.NmRecibo = "";
+                    movimento.NmRecibo = cbOpcao.Text;
                     
                     movimentoCaixaDAO.addMovimentoCaixa(movimento, trans);
 

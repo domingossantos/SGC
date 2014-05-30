@@ -820,12 +820,13 @@ namespace BLL
                 //x++;
                 imp.PrintText(x++, 1, "A PAGAR ..........: R$ " + String.Format("{0:N2}", valor).PadLeft(11, ' '));
                 //x++;
-                imp.PrintText(x++, 1, "DESCONTO..........: R$ " + String.Format("{0:N2}", movimento.VlDesconto).PadLeft(11, ' '));
+                imp.PrintText(x++, 1, "USO INTERNO.......: R$ " + String.Format("{0:N2}", movimento.VlDesconto).PadLeft(11, ' '));
 
                 imp.PrintText(x++, 1, "VALOR PAGO........: R$ " + String.Format("{0:N2}", valorAPagar).PadLeft(11, ' '));
-                
+
+                imp.PrintText(x++, 1, "TROCO.............: R$ " + String.Format("{0:N2}", troco).PadLeft(11, ' '));
                 //x++;
-                //imp.PrintText(x++, 1, "TROCO.............: R$ " + String.Format("{0:N2}", troco).PadLeft(11, ' '));
+                
 
 
                 //x++;
