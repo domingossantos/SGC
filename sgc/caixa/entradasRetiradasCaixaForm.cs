@@ -299,7 +299,7 @@ namespace sgc.caixa
                     movimento.VlDesconto = 0;
                     movimento.VlDinheiro = Convert.ToDouble(txValor.Text.Replace("R$", ""));
                     movimento.NmRecibo = "";
-                    
+                    movimento.TpPagamento = 1;
 
                     movimentoCaixaDAO.addMovimentoCaixa(movimento, trans);
                     mensagem = "OUTROS PAGAMENTOS: ";

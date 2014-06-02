@@ -547,7 +547,7 @@ namespace BLL
                         DataRow drDados;
                         int nrSelo = 0;
                         int cdTipo = 0;
-
+                        double valor = 0;
                         for (int i = 0; i < dvDados.Count; i++)
                         {
                             drDados = dvDados[i].Row;
@@ -560,7 +560,7 @@ namespace BLL
                                 seloDAO.mudarStatusSelo(nrSelo, cdTipo, 'U', transacao);
                             }
 
-                            //valor += Convert.ToDouble(drDados["vlItem"].ToString());
+                            valor += Convert.ToDouble(drDados["vlItem"].ToString());
 
                         }
                         pedidoDAO.atualizaPedido(nrPedido, 'P', transacao);
@@ -578,7 +578,7 @@ namespace BLL
 
                         if (nrPedidoPagamentoPai == 0)
                         {
-                            movimento.VlMovimento = vlPago;
+                            movimento.VlMovimento = valor;
                             movimento.NrPedidoPagto = 0;
                             movimento.VlDesconto = vlDesconto;
                             movimento.VlDinheiro = vlPago;

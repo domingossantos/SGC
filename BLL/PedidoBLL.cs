@@ -867,6 +867,88 @@ namespace BLL
             return movimento;
         }
 
+
+        public void imprimeCaixa(string pathIniFile, HistoricoCaixa historico)
+        {
+
+
+            try
+            {
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+
+                Usuario usuario = usuarioDAO.getUsuario(historico.DsLogin);
+                IniFile iniFile = new IniFile(pathIniFile);
+                bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
+
+                if (arquivo)
+                {
+                    if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA")))
+                        File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA"));
+                }
+
+                imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA");
+                imp.StartJob();
+
+                int i = 1;
+
+                imp.PrintText(i, 1, iniFile.IniReadValue("HBOLETO", "LINHA1"));
+                imp.PrintText(i++, 1, iniFile.IniReadValue("HBOLETO", "LINHA2"));
+                imp.PrintText(i++, 1, iniFile.IniReadValue("HBOLETO", "LINHA3"));
+                imp.PrintText(i++, 1, iniFile.IniReadValue("HBOLETO", "LINHA4"));
+                imp.PrintText(i++, 1, iniFile.IniReadValue("HBOLETO", "LINHA5"));
+
+                imp.PrintText(i++, 1, "############ FECHAMENTO DE CAIXA ##############");
+                imp.PrintText(i++, 1, "Funcionario(a)......: " + usuario.DsLogin);
+                imp.PrintText(i++, 1, "Caixa (Guiche):.....: " + historico.NrCaixa.ToString().PadLeft(2, '0'));
+                imp.PrintText(i++, 1, "Data/Hora (Inicio)..: " + historico.DtAbertura.ToString());
+                imp.PrintText(i++, 1, "Data/Hora (Fim).....: " + historico.DtFechamento.ToString());
+                imp.PrintText(i++, 1, "");
+
+                #region Lista de Selos Utilizados
+                DataTable selosUsados = pedidoDAO.selosUtilizados(historico.DtAbertura.ToShortDateString()
+                        , historico.IdHistoricocaixa, 0);
+
+                DataView dadosSelosUsados = new DataView(selosUsados);
+                DataRow linhaSeloUsado;
+
+                int x = 10;
+                imp.PrintText(x++, 1, "");
+
+                imp.PrintText(x++, 1, "############ UTILIZACAO DE SELOS ##############");
+                imp.PrintText(x++, 1, "QTD TIPO/SERIE              INTERVALO");
+                /*
+                for (int i = 0; i < dadosSelosUsados.Count; i++)
+                {
+                    linhaSeloUsado = dadosSelosUsados[i].Row;
+                    imp.PrintText(x++, 1,
+                            linhaSeloUsado[2].ToString().PadLeft(3, '0') + " "
+                            + linhaSeloUsado[1].ToString().PadRight(24, ' ')
+                            + linhaSeloUsado[5].ToString().PadLeft(8, '0')
+                            + " A " + linhaSeloUsado[6].ToString().PadLeft(8, '0')
+                            );
+                }
+                */
+                #endregion
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao imprimir Caixa.\n" + ex.Message);
+            }
+            finally {
+                if (con.ObjCon.State == ConnectionState.Open)
+                {
+                    con.ObjCon.Close();
+                }
+            }
+        }
+
         public void imprimeFechamentoCaixa(string pathIniFile, HistoricoCaixa historico)
         {
             try
@@ -904,14 +986,7 @@ namespace BLL
                 #region Lista de Selos Utilizados
                 DataTable selosUsados = pedidoDAO.selosUtilizados(historico.DtAbertura.ToShortDateString()
                         , historico.IdHistoricocaixa, 0);
-                /*
-                DataTable dadosSelos = pedidoDAO.resumoSelosPedidosDia(
-                        historico.DtAbertura.ToShortDateString(),
-                        historico.DtAbertura.ToShortDateString(),
-                        historico.NrCaixa,
-                        historico.IdHistoricocaixa,
-                        historico.DsLogin);
-                */
+                
                 DataView dadosSelosUsados = new DataView(selosUsados);
                 DataRow linhaSeloUsado;
 
@@ -1290,6 +1365,7 @@ namespace BLL
                             );
                 }
 
+
                 imp.PrintText(x++, 1, "");
                 imp.PrintText(x++, 1, "################# MOVIMENTO ###################");
 
@@ -1361,6 +1437,8 @@ namespace BLL
                 imp.PrintText(x++, 1, "TOTAL:..........................: " + String.Format("{0:N2}", vlMovimento).PadLeft(13, ' '));
                 imp.PrintText(x++, 1, "");
 
+
+
                 imp.PrintText(x++, 1, "################ CORRENTISTA ##################");
 
                 DataTable dtResumoBalcaoCorrent = pedidoDAO.getResumoBalcaoPorPeriodo(dtMovimento, dtFim, 'C');
@@ -1431,12 +1509,14 @@ namespace BLL
                 imp.PrintText(x++, 1, "TOTAL:..........................: " + String.Format("{0:N2}", vlMovimentoCorrent).PadLeft(13, ' '));
                 imp.PrintText(x++, 1, "");
 
+
+
                 imp.PrintText(x++, 1, "########### DEMOSTRATIVO PAGAMENTO ############");
                 imp.PrintText(x++, 1, "TIPO PAGAMENTO                     VALOR");
                 string dtIni = dtMovimento.Substring(6, 4) + "-" + dtMovimento.Substring(3, 2) + "-" + dtMovimento.Substring(0, 2);
                 string dtFinal = dtFim.Substring(6, 4) + "-" + dtFim.Substring(3, 2) + "-" + dtFim.Substring(0, 2);
 
-                DataTable dadosMovimento = movimentoDAO.getResumoMovimento("and m.dtMovimento between '" + dtIni + " 00:00:00' and '" + dtFinal + " 23:59:59' and m.tpOperacao = 'C' ");
+                DataTable dadosMovimento = movimentoDAO.getResumoMovimento("and m.dtMovimento between '" + dtIni + " 00:00:00' and '" + dtFinal + " 23:59:59' and m.tpOperacao in('C','R')");
                 DataView dvMovimento = new DataView(dadosMovimento);
                 DataRow drMovimento;
                 double valorEntradas = 0;
@@ -1452,6 +1532,27 @@ namespace BLL
                 imp.PrintText(x++, 1, "-----------------------------------------------");
                 imp.PrintText(x++, 1, "TOTAL:..........................: " + String.Format("R$ {0:N2}", valorEntradas).PadLeft(13, ' '));
                 imp.PrintText(x++, 1, "");
+
+                // outros pagamentos
+                imp.PrintText(x++, 1, "############## OUTROS PAGAMENTO ###############");
+                DataTable dadosMovimentoOutros = movimentoDAO.getOutrasReceitas(dtIni,dtFinal) ;
+                DataView dvMovimentoOutros = new DataView(dadosMovimentoOutros);
+                DataRow drMovimentoOutros;
+                double valorEntradasOutros = 0;
+
+                for (int i = 0; i < dvMovimentoOutros.Count; i++)
+                {
+                    drMovimentoOutros = dvMovimentoOutros[i].Row;
+                    imp.PrintText(x++, 1, drMovimentoOutros[2].ToString().PadRight(36, ' ') + " " + String.Format("{0:N2}", drMovimentoOutros[3]).PadLeft(10, ' '));
+                    valorEntradasOutros += Convert.ToDouble(drMovimentoOutros[3].ToString());
+                }
+
+
+                imp.PrintText(x++, 1, "-----------------------------------------------");
+                imp.PrintText(x++, 1, "TOTAL:..........................: " + String.Format("R$ {0:N2}", valorEntradasOutros).PadLeft(13, ' '));
+                imp.PrintText(x++, 1, "");
+
+
 
 
                 imp.PrintText(x++, 1, "###### DEMOSTRATIVO RECEBIMENTO CORREN. #######");
@@ -1471,6 +1572,9 @@ namespace BLL
                 imp.PrintText(x++, 1, "-----------------------------------------------");
                 imp.PrintText(x++, 1, "TOTAL:..........................: " + String.Format("R$ {0:N2}", valorRecebeCorrentista).PadLeft(13, ' '));
                 imp.PrintText(x++, 1, "");
+
+
+
 
                 imp.PrintText(x++, 1, "##################### SELOS ###################");
                 imp.PrintText(x++, 1, "QTD   TIPO                    V.UN.       VALOR");
@@ -1510,7 +1614,6 @@ namespace BLL
                     valorOutrosValores += Convert.ToDouble(drOutros[2].ToString());
                 }
 
-
                 DataTable dadosDescontos = movimentoDAO.getValorDescontoPeriodo(dtIni, dtFinal);
 
                 DataView dvDescontos = new DataView(dadosDescontos);
@@ -1522,8 +1625,23 @@ namespace BLL
                     imp.PrintText(x++, 1, drDescontos[3].ToString().PadLeft(5, '0') + " " + drDescontos[1].ToString().PadRight(30, ' ') + " " + String.Format("{0:N2}", drDescontos[2]).PadLeft(10, ' '));
                     valorDescontos += Convert.ToDouble(drDescontos[2].ToString());
                 }
+
+                // PAGTO CORRENTISTA
+                double valorTotalCorrentista = movimentoDAO.getValorTotalTipoPgto(dtIni, 2);
+
+                imp.PrintText(x++, 1, "CORRENTISTA ".PadRight(36, ' ') + " " + String.Format("{0:N2}", valorTotalCorrentista).PadLeft(10, ' '));
+                valorOutrosValores += valorTotalCorrentista + valorDescontos;
+
                 imp.PrintText(x++, 1, "-----------------------------------------------");
-                imp.PrintText(x++, 1, "TOTAL:..........................: " + String.Format("R$ {0:N2}", valorDescontos + valorOutrosValores + valorOutrosValores + valorDescontos).PadLeft(13, ' '));
+                imp.PrintText(x++, 1, "TOTAL:..........................: " + String.Format("R$ {0:N2}", valorOutrosValores).PadLeft(13, ' '));
+
+                valorOutrosValores = valorOutrosValores - (valorTotalCorrentista + valorDescontos);
+
+                double valorTotal = (valorEntradas - valorTotalCorrentista) - (valorOutrosValores);
+
+                imp.PrintText(x++, 1, "-----------------------------------------------");
+                imp.PrintText(x++, 1, "");
+                imp.PrintText(x++, 1, "TOTAL GERAL:....................: " + String.Format("R$ {0:N2}", valorTotal).PadLeft(13, ' '));
                 imp.PrintText(x++, 1, "");
 
 

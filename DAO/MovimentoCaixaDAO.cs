@@ -108,7 +108,11 @@ namespace DAO
                         + "        when 4 then 'CONTA ESCRITURA' \n"
                         + "        when 5 then 'DEPOSITO BANCO' \n"
                         + "    end nmPagamento, \n"
-                        + " sum(m.vlMovimento) as vlPagamento from tblMovimentoCaixa m \n"
+                        + " case m.tpPagamento \n"
+		                + " when 2 then sum(m.vlMovimento) \n"
+		                + " else sum(m.vlMovimento) - sum(m.vlDesconto) \n"
+	                    + " end as vlPagamento \n"
+                        + " from tblMovimentoCaixa m \n"
                         + " where tpPagamento in (0,1,2,3,4,5) " + filtro +" \n"
                         + " group by m.tpPagamento \n";
 
@@ -137,6 +141,34 @@ namespace DAO
                     + " FROM tblMovimentoCaixa m "
                     + " where m.idHistoricoCaixa = " + idHistorico.ToString() 
                     + " and m.tpOperacao = 'D' and tpPagamento <> 2 "
+                    + " group by m.idTipoMovimento";
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);
+                DataTable dados = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+                da.Fill(dados);
+
+                return dados;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Erro ao outros valoresss " + ex.Message);
+            }
+        }
+
+        public DataTable getOutrasReceitas(String ini, String fim)
+        {
+            string sql = "SELECT "
+                        + " m.idTipoMovimento, count(m.idTipoMovimento) as qtd,"
+                        + " (select t.dsAto from tblAtosOperacoes t "
+                            + " where t.cdAto = m.idTipoMovimento) as dsTipoMovimento ,"
+                        + " SUM(m.vlMovimento) as vlMovimento"
+                    + " FROM tblMovimentoCaixa m "
+                    + " where 1 = 1"
+                    + " and m.tpOperacao = 'R' and tpPagamento <> 0 "
+                    + " and dtMovimento between '"+ini+" 00:00:00' and '"+fim+" 23:00:00'"
                     + " group by m.idTipoMovimento";
 
             try
@@ -216,9 +248,11 @@ namespace DAO
                             + " where t.cdAto = m.idTipoMovimento) as dsTipoMovimento ,"
                         + " SUM(m.vlMovimento) as vlMovimento"
                     + " FROM tblMovimentoCaixa m "
-                    + " where m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
-                    + "      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) "
-                    + " and m.tpOperacao = '" + op + "' and tpPagamento = " + tipo.ToString()
+                    + " where 1 = 1 "
+                    /* m.idMovimento in (select min(idMovimento) from tblMovimentoCaixa "
+                    + "      where idHistoricoCaixa = " + idHistorico.ToString() + "group by nrPedido) " */
+                    + " and m.tpOperacao = '" + op + "' and tpPagamento <> " + tipo.ToString()
+                    + " and idHistoricoCaixa = " + idHistorico.ToString() 
                     + "group by m.idTipoMovimento";
 
             try
