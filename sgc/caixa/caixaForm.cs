@@ -543,6 +543,13 @@ namespace sgc.caixa
                     cbCorrentista.Focus();
                     return;
                 }
+
+                if (!txTotal.Text.Equals(txPago.Text))
+                {
+                    utils.MessagensExcept.funMsgSistema("O valor de pagamento deve ser igual ao valor total!", 1);
+                    txPago.Focus();
+                    return;
+                }
             }
 
             if (getTipoPagamento() == 3)

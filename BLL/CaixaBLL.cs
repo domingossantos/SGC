@@ -576,16 +576,15 @@ namespace BLL
                         movimento.TpOperacao = 'C';
                         movimento.TpPagamento = tipoPagamento;
 
+                        movimento.VlMovimento = valor;
                         if (nrPedidoPagamentoPai == 0)
                         {
-                            movimento.VlMovimento = valor;
                             movimento.NrPedidoPagto = 0;
                             movimento.VlDesconto = vlDesconto;
                             movimento.VlDinheiro = vlPago;
                         }
                         else 
                         {
-                            movimento.VlMovimento = 0.0;
                             movimento.NrPedidoPagto = nrPedidoPagamentoPai;
                             movimento.VlDesconto = 0;
                             movimento.VlDinheiro = 0;

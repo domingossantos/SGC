@@ -1205,7 +1205,16 @@ namespace BLL
                 for (int i = 0; i < dvDemosCorren.Count; i++)
                 {
                     drDemosCorren = dvDemosCorren[i].Row;
-                    imp.PrintText(x++, 1, drDemosCorren[2].ToString().PadRight(36, ' ') + " " + String.Format("{0:N2}", drDemosCorren[1]).PadLeft(10, ' '));
+
+                    if (drDemosCorren[2].ToString().Length > 35)
+                    {
+                        desc = drDemosCorren[2].ToString().Substring(0, 35);
+                    }
+                    else
+                    {
+                        desc = drDemosCorren[2].ToString();
+                    }
+                    imp.PrintText(x++, 1, desc.PadRight(36, ' ') + " " + String.Format("{0:N2}", drDemosCorren[1]).PadLeft(10, ' '));
                     valorDemosCorrentista += Convert.ToDouble(drDemosCorren[1].ToString());
                 }
                 imp.PrintText(x++, 1, "-----------------------------------------------");
