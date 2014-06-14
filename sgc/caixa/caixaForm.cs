@@ -500,8 +500,6 @@ namespace sgc.caixa
                 return;
             }
 
-
-
             if (!MessageBox.Show("Deseja efetuar esse pagamento?", "Atenção!", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString().Equals("Yes"))
             {
                 utils.MessagensExcept.funMsgSistema("Pagamento Cancelado!",3);
@@ -544,10 +542,17 @@ namespace sgc.caixa
                     return;
                 }
 
+
+
                 if (!txTotal.Text.Equals(txPago.Text))
                 {
                     utils.MessagensExcept.funMsgSistema("O valor de pagamento deve ser igual ao valor total!", 1);
                     txPago.Focus();
+                    return;
+                }
+
+                if (!txDesconto.Text.Equals("")) {
+                    utils.MessagensExcept.funMsgSistema("Pagamento de correntista não aceita desconto!", 1);
                     return;
                 }
             }
