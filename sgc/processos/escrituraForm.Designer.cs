@@ -299,7 +299,7 @@
             this.txVlImovel.Location = new System.Drawing.Point(13, 32);
             this.txVlImovel.Name = "txVlImovel";
             this.txVlImovel.Size = new System.Drawing.Size(100, 20);
-            this.txVlImovel.TabIndex = 5;
+            this.txVlImovel.TabIndex = 0;
             this.txVlImovel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txVlImovel.Enter += new System.EventHandler(this.txVlImovel_Enter);
             this.txVlImovel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txVlImovel_KeyDown);
@@ -320,7 +320,7 @@
             this.txVlVenal.Location = new System.Drawing.Point(119, 32);
             this.txVlVenal.Name = "txVlVenal";
             this.txVlVenal.Size = new System.Drawing.Size(100, 20);
-            this.txVlVenal.TabIndex = 7;
+            this.txVlVenal.TabIndex = 1;
             this.txVlVenal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txVlVenal.Enter += new System.EventHandler(this.txVlVenal_Enter);
             this.txVlVenal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txVlVenal_KeyDown);
@@ -341,7 +341,7 @@
             this.txVlBaseCalculo.Location = new System.Drawing.Point(225, 32);
             this.txVlBaseCalculo.Name = "txVlBaseCalculo";
             this.txVlBaseCalculo.Size = new System.Drawing.Size(100, 20);
-            this.txVlBaseCalculo.TabIndex = 9;
+            this.txVlBaseCalculo.TabIndex = 2;
             this.txVlBaseCalculo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox1
@@ -399,7 +399,7 @@
             this.cbSegundNota.Location = new System.Drawing.Point(472, 32);
             this.cbSegundNota.Name = "cbSegundNota";
             this.cbSegundNota.Size = new System.Drawing.Size(78, 21);
-            this.cbSegundNota.TabIndex = 25;
+            this.cbSegundNota.TabIndex = 5;
             // 
             // label15
             // 
@@ -496,7 +496,7 @@
             this.txProcessoItbi.Location = new System.Drawing.Point(404, 32);
             this.txProcessoItbi.Name = "txProcessoItbi";
             this.txProcessoItbi.Size = new System.Drawing.Size(62, 20);
-            this.txProcessoItbi.TabIndex = 19;
+            this.txProcessoItbi.TabIndex = 4;
             // 
             // label1
             // 
@@ -512,7 +512,7 @@
             this.txProcessoLaudemio.Location = new System.Drawing.Point(336, 32);
             this.txProcessoLaudemio.Name = "txProcessoLaudemio";
             this.txProcessoLaudemio.Size = new System.Drawing.Size(62, 20);
-            this.txProcessoLaudemio.TabIndex = 17;
+            this.txProcessoLaudemio.TabIndex = 3;
             // 
             // label24
             // 
@@ -526,10 +526,10 @@
             // cbAtos
             // 
             this.cbAtos.FormattingEnabled = true;
-            this.cbAtos.Location = new System.Drawing.Point(39, 58);
+            this.cbAtos.Location = new System.Drawing.Point(41, 58);
             this.cbAtos.Name = "cbAtos";
             this.cbAtos.Size = new System.Drawing.Size(318, 21);
-            this.cbAtos.TabIndex = 13;
+            this.cbAtos.TabIndex = 6;
             this.cbAtos.SelectionChangeCommitted += new System.EventHandler(this.cbAtos_SelectionChangeCommitted);
             // 
             // groupBox2
@@ -570,7 +570,7 @@
             this.txEmailContato.Location = new System.Drawing.Point(903, 32);
             this.txEmailContato.Name = "txEmailContato";
             this.txEmailContato.Size = new System.Drawing.Size(120, 20);
-            this.txEmailContato.TabIndex = 12;
+            this.txEmailContato.TabIndex = 6;
             // 
             // txFoneContato
             // 
@@ -578,7 +578,7 @@
             this.txFoneContato.Location = new System.Drawing.Point(760, 32);
             this.txFoneContato.Name = "txFoneContato";
             this.txFoneContato.Size = new System.Drawing.Size(137, 20);
-            this.txFoneContato.TabIndex = 11;
+            this.txFoneContato.TabIndex = 5;
             // 
             // label13
             // 
@@ -624,7 +624,7 @@
             this.cbUF.Location = new System.Drawing.Point(500, 32);
             this.cbUF.Name = "cbUF";
             this.cbUF.Size = new System.Drawing.Size(54, 21);
-            this.cbUF.TabIndex = 9;
+            this.cbUF.TabIndex = 3;
             this.cbUF.ValueMember = "PA";
             // 
             // label9
@@ -642,7 +642,7 @@
             this.txCidade.Location = new System.Drawing.Point(387, 32);
             this.txCidade.Name = "txCidade";
             this.txCidade.Size = new System.Drawing.Size(107, 20);
-            this.txCidade.TabIndex = 7;
+            this.txCidade.TabIndex = 2;
             // 
             // label8
             // 
@@ -659,7 +659,7 @@
             this.txCEP.Location = new System.Drawing.Point(306, 32);
             this.txCEP.Name = "txCEP";
             this.txCEP.Size = new System.Drawing.Size(75, 20);
-            this.txCEP.TabIndex = 5;
+            this.txCEP.TabIndex = 1;
             // 
             // label7
             // 
@@ -676,7 +676,7 @@
             this.txNomeContato.Location = new System.Drawing.Point(560, 34);
             this.txNomeContato.Name = "txNomeContato";
             this.txNomeContato.Size = new System.Drawing.Size(195, 20);
-            this.txNomeContato.TabIndex = 3;
+            this.txNomeContato.TabIndex = 4;
             // 
             // label6
             // 
@@ -693,7 +693,7 @@
             this.txEndereco.Location = new System.Drawing.Point(11, 32);
             this.txEndereco.Name = "txEndereco";
             this.txEndereco.Size = new System.Drawing.Size(289, 20);
-            this.txEndereco.TabIndex = 1;
+            this.txEndereco.TabIndex = 0;
             // 
             // label5
             // 
@@ -857,7 +857,7 @@
             this.btAddPessoa.Location = new System.Drawing.Point(332, 28);
             this.btAddPessoa.Name = "btAddPessoa";
             this.btAddPessoa.Size = new System.Drawing.Size(75, 23);
-            this.btAddPessoa.TabIndex = 8;
+            this.btAddPessoa.TabIndex = 4;
             this.btAddPessoa.Text = "Adicionar";
             this.btAddPessoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btAddPessoa.UseVisualStyleBackColor = false;
@@ -870,7 +870,7 @@
             this.btPesquisaPessoa.Location = new System.Drawing.Point(130, 28);
             this.btPesquisaPessoa.Name = "btPesquisaPessoa";
             this.btPesquisaPessoa.Size = new System.Drawing.Size(30, 23);
-            this.btPesquisaPessoa.TabIndex = 7;
+            this.btPesquisaPessoa.TabIndex = 1;
             this.btPesquisaPessoa.UseVisualStyleBackColor = false;
             this.btPesquisaPessoa.Click += new System.EventHandler(this.btPesquisaPessoa_Click);
             // 
@@ -899,7 +899,7 @@
             this.cbTipo.Location = new System.Drawing.Point(204, 28);
             this.cbTipo.Name = "cbTipo";
             this.cbTipo.Size = new System.Drawing.Size(122, 21);
-            this.cbTipo.TabIndex = 4;
+            this.cbTipo.TabIndex = 3;
             // 
             // txNomePessoa
             // 
@@ -907,7 +907,7 @@
             this.txNomePessoa.Location = new System.Drawing.Point(166, 6);
             this.txNomePessoa.Name = "txNomePessoa";
             this.txNomePessoa.Size = new System.Drawing.Size(322, 20);
-            this.txNomePessoa.TabIndex = 3;
+            this.txNomePessoa.TabIndex = 2;
             // 
             // label11
             // 
@@ -923,7 +923,7 @@
             this.txCpfCnpj.Location = new System.Drawing.Point(7, 28);
             this.txCpfCnpj.Name = "txCpfCnpj";
             this.txCpfCnpj.Size = new System.Drawing.Size(117, 20);
-            this.txCpfCnpj.TabIndex = 1;
+            this.txCpfCnpj.TabIndex = 0;
             this.txCpfCnpj.Leave += new System.EventHandler(this.txCpfCnpj_Leave);
             // 
             // label10

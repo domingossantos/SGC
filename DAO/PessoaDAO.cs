@@ -355,7 +355,7 @@ namespace DAO
             }
             catch (SqlException ex)
             {
-                throw new Exception("Erro SQL: " + ex.Number);
+                throw new Exception("Erro SQL: " + ex.Message);
             }
             catch (Exception e)
             {

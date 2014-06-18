@@ -80,7 +80,7 @@ namespace sgc.assinaturas
                         imgHeigth = imgOriginal.Height;
                         tamanhoOriginal = new Size(imgWidth, imgHeigth);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         if (posicao == 0)
                         {

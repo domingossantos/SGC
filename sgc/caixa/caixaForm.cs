@@ -596,6 +596,88 @@ namespace sgc.caixa
             
             try
             {
+                /*
+                // Registro de pagamento via procedure
+                char resposta = 'F';
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("psPgtoPedido", con.ObjCon);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    /*
+                     @nrPedidos = N'947361,947362,947363',
+		            @vlPago = 80,
+		            @idHistorico = 3515,
+		            @dsLogin = N'admin',
+		            @nrCaixa = 2,
+		            @cdTipoMovimento = 78,
+		            @cdTipoPgto = 1,
+		            @vlDesconto = 20,
+		            @dsLoginDesconto = N'admin',
+		            @nmRecibo = N'FULANO'
+                     * 
+                     * cmd.Parameters.Add(new SqlParameter("@nrPedidos", SqlDbType.VarChar).Value = lbPedidos.Text);
+                    cmd.Parameters.Add("@vlPago", SqlDbType.Money).Value = vlPago;
+                    cmd.Parameters.Add("@idHistorico", SqlDbType.Int).Value = sessao.Historico;
+                    cmd.Parameters.Add("@dsLogin", SqlDbType.VarChar).Value = sessao.UsuarioSessao.DsLogin;
+                    cmd.Parameters.Add("@nrCaixa", SqlDbType.Int).Value = sessao.NrCaixa;
+                    cmd.Parameters.Add("@cdTipoMovimento", SqlDbType.Int).Value = sessao.CdAtoPedido;
+                    cmd.Parameters.Add("@cdTipoMovimento", SqlDbType.Int).Value = getTipoPagamento();
+                    cmd.Parameters.Add("@vlDesconto", SqlDbType.Money).Value = Convert.ToDouble(txDesconto.Text.Replace("R$", ""));
+                    cmd.Parameters.Add("@dsLoginDesconto", SqlDbType.VarChar).Value = dsLoginDesconto;
+                    cmd.Parameters.Add("@nmRecibo", SqlDbType.VarChar).Value = nmBoleto;
+                    
+                     * 
+                     cmd.Parameters.AddWithValue("@nrPedidos",lbPedidos.Text);
+                    cmd.Parameters.AddWithValue("@vlPago", vlPago);
+                    cmd.Parameters.AddWithValue("@idHistorico",  sessao.Historico);
+                    cmd.Parameters.AddWithValue("@dsLogin",  sessao.UsuarioSessao.DsLogin);
+                    cmd.Parameters.AddWithValue("@nrCaixa",  sessao.NrCaixa);
+                    cmd.Parameters.AddWithValue("@cdTipoMovimento",  sessao.CdAtoPedido);
+                    cmd.Parameters.AddWithValue("@cdTipoMovimento", getTipoPagamento());
+                    cmd.Parameters.AddWithValue("@vlDesconto",  Convert.ToDouble(txDesconto.Text.Replace("R$", "")));
+                    cmd.Parameters.AddWithValue("@dsLoginDesconto", dsLoginDesconto);
+                    cmd.Parameters.AddWithValue("@nmRecibo",  nmBoleto);
+                     * 
+                     */
+
+                    /*
+                    if (con.ObjCon.State == ConnectionState.Closed)
+                    {
+                        con.ObjCon.Open();
+                    }
+
+                    cmd.Parameters.Add("@nrPedidos", SqlDbType.VarChar).Value = lbPedidos.Text;
+                    cmd.Parameters.Add("@vlPago", SqlDbType.Money).Value = vlPago;
+                    cmd.Parameters.Add("@idHistorico", SqlDbType.Int).Value = sessao.Historico.IdHistoricocaixa;
+                    cmd.Parameters.Add("@dsLogin", SqlDbType.VarChar).Value = sessao.UsuarioSessao.DsLogin;
+                    cmd.Parameters.Add("@nrCaixa", SqlDbType.Int).Value = sessao.NrCaixa;
+                    cmd.Parameters.Add("@cdTipoMovimento", SqlDbType.Int).Value = sessao.CdAtoPedido;
+                    cmd.Parameters.Add("@cdTipoPgto", SqlDbType.Int).Value = getTipoPagamento();
+                    cmd.Parameters.Add("@vlDesconto", SqlDbType.Money).Value = Convert.ToDouble(txDesconto.Text.Replace("R$", ""));
+                    cmd.Parameters.Add("@dsLoginDesconto", SqlDbType.VarChar).Value = dsLoginDesconto;
+                    cmd.Parameters.Add("@nmRecibo", SqlDbType.VarChar).Value = nmBoleto;
+                    
+
+                    SqlDataReader dr = null;
+
+                    dr = cmd.ExecuteReader(CommandBehavior.SingleResult);
+
+                    if (dr.HasRows)
+                    {
+                        dr.Read();
+                        resposta  = Convert.ToChar(dr["nrPedido"].ToString());
+                        
+                    }
+                    dr.Close();
+                    con.ObjCon.Close();
+                }
+                catch (SqlException ex)
+                {
+                    utils.MessagensExcept.funMsgSistema("Erro ao efetuar pagamento.\n"+ex.Message,1);
+                }
+                    */
+                
                 bool stPgtoPedido = caixaBLL.registraPagamentoPedido(vlPago
                                                 , lPedidos
                                                 , sessao.Historico
@@ -606,6 +688,8 @@ namespace sgc.caixa
                                                 , Convert.ToDouble(txDesconto.Text.Replace("R$", ""))
                                                 , dsLoginDesconto
                                                 ,nmBoleto);
+                
+
                 if (stPgtoPedido) {
 
                     int nrPedidoPagto = lPedidos[0];
@@ -1158,47 +1242,54 @@ namespace sgc.caixa
 
         private void btProcurarPedido_Click(object sender, EventArgs e)
         {
-            DataTable dados = null;
-            DataView dvDados = null;
-            DataRow drDados;
-            int i;
-            dados = pedidoBLL.getPedidosMulti(utils.sessao.UsuarioSessao.DsLogin, Convert.ToInt32(txPedido.Text), Convert.ToInt32(txUltmoPedido.Text));
-            dvDados = new DataView(dados);
-
-            if (dvDados.Count > 0) {
-                limparDados();
-            }
-
-            for (i = 0; i < dvDados.Count; i++)
+            try
             {
-                drDados = dvDados[i].Row;
-                lbPedidos.Text += drDados[0].ToString() + ";";
+                DataTable dados = null;
+                DataView dvDados = null;
+                DataRow drDados;
+                int i;
+                dados = pedidoBLL.getPedidosMulti(utils.sessao.UsuarioSessao.DsLogin, Convert.ToInt32(txPedido.Text), Convert.ToInt32(txUltmoPedido.Text));
+                dvDados = new DataView(dados);
+
+                if (dvDados.Count > 0)
+                {
+                    limparDados();
+                }
+
+                for (i = 0; i < dvDados.Count; i++)
+                {
+                    drDados = dvDados[i].Row;
+                    lbPedidos.Text += drDados[0].ToString() + ";";
+                }
+
+                String[] pedidos = lbPedidos.Text.Split(new char[] { ';' });
+                List<int> lPedidos = new List<int>();
+
+
+                for (i = 1; i < pedidos.Length - 1; i++)
+                {
+                    lPedidos.Add(Convert.ToInt32(pedidos[i]));
+                }
+
+                dados = pedidoBLL.getItensPedidosImpressao(lPedidos);
+                dvDados = new DataView(dados);
+
+
+                for (i = 0; i < dvDados.Count; i++)
+                {
+                    drDados = dvDados[i].Row;
+                    grid.Rows.Add(drDados[0], drDados[1], String.Format("{0:N2}", drDados[2]), String.Format("{0:N2}", drDados[3]));
+
+                    valor += Convert.ToDouble(drDados[3].ToString());
+                }
+
+                txTotal.Text = String.Format("{0:N2}", valor);
+
+                txPago.Focus();
             }
-
-            String[] pedidos = lbPedidos.Text.Split(new char[] { ';' });
-            List<int> lPedidos = new List<int>();
-
-            
-            for (i = 1; i < pedidos.Length - 1; i++)
-            {
-                lPedidos.Add(Convert.ToInt32(pedidos[i]));
+            catch (Exception ex) {
+                utils.MessagensExcept.funMsgSistema("Erro ao pesquisar pedido.\n" + ex.Message, 1);
             }
-
-            dados = pedidoBLL.getItensPedidosImpressao(lPedidos);
-            dvDados = new DataView(dados);
-            
-
-            for (i = 0; i < dvDados.Count; i++)
-            {
-                drDados = dvDados[i].Row;
-                grid.Rows.Add(drDados[0], drDados[1], String.Format("{0:N2}", drDados[2]), String.Format("{0:N2}", drDados[3]));
-
-                valor += Convert.ToDouble(drDados[3].ToString());
-            }
-
-            txTotal.Text = String.Format("{0:N2}", valor);
-
-            txPago.Focus();
         }
 
         private void txUltmoPedido_KeyPress(object sender, KeyPressEventArgs e)
@@ -1265,3 +1356,4 @@ namespace sgc.caixa
 
     }
 }
+

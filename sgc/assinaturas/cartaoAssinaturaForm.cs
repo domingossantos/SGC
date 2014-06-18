@@ -779,13 +779,13 @@ namespace sgc.assinaturas
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Erro ao digitalizar imagem!");
+                        utils.MessagensExcept.funMsgSistema("Erro ao digitalizar imagem!\n"+ex.Message,1);
                     }
 
                 }
                 catch (Exception exd)
                 {
-                    MessageBox.Show("Erro ao conectar com scanner!");
+                    utils.MessagensExcept.funMsgSistema("Erro ao conectar com scanner!\n"+exd.Message,1);
                 }
                 finally {
                     deviceManager.Close();

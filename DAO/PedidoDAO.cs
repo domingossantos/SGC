@@ -235,6 +235,7 @@ namespace DAO
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlParameter param = cmd.Parameters.Add(new SqlParameter("@login", SqlDbType.VarChar));
+                
                 param.Direction = ParameterDirection.Input;
                 param.Value = login;
                 SqlDataReader dr = null;

@@ -51,7 +51,7 @@ namespace sgc.admin
                 inicio = Convert.ToInt32(txInicio.Text);
                 }
                 catch(Exception ex){
-                    utils.MessagensExcept.funMsgSistema("O Campo Selo deve ser somente numeros!",1);
+                    utils.MessagensExcept.funMsgSistema("O Campo Selo deve ser somente numeros!\n"+ex.Message,1);
                     return;
                 }
             }
@@ -64,7 +64,7 @@ namespace sgc.admin
                 fim = Convert.ToInt32(txFim.Text);
             }
             catch(Exception ex){
-                utils.MessagensExcept.funMsgSistema("O Campo Selo deve ser somente numeros!",1);
+                utils.MessagensExcept.funMsgSistema("O Campo Selo deve ser somente numeros!\n"+ex.Message,1);
                 txFim.Focus();
                 return;
             }

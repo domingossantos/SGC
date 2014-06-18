@@ -54,7 +54,7 @@ namespace sgc.processos
 
         public void carregaAtos(int idx = 0)
         {
-            cbAtos.DataSource = atoBLL.listaAtosPorTipo(3,0,"");
+            cbAtos.DataSource = atoBLL.listaAtosPorTipo(3,0,null);
             if (idx > 0)
                 cbAtos.SelectedValue = idx;
             else
@@ -427,7 +427,15 @@ namespace sgc.processos
             {
                 limparCampos();
                 txVlImovel.Focus();
-                escritura.IdEscritura = escrituraBLL.novaEscritura();
+
+                try
+                {
+                    escritura.IdEscritura = escrituraBLL.novaEscritura();
+                }
+                catch (Exception ex)
+                {
+                    utils.MessagensExcept.funMsgSistema("Erro ao salvar nova ficha.\n" + ex.Message, 1);
+                }
                 lbNumFicha.Text = escritura.IdEscritura.ToString();
                 op = 2;
                 carregaTodosDados();

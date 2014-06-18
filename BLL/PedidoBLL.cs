@@ -912,7 +912,7 @@ namespace BLL
                         , historico.IdHistoricocaixa, 0);
 
                 DataView dadosSelosUsados = new DataView(selosUsados);
-                DataRow linhaSeloUsado;
+                //DataRow linhaSeloUsado;
 
                 int x = 10;
                 imp.PrintText(x++, 1, "");
