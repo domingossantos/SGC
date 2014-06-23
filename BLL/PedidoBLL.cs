@@ -808,9 +808,10 @@ namespace BLL
 
 
                 double troco = 0;
+                
                 double valorAPagar = valor - movimento.VlDesconto;
 
-                if (vlPago > 0)
+                if (vlPago >= 0)
                     troco = movimento.VlDinheiro - valorAPagar;
 
                 
@@ -824,7 +825,10 @@ namespace BLL
 
                 imp.PrintText(x++, 1, "VALOR PAGO........: R$ " + String.Format("{0:N2}", valorAPagar).PadLeft(11, ' '));
 
+                imp.PrintText(x++, 1, "DINHEIRO..........: R$ " + String.Format("{0:N2}", movimento.VlDinheiro).PadLeft(11, ' '));
+
                 imp.PrintText(x++, 1, "TROCO.............: R$ " + String.Format("{0:N2}", troco).PadLeft(11, ' '));
+
                 //x++;
                 
 
