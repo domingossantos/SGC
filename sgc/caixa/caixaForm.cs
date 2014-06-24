@@ -596,7 +596,7 @@ namespace sgc.caixa
             
             try
             {
-                /*
+                
                 // Registro de pagamento via procedure
                 char resposta = 'F';
                 try
@@ -604,50 +604,14 @@ namespace sgc.caixa
                     SqlCommand cmd = new SqlCommand("psPgtoPedido", con.ObjCon);
 
                     cmd.CommandType = CommandType.StoredProcedure;
-                    /*
-                     @nrPedidos = N'947361,947362,947363',
-		            @vlPago = 80,
-		            @idHistorico = 3515,
-		            @dsLogin = N'admin',
-		            @nrCaixa = 2,
-		            @cdTipoMovimento = 78,
-		            @cdTipoPgto = 1,
-		            @vlDesconto = 20,
-		            @dsLoginDesconto = N'admin',
-		            @nmRecibo = N'FULANO'
-                     * 
-                     * cmd.Parameters.Add(new SqlParameter("@nrPedidos", SqlDbType.VarChar).Value = lbPedidos.Text);
-                    cmd.Parameters.Add("@vlPago", SqlDbType.Money).Value = vlPago;
-                    cmd.Parameters.Add("@idHistorico", SqlDbType.Int).Value = sessao.Historico;
-                    cmd.Parameters.Add("@dsLogin", SqlDbType.VarChar).Value = sessao.UsuarioSessao.DsLogin;
-                    cmd.Parameters.Add("@nrCaixa", SqlDbType.Int).Value = sessao.NrCaixa;
-                    cmd.Parameters.Add("@cdTipoMovimento", SqlDbType.Int).Value = sessao.CdAtoPedido;
-                    cmd.Parameters.Add("@cdTipoMovimento", SqlDbType.Int).Value = getTipoPagamento();
-                    cmd.Parameters.Add("@vlDesconto", SqlDbType.Money).Value = Convert.ToDouble(txDesconto.Text.Replace("R$", ""));
-                    cmd.Parameters.Add("@dsLoginDesconto", SqlDbType.VarChar).Value = dsLoginDesconto;
-                    cmd.Parameters.Add("@nmRecibo", SqlDbType.VarChar).Value = nmBoleto;
                     
-                     * 
-                     cmd.Parameters.AddWithValue("@nrPedidos",lbPedidos.Text);
-                    cmd.Parameters.AddWithValue("@vlPago", vlPago);
-                    cmd.Parameters.AddWithValue("@idHistorico",  sessao.Historico);
-                    cmd.Parameters.AddWithValue("@dsLogin",  sessao.UsuarioSessao.DsLogin);
-                    cmd.Parameters.AddWithValue("@nrCaixa",  sessao.NrCaixa);
-                    cmd.Parameters.AddWithValue("@cdTipoMovimento",  sessao.CdAtoPedido);
-                    cmd.Parameters.AddWithValue("@cdTipoMovimento", getTipoPagamento());
-                    cmd.Parameters.AddWithValue("@vlDesconto",  Convert.ToDouble(txDesconto.Text.Replace("R$", "")));
-                    cmd.Parameters.AddWithValue("@dsLoginDesconto", dsLoginDesconto);
-                    cmd.Parameters.AddWithValue("@nmRecibo",  nmBoleto);
-                     * 
-                     */
-
-                    /*
+                    
                     if (con.ObjCon.State == ConnectionState.Closed)
                     {
                         con.ObjCon.Open();
                     }
 
-                    cmd.Parameters.Add("@nrPedidos", SqlDbType.VarChar).Value = lbPedidos.Text;
+                    cmd.Parameters.Add("@nrPedidos", SqlDbType.VarChar).Value = lbPedidos.Text.Substring(2);
                     cmd.Parameters.Add("@vlPago", SqlDbType.Money).Value = vlPago;
                     cmd.Parameters.Add("@idHistorico", SqlDbType.Int).Value = sessao.Historico.IdHistoricocaixa;
                     cmd.Parameters.Add("@dsLogin", SqlDbType.VarChar).Value = sessao.UsuarioSessao.DsLogin;
@@ -666,7 +630,7 @@ namespace sgc.caixa
                     if (dr.HasRows)
                     {
                         dr.Read();
-                        resposta  = Convert.ToChar(dr["nrPedido"].ToString());
+                        resposta = Convert.ToChar(dr["resultado"].ToString());
                         
                     }
                     dr.Close();
@@ -676,8 +640,10 @@ namespace sgc.caixa
                 {
                     utils.MessagensExcept.funMsgSistema("Erro ao efetuar pagamento.\n"+ex.Message,1);
                 }
-                    */
+                    
                 
+
+                /*
                 bool stPgtoPedido = caixaBLL.registraPagamentoPedido(vlPago
                                                 , lPedidos
                                                 , sessao.Historico
@@ -689,8 +655,8 @@ namespace sgc.caixa
                                                 , dsLoginDesconto
                                                 ,nmBoleto);
                 
-
-                if (stPgtoPedido) {
+                */
+                if (resposta == 'T') {
 
                     int nrPedidoPagto = lPedidos[0];
 
@@ -804,168 +770,13 @@ namespace sgc.caixa
                 utils.MessagensExcept.funMsgSistema("Erro: " + ex.Message,1);
             }
                 
-                #region Codigo antigo
-                /*
-            MovimentoCaixa movimento = new MovimentoCaixa();
-
-            movimento.IdHitoricoCaixa = sessao.Historico.IdHistoricocaixa;
-            movimento.DtMovimento = DateTime.Now;
-            movimento.DsLogin = sessao.UsuarioSessao.DsLogin;
-            movimento.IdTipoMovimento = sessao.CdAtoPedido;
-            movimento.NrCaixa = sessao.NrCaixa;
-            movimento.NrPedido = lPedidos[0];
-            movimento.TpOperacao = 'C';
-            movimento.TpPagamento = getTipoPagamento();
-            movimento.VlMovimento = Convert.ToDouble(txTotal.Text.Replace("R$", ""));
-            movimento.NrPedidoPagto = 0;
-
-            int nrPedidoPagamentoPai = 0;
-            if(lPedidos.Count > 0){
-                nrPedidoPagamentoPai = movimento.NrPedido;
-            }
-            
-
-            if (txDesconto.Text.Equals(""))
-                txDesconto.Text = "0";
-
-            movimento.VlDesconto = Convert.ToDouble(txDesconto.Text.Replace("R$", ""));
-            movimento.DsLoginAutDesconto = dsLoginDesconto;
-
-            caixaBLL.salvaMovimento(movimento,trans);
-
-            for (i = 1; i < lPedidos.Count; i++)
-            {
-                movimento.IdHitoricoCaixa = sessao.Historico.IdHistoricocaixa;
-                movimento.DtMovimento = DateTime.Now;
-                movimento.DsLogin = sessao.UsuarioSessao.DsLogin;
-                movimento.IdTipoMovimento = sessao.CdAtoPedido;
-                movimento.NrCaixa = sessao.NrCaixa;
-                movimento.NrPedido = lPedidos[i];
-                movimento.TpOperacao = 'C';
-                movimento.TpPagamento = getTipoPagamento();
-                movimento.VlMovimento = 0;
-                movimento.NrPedidoPagto = nrPedidoPagamentoPai;
-                txDesconto.Text = "0";
-
-                movimento.VlDesconto = 0;
-                movimento.DsLoginAutDesconto = "";
-                caixaBLL.salvaMovimento(movimento,trans);
-            }
-
-            //Verifica se o pedido vem da escritura
-            for (int n = 0; n < lPedidos.Count; n++)
-            {
-                DataTable dadosItens = new DataTable();
-                dadosItens = pedidoBLL.getItensPedidos(Convert.ToInt32(lPedidos[n]));
-
-                DataView dvDados = new DataView(dadosItens);
-                DataRow drDados;
-                for (int m = 0; m < dvDados.Count; m++)
-                {
-                    drDados = dvDados[m].Row;
-                    if (!drDados["idMovimentoBanco"].ToString().Equals("")) {
-                        escrituraBLL.alteraStatusMovimento(Convert.ToInt32(drDados["idMovimentoBanco"].ToString()), 'P');
-                    } 
-                }
-            }
-            */
-                #endregion
-
-                
         }
 
         private void caixaForm_Load(object sender, EventArgs e)
         {
-            abreCaixa();
+            
             carregaCorrentista();
             gbCorrentista.Visible = false;
-        }
-
-        private void abreCaixa()
-        {
-            /*
-            string strCaixa = "0";
-            HistoricoCaixa historico = null;
-            if (sessao.NrCaixa ==  0)
-                {
-                    strCaixa = (Microsoft.VisualBasic.Interaction.InputBox("No. do Caixa", "Cartorio Conduru", "0", 150, 150));
-                    
-                        if (strCaixa.Equals("0"))
-                        {
-                            MessageBox.Show("Informe No. do Caixa");
-                            abreCaixa();
-                            return;
-                        }
-
-                        if (strCaixa.Equals("")) {
-                            this.Close();
-                        }
-
-                }
-
-            if (!caixaBLL.getCaixaFechado(Convert.ToInt16(strCaixa)))
-            {
-                historico = new HistoricoCaixa();
-
-                historico = caixaBLL.getUltimoHistorioPorCaixa(Convert.ToInt32(strCaixa));
-                if (!historico.DsLogin.Equals(sessao.UsuarioSessao.DsLogin))
-                {
-                    MessageBox.Show("Caixa No. " + strCaixa + " aberto pelo usuário " + historico.DsLogin + "\nFavor utilizar outro no. de caixa.");
-                    this.Close();
-                    this.Dispose();
-                    return;
-                }
-                else
-                {
-                    if (historico.DtAbertura.ToShortDateString() != DateTime.Now.ToShortDateString())
-                    {
-                        MessageBox.Show("Este caixa esta aberto desde o dia " + historico.DtAbertura.ToShortDateString() + "\nFavor feche-o para então utilizá-lo novamente.");
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Caixa já aberto.");
-                        panel2.Enabled = true;
-                        panel1.Enabled = true;
-                        sessao.Historico = historico;
-                        sessao.NrCaixa = Convert.ToInt32(strCaixa);
-                    }
-                }
-            }
-            else
-            {
-                historico = new HistoricoCaixa();
-
-                historico.DsLogin = sessao.UsuarioSessao.DsLogin;
-                historico.DtAbertura = DateTime.Now;
-                historico.NrCaixa = Convert.ToInt32(strCaixa);
-                
-                caixaBLL.abreCaixa(historico);
-
-                string vlCaixa = (Microsoft.VisualBasic.Interaction.InputBox("Valor de Abertura de Caixa", "Cartorio Conduru", "0", 150, 150));
-
-                if (vlCaixa != "")
-                {
-                    MovimentoCaixa movimento = new MovimentoCaixa();
-
-                    movimento.IdHitoricoCaixa = historico.IdHistoricocaixa;
-                    movimento.IdTipoMovimento = 4;
-                    movimento.NrCaixa = historico.NrCaixa;
-                    movimento.TpOperacao = 'C';
-                    movimento.VlMovimento = Convert.ToDouble(vlCaixa);
-                    movimento.DsLogin = historico.DsLogin;
-                    movimento.DsLoginAutDesconto = dsLoginDesconto;
-                    movimento.NrCaixa = historico.NrCaixa;
-                    movimento.NrPedido = 0;
-                    movimento.VlDesconto = 0;
-
-                    caixaBLL.salvaMovimento(movimento);
-                }
-                sessao.NrCaixa = historico.NrCaixa;
-                sessao.Historico = historico;
-                panel2.Enabled = true;
-                panel1.Enabled = true;
-            } */
         }
 
         private void caixaForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -718,12 +718,7 @@ namespace BLL
                 //}
 
 
-                /*
-                for (int i = 0; i < nrPedidos.Count; i++)
-                {
-                    pedidos += nrPedidos[i].ToString() + ",";
-                }
-                */
+                
                 pedidos = pedidos.Substring(0, (pedidos.Length - 1));
                 
 
@@ -766,6 +761,7 @@ namespace BLL
                 imp.PrintText(9, 1, "");
                 int x = 9;
                 imp.PrintText(x++, 1, "Forma de Pagamento......: " + strPgto);
+                
                 if (movimento.TpPagamento == 2)
                 {
                     imp.PrintText(x++, 1, getNomeCorrentistaPgto(nrPedido));
@@ -825,15 +821,18 @@ namespace BLL
 
                 imp.PrintText(x++, 1, "VALOR PAGO........: R$ " + String.Format("{0:N2}", valorAPagar).PadLeft(11, ' '));
 
-                imp.PrintText(x++, 1, "DINHEIRO..........: R$ " + String.Format("{0:N2}", movimento.VlDinheiro).PadLeft(11, ' '));
+                if (movimento.TpPagamento == 1)
+                {
 
-                imp.PrintText(x++, 1, "TROCO.............: R$ " + String.Format("{0:N2}", troco).PadLeft(11, ' '));
+                    imp.PrintText(x++, 1, "DINHEIRO..........: R$ " + String.Format("{0:N2}", movimento.VlDinheiro).PadLeft(11, ' '));
 
-                //x++;
+                    imp.PrintText(x++, 1, "TROCO.............: R$ " + String.Format("{0:N2}", troco).PadLeft(11, ' '));
+                }
+                
                 
 
 
-                //x++;
+                
                 imp.PrintText(x++, 1, iniFile.IniReadValue("FBOLETO", "LINHA1"));
                 imp.PrintText(x++, 1, iniFile.IniReadValue("FBOLETO", "LINHA2"));
 
