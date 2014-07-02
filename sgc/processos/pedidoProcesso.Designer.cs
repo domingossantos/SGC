@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btDelataItem = new System.Windows.Forms.Button();
             this.btSalvaItem = new System.Windows.Forms.Button();
             this.lbValorItem = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -53,7 +54,6 @@
             this.btCancelar = new System.Windows.Forms.Button();
             this.btGrava = new System.Windows.Forms.Button();
             this.grid = new System.Windows.Forms.DataGridView();
-            this.btDelataItem = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -97,6 +97,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Novo Item";
             // 
+            // btDelataItem
+            // 
+            this.btDelataItem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btDelataItem.Image = global::sgc.Properties.Resources.delete;
+            this.btDelataItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDelataItem.Location = new System.Drawing.Point(380, 76);
+            this.btDelataItem.Name = "btDelataItem";
+            this.btDelataItem.Size = new System.Drawing.Size(104, 23);
+            this.btDelataItem.TabIndex = 9;
+            this.btDelataItem.Text = "Apaga Item";
+            this.btDelataItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btDelataItem.UseVisualStyleBackColor = false;
+            this.btDelataItem.Click += new System.EventHandler(this.btDelataItem_Click);
+            // 
             // btSalvaItem
             // 
             this.btSalvaItem.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -137,6 +151,7 @@
             this.txValorUnt.Size = new System.Drawing.Size(100, 20);
             this.txValorUnt.TabIndex = 5;
             this.txValorUnt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txValorUnt_KeyDown);
+            this.txValorUnt.Leave += new System.EventHandler(this.txValorUnt_Leave);
             // 
             // label8
             // 
@@ -326,20 +341,6 @@
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(707, 263);
             this.grid.TabIndex = 3;
-            // 
-            // btDelataItem
-            // 
-            this.btDelataItem.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btDelataItem.Image = global::sgc.Properties.Resources.delete;
-            this.btDelataItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btDelataItem.Location = new System.Drawing.Point(380, 76);
-            this.btDelataItem.Name = "btDelataItem";
-            this.btDelataItem.Size = new System.Drawing.Size(104, 23);
-            this.btDelataItem.TabIndex = 9;
-            this.btDelataItem.Text = "Apaga Item";
-            this.btDelataItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btDelataItem.UseVisualStyleBackColor = false;
-            this.btDelataItem.Click += new System.EventHandler(this.btDelataItem_Click);
             // 
             // pedidoProcesso
             // 

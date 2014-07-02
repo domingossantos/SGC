@@ -308,5 +308,15 @@ namespace sgc.processos
                 MessageBox.Show("Erro ao apagar Item\n"+ex.Message);
             }
         }
+
+        private void txValorUnt_Leave(object sender, EventArgs e)
+        {
+            int qtd;
+            if (txQtd.Text.Equals(""))
+                qtd = 0;
+            else
+                qtd = Convert.ToInt32(txQtd.Text);
+            lbValorItem.Text = getValorTotalItem(Convert.ToDouble(txValorUnt.Text), qtd).ToString();
+        }
     }
 }

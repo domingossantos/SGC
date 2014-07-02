@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Textbox Name="nmCartao">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!nmCartao.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>nmCartao</rd:DefaultName>
+        <Top>0.45474cm</Top>
+        <Left>0.49354cm</Left>
+        <Height>0.6cm</Height>
+        <Width>13.24208cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="nrCPF">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!nrCPF.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>nrCPF</rd:DefaultName>
+        <Top>1.72474cm</Top>
+        <Left>0.49354cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="nrFones">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!nrFones.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>nrFones</rd:DefaultName>
+        <Top>1.72474cm</Top>
+        <Left>11.23562cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="nrRG">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!nrRG.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>nrRG</rd:DefaultName>
+        <Top>1.72474cm</Top>
+        <Left>3.85974cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="dtExpRG">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!dtExpRG.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>dtExpRG</rd:DefaultName>
+        <Top>1.72474cm</Top>
+        <Left>7.19349cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.89688cm</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="dsEndereco">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!dsEndereco.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>dsEndereco</rd:DefaultName>
+        <Top>2.91537cm</Top>
+        <Left>0.49354cm</Left>
+        <Height>0.6cm</Height>
+        <Width>13.24208cm</Width>
+        <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="dsBairro">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!dsBairro.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>dsBairro</rd:DefaultName>
+        <Top>4.15891cm</Top>
+        <Left>0.49354cm</Left>
+        <Height>0.6cm</Height>
+        <Width>6.86562cm</Width>
+        <ZIndex>6</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="nmCidade">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!nmCidade.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>nmCidade</rd:DefaultName>
+        <Top>5.40245cm</Top>
+        <Left>0.49354cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.92875cm</Width>
+        <ZIndex>7</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="nrCEP">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!nrCEP.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>nrCEP</rd:DefaultName>
+        <Top>4.15891cm</Top>
+        <Left>10.60062cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.135cm</Width>
+        <ZIndex>8</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="sgUF">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!sgUF.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>sgUF</rd:DefaultName>
+        <Top>5.40245cm</Top>
+        <Left>5.12974cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>9</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="dtNascimento">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!dtNascimento.Value, "CartaoDS")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>dtNascimento</rd:DefaultName>
+        <Top>5.40245cm</Top>
+        <Left>9.75396cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.98167cm</Width>
+        <ZIndex>10</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <Height>3.5in</Height>
+    <Style />
+  </Body>
+  <Width>5.75384in</Width>
+  <Page>
+    <PageHeader>
+      <Height>1.94979cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Textbox Name="Textbox1">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Cartão de Assinatura - Cartório Conduru</Value>
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox1</rd:DefaultName>
+          <Top>0.5825cm</Top>
+          <Left>2.16993cm</Left>
+          <Height>0.6cm</Height>
+          <Width>6.97146cm</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Image Name="Image1">
+          <Source>Embedded</Source>
+          <Value>logo_cartorio</Value>
+          <Sizing>FitProportional</Sizing>
+          <Top>0.2734cm</Top>
+          <Left>0.49354cm</Left>
+          <Height>1.5cm</Height>
+          <Width>1.5cm</Width>
+          <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Textbox Name="nrCartao">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=First(Fields!nrCartao.Value, "CartaoDS")</Value>
+                  <Style />
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>nrCartao</rd:DefaultName>
+          <Top>0.5825cm</Top>
+          <Left>11.49645cm</Left>
+          <Height>0.6cm</Height>
+          <Width>2.5cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="SGCDataSet">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>2649cc65-c0e5-4b46-8f45-473549725902</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="CartaoDS">
+      <Query>
+        <DataSourceName>SGCDataSet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="nrCartao">
+          <DataField>nrCartao</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nmCartao">
+          <DataField>nmCartao</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nrCPF">
+          <DataField>nrCPF</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dsEndereco">
+          <DataField>dsEndereco</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dsBairro">
+          <DataField>dsBairro</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nmCidade">
+          <DataField>nmCidade</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nrCEP">
+          <DataField>nrCEP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="sgUF">
+          <DataField>sgUF</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dtNascimento">
+          <DataField>dtNascimento</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="nrRG">
+          <DataField>nrRG</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dtExpRG">
+          <DataField>dtExpRG</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="nrFones">
+          <DataField>nrFones</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>SGCDataSet</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\desenvolvimento\Documents\GitHub\SGC\sgc\SGCDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>tblCartaoAssinatura</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>tblCartaoAssinaturaTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logo_cartorio">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMpaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpCOTdGQjNBQjZDQjIxMUUxQkE1RkM4RjM3RjRCMjI2NSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpCOTdGQjNBQzZDQjIxMUUxQkE1RkM4RjM3RjRCMjI2NSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkI5N0ZCM0E5NkNCMjExRTFCQTVGQzhGMzdGNEIyMjY1IiBzdFJlZjpkb2N1bWVudElE
+PSJ4bXAuZGlkOkI5N0ZCM0FBNkNCMjExRTFCQTVGQzhGMzdGNEIyMjY1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgAUABQAwERAAIRAQMRAf/EAKsAAAICAwEBAAAAAAAAAAAAAAYHBQgAAgQBAwEAAgMBAQAAAAAAAAAAAAAABAUAAgYDARAAAgEDAwICBgUIBgsAAAAAAQIDEQQFABIGIQcxE0FRYXEiCIGRMpMUoUJygtIjQxWx0WIzVEZSklNzo7PTVRZWFxEAAQMBBAYHCAIDAQAAAAAAAQACAxEhMRIEQVGRUhMFYXGhsdEyFPCBweEiQnIGYiOCsjMk/9oADAMBAAIRAxEAPwCzebzeLweKuMrlLhbaxtV3zStU0HgAAOpJPQAdSdeE0V44y80CQHN+Wd2uQs2V45knwNutRZ4X4VleH0STSHcBK/js8FHSta6OPKpXMxVo/d+etXi5plYpMBbjbv8AT0Dd7Upsl3e72Yq6a0yGevra4XxjlCDp6x8NCPaNJ5mSxGj6grRwR5WZuJga4Lm/+693P/Zrr6o/2NcuI7Wu/ood0LdO/Xd1fDklwfekR/pTU4jta89FDuhbjv8A93x/mOb7uD9jU4rtanoYd0LYfMF3fH+YpPuoP2NTiu1rz0MO6FsPmF7wD/ML/cwf9PU4rtanoId0dqLO2vzM8sseSRJzK9OQwdzSKZ/LRXtyT0lXy1UsB+cPV4auyYg2ofM8
+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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>cd1c98e9-0789-4787-96c1-78d1194ba0aa</rd:ReportID>
+</Report>

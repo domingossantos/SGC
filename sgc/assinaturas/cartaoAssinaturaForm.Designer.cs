@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cbScanner = new System.Windows.Forms.ComboBox();
             this.btApagar = new System.Windows.Forms.Button();
             this.btZoomOut = new System.Windows.Forms.Button();
             this.btZoomIn = new System.Windows.Forms.Button();
@@ -39,6 +41,7 @@
             this.btAddImagem = new System.Windows.Forms.Button();
             this.btEditar = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btCartaoPrint = new System.Windows.Forms.Button();
             this.lbNrReg = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.btPesquisar = new System.Windows.Forms.Button();
@@ -88,8 +91,6 @@
             this.grid = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.assinatura = new System.Windows.Forms.PictureBox();
-            this.cbScanner = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -121,6 +122,23 @@
             this.panel1.Size = new System.Drawing.Size(861, 41);
             this.panel1.TabIndex = 0;
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(693, 3);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(97, 13);
+            this.label21.TabIndex = 27;
+            this.label21.Text = "Selecionar Stanner";
+            // 
+            // cbScanner
+            // 
+            this.cbScanner.FormattingEnabled = true;
+            this.cbScanner.Location = new System.Drawing.Point(693, 17);
+            this.cbScanner.Name = "cbScanner";
+            this.cbScanner.Size = new System.Drawing.Size(131, 21);
+            this.cbScanner.TabIndex = 26;
+            // 
             // btApagar
             // 
             this.btApagar.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -149,9 +167,9 @@
             // btZoomIn
             // 
             this.btZoomIn.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btZoomIn.Location = new System.Drawing.Point(828, 0);
+            this.btZoomIn.Location = new System.Drawing.Point(830, 0);
             this.btZoomIn.Name = "btZoomIn";
-            this.btZoomIn.Size = new System.Drawing.Size(28, 19);
+            this.btZoomIn.Size = new System.Drawing.Size(26, 19);
             this.btZoomIn.TabIndex = 23;
             this.btZoomIn.Text = "+";
             this.btZoomIn.UseVisualStyleBackColor = false;
@@ -251,6 +269,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.splitContainer1.Panel1.Controls.Add(this.btCartaoPrint);
             this.splitContainer1.Panel1.Controls.Add(this.lbNrReg);
             this.splitContainer1.Panel1.Controls.Add(this.label16);
             this.splitContainer1.Panel1.Controls.Add(this.btPesquisar);
@@ -267,6 +286,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(861, 447);
             this.splitContainer1.SplitterDistance = 450;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // btCartaoPrint
+            // 
+            this.btCartaoPrint.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btCartaoPrint.Location = new System.Drawing.Point(100, 412);
+            this.btCartaoPrint.Name = "btCartaoPrint";
+            this.btCartaoPrint.Size = new System.Drawing.Size(116, 32);
+            this.btCartaoPrint.TabIndex = 41;
+            this.btCartaoPrint.Text = "Imprimir Cartão";
+            this.btCartaoPrint.UseVisualStyleBackColor = false;
+            this.btCartaoPrint.Click += new System.EventHandler(this.btCartaoPrint_Click);
             // 
             // lbNrReg
             // 
@@ -304,9 +334,9 @@
             // 
             this.btAvanca.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btAvanca.Image = global::sgc.Properties.Resources.forward24;
-            this.btAvanca.Location = new System.Drawing.Point(85, 412);
+            this.btAvanca.Location = new System.Drawing.Point(54, 412);
             this.btAvanca.Name = "btAvanca";
-            this.btAvanca.Size = new System.Drawing.Size(75, 32);
+            this.btAvanca.Size = new System.Drawing.Size(43, 32);
             this.btAvanca.TabIndex = 15;
             this.btAvanca.UseVisualStyleBackColor = false;
             this.btAvanca.Click += new System.EventHandler(this.btAvanca_Click);
@@ -317,7 +347,7 @@
             this.btVoltar.Image = global::sgc.Properties.Resources.back24;
             this.btVoltar.Location = new System.Drawing.Point(4, 412);
             this.btVoltar.Name = "btVoltar";
-            this.btVoltar.Size = new System.Drawing.Size(75, 32);
+            this.btVoltar.Size = new System.Drawing.Size(43, 32);
             this.btVoltar.TabIndex = 14;
             this.btVoltar.UseVisualStyleBackColor = false;
             this.btVoltar.Click += new System.EventHandler(this.btVoltar_Click);
@@ -744,32 +774,15 @@
             // 
             // assinatura
             // 
-            this.assinatura.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.assinatura.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.assinatura.Location = new System.Drawing.Point(3, 1);
             this.assinatura.Name = "assinatura";
             this.assinatura.Size = new System.Drawing.Size(397, 312);
             this.assinatura.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.assinatura.TabIndex = 0;
             this.assinatura.TabStop = false;
-            // 
-            // cbScanner
-            // 
-            this.cbScanner.FormattingEnabled = true;
-            this.cbScanner.Location = new System.Drawing.Point(693, 17);
-            this.cbScanner.Name = "cbScanner";
-            this.cbScanner.Size = new System.Drawing.Size(131, 21);
-            this.cbScanner.TabIndex = 26;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(693, 3);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(97, 13);
-            this.label21.TabIndex = 27;
-            this.label21.Text = "Selecionar Stanner";
             // 
             // cartaoAssinaturaForm
             // 
@@ -867,5 +880,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox cbScanner;
+        private System.Windows.Forms.Button btCartaoPrint;
     }
 }

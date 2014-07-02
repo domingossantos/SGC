@@ -184,6 +184,12 @@
     <Compile Include="assinaturas\detalheCartaoAssinaturaForm.Designer.cs">
       <DependentUpon>detalheCartaoAssinaturaForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="assinaturas\ImpressaoCartaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="assinaturas\ImpressaoCartaoForm.Designer.cs">
+      <DependentUpon>ImpressaoCartaoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="assinaturas\listaTamanhoAssinForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -564,6 +570,9 @@
     <EmbeddedResource Include="assinaturas\detalheCartaoAssinaturaForm.resx">
       <DependentUpon>detalheCartaoAssinaturaForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="assinaturas\ImpressaoCartaoForm.resx">
+      <DependentUpon>ImpressaoCartaoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="assinaturas\listaTamanhoAssinForm.resx">
       <DependentUpon>listaTamanhoAssinForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -573,6 +582,7 @@
     <EmbeddedResource Include="assinaturas\recuperaDadosRemotoForm.resx">
       <DependentUpon>recuperaDadosRemotoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="assinaturas\Report1.rdlc" />
     <EmbeddedResource Include="assinaturas\scannerLoteForm.resx">
       <DependentUpon>scannerLoteForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -720,6 +730,7 @@
     <EmbeddedResource Include="relatorios\listaEscrituras.rdlc" />
     <EmbeddedResource Include="relatorios\listaProvimentoCep.rdlc" />
     <EmbeddedResource Include="relatorios\relAtosRealizados.rdlc" />
+    <EmbeddedResource Include="relatorios\relCartaoAssinatura.rdlc" />
     <EmbeddedResource Include="relatorios\relMovimentoDia.rdlc" />
     <EmbeddedResource Include="relatorios\relOrcamentoEscritura.rdlc" />
     <EmbeddedResource Include="relatorios\relSelosUsados.rdlc" />

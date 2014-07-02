@@ -1,148 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
-  <DataSources>
-    <DataSource Name="SGCDataSet">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>972264f4-4532-447d-b8d9-b44cb22e7124</rd:DataSourceID>
-    </DataSource>
-  </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet1">
-      <Fields>
-        <Field Name="dsAto">
-          <DataField>dsAto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="vlAto">
-          <DataField>vlAto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="idEscritura">
-          <DataField>idEscritura</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="vlDocumento">
-          <DataField>vlDocumento</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="vlVenal">
-          <DataField>vlVenal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="vlBaseCalculo">
-          <DataField>vlBaseCalculo</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="nrProcessoLaudemio">
-          <DataField>nrProcessoLaudemio</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nrProcessoITBI">
-          <DataField>nrProcessoITBI</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dtEntrada">
-          <DataField>dtEntrada</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="dtSaida">
-          <DataField>dtSaida</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="tpEscritura">
-          <DataField>tpEscritura</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dsContato">
-          <DataField>dsContato</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dsEndereco">
-          <DataField>dsEndereco</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nrCEP">
-          <DataField>nrCEP</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="nmCidade">
-          <DataField>nmCidade</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dsUF">
-          <DataField>dsUF</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dsFoneContato">
-          <DataField>dsFoneContato</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dsEmailContato">
-          <DataField>dsEmailContato</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dtOrcamento">
-          <DataField>dtOrcamento</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="stRegistro">
-          <DataField>stRegistro</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="dsLogin">
-          <DataField>dsLogin</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>SGCDataSet</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>SGCDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\Projetos\Conduru\SGC\app\sgc\sgc\SGCDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>tblEscritura</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>tblEscrituraTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-    <DataSet Name="DataSet2">
-      <Fields>
-        <Field Name="dsAto">
-          <DataField>dsAto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="vlAto">
-          <DataField>vlAto</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="nrQuantidade">
-          <DataField>nrQuantidade</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-        <Field Name="vlTotal">
-          <DataField>vlTotal</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>SGCDataSet</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <rd:DataSetInfo>
-        <rd:DataSetName>SGCDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\Projetos\Conduru\SGC\app\sgc\sgc\SGCDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>tblItensOrcamento</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>tblItensOrcamentoTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-  </DataSets>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
       <Textbox Name="idEscritura">
@@ -809,21 +666,21 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.81148in</Width>
+              <Width>7.14116cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.19777in</Width>
+              <Width>3.04234cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.10358in</Width>
+              <Width>2.80309cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.25499in</Width>
+              <Width>3.18767cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.21539in</Height>
+              <Height>0.54709cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -970,7 +827,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.23622in</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -1357,6 +1214,150 @@
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="SGCDataSet">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>972264f4-4532-447d-b8d9-b44cb22e7124</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>SGCDataSet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="dsAto">
+          <DataField>dsAto</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="vlAto">
+          <DataField>vlAto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="idEscritura">
+          <DataField>idEscritura</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="vlDocumento">
+          <DataField>vlDocumento</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="vlVenal">
+          <DataField>vlVenal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="vlBaseCalculo">
+          <DataField>vlBaseCalculo</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="nrProcessoLaudemio">
+          <DataField>nrProcessoLaudemio</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nrProcessoITBI">
+          <DataField>nrProcessoITBI</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dtEntrada">
+          <DataField>dtEntrada</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="dtSaida">
+          <DataField>dtSaida</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="tpEscritura">
+          <DataField>tpEscritura</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dsContato">
+          <DataField>dsContato</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dsEndereco">
+          <DataField>dsEndereco</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nrCEP">
+          <DataField>nrCEP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nmCidade">
+          <DataField>nmCidade</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dsUF">
+          <DataField>dsUF</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dsFoneContato">
+          <DataField>dsFoneContato</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dsEmailContato">
+          <DataField>dsEmailContato</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dtOrcamento">
+          <DataField>dtOrcamento</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="stRegistro">
+          <DataField>stRegistro</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dsLogin">
+          <DataField>dsLogin</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>SGCDataSet</rd:DataSetName>
+        <rd:SchemaPath>D:\Projetos\Conduru\SGC\app\sgc\sgc\SGCDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>tblEscritura</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>tblEscrituraTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Query>
+        <DataSourceName>SGCDataSet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="dsAto">
+          <DataField>dsAto</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="vlAto">
+          <DataField>vlAto</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="nrQuantidade">
+          <DataField>nrQuantidade</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="vlTotal">
+          <DataField>vlTotal</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>SGCDataSet</rd:DataSetName>
+        <rd:SchemaPath>D:\Projetos\Conduru\SGC\app\sgc\sgc\SGCDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>tblItensOrcamento</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>tblItensOrcamentoTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <EmbeddedImages>
     <EmbeddedImage Name="logo_cartorio">
       <MIMEType>image/jpeg</MIMEType>
@@ -1368,6 +1369,6 @@ uT52t0rk+Zrbyo7P8S5Hx+XZlrGS3UmiTU3RN+jItVP16syUOuKsyRrrlEavVXVnPk15jMLjM8RnesJQ
 BHHFHHJIzv8AiUk2rsVhXbGT100kcAQiJHAEVRVFxTOfz3GubWdYYsE0EsxguNizm0ki8ony/t7nGuWMUPWuXEFD1qPx/EORix4ujY+5SSHIzS3SNbzgwRs8G1pPg6AiMnXpkFvUrGRtTboQhyq1nteS5SGZSki3UpowKmjOWU0YA0KkEa7xn6QuzDVoVtvlT7Z3PHOMT8mycXl5HPKhto26NHZr8SV9RkY7vdTWN5tnBNL9PlbYPiUxw4G4dN5+A9tad99Y2l9aS2d3GJradSksbeBB939Oliq0kGqXGX7YZW2JfEzrexCtIJj5cwHoAf7D/Tt00h5o5tjxi6dKGkyUbjVpwdo8R2oVyFjkscduRtZrPrTdMpEZ90g3Rn/W0xjz8T/up12IN+QlbaBiH8bfn2LnBBAINQfAjw0WhEJd2DTgGU9oi/5q68+5v5N712y/n2qulpksjZhhaXU1uHoXEUjJWnhXaRXTgtBvRhAK+/8A5Dn/APud39/J+1rzht1LzANS7cXcc2y1ytri5slfXDGixW7zytU+xSdcJpYYxV5a1dWZcvubVWB7MfLNk7m/j5N3ERwY3D2+HmbfJKy02vctVvhHoTxPp9Ws7zDm+McOKxuk6+gIuOMRW3u7B4nsVolVVUKoCqooAOgAGkSqSvdRRZqKLxlVlKsAVPQg9QRqKIdynb/jN/vdLb8FcP8AxrU+X19ZTrGfpXXWKZ8flNO7YvX0f5wHdd+29JrvD235YOM3OLx9o+Va+khitJbZepYyr0lT+H0/Ort9o8NNYOaNs4lhBBs0oduRGKrDZqOjxHb0Li4F8neNiiiu+a5B7icgM2NsTsjX+y8xG5v1QPfr3M88lfZGMA2nwRIjjb/I9nj7XJtYvsX2kxm023GLNmWlHnVrg9P98z6VyZqV/mc4+9WbIRdQe4Ixx+JxWNi8nHWcFlF/s7eNIl+pAND0XjpHOvNV1a9VFmoov//Z</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <rd:ReportID>dc0ea7a0-ac24-4f24-9d63-29586a04f507</rd:ReportID>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>dc0ea7a0-ac24-4f24-9d63-29586a04f507</rd:ReportID>
 </Report>
