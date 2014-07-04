@@ -176,5 +176,19 @@ namespace Modelos
             get { return dsEmail; }
             set { dsEmail = value; }
         }
+
+        private int idEstadoCivil;
+
+        public int IdEstadoCivil
+        {
+            get { return idEstadoCivil; }
+            set { idEstadoCivil = value; }
+        }
+
+        private String dsProfissao;
+        public String DsProfissao {
+            get { return dsProfissao; }
+            set { dsProfissao = value; }
+        }
     }
 }

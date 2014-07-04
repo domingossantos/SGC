@@ -743,6 +743,22 @@ namespace BLL
 
             return desc;
         }
+
+        public DataTable getEstadoCivil() {
+            DataTable dados = new DataTable();
+            try
+            {
+                String sql = "select idEstadoCivil, dsEstadoCivil from tblEstadoCivil order by dsEstadoCivil";
+                
+                SqlDataAdapter da = new SqlDataAdapter(sql, con.ObjCon);
+                da.Fill(dados);
+
+            }
+            catch (Exception ex) {
+                throw new Exception("Erro ao recuperar estado civil."+ex.Message);
+            }
+            return dados;
+        }
     }
 
 

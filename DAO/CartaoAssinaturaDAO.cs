@@ -167,7 +167,7 @@ namespace DAO
             String sql = "select nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
                     sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
                     sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,dtRenovacao,idCartorio, dsObservacao, ";
-                    sql += "dsEmail from tblCartaoAssinatura where 1 = 1 " + filtro;
+                    sql += "dsEmail,idEstadoCivil,dsProfissao from tblCartaoAssinatura where 1 = 1 " + filtro;
                     sql += " order by nrCartao ";
 
             try
@@ -191,7 +191,8 @@ namespace DAO
             String sql = "select nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
             sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
             sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,dtRenovacao,idCartorio,dsObservacao ";
-            sql += ",dsEmail from tblCartaoAssinatura where nrCartao = '" + nrCartao+"'";
+            sql += ",dsEmail,idEstadoCivil,dsProfissao from tblCartaoAssinatura where nrCartao = '" + nrCartao + "'";
+            
             CartaoAssinatura cartao = null;
             try
             {
@@ -212,8 +213,8 @@ namespace DAO
                     cartao.NrCEP = (dr["nrCEP"].ToString());
                     cartao.NrRG = (dr["nrRG"].ToString());
                     cartao.DsOrgaoEmissor = (dr["dsOrgaoExpRG"].ToString());
+                    cartao.IdEstadoCivil =  Convert.ToInt32(dr["idEstadoCivil"].ToString());
 
-                    
                     if (dr["dtExpRG"].ToString() != "")
                         cartao.DtExpedicao = DateTime.Parse(dr["dtExpRG"].ToString());
                     
@@ -229,6 +230,8 @@ namespace DAO
                     cartao.IdCartorio = Convert.ToInt32( dr["idCartorio"].ToString());
                     cartao.DsObservacao = dr["dsObservacao"].ToString();
                     cartao.DsEmail = dr["dsEmail"].ToString();
+                    cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
+                    cartao.DsProfissao = dr["dsProfissao"].ToString();
                     dr.Close();
 
                 }
@@ -246,7 +249,7 @@ namespace DAO
             String sql = "select nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
             sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
             sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,dtRenovacao,idCartorio,dsObservacao ";
-            sql += ",dsEmail from tblCartaoAssinatura where nrCPF = '" + nrCpf + "'";
+            sql += ",dsEmail,idEstadoCivil,dsProfissao from tblCartaoAssinatura where nrCPF = '" + nrCpf + "'";
             CartaoAssinatura cartao = null;
             try
             {
@@ -267,7 +270,7 @@ namespace DAO
                     cartao.NrCEP = (dr["nrCEP"].ToString());
                     cartao.NrRG = (dr["nrRG"].ToString());
                     cartao.DsOrgaoEmissor = (dr["dsOrgaoExpRG"].ToString());
-
+                    cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
 
                     if (dr["dtExpRG"].ToString() != "")
                         cartao.DtExpedicao = DateTime.Parse(dr["dtExpRG"].ToString());
@@ -284,6 +287,8 @@ namespace DAO
                     cartao.IdCartorio = Convert.ToInt32(dr["idCartorio"].ToString());
                     cartao.DsObservacao = dr["dsObservacao"].ToString();
                     cartao.DsEmail = dr["dsEmail"].ToString();
+                    cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
+                    cartao.DsProfissao = dr["dsProfissao"].ToString();
                     dr.Close();
 
                 }
@@ -319,6 +324,8 @@ namespace DAO
                         sql += ",dsObservacao = @dsObservacao ";
                         sql += ",dsEmail = @dsEmail ";
                         sql += ",stCopia = 'N' ";
+                        sql += ",idEstadoCivil = @idEstadoCivil ";
+                        sql += ",dsProfissao = @dsProfissao ";
                         sql += "WHERE nrCartao = @nrCartao";
 
                         SqlCommand cmd = new SqlCommand(sql, con);
@@ -364,6 +371,8 @@ namespace DAO
                         cmd.Parameters.AddWithValue("@nrCartao", cartao.NrCartao);
                         cmd.Parameters.AddWithValue("@dsObservacao", cartao.DsObservacao);
                         cmd.Parameters.AddWithValue("@dsEmail", cartao.DsEmail);
+                        cmd.Parameters.AddWithValue("@idEstadoCivil", cartao.IdEstadoCivil);
+                        cmd.Parameters.AddWithValue("@dsProfissao", cartao.DsProfissao);
 
                         cmd.ExecuteNonQuery();
 
@@ -384,10 +393,10 @@ namespace DAO
                 string sql = "INSERT INTO tblCartaoAssinatura ";
                 sql += "(nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
                 sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
-                sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,idCartorio,dsObservacao,dsEmail)VALUES ";
+                sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,idCartorio,dsObservacao,dsEmail, idEstadoCivil,dsProfissao)VALUES ";
                 sql += "(@nrCartao,@dtCadastro,@nmCartao,@nrCPF ,@dsEndereco ";
                 sql += ",@dsBairro,@nmCidade,@nrCEP,@sgUF,@dtNascimento,@nrRG,@cdTipoRG ";
-                sql += ",@dtExpRG,@dsOrgaoExpRG,@nrFones, @tpCartao,@idCartorio,@dsObservacao,@dsEmail)";
+                sql += ",@dtExpRG,@dsOrgaoExpRG,@nrFones, @tpCartao,@idCartorio,@dsObservacao,@dsEmail,@idEstadoCivil,@dsProfissao)";
 
                 cmd.CommandText = sql;
                 cmd.Parameters.AddWithValue("@nrcartao",cartao.NrCartao.PadLeft(7,'0'));
@@ -428,6 +437,8 @@ namespace DAO
                 cmd.Parameters.AddWithValue("@idCartorio", cartao.IdCartorio);
                 cmd.Parameters.AddWithValue("@dsObservacao", cartao.DsObservacao);
                 cmd.Parameters.AddWithValue("@dsEmail", cartao.DsEmail);
+                cmd.Parameters.AddWithValue("@idEstadoCivil", cartao.IdEstadoCivil);
+                cmd.Parameters.AddWithValue("@dsProfissao", cartao.DsProfissao);
 
                 cmd.ExecuteNonQuery();
             }

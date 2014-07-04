@@ -212,6 +212,8 @@ namespace sgc.assinaturas
                 if (!linha["dtNascimento"].ToString().Equals(""))
                     cartao.DtNascimento = Convert.ToDateTime(linha["dtNascimento"].ToString());
 
+                cartao.IdEstadoCivil = Convert.ToInt32(linha["idEstadoCivil"].ToString());
+
                 cartao.NmCartao = linha["nmCartao"].ToString();
                 cartao.DsEndereco = linha["dsEndereco"].ToString();
                 cartao.SgUF = linha["sgUF"].ToString();
@@ -228,8 +230,8 @@ namespace sgc.assinaturas
                 if (!linha["cdTipoRG"].ToString().Equals(""))
                     cartao.CdTipoRG = Convert.ToInt32(linha["cdTipoRG"].ToString());
 
-                
-
+                cbEsrtadoCivil.SelectedValue = Convert.ToInt32(cartao.IdEstadoCivil.ToString());
+                txProfissao.Text = linha["dsProfissao"].ToString();
                 
                 preencheGridAssinaturas(txNrCartao.Text);
 
@@ -515,6 +517,8 @@ namespace sgc.assinaturas
                 cartao.DsObservacao = txObservacao.Text;
                 cartao.CdTipoRG = Convert.ToInt32(cbTipoRG.SelectedValue);
                 cartao.DsEmail = txEmail.Text;
+                cartao.IdEstadoCivil = Convert.ToInt32(cbEsrtadoCivil.SelectedValue);
+                cartao.DsProfissao = txProfissao.Text;
                 try
                 {
                     assinaturaBLL.saveCartaoAssinatura(cartao, op);
@@ -723,10 +727,11 @@ namespace sgc.assinaturas
                     deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
                     device = deviceManager.Devices.Current;
                     device.ShowUI = true;
-                    //_device.PixelType = PixelType.BW;
+                    
                     device.TransferMode = TransferMode.Memory;
-                    //_device.FileFormat = TwainImageFileFormat.Jpeg;
+                    device.FileFormat = TwainImageFileFormat.Jpeg;
                     device.Open();
+                    device.PixelType = PixelType.Gray;
 
                     System.IO.MemoryStream msImg = null;
 
@@ -799,6 +804,8 @@ namespace sgc.assinaturas
             getScanner();
             carregaTipoRG();
             carregaCartorio();
+            carregaEstadoCivil();
+            
             string arg = (Microsoft.VisualBasic.Interaction.InputBox("Nome do Cliente:", "Cartorio Conduru", "0", 150, 150));
 
             if (!arg.Equals("0"))
@@ -870,14 +877,41 @@ namespace sgc.assinaturas
                 if (MessageBox.Show("Deseja apagar este Cartão?", "Atenção!", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString().Equals("Yes"))
                 {
                     assinaturaBLL.delCartaoAssinatura(txNrCartao.Text);
-                    MessageBox.Show("Cartão Apagado");
+                    utils.MessagensExcept.funMsgSistema("Cartão Apagado",2);
                     limparCampos();
                 }
             }
             catch (Exception ex) {
-                MessageBox.Show("Erro ao apagar Cartão\n" + ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao apagar Cartão\n" + ex.Message,1);
             }
 
+        }
+
+        private void btCartaoPrint_Click(object sender, EventArgs e)
+        {
+            if (!txNrCartao.Text.Equals("")) {
+                ImpressaoCartaoForm oImpressaoCartaoForm = new ImpressaoCartaoForm(txNrCartao.Text);
+                oImpressaoCartaoForm.ShowDialog();
+            } else {
+                utils.MessagensExcept.funMsgSistema("Informe um cartão para ser impresso", 2);
+            }
+        }
+
+        private void carregaEstadoCivil(int id = 0) {
+            try
+            {
+                cbEsrtadoCivil.DataSource = assinaturaBLL.getEstadoCivil();
+                cbEsrtadoCivil.DisplayMember = "dsEstadoCivil";
+                cbEsrtadoCivil.ValueMember = "idEstadoCivil";
+                
+                if (id != 0)
+                {
+                    cbEsrtadoCivil.SelectedValue = id;
+                }
+            }
+            catch (Exception ex) {
+                utils.MessagensExcept.funMsgSistema("Erro: "+ex.Message,1);
+            }
         }
     }
 }

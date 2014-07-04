@@ -91,6 +91,10 @@
             this.grid = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.assinatura = new System.Windows.Forms.PictureBox();
+            this.cbEsrtadoCivil = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.txProfissao = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -250,7 +254,7 @@
             this.btEditar.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btEditar.Image = global::sgc.Properties.Resources.package_editors;
             this.btEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btEditar.Location = new System.Drawing.Point(341, 88);
+            this.btEditar.Location = new System.Drawing.Point(4, 329);
             this.btEditar.Name = "btEditar";
             this.btEditar.Size = new System.Drawing.Size(97, 30);
             this.btEditar.TabIndex = 1;
@@ -283,6 +287,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.grid);
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Panel2.Controls.Add(this.btEditar);
             this.splitContainer1.Size = new System.Drawing.Size(861, 447);
             this.splitContainer1.SplitterDistance = 450;
             this.splitContainer1.TabIndex = 1;
@@ -354,6 +359,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txProfissao);
+            this.groupBox2.Controls.Add(this.label23);
             this.groupBox2.Controls.Add(this.txCEP);
             this.groupBox2.Controls.Add(this.txFones);
             this.groupBox2.Controls.Add(this.label14);
@@ -375,10 +382,10 @@
             // 
             // txCEP
             // 
-            this.txCEP.Location = new System.Drawing.Point(182, 71);
+            this.txCEP.Location = new System.Drawing.Point(131, 71);
             this.txCEP.Mask = "00.000-000";
             this.txCEP.Name = "txCEP";
-            this.txCEP.Size = new System.Drawing.Size(100, 20);
+            this.txCEP.Size = new System.Drawing.Size(65, 20);
             this.txCEP.TabIndex = 2;
             // 
             // txFones
@@ -418,16 +425,16 @@
             // txUF
             // 
             this.txUF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txUF.Location = new System.Drawing.Point(306, 71);
+            this.txUF.Location = new System.Drawing.Point(203, 71);
             this.txUF.MaxLength = 2;
             this.txUF.Name = "txUF";
-            this.txUF.Size = new System.Drawing.Size(100, 20);
+            this.txUF.Size = new System.Drawing.Size(37, 20);
             this.txUF.TabIndex = 3;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(303, 55);
+            this.label12.Location = new System.Drawing.Point(200, 55);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(40, 13);
             this.label12.TabIndex = 6;
@@ -436,7 +443,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(179, 55);
+            this.label11.Location = new System.Drawing.Point(128, 55);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
             this.label11.TabIndex = 4;
@@ -447,7 +454,7 @@
             this.txBairro.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txBairro.Location = new System.Drawing.Point(12, 71);
             this.txBairro.Name = "txBairro";
-            this.txBairro.Size = new System.Drawing.Size(155, 20);
+            this.txBairro.Size = new System.Drawing.Size(113, 20);
             this.txBairro.TabIndex = 1;
             // 
             // label10
@@ -479,11 +486,12 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox1.Controls.Add(this.label22);
+            this.groupBox1.Controls.Add(this.cbEsrtadoCivil);
             this.groupBox1.Controls.Add(this.txEmail);
             this.groupBox1.Controls.Add(this.label20);
             this.groupBox1.Controls.Add(this.txDtCadastro);
             this.groupBox1.Controls.Add(this.txObservacao);
-            this.groupBox1.Controls.Add(this.btEditar);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.cbTipoRG);
@@ -584,7 +592,7 @@
             // cbCartorio
             // 
             this.cbCartorio.FormattingEnabled = true;
-            this.cbCartorio.Location = new System.Drawing.Point(102, 98);
+            this.cbCartorio.Location = new System.Drawing.Point(230, 99);
             this.cbCartorio.Name = "cbCartorio";
             this.cbCartorio.Size = new System.Drawing.Size(194, 21);
             this.cbCartorio.TabIndex = 6;
@@ -592,7 +600,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(101, 85);
+            this.label17.Location = new System.Drawing.Point(229, 86);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(43, 13);
             this.label17.TabIndex = 41;
@@ -673,7 +681,7 @@
             this.txNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txNome.Location = new System.Drawing.Point(13, 64);
             this.txNome.Name = "txNome";
-            this.txNome.Size = new System.Drawing.Size(407, 20);
+            this.txNome.Size = new System.Drawing.Size(411, 20);
             this.txNome.TabIndex = 4;
             // 
             // label5
@@ -784,6 +792,39 @@
             this.assinatura.TabIndex = 0;
             this.assinatura.TabStop = false;
             // 
+            // cbEsrtadoCivil
+            // 
+            this.cbEsrtadoCivil.FormattingEnabled = true;
+            this.cbEsrtadoCivil.Location = new System.Drawing.Point(103, 99);
+            this.cbEsrtadoCivil.Name = "cbEsrtadoCivil";
+            this.cbEsrtadoCivil.Size = new System.Drawing.Size(121, 21);
+            this.cbEsrtadoCivil.TabIndex = 46;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(101, 86);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(62, 13);
+            this.label22.TabIndex = 47;
+            this.label22.Text = "Estado Civil";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(254, 55);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(50, 13);
+            this.label23.TabIndex = 11;
+            this.label23.Text = "Profissão";
+            // 
+            // txProfissao
+            // 
+            this.txProfissao.Location = new System.Drawing.Point(257, 71);
+            this.txProfissao.Name = "txProfissao";
+            this.txProfissao.Size = new System.Drawing.Size(172, 20);
+            this.txProfissao.TabIndex = 12;
+            // 
             // cartaoAssinaturaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -881,5 +922,9 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox cbScanner;
         private System.Windows.Forms.Button btCartaoPrint;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cbEsrtadoCivil;
+        private System.Windows.Forms.TextBox txProfissao;
+        private System.Windows.Forms.Label label23;
     }
 }

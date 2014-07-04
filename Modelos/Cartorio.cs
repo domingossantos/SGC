@@ -95,5 +95,8 @@ namespace Modelos
             get { return nrCNPJ; }
             set { nrCNPJ = value; }
         }
+
+       
+
     }
 }
