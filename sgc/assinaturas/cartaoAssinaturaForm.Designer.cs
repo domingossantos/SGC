@@ -48,6 +48,8 @@
             this.btAvanca = new System.Windows.Forms.Button();
             this.btVoltar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txProfissao = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.txCEP = new System.Windows.Forms.MaskedTextBox();
             this.txFones = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -61,6 +63,8 @@
             this.txEndereco = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.cbEsrtadoCivil = new System.Windows.Forms.ComboBox();
             this.txEmail = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.txDtCadastro = new System.Windows.Forms.MaskedTextBox();
@@ -91,10 +95,6 @@
             this.grid = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.assinatura = new System.Windows.Forms.PictureBox();
-            this.cbEsrtadoCivil = new System.Windows.Forms.ComboBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txProfissao = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -380,6 +380,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Endereçamento";
             // 
+            // txProfissao
+            // 
+            this.txProfissao.Location = new System.Drawing.Point(257, 71);
+            this.txProfissao.Name = "txProfissao";
+            this.txProfissao.Size = new System.Drawing.Size(172, 20);
+            this.txProfissao.TabIndex = 12;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(254, 55);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(50, 13);
+            this.label23.TabIndex = 11;
+            this.label23.Text = "Profissão";
+            // 
             // txCEP
             // 
             this.txCEP.Location = new System.Drawing.Point(131, 71);
@@ -520,6 +536,23 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Identificação";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(101, 86);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(62, 13);
+            this.label22.TabIndex = 47;
+            this.label22.Text = "Estado Civil";
+            // 
+            // cbEsrtadoCivil
+            // 
+            this.cbEsrtadoCivil.FormattingEnabled = true;
+            this.cbEsrtadoCivil.Location = new System.Drawing.Point(103, 99);
+            this.cbEsrtadoCivil.Name = "cbEsrtadoCivil";
+            this.cbEsrtadoCivil.Size = new System.Drawing.Size(121, 21);
+            this.cbEsrtadoCivil.TabIndex = 46;
             // 
             // txEmail
             // 
@@ -754,7 +787,7 @@
             this.btInicioCap.Name = "btInicioCap";
             this.btInicioCap.Size = new System.Drawing.Size(91, 32);
             this.btInicioCap.TabIndex = 40;
-            this.btInicioCap.Text = "Iniciar Cap";
+            this.btInicioCap.Text = "Imagem RG";
             this.btInicioCap.UseVisualStyleBackColor = false;
             this.btInicioCap.Click += new System.EventHandler(this.btInicioCap_Click);
             // 
@@ -791,39 +824,6 @@
             this.assinatura.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.assinatura.TabIndex = 0;
             this.assinatura.TabStop = false;
-            // 
-            // cbEsrtadoCivil
-            // 
-            this.cbEsrtadoCivil.FormattingEnabled = true;
-            this.cbEsrtadoCivil.Location = new System.Drawing.Point(103, 99);
-            this.cbEsrtadoCivil.Name = "cbEsrtadoCivil";
-            this.cbEsrtadoCivil.Size = new System.Drawing.Size(121, 21);
-            this.cbEsrtadoCivil.TabIndex = 46;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(101, 86);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(62, 13);
-            this.label22.TabIndex = 47;
-            this.label22.Text = "Estado Civil";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(254, 55);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(50, 13);
-            this.label23.TabIndex = 11;
-            this.label23.Text = "Profissão";
-            // 
-            // txProfissao
-            // 
-            this.txProfissao.Location = new System.Drawing.Point(257, 71);
-            this.txProfissao.Name = "txProfissao";
-            this.txProfissao.Size = new System.Drawing.Size(172, 20);
-            this.txProfissao.TabIndex = 12;
             // 
             // cartaoAssinaturaForm
             // 

@@ -30,18 +30,28 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.sGCDataSet = new sgc.SGCDataSet();
             this.tblCartaoAssinaturaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sGCDataSet = new sgc.SGCDataSet();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tblCartaoAssinaturaTableAdapter = new sgc.SGCDataSetTableAdapters.tblCartaoAssinaturaTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.sGCDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblCartaoAssinaturaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sGCDataSet)).BeginInit();
             this.SuspendLayout();
+            // 
+            // tblCartaoAssinaturaBindingSource
+            // 
+            this.tblCartaoAssinaturaBindingSource.DataMember = "tblCartaoAssinatura";
+            this.tblCartaoAssinaturaBindingSource.DataSource = this.sGCDataSet;
+            // 
+            // sGCDataSet
+            // 
+            this.sGCDataSet.DataSetName = "SGCDataSet";
+            this.sGCDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "CartaoDS";
+            reportDataSource1.Name = "dsCartao";
             reportDataSource1.Value = this.tblCartaoAssinaturaBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "sgc.relatorios.relCartaoAssinatura.rdlc";
@@ -49,16 +59,6 @@
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.Size = new System.Drawing.Size(583, 409);
             this.reportViewer1.TabIndex = 0;
-            // 
-            // sGCDataSet
-            // 
-            this.sGCDataSet.DataSetName = "SGCDataSet";
-            this.sGCDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tblCartaoAssinaturaBindingSource
-            // 
-            this.tblCartaoAssinaturaBindingSource.DataMember = "tblCartaoAssinatura";
-            this.tblCartaoAssinaturaBindingSource.DataSource = this.sGCDataSet;
             // 
             // tblCartaoAssinaturaTableAdapter
             // 
@@ -70,11 +70,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(583, 409);
             this.Controls.Add(this.reportViewer1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ImpressaoCartaoForm";
-            this.Text = "ImpressaoCartaoForm";
+            this.Text = "Impressão Cartão";
             this.Load += new System.EventHandler(this.ImpressaoCartaoForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.sGCDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tblCartaoAssinaturaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sGCDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -46,6 +46,39 @@ namespace DAO
             }
         }
 
+        public byte[] getRG(String nrCartao, string campo)
+        {
+            String sql = "select "+campo+" from tblCartaoAssinatura ";
+            sql += " where nrCartao = '" + nrCartao.PadLeft(7, '0') + "'";
+
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    if (!dr[campo].ToString().Equals(""))
+                    {
+                        return (byte[])dr[campo];
+                    }
+                    else {
+                        return null;    
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Erro ao ler assinatura " + ex.Message);
+            }
+        }
+
         public byte[] getUltimaAssinatura(String nrCartao)
         {
             String sql = "select biAssinatura from tblAssinaturas ";

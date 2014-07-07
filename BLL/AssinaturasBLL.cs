@@ -136,6 +136,26 @@ namespace BLL
             }
         }
 
+        public byte[] getRG(String nrCartao,string campo)
+        {
+            byte[] img;
+
+            try
+            {
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+                img = assinaturaDAO.getRG(nrCartao,campo);
+
+                return img;
+            }
+            finally
+            {
+                con.ObjCon.Close();
+            }
+        }
+
         public byte[] getUltimaAssinatura(String nrCartao,bool remoto = false)
         {
             byte[] img;
@@ -758,6 +778,25 @@ namespace BLL
                 throw new Exception("Erro ao recuperar estado civil."+ex.Message);
             }
             return dados;
+        }
+
+        public void salvaRgCartao(String nrCartao, String campo, byte[] imagem) {
+            try
+            {
+                if (con.ObjCon.State == ConnectionState.Closed)
+                {
+                    con.ObjCon.Open();
+                }
+                cartaoDAO.saveRGCartao(nrCartao, campo, imagem);
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro: " + ex.Message);
+            }
+            finally {
+                con.ObjCon.Close();
+            }
         }
     }
 

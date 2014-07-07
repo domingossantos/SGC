@@ -23,6 +23,11 @@ namespace sgc.assinaturas
         {
             tblCartaoAssinaturaTableAdapter.Connection.ConnectionString = DAO.Dados.strConexao;
             tblCartaoAssinaturaTableAdapter.Fill(this.sGCDataSet.tblCartaoAssinatura, nrCartao);
+
+            System.Drawing.Printing.PageSettings pageSettings = new System.Drawing.Printing.PageSettings();
+
+            pageSettings.Margins = new System.Drawing.Printing.Margins(35, 35, 35, 35);
+            reportViewer1.SetPageSettings(pageSettings);
             this.reportViewer1.RefreshReport();
         }
     }

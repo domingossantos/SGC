@@ -14,6 +14,7 @@ using DAO;
 using Modelos;
 using Vintasoft.Twain;
 
+
 namespace sgc.assinaturas
 {
     public partial class cartaoAssinaturaForm : Form
@@ -702,7 +703,16 @@ namespace sgc.assinaturas
 
         private void btInicioCap_Click(object sender, EventArgs e)
         {
-            //imgWebCam.Start();  
+
+            if (!txNrCartao.Text.Equals(""))
+            {
+                RGCartaoForm oRGCartaoForm = new RGCartaoForm(txNrCartao.Text);
+                oRGCartaoForm.ShowDialog();
+            }
+            else {
+                utils.MessagensExcept.funMsgSistema("Carregue um cadastro para exibir o RG",3);
+            }
+            
         }
 
         private void btFoto_Click(object sender, EventArgs e)
@@ -721,25 +731,29 @@ namespace sgc.assinaturas
             
             if (cartao.NrCartao != null)
             {
+
+
+
                 try
                 {
                     deviceManager.Open();
                     deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
                     device = deviceManager.Devices.Current;
                     device.ShowUI = true;
+                    //device.ShowIndicators = false;
+                    //device.DisableAfterAcquire = true;
                     
                     device.TransferMode = TransferMode.Memory;
                     device.FileFormat = TwainImageFileFormat.Jpeg;
                     device.Open();
                     device.PixelType = PixelType.Gray;
+                    device.UnitOfMeasure = UnitOfMeasure.Inches;
+                    device.Resolution = new Resolution(200f, 200f);
+                    //device.ImageLayout.Set(1f, 6f, 8f, 8f);
 
                     System.IO.MemoryStream msImg = null;
 
-                    /*
-                    DeviceCapability jpegQualityCap = device.Capabilities.Find(DeviceCapabilityId.IJpegQuality);
-                    if (jpegQualityCap != null)
-                        jpegQualityCap.SetValue((int)50);
-                    */
+
                     AcquireModalState acquireModalState = AcquireModalState.None;
                     do
                     {

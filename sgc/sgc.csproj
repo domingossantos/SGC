@@ -95,7 +95,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Vintasoft.Twain, Version=8.2.3.1, Culture=neutral, PublicKeyToken=153caf29a10d2e31, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\VintaSoftTwain\Bin-Registered\v4.0\AnyCPU\Vintasoft.Twain.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\VintaSoft\VintaSoftTwain.NET v8.2\Bin-Registered\v4.0\AnyCPU\Vintasoft.Twain.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -207,6 +207,12 @@
     </Compile>
     <Compile Include="assinaturas\recuperaDadosRemotoForm.Designer.cs">
       <DependentUpon>recuperaDadosRemotoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="assinaturas\RGCartaoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="assinaturas\RGCartaoForm.Designer.cs">
+      <DependentUpon>RGCartaoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="assinaturas\scannerLoteForm.cs">
       <SubType>Form</SubType>
@@ -583,6 +589,9 @@
       <DependentUpon>recuperaDadosRemotoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="assinaturas\Report1.rdlc" />
+    <EmbeddedResource Include="assinaturas\RGCartaoForm.resx">
+      <DependentUpon>RGCartaoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="assinaturas\scannerLoteForm.resx">
       <DependentUpon>scannerLoteForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -367,9 +367,9 @@ namespace sgc
 
                 }
 
+               
+                    Caixa c = caixaBLL.getCaixa(Convert.ToInt32(strCaixa));
                 
-                Caixa c = caixaBLL.getCaixa(Convert.ToInt32(strCaixa));
-                    
                 if (c == null) 
                 {
                     utils.MessagensExcept.funMsgSistema("Caixa Não Existe",3);

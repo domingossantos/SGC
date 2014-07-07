@@ -462,6 +462,29 @@ namespace DAO
                 throw new Exception(ex.ErrorCode.ToString());
             }
         }
+
+        public void saveRGCartao(String nrCartao, String campo, Byte[] img)
+        {
+            try
+            {
+                string sql = "UPDATE tblCartaoAssinatura SET ";
+                sql += campo + "= @imagem ";
+                sql += "WHERE nrCartao = @nrCartao";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                cmd.Parameters.AddWithValue("@nrCartao", nrCartao);
+                cmd.Parameters.AddWithValue("@imagem", img);
+                
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao gravar registro" + e.Message);
+            }
+
+        }
     }
 
 }
