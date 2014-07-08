@@ -43,7 +43,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lbNome = new System.Windows.Forms.Label();
             this.cbScanner = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.btAdicionar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.panel1.SuspendLayout();
@@ -188,15 +187,7 @@
             this.cbScanner.Name = "cbScanner";
             this.cbScanner.Size = new System.Drawing.Size(121, 21);
             this.cbScanner.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(497, 4);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Selecione Scanner";
+            this.cbScanner.Visible = false;
             // 
             // btAdicionar
             // 
@@ -219,7 +210,6 @@
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(633, 468);
             this.Controls.Add(this.btAdicionar);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.cbScanner);
             this.Controls.Add(this.lbNome);
             this.Controls.Add(this.label6);
@@ -263,7 +253,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.ComboBox cbScanner;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btAdicionar;
     }
 }

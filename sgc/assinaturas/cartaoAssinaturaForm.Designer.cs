@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
             this.cbScanner = new System.Windows.Forms.ComboBox();
             this.btApagar = new System.Windows.Forms.Button();
             this.btZoomOut = new System.Windows.Forms.Button();
@@ -110,8 +109,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel1.Controls.Add(this.label21);
-            this.panel1.Controls.Add(this.cbScanner);
             this.panel1.Controls.Add(this.btApagar);
             this.panel1.Controls.Add(this.btZoomOut);
             this.panel1.Controls.Add(this.btZoomIn);
@@ -126,22 +123,14 @@
             this.panel1.Size = new System.Drawing.Size(861, 41);
             this.panel1.TabIndex = 0;
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(693, 3);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(97, 13);
-            this.label21.TabIndex = 27;
-            this.label21.Text = "Selecionar Stanner";
-            // 
             // cbScanner
             // 
             this.cbScanner.FormattingEnabled = true;
-            this.cbScanner.Location = new System.Drawing.Point(693, 17);
+            this.cbScanner.Location = new System.Drawing.Point(292, 8);
             this.cbScanner.Name = "cbScanner";
             this.cbScanner.Size = new System.Drawing.Size(131, 21);
             this.cbScanner.TabIndex = 26;
+            this.cbScanner.Visible = false;
             // 
             // btApagar
             // 
@@ -160,9 +149,9 @@
             // btZoomOut
             // 
             this.btZoomOut.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btZoomOut.Location = new System.Drawing.Point(830, 18);
+            this.btZoomOut.Location = new System.Drawing.Point(814, 8);
             this.btZoomOut.Name = "btZoomOut";
-            this.btZoomOut.Size = new System.Drawing.Size(26, 20);
+            this.btZoomOut.Size = new System.Drawing.Size(35, 27);
             this.btZoomOut.TabIndex = 24;
             this.btZoomOut.Text = "-";
             this.btZoomOut.UseVisualStyleBackColor = false;
@@ -171,9 +160,9 @@
             // btZoomIn
             // 
             this.btZoomIn.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btZoomIn.Location = new System.Drawing.Point(830, 0);
+            this.btZoomIn.Location = new System.Drawing.Point(775, 8);
             this.btZoomIn.Name = "btZoomIn";
-            this.btZoomIn.Size = new System.Drawing.Size(26, 19);
+            this.btZoomIn.Size = new System.Drawing.Size(33, 27);
             this.btZoomIn.TabIndex = 23;
             this.btZoomIn.Text = "+";
             this.btZoomIn.UseVisualStyleBackColor = false;
@@ -359,6 +348,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbScanner);
             this.groupBox2.Controls.Add(this.txProfissao);
             this.groupBox2.Controls.Add(this.label23);
             this.groupBox2.Controls.Add(this.txCEP);
@@ -840,7 +830,6 @@
             this.Shown += new System.EventHandler(this.cartaoAssinaturaForm_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cartaoAssinaturaForm_KeyDown);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -919,7 +908,6 @@
         private System.Windows.Forms.Button btApagar;
         private System.Windows.Forms.TextBox txEmail;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox cbScanner;
         private System.Windows.Forms.Button btCartaoPrint;
         private System.Windows.Forms.Label label22;

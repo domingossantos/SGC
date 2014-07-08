@@ -38,16 +38,6 @@ namespace sgc.assinaturas
         {
             carregaImagem(pbxRG1, 1);
             carregaImagem(pbxRG2, 2);
-            getScanner();
-        }
-
-        private void getScanner()
-        {
-            deviceManager.Open();
-            for (int i = 0; i < deviceManager.Devices.Count; i++)
-            {
-                cbScanner.Items.Add(deviceManager.Devices[i].Info.ProductName);
-            }
         }
 
         private void digitalizar(sbyte lado) {
@@ -56,20 +46,19 @@ namespace sgc.assinaturas
             try
             {
                 deviceManager.Open();
-                deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
+                //deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
+                deviceManager.Devices.Select();
                 device = deviceManager.Devices.Current;
-                device.ShowUI = true;
-                //device.ShowIndicators = false;
-                //device.DisableAfterAcquire = true;
-
-
+                device.ShowUI = false;
+                device.ShowIndicators = true;
+                device.DisableAfterAcquire = true;
                 device.TransferMode = TransferMode.Memory;
                 device.FileFormat = TwainImageFileFormat.Jpeg;
                 device.Open();
                 device.PixelType = PixelType.Gray;
                 device.UnitOfMeasure = UnitOfMeasure.Inches;
                 device.Resolution = new Resolution(200f, 200f);
-                //device.ImageLayout.Set(1f, 1f, 4f, 3f);
+                device.ImageLayout.Set(0f, 2.9f, 4.72f, 2.7f);
 
                 System.IO.MemoryStream msImg = null;
 

@@ -51,11 +51,13 @@ namespace sgc.assinaturas
         }
 
         private void getScanner() {
+            /*
             deviceManager.Open();
             for (int i = 0; i < deviceManager.Devices.Count; i++)
             {
                 cbScanner.Items.Add(deviceManager.Devices[i].Info.ProductName);
             }
+             */ 
         }
 
         private void pesquisar()
@@ -724,11 +726,12 @@ namespace sgc.assinaturas
         {
 
             TwainEnvironment.Register("Domingos Santos", "domsantos@gmail.com", "eoFCQlZLvJVmSx20kWI0zGQT8LdsdUpY7HrgTl+ZX/6eDVJVoWQj81oEhzguzfBRvZbg+GZfGEJHydk9rxEN5bcLuey5z+tVrPClUjgZqtcCXm5NDGLkJgB29Zz2ty5qPZcL6WRNMVyro5lSFGzpJ4n9xd5TOLuQ/c9zdmj0Olto");
+            /*
             if (cbScanner.Text.Equals("")) {
                 MessageBox.Show("Selecione um Scanner!");
                 return;
             }
-            
+            */
             if (cartao.NrCartao != null)
             {
 
@@ -737,7 +740,9 @@ namespace sgc.assinaturas
                 try
                 {
                     deviceManager.Open();
-                    deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
+                    //deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
+                    deviceManager.Devices.Select();
+
                     device = deviceManager.Devices.Current;
                     device.ShowUI = false;
                     device.ShowIndicators = true;
@@ -780,7 +785,7 @@ namespace sgc.assinaturas
 
                     try
                     {
-                        byte[] imageByte = (byte[])msImg.GetBuffer();  //img.FileData.get_BinaryData();
+                        byte[] imageByte = (byte[])msImg.GetBuffer();  
 
                         
                         Assinatura oAssinatura = new Assinatura();

@@ -29,13 +29,11 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbScanner = new System.Windows.Forms.ComboBox();
+            this.btnImpressao = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnRG1 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnImpressao = new System.Windows.Forms.Button();
             this.pbxRG1 = new System.Windows.Forms.PictureBox();
             this.pbxRG2 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -51,8 +49,6 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.btnImpressao);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.cbScanner);
             this.panel1.Controls.Add(this.btnFechar);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.btnRG1);
@@ -62,50 +58,55 @@
             this.panel1.Size = new System.Drawing.Size(696, 38);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // btnImpressao
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(280, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "Selecione o Scanner:";
-            // 
-            // cbScanner
-            // 
-            this.cbScanner.FormattingEnabled = true;
-            this.cbScanner.Location = new System.Drawing.Point(392, 7);
-            this.cbScanner.Name = "cbScanner";
-            this.cbScanner.Size = new System.Drawing.Size(131, 21);
-            this.cbScanner.TabIndex = 27;
+            this.btnImpressao.Image = global::sgc.Properties.Resources.page_preview;
+            this.btnImpressao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImpressao.Location = new System.Drawing.Point(321, 5);
+            this.btnImpressao.Name = "btnImpressao";
+            this.btnImpressao.Size = new System.Drawing.Size(106, 27);
+            this.btnImpressao.TabIndex = 29;
+            this.btnImpressao.Text = "Imprimir RG";
+            this.btnImpressao.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnImpressao.UseVisualStyleBackColor = true;
+            this.btnImpressao.Click += new System.EventHandler(this.btnImpressao_Click);
             // 
             // btnFechar
             // 
+            this.btnFechar.Image = global::sgc.Properties.Resources.close16;
+            this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFechar.Location = new System.Drawing.Point(618, 5);
             this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(75, 23);
+            this.btnFechar.Size = new System.Drawing.Size(75, 27);
             this.btnFechar.TabIndex = 2;
             this.btnFechar.Text = "Fechar";
+            this.btnFechar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(146, 5);
+            this.button2.Image = global::sgc.Properties.Resources.report;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(172, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 23);
+            this.button2.Size = new System.Drawing.Size(136, 27);
             this.button2.TabIndex = 1;
             this.button2.Text = "Digitalizar Verso RG";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnRG1
             // 
+            this.btnRG1.Image = global::sgc.Properties.Resources.report;
+            this.btnRG1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRG1.Location = new System.Drawing.Point(12, 5);
             this.btnRG1.Name = "btnRG1";
-            this.btnRG1.Size = new System.Drawing.Size(128, 23);
+            this.btnRG1.Size = new System.Drawing.Size(136, 27);
             this.btnRG1.TabIndex = 0;
             this.btnRG1.Text = "Digitalizar Frente RG ";
+            this.btnRG1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRG1.UseVisualStyleBackColor = true;
             this.btnRG1.Click += new System.EventHandler(this.btnRG1_Click);
             // 
@@ -125,16 +126,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(696, 348);
             this.splitContainer1.SplitterDistance = 352;
             this.splitContainer1.TabIndex = 1;
-            // 
-            // btnImpressao
-            // 
-            this.btnImpressao.Location = new System.Drawing.Point(537, 5);
-            this.btnImpressao.Name = "btnImpressao";
-            this.btnImpressao.Size = new System.Drawing.Size(75, 23);
-            this.btnImpressao.TabIndex = 29;
-            this.btnImpressao.Text = "Imprimir RG";
-            this.btnImpressao.UseVisualStyleBackColor = true;
-            this.btnImpressao.Click += new System.EventHandler(this.btnImpressao_Click);
             // 
             // pbxRG1
             // 
@@ -178,7 +169,6 @@
             this.Text = "RG Cartão No. ";
             this.Load += new System.EventHandler(this.RGCartaoForm_Load);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -199,8 +189,6 @@
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnRG1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbScanner;
         private System.Windows.Forms.Button btnImpressao;
         private System.Windows.Forms.StatusStrip statusStrip1;
     }

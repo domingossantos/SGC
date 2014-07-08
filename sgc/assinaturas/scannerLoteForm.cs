@@ -57,10 +57,6 @@ namespace sgc.assinaturas
 
             try
             {
-
-                deviceManager.Open();
-                deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
-                device = deviceManager.Devices.Current;
                 device.ShowUI = false;
                 device.ShowIndicators = true;
                 device.DisableAfterAcquire = true;
@@ -74,6 +70,7 @@ namespace sgc.assinaturas
 
                 System.IO.MemoryStream msImg = null;
 
+
                 AcquireModalState acquireModalState = AcquireModalState.None;
                 do
                 {
@@ -81,21 +78,24 @@ namespace sgc.assinaturas
                     switch (acquireModalState)
                     {
                         case AcquireModalState.ImageAcquired:
-                            msImg = device.AcquiredImages.Last.GetAsStream(ImageFileFormat.BMP);
-                            fechaScanner(device, deviceManager);
+                            msImg = device.AcquiredImages.Last.GetAsStream(ImageFileFormat.JPEG);
                             break;
                         case AcquireModalState.ScanCompleted:
-                            fechaScanner(device, deviceManager);
+                            device.Close();
+                            deviceManager.Close();
                             break;
                         case AcquireModalState.ScanCanceled:
-                            fechaScanner(device, deviceManager);
+                            device.Close();
+                            deviceManager.Close();
                             break;
                         case AcquireModalState.ScanFailed:
-                            fechaScanner(device, deviceManager);
+                            device.Close();
+                            deviceManager.Close();
                             break;
                     }
                 }
                 while (acquireModalState != AcquireModalState.None);
+
 
                 byte[] imageByte = (byte[])msImg.GetBuffer();
 
@@ -127,10 +127,12 @@ namespace sgc.assinaturas
                 _device.Close();
             }
 
+            /*
             if (_deviceManager.State == DeviceManagerState.Opened)
             {
                 _deviceManager.Close();
             }
+             */ 
         }
 
         private void btScanner_Click(object sender, EventArgs e)
@@ -140,10 +142,17 @@ namespace sgc.assinaturas
                 return;
             }
 
+            /*
             if (cbScanner.Text.Equals("")) {
                 MessageBox.Show("Selecione um Scanner!");
                 return;
             }
+            */
+
+            deviceManager.Open();
+            //deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
+            deviceManager.Devices.Select();
+            device = deviceManager.Devices.Current;
 
             for (int i = 0; i < (grid.RowCount - 1); i++)
             {
@@ -163,19 +172,24 @@ namespace sgc.assinaturas
 
             }
 
+            if (deviceManager.State == DeviceManagerState.Opened)
+            {
+                deviceManager.Close();
+            }
+
             MessageBox.Show("O processo de scanner em lote terminou!");
         }
 
         private void scannerLoteForm_Load(object sender, EventArgs e)
         {
             //TwainEnvironment.Register("Domingos Santos", "domsantos@gmail.com", "eoFCQlZLvJVmSx20kWI0zGQT8LdsdUpY7HrgTl+ZX/6eDVJVoWQj81oEhzguzfBRvZbg+GZfGEJHydk9rxEN5bcLuey5z+tVrPClUjgZqtcCXm5NDGLkJgB29Zz2ty5qPZcL6WRNMVyro5lSFGzpJ4n9xd5TOLuQ/c9zdmj0Olto");
-            deviceManager.Open();
+            /*deviceManager.Open();
             for (int i = 0; i < deviceManager.Devices.Count; i++)
             {
                 cbScanner.Items.Add(deviceManager.Devices[i].Info.ProductName);
             }
             deviceManager.Close();
-
+            */
             cartoes.Columns.Add("Cartao", typeof(string));
 
         }
