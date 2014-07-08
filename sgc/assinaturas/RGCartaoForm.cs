@@ -180,5 +180,11 @@ namespace sgc.assinaturas
             digitalizar(2);
             carregaImagem(pbxRG2, 2);
         }
+
+        private void btnImpressao_Click(object sender, EventArgs e)
+        {
+            ImpressaoRGForm oImpressaoRGForm = new ImpressaoRGForm(nrCartao);
+            oImpressaoRGForm.ShowDialog();
+        }
     }
 }

@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbScanner = new System.Windows.Forms.ComboBox();
             this.btnFechar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnRG1 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnImpressao = new System.Windows.Forms.Button();
             this.pbxRG1 = new System.Windows.Forms.PictureBox();
             this.pbxRG2 = new System.Windows.Forms.PictureBox();
-            this.cbScanner = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -48,6 +50,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnImpressao);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.cbScanner);
             this.panel1.Controls.Add(this.btnFechar);
@@ -56,12 +59,29 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(681, 38);
+            this.panel1.Size = new System.Drawing.Size(696, 38);
             this.panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(280, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Selecione o Scanner:";
+            // 
+            // cbScanner
+            // 
+            this.cbScanner.FormattingEnabled = true;
+            this.cbScanner.Location = new System.Drawing.Point(392, 7);
+            this.cbScanner.Name = "cbScanner";
+            this.cbScanner.Size = new System.Drawing.Size(131, 21);
+            this.cbScanner.TabIndex = 27;
             // 
             // btnFechar
             // 
-            this.btnFechar.Location = new System.Drawing.Point(603, 5);
+            this.btnFechar.Location = new System.Drawing.Point(618, 5);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
             this.btnFechar.TabIndex = 2;
@@ -102,16 +122,26 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pbxRG2);
-            this.splitContainer1.Size = new System.Drawing.Size(681, 323);
-            this.splitContainer1.SplitterDistance = 345;
+            this.splitContainer1.Size = new System.Drawing.Size(696, 348);
+            this.splitContainer1.SplitterDistance = 352;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // btnImpressao
+            // 
+            this.btnImpressao.Location = new System.Drawing.Point(537, 5);
+            this.btnImpressao.Name = "btnImpressao";
+            this.btnImpressao.Size = new System.Drawing.Size(75, 23);
+            this.btnImpressao.TabIndex = 29;
+            this.btnImpressao.Text = "Imprimir RG";
+            this.btnImpressao.UseVisualStyleBackColor = true;
+            this.btnImpressao.Click += new System.EventHandler(this.btnImpressao_Click);
             // 
             // pbxRG1
             // 
             this.pbxRG1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxRG1.Location = new System.Drawing.Point(0, 0);
             this.pbxRG1.Name = "pbxRG1";
-            this.pbxRG1.Size = new System.Drawing.Size(345, 323);
+            this.pbxRG1.Size = new System.Drawing.Size(352, 348);
             this.pbxRG1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxRG1.TabIndex = 0;
             this.pbxRG1.TabStop = false;
@@ -121,36 +151,28 @@
             this.pbxRG2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxRG2.Location = new System.Drawing.Point(0, 0);
             this.pbxRG2.Name = "pbxRG2";
-            this.pbxRG2.Size = new System.Drawing.Size(332, 323);
+            this.pbxRG2.Size = new System.Drawing.Size(340, 348);
             this.pbxRG2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxRG2.TabIndex = 0;
             this.pbxRG2.TabStop = false;
             // 
-            // cbScanner
+            // statusStrip1
             // 
-            this.cbScanner.FormattingEnabled = true;
-            this.cbScanner.Location = new System.Drawing.Point(392, 7);
-            this.cbScanner.Name = "cbScanner";
-            this.cbScanner.Size = new System.Drawing.Size(131, 21);
-            this.cbScanner.TabIndex = 27;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(280, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "Selecione o Scanner:";
+            this.statusStrip1.Location = new System.Drawing.Point(0, 364);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(696, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // RGCartaoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 361);
+            this.ClientSize = new System.Drawing.Size(696, 386);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "RGCartaoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RG Cartão No. ";
@@ -164,6 +186,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbxRG1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxRG2)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -178,5 +201,7 @@
         private System.Windows.Forms.Button btnRG1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbScanner;
+        private System.Windows.Forms.Button btnImpressao;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }

@@ -4885,6 +4885,10 @@ namespace sgc {
             
             private global::System.Data.DataColumn columndsProfissao;
             
+            private global::System.Data.DataColumn columnbiRgFrente;
+            
+            private global::System.Data.DataColumn columnbiRgVerso;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public tblCartaoAssinaturaDataTable() {
@@ -5032,6 +5036,22 @@ namespace sgc {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn biRgFrenteColumn {
+                get {
+                    return this.columnbiRgFrente;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn biRgVersoColumn {
+                get {
+                    return this.columnbiRgVerso;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5067,7 +5087,23 @@ namespace sgc {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public tblCartaoAssinaturaRow AddtblCartaoAssinaturaRow(string nrCartao, string nmCartao, string nrCPF, string dsEndereco, string dsBairro, string nmCidade, string nrCEP, string sgUF, string nrRG, System.DateTime dtExpRG, string nrFones, string dtNascimento, string dsEstadoCivil, string dsProfissao) {
+            public tblCartaoAssinaturaRow AddtblCartaoAssinaturaRow(
+                        string nrCartao, 
+                        string nmCartao, 
+                        string nrCPF, 
+                        string dsEndereco, 
+                        string dsBairro, 
+                        string nmCidade, 
+                        string nrCEP, 
+                        string sgUF, 
+                        string nrRG, 
+                        System.DateTime dtExpRG, 
+                        string nrFones, 
+                        string dtNascimento, 
+                        string dsEstadoCivil, 
+                        string dsProfissao, 
+                        byte[] biRgFrente, 
+                        byte[] biRgVerso) {
                 tblCartaoAssinaturaRow rowtblCartaoAssinaturaRow = ((tblCartaoAssinaturaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         nrCartao,
@@ -5083,7 +5119,9 @@ namespace sgc {
                         nrFones,
                         dtNascimento,
                         dsEstadoCivil,
-                        dsProfissao};
+                        dsProfissao,
+                        biRgFrente,
+                        biRgVerso};
                 rowtblCartaoAssinaturaRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowtblCartaoAssinaturaRow);
                 return rowtblCartaoAssinaturaRow;
@@ -5127,6 +5165,8 @@ namespace sgc {
                 this.columndtNascimento = base.Columns["dtNascimento"];
                 this.columndsEstadoCivil = base.Columns["dsEstadoCivil"];
                 this.columndsProfissao = base.Columns["dsProfissao"];
+                this.columnbiRgFrente = base.Columns["biRgFrente"];
+                this.columnbiRgVerso = base.Columns["biRgVerso"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5160,6 +5200,10 @@ namespace sgc {
                 base.Columns.Add(this.columndsEstadoCivil);
                 this.columndsProfissao = new global::System.Data.DataColumn("dsProfissao", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndsProfissao);
+                this.columnbiRgFrente = new global::System.Data.DataColumn("biRgFrente", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbiRgFrente);
+                this.columnbiRgVerso = new global::System.Data.DataColumn("biRgVerso", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbiRgVerso);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnnrCartao}, true));
                 this.columnnrCartao.AllowDBNull = false;
@@ -8248,6 +8292,38 @@ namespace sgc {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte[] biRgFrente {
+                get {
+                    try {
+                        return ((byte[])(this[this.tabletblCartaoAssinatura.biRgFrenteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'biRgFrente\' in table \'tblCartaoAssinatura\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblCartaoAssinatura.biRgFrenteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public byte[] biRgVerso {
+                get {
+                    try {
+                        return ((byte[])(this[this.tabletblCartaoAssinatura.biRgVersoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'biRgVerso\' in table \'tblCartaoAssinatura\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabletblCartaoAssinatura.biRgVersoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsnmCartaoNull() {
                 return this.IsNull(this.tabletblCartaoAssinatura.nmCartaoColumn);
             }
@@ -8400,6 +8476,30 @@ namespace sgc {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetdsProfissaoNull() {
                 this[this.tabletblCartaoAssinatura.dsProfissaoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsbiRgFrenteNull() {
+                return this.IsNull(this.tabletblCartaoAssinatura.biRgFrenteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetbiRgFrenteNull() {
+                this[this.tabletblCartaoAssinatura.biRgFrenteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsbiRgVersoNull() {
+                return this.IsNull(this.tabletblCartaoAssinatura.biRgVersoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetbiRgVersoNull() {
+                this[this.tabletblCartaoAssinatura.biRgVersoColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -11549,6 +11649,8 @@ where
             tableMapping.ColumnMappings.Add("dtNascimento", "dtNascimento");
             tableMapping.ColumnMappings.Add("dsEstadoCivil", "dsEstadoCivil");
             tableMapping.ColumnMappings.Add("dsProfissao", "dsProfissao");
+            tableMapping.ColumnMappings.Add("biRgFrente", "biRgFrente");
+            tableMapping.ColumnMappings.Add("biRgVerso", "biRgVerso");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -11565,8 +11667,9 @@ where
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT     nrCartao, nmCartao, nrCPF, dsEndereco, dsBairro, nmCidade, nrCEP, sgUF,dsProfissao
-, CONVERT(varchar(10), dtNascimento,103) as dtNascimento, nrRG, dtExpRG, nrFones, dsEstadoCivil
+            this._commandCollection[0].CommandText = @"SELECT     nrCartao, nmCartao, nrCPF, dsEndereco, dsBairro, nmCidade, nrCEP, sgUF,dsProfissao,biRgFrente,biRgVerso
+, CONVERT(varchar(10), dtNascimento,103) as dtNascimento, nrRG,
+ dtExpRG, nrFones, dsEstadoCivil
 FROM         tblCartaoAssinatura c
 inner join tblEstadoCivil e on e.idEstadoCivil = c.idEstadoCivil
 WHERE nrCartao = @nrCartao";
