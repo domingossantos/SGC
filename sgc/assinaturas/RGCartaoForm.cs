@@ -49,16 +49,16 @@ namespace sgc.assinaturas
                 //deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
                 deviceManager.Devices.Select();
                 device = deviceManager.Devices.Current;
-                device.ShowUI = false;
+                device.ShowUI = true;
                 device.ShowIndicators = true;
-                device.DisableAfterAcquire = true;
+                //device.DisableAfterAcquire = true;
                 device.TransferMode = TransferMode.Memory;
                 device.FileFormat = TwainImageFileFormat.Jpeg;
                 device.Open();
                 device.PixelType = PixelType.Gray;
                 device.UnitOfMeasure = UnitOfMeasure.Inches;
                 device.Resolution = new Resolution(200f, 200f);
-                device.ImageLayout.Set(0f, 2.9f, 4.72f, 2.7f);
+                //device.ImageLayout.Set(0f, 2.9f, 4.72f, 2.7f);
 
                 System.IO.MemoryStream msImg = null;
 

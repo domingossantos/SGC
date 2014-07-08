@@ -62,7 +62,7 @@
             // 
             this.btnImpressao.Image = global::sgc.Properties.Resources.page_preview;
             this.btnImpressao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImpressao.Location = new System.Drawing.Point(321, 5);
+            this.btnImpressao.Location = new System.Drawing.Point(296, 5);
             this.btnImpressao.Name = "btnImpressao";
             this.btnImpressao.Size = new System.Drawing.Size(106, 27);
             this.btnImpressao.TabIndex = 29;
@@ -73,6 +73,8 @@
             // 
             // btnFechar
             // 
+            this.btnFechar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFechar.Image = global::sgc.Properties.Resources.close16;
             this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFechar.Location = new System.Drawing.Point(618, 5);
@@ -88,7 +90,7 @@
             // 
             this.button2.Image = global::sgc.Properties.Resources.report;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(172, 5);
+            this.button2.Location = new System.Drawing.Point(154, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(136, 27);
             this.button2.TabIndex = 1;

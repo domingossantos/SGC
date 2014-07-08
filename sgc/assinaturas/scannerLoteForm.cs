@@ -57,6 +57,11 @@ namespace sgc.assinaturas
 
             try
             {
+                deviceManager.Open();
+                //deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
+                deviceManager.Devices.Select();
+                device = deviceManager.Devices.Current;
+
                 device.ShowUI = false;
                 device.ShowIndicators = true;
                 device.DisableAfterAcquire = true;
@@ -96,6 +101,7 @@ namespace sgc.assinaturas
                 }
                 while (acquireModalState != AcquireModalState.None);
 
+                
 
                 byte[] imageByte = (byte[])msImg.GetBuffer();
 
@@ -127,12 +133,12 @@ namespace sgc.assinaturas
                 _device.Close();
             }
 
-            /*
+            
             if (_deviceManager.State == DeviceManagerState.Opened)
             {
                 _deviceManager.Close();
             }
-             */ 
+            
         }
 
         private void btScanner_Click(object sender, EventArgs e)
@@ -149,10 +155,7 @@ namespace sgc.assinaturas
             }
             */
 
-            deviceManager.Open();
-            //deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
-            deviceManager.Devices.Select();
-            device = deviceManager.Devices.Current;
+            
 
             for (int i = 0; i < (grid.RowCount - 1); i++)
             {
@@ -172,10 +175,7 @@ namespace sgc.assinaturas
 
             }
 
-            if (deviceManager.State == DeviceManagerState.Opened)
-            {
-                deviceManager.Close();
-            }
+            
 
             MessageBox.Show("O processo de scanner em lote terminou!");
         }
