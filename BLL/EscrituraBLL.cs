@@ -970,6 +970,7 @@ namespace BLL
             esc.DsEndereco = orc.DsEndereco;
             esc.IdOrcamento= orc.IdOrcamento;
             esc.DsLogin = login;
+            
 
             salvaEscritura(esc);
 
@@ -988,6 +989,9 @@ namespace BLL
                     addPessoaEscritura(pe);
                 }
             }
+
+           
+
 
         }
 

@@ -46,12 +46,12 @@ namespace sgc.assinaturas
             try
             {
                 deviceManager.Open();
-                //deviceManager.Devices.CurrentIndex = cbScanner.SelectedIndex;
                 deviceManager.Devices.Select();
                 device = deviceManager.Devices.Current;
                 device.ShowUI = true;
                 device.ShowIndicators = true;
                 //device.DisableAfterAcquire = true;
+
                 device.TransferMode = TransferMode.Memory;
                 device.FileFormat = TwainImageFileFormat.Jpeg;
                 device.Open();
@@ -67,10 +67,15 @@ namespace sgc.assinaturas
                 do
                 {
                     acquireModalState = device.AcquireModal();
+
+                    if (acquireModalState == AcquireModalState.ImageAcquired){
+                        msImg = device.AcquiredImages.Last.GetAsStream(ImageFileFormat.JPEG);
+                    }
+                    /*
                     switch (acquireModalState)
                     {
-                        case AcquireModalState.ImageAcquired:
-                            msImg = device.AcquiredImages.Last.GetAsStream(ImageFileFormat.JPEG);
+                        case :
+                            
                             break;
                         case AcquireModalState.ScanCompleted:
                             device.Close();
@@ -85,6 +90,7 @@ namespace sgc.assinaturas
                             deviceManager.Close();
                             break;
                     }
+                     */
                 }
                 while (acquireModalState != AcquireModalState.None);
 
@@ -96,17 +102,22 @@ namespace sgc.assinaturas
                     {
                         String campo = "biRGFrente";
 
-                        if (lado == 2) {
+                        if (lado == 2)
+                        {
                             campo = "biRGVerso";
                         }
                         assinaturaBLL.salvaRgCartao(nrCartao, campo, imageByte);
-                        utils.MessagensExcept.funMsgSistema("Imagem Salva!" , 2);
+                        utils.MessagensExcept.funMsgSistema("Imagem Salva!", 2);
                     }
 
                 }
                 catch (Exception ex)
                 {
                     utils.MessagensExcept.funMsgSistema("Erro ao digitalizar imagem!\n" + ex.Message, 1);
+                }
+                finally {
+                    device.Close();
+                    deviceManager.Close();
                 }
 
             }

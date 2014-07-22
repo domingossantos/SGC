@@ -597,13 +597,13 @@ namespace sgc.processos
                         escritura.DtEntrada = DateTime.Parse(txDataAbertura.Text);
                     }
                     else {
-                        MessageBox.Show("Data Inválida");
+                        utils.MessagensExcept.funMsgSistema("Data Inválida",1);
                         txDataAbertura.Focus();
                         return;
                     }
                 }
 
-                MessageBox.Show("Escritura gravada!");
+                utils.MessagensExcept.funMsgSistema("Escritura gravada!",2);
 
             }
             gravaValorEscritura();
@@ -690,31 +690,31 @@ namespace sgc.processos
                 pe.IdEscritura = escritura.IdEscritura;
                 pe.NrCpfCnpj = txCpfCnpj.Text;
                 escrituraBLL.addPessoaEscritura (pe);
-                MessageBox.Show("Registro Salvo!");
+                utils.MessagensExcept.funMsgSistema("Registro Salvo!",2);
                 txNomePessoa.Text = "";
                 txCpfCnpj.Text = "";
                 txCpfCnpj.Focus();
                 carregaPessoaEscritura();
             }
             catch (Exception ex) {
-                MessageBox.Show("Erro ao cadastrar pessoa.\n"+ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao cadastrar pessoa.\n" + ex.Message,1);
             }
         }
 
         private void brDelPessoa_Click(object sender, EventArgs e)
         {
             if (escritura.IdEscritura <= 0) {
-                MessageBox.Show("Selecione uma Escritura para editar os registros");
+                utils.MessagensExcept.funMsgSistema("Selecione uma Escritura para editar os registros",3);
             }
             try
             {
                 string num = gridVendedor[0, gridVendedor.CurrentRow.Index].Value.ToString();
                 escrituraBLL.delPessoaEscritura(num, escritura.IdEscritura);
-                MessageBox.Show("Registro Apagado!");
+                utils.MessagensExcept.funMsgSistema("Registro Apagado!",2);
                 carregaPessoaEscritura();
             }
             catch(Exception){
-                MessageBox.Show("Não há registro selecionado!");
+                utils.MessagensExcept.funMsgSistema("Não há registro selecionado!",2);
             }
         }
 
@@ -728,11 +728,11 @@ namespace sgc.processos
             try
             {
                 escrituraBLL.delItemOrcamento(Convert.ToInt32(gridItensOrcamento[0, gridItensOrcamento.CurrentRow.Index].Value.ToString()), escritura.IdEscritura);
-                MessageBox.Show("Item apagado!");
+                utils.MessagensExcept.funMsgSistema("Item apagado!",2);
                 carregaItensOrcamento();
             }
             catch (Exception) {
-                MessageBox.Show("Erro ao apagar item!");
+                utils.MessagensExcept.funMsgSistema("Erro ao apagar item!",1);
                 con.ObjCon.Close();
             }
         }
@@ -823,7 +823,7 @@ namespace sgc.processos
             AtoOperacao atoPago = escrituraBLL.verificaPagamentoEscritura(escritura.IdEscritura, escritura.CdAto);
             if (atoPago != null)
             {
-                MessageBox.Show("Escritura já paga!");
+                utils.MessagensExcept.funMsgSistema("Escritura já paga!",2);
             }
 
             lavrarEscrituraForm lavrarForm = new lavrarEscrituraForm(escritura);
@@ -867,7 +867,7 @@ namespace sgc.processos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao solictar pagamento.\n" + ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao solictar pagamento.\n" + ex.Message,1);
             }
                 
     
@@ -880,7 +880,7 @@ namespace sgc.processos
                 DialogResult dlgR = MessageBox.Show("Deseja Fechar esta Ficha e Entregar a Escritura?", "Cartorio Conduru", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dlgR == DialogResult.No)
                 {
-                    MessageBox.Show("Solicitação Cancelada!");
+                    utils.MessagensExcept.funMsgSistema("Solicitação Cancelada!",3);
                     return;
                 }
                 
@@ -888,7 +888,7 @@ namespace sgc.processos
                 double valor = escrituraBLL.getValorCliente(escritura.IdEscritura, 'C');
                 if (valor < 0) 
                 {
-                    MessageBox.Show("O saldo desta ficha está negativa.\nFavor entrar em contato com o cliente para informá-lo.");
+                    utils.MessagensExcept.funMsgSistema("O saldo desta ficha está negativa.\nFavor entrar em contato com o cliente para informá-lo.",3);
                     return;
                 }
 
@@ -922,7 +922,7 @@ namespace sgc.processos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao Fechar Ficha\n"+ex.Message);
+                utils.MessagensExcept.funMsgSistema("Erro ao Fechar Ficha\n" + ex.Message,1);
             }
 
         }
@@ -930,7 +930,7 @@ namespace sgc.processos
         private void brImportOrcamento_Click(object sender, EventArgs e)
         {
             if (!escritura.IdOrcamento.Equals(0)) {
-                MessageBox.Show("Orçamento já atribuido a Ficha");
+                utils.MessagensExcept.funMsgSistema("Orçamento já atribuido a Ficha",3);
                 return;
             }
 
@@ -943,6 +943,10 @@ namespace sgc.processos
                     escrituraBLL.importaOrcamentoEscritura(Convert.ToInt32(orcamento),
                                             escritura.IdEscritura,
                                             utils.sessao.UsuarioSessao.DsLogin);
+
+                    carregaTodosDados();
+                    utils.MessagensExcept.funMsgSistema("Informações importadas",2);
+
                 }
                 finally { 
                     

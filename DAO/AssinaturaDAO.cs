@@ -19,7 +19,7 @@ namespace DAO
 
         public byte[] getAssinatura(String nrCartao, DateTime data)
         {
-            String sql = "select biAssinatura from tblAssinaturas ";
+            String sql = "select biAssinatura from SGCCartao..tblAssinaturas ";
                    sql += " where nrCartao = '"+nrCartao.PadLeft(7,'0')+"'";
                    sql += "and DateAdd (ms,-DatePart (ms, [dtAssinatura] ), [dtAssinatura] ) ";
                    sql += " =  CONVERT(datetime,'" + formatoData(data.ToString()) + "',20) ";
@@ -48,7 +48,7 @@ namespace DAO
 
         public byte[] getRG(String nrCartao, string campo)
         {
-            String sql = "select "+campo+" from tblCartaoAssinatura ";
+            String sql = "select " + campo + " from SGCCartao..tblCartaoAssinatura ";
             sql += " where nrCartao = '" + nrCartao.PadLeft(7, '0') + "'";
 
 
@@ -81,9 +81,9 @@ namespace DAO
 
         public byte[] getUltimaAssinatura(String nrCartao)
         {
-            String sql = "select biAssinatura from tblAssinaturas ";
+            String sql = "select biAssinatura from SGCCartao..tblAssinaturas ";
             sql += " where nrCartao = '"+nrCartao+"' and dtAssinatura = ";
-            sql += " (select MAX(dtAssinatura) from tblAssinaturas ";
+            sql += " (select MAX(dtAssinatura) from SGCCartao..tblAssinaturas ";
             sql += " where nrCartao = '" + nrCartao + "')";
 
             try
@@ -109,7 +109,7 @@ namespace DAO
 
         public int getExisteAssinatura(String nrCartao,DateTime dtAssinatura)
         {
-            String sql = "select count(*) as qtd from tblAssinaturas ";
+            String sql = "select count(*) as qtd from SGCCartao..tblAssinaturas ";
             sql += " where nrCartao = @nrCartao and dtAssinatura = @dtAssinatura";
             
 
@@ -138,7 +138,7 @@ namespace DAO
 
         public DateTime getDataUltimaAssinatura(String nrCartao)
         {
-            String sql = "select MAX(dtAssinatura) data from tblAssinaturas "
+            String sql = "select MAX(dtAssinatura) data from SGCCartao..tblAssinaturas "
                         + " where nrCartao = '" + nrCartao + "'";
 
             try
@@ -163,7 +163,7 @@ namespace DAO
 
         public DateTime getDataUltimaAssinaturaAtualiza()
         {
-            String sql = "select MAX(dtAssinatura) data from tblAssinaturas ";
+            String sql = "select MAX(dtAssinatura) data from SGCCartao..tblAssinaturas ";
                         
 
             try
@@ -191,7 +191,7 @@ namespace DAO
         {
             try
             {
-                String sql = "select dtAssinatura from tblAssinaturas where nrCartao = '" + nrCartao.PadLeft(7,'0') + "' order by dtAssinatura desc";
+                String sql = "select dtAssinatura from SGCCartao..tblAssinaturas where nrCartao = '" + nrCartao.PadLeft(7, '0') + "' order by dtAssinatura desc";
                 DataTable dados = new DataTable();
 
                 //SqlCommand cmd = new SqlCommand(sql,con);
@@ -211,7 +211,7 @@ namespace DAO
         {
             try
             {
-                String sql = "select nrCartao from tblCartaoAssinatura where nrCartao between '" + nrCartaoIni + "' and '"+nrCartoesFim+"'";
+                String sql = "select nrCartao from SGCCartao..tblCartaoAssinatura where nrCartao between '" + nrCartaoIni + "' and '" + nrCartoesFim + "'";
                 DataTable dados = new DataTable();
 
                 //SqlCommand cmd = new SqlCommand(sql, con);
@@ -231,7 +231,7 @@ namespace DAO
         {
             try
             {
-                string sql = "insert into tblAssinaturas (dtAssinatura, biAssinatura, nrCartao) values (@dtAssinatura,@biAssinatura,@nrCartao)";
+                string sql = "insert into SGCCartao..tblAssinaturas (dtAssinatura, biAssinatura, nrCartao) values (@dtAssinatura,@biAssinatura,@nrCartao)";
 
                 SqlCommand cmd = new SqlCommand(sql,con);
                 cmd.Parameters.AddWithValue("@dtAssinatura",obj.DtAssnatura);
@@ -275,7 +275,7 @@ namespace DAO
         {
             try
             {
-                string sql = "delete from tblAssinaturas  where nrCartao = '" + nrCartao.PadLeft(7, '0') + "'";
+                string sql = "delete from SGCCartao..tblAssinaturas  where nrCartao = '" + nrCartao.PadLeft(7, '0') + "'";
                 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Transaction = trans;
@@ -292,7 +292,7 @@ namespace DAO
         {
             try
             {
-                string sql = "delete from tblAssinaturas  where nrCartao = '"+nrCartao.PadLeft(7,'0')+"'";
+                string sql = "delete from SGCCartao..tblAssinaturas  where nrCartao = '" + nrCartao.PadLeft(7, '0') + "'";
                            sql += "and DateAdd (ms,-DatePart (ms, [dtAssinatura] ), [dtAssinatura] ) ";
                            sql += " =  CONVERT(datetime,'" + formatoData(dtAssin.ToString()) + "',20) ";
 
@@ -312,7 +312,7 @@ namespace DAO
             StringBuilder sql = new StringBuilder();
             sql.Append("select nrCartao, dtAssinatura, (nrTamanhoImagem/1024) as nrTamanhoKb ");
             sql.Append(", (nrTamanhoImagem/1024)/1024 as nrTamanhoMb ");
-            sql.Append("from tblAssinaturas ");
+            sql.Append("from SGCCartao..tblAssinaturas ");
             sql.Append("where (nrTamanhoImagem/1024) > @tamanho ");
             sql.Append("order by nrTamanhoImagem desc");
 

@@ -7,26 +7,10 @@
         <Value>=First(Fields!biRgFrente.Value, "dsImagemRG")</Value>
         <MIMEType>image/jpeg</MIMEType>
         <Sizing>FitProportional</Sizing>
-        <Left>0.09525cm</Left>
-        <Height>12cm</Height>
-        <Width>11.6cm</Width>
-        <ToolTip>=First(Fields!biRgFrente.Value, "dsImagemRG")</ToolTip>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
-      <Image Name="Image2">
-        <Source>Database</Source>
-        <Value>=First(Fields!biRgVerso.Value, "dsImagemRG")</Value>
-        <MIMEType>image/jpeg</MIMEType>
-        <Sizing>FitProportional</Sizing>
-        <Top>7.42896cm</Top>
-        <Left>0.09525cm</Left>
-        <Height>7cm</Height>
-        <Width>11.69525cm</Width>
-        <ZIndex>1</ZIndex>
+        <Top>0.55245cm</Top>
+        <Left>0.65828cm</Left>
+        <Height>6.55354cm</Height>
+        <Width>10.23125cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -34,10 +18,10 @@
         </Style>
       </Image>
     </ReportItems>
-    <Height>19.69417cm</Height>
+    <Height>14cm</Height>
     <Style />
   </Body>
-  <Width>12.01275cm</Width>
+  <Width>12.18208cm</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

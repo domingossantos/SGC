@@ -20,6 +20,9 @@ namespace sgc.processos
 
         private void impressaoOrcamentoForm_Load(object sender, EventArgs e)
         {
+            tblOrcamentoEscrituraTableAdapter.Connection.ConnectionString = DAO.Dados.strConexao;
+            itensOrcamentoTableAdapter.Connection.ConnectionString = DAO.Dados.strConexao;
+            pessoasOrcamentoTableAdapter.Connection.ConnectionString = DAO.Dados.strConexao;
 
             tblOrcamentoEscrituraTableAdapter.Fill(sGCDataSet.tblOrcamentoEscritura,  idOrcamento);
             itensOrcamentoTableAdapter.Fill(sGCDataSet.ItensOrcamento, idOrcamento);

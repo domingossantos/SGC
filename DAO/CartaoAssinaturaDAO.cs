@@ -21,7 +21,7 @@ namespace DAO
         {
             DataTable dados = new DataTable();
             String sql = "select nrCartao,nmCartao,nrCPF,dtRenovacao,dsObservacao,dtCadastro";
-            sql += " from tblCartaoAssinatura where nrCartao like '"+nrCartao+"%'";
+            sql += " from SGCCartao..tblCartaoAssinatura where nrCartao like '" + nrCartao + "%'";
             sql += " order by nrCartao";
             try
             {
@@ -42,7 +42,7 @@ namespace DAO
             {
                 bool existe = false;
 
-                string sql = "select count(*) as qtd from tblCartaoAssinatura where nrCartao = '" + nrCartao + "'";
+                string sql = "select count(*) as qtd from SGCCartao..tblCartaoAssinatura where nrCartao = '" + nrCartao + "'";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -63,7 +63,7 @@ namespace DAO
         {
             DataTable dados = new DataTable();
             String sql = "select nrCartao,nmCartao,nrCPF,dtRenovacao,dsObservacao,dtCadastro ";
-            sql += " from tblCartaoAssinatura where nmCartao like '" + nome + "%'";
+            sql += " from SGCCartao..tblCartaoAssinatura where nmCartao like '" + nome + "%'";
             sql += " order by nmCartao";
 
             try
@@ -83,7 +83,7 @@ namespace DAO
         {
             DataTable dados = new DataTable();
             String sql = "select nrCartao,nmCartao,nrCPF,dtRenovacao,dsObservacao,dtCadastro";
-            sql += " from tblCartaoAssinatura where nrCPF = '" + nrCPF + "'";
+            sql += " from SGCCartao..tblCartaoAssinatura where nrCPF = '" + nrCPF + "'";
             sql += " order by nmCartao";
 
             try
@@ -102,7 +102,7 @@ namespace DAO
         {
             DataTable dados = new DataTable();
             String sql = "select nrCartao,nmCartao,nrCPF,dtRenovacao,dsObservacao,dtCadastro";
-            sql += " from tblCartaoAssinatura where nrRG = '" + nrRG + "'";
+            sql += " from SGCCartao..tblCartaoAssinatura where nrRG = '" + nrRG + "'";
             sql += " order by nmCartao";
 
             try
@@ -123,8 +123,8 @@ namespace DAO
             DataTable dados = new DataTable();
             String sql = "select ca.nrCartao,ca.nmCartao,c.nmCartorio,c.dsCidade,c.dsObservacao,"
                     + "ca.dtCadastro,ca.dtRenovacao,ca.nrCPF "
-                    + "from tblCartaoAssinatura ca "
-                    + "inner join tblCartorio c on ca.idCartorio = c.idCartorio "
+                    + "from SGCCartao..tblCartaoAssinatura ca "
+                    + "inner join SGCCartao..tblCartorio c on ca.idCartorio = c.idCartorio "
                     + "where c.dsCidade like '"+Cidade+"%' order by ca.nmCartao";
 
             try
@@ -144,8 +144,8 @@ namespace DAO
             DataTable dados = new DataTable();
             String sql = "select ca.nrCartao,ca.nmCartao,c.nmCartorio,c.dsCidade,c.dsObservacao,"
                     + "ca.dtCadastro,ca.dtRenovacao,ca.nrCPF "
-                    + "from tblCartaoAssinatura ca "
-                    + "inner join tblCartorio c on ca.idCartorio = c.idCartorio "
+                    + "from SGCCartao..tblCartaoAssinatura ca "
+                    + "inner join SGCCartao..tblCartorio c on ca.idCartorio = c.idCartorio "
                     + "where c.nmCartorio like '" + Cartorio + "%' order by c.nmCartorio";
 
             try
@@ -167,7 +167,7 @@ namespace DAO
             String sql = "select nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
                     sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
                     sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,dtRenovacao,idCartorio, dsObservacao, ";
-                    sql += "dsEmail,idEstadoCivil,dsProfissao from tblCartaoAssinatura where 1 = 1 " + filtro;
+                    sql += "dsEmail,idEstadoCivil,dsProfissao from SGCCartao..tblCartaoAssinatura where 1 = 1 " + filtro;
                     sql += " order by nrCartao ";
 
             try
@@ -191,7 +191,7 @@ namespace DAO
             String sql = "select nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
             sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
             sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,dtRenovacao,idCartorio,dsObservacao ";
-            sql += ",dsEmail,idEstadoCivil,dsProfissao from tblCartaoAssinatura where nrCartao = '" + nrCartao + "'";
+            sql += ",dsEmail,idEstadoCivil,dsProfissao from SGCCartao..tblCartaoAssinatura where nrCartao = '" + nrCartao + "'";
             
             CartaoAssinatura cartao = null;
             try
@@ -249,7 +249,7 @@ namespace DAO
             String sql = "select nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
             sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
             sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,dtRenovacao,idCartorio,dsObservacao ";
-            sql += ",dsEmail,idEstadoCivil,dsProfissao from tblCartaoAssinatura where nrCPF = '" + nrCpf + "'";
+            sql += ",dsEmail,idEstadoCivil,dsProfissao from SGCCartao..tblCartaoAssinatura where nrCPF = '" + nrCpf + "'";
             CartaoAssinatura cartao = null;
             try
             {
@@ -304,7 +304,7 @@ namespace DAO
         {
             try
             {
-                string sql = "UPDATE tblCartaoAssinatura SET ";
+                string sql = "UPDATE SGCCartao..tblCartaoAssinatura SET ";
                         sql += "nmCartao = @nmCartao ";
                         sql += ",nrCPF = @nrCPF ";
                         sql += ",dsEndereco = @dsEndereco ";
@@ -390,7 +390,7 @@ namespace DAO
             {
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = con;
-                string sql = "INSERT INTO tblCartaoAssinatura ";
+                string sql = "INSERT INTO SGCCartao..tblCartaoAssinatura ";
                 sql += "(nrCartao,dtCadastro,nmCartao,nrCPF,dsEndereco ";
                 sql += ",dsBairro,nmCidade,nrCEP,sgUF,dtNascimento,nrRG,cdTipoRG ";
                 sql += ",dtExpRG,dsOrgaoExpRG,nrFones,tpCartao,idCartorio,dsObservacao,dsEmail, idEstadoCivil,dsProfissao)VALUES ";
@@ -451,7 +451,7 @@ namespace DAO
         public void delCartao(string nrCartao,SqlTransaction trans = null) 
         {
             try {
-                string sql = "delete from tblCartaoAssinatura  where nrCartao = '" + nrCartao.PadLeft(7, '0') + "'";
+                string sql = "delete from SGCCartao..tblCartaoAssinatura  where nrCartao = '" + nrCartao.PadLeft(7, '0') + "'";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
                 cmd.Transaction = trans;
@@ -467,7 +467,7 @@ namespace DAO
         {
             try
             {
-                string sql = "UPDATE tblCartaoAssinatura SET ";
+                string sql = "UPDATE SGCCartao..tblCartaoAssinatura SET ";
                 sql += campo + "= @imagem ";
                 sql += "WHERE nrCartao = @nrCartao";
 
