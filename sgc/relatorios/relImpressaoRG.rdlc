@@ -6,11 +6,27 @@
         <Source>Database</Source>
         <Value>=First(Fields!biRgFrente.Value, "dsImagemRG")</Value>
         <MIMEType>image/jpeg</MIMEType>
-        <Sizing>FitProportional</Sizing>
+        <Sizing>Fit</Sizing>
         <Top>0.55245cm</Top>
         <Left>0.65828cm</Left>
-        <Height>6.55354cm</Height>
+        <Height>5.25708cm</Height>
         <Width>10.23125cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="Image2">
+        <Source>Database</Source>
+        <Value>=First(Fields!biRgVerso.Value, "dsImagemRG")</Value>
+        <MIMEType>image/jpeg</MIMEType>
+        <Sizing>Fit</Sizing>
+        <Top>6.32938cm</Top>
+        <Left>0.65828cm</Left>
+        <Height>5.25708cm</Height>
+        <Width>10.23125cm</Width>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
