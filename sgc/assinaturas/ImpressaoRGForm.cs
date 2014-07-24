@@ -12,21 +12,32 @@ namespace sgc.assinaturas
     public partial class ImpressaoRGForm : Form
     {
         private String nrCartao;
-        public ImpressaoRGForm(String _nrCartao)
+        private sbyte qtdImg;
+        public ImpressaoRGForm(String _nrCartao,sbyte _qtdImg)
         {
             nrCartao = _nrCartao;
+            qtdImg = _qtdImg;
             InitializeComponent();
         }
 
         private void ImpressaoRGForm_Load(object sender, EventArgs e)
         {
 
+            
             tblCartaoAssinaturaTableAdapter.Connection.ConnectionString = DAO.Dados.strConexao;
             tblCartaoAssinaturaTableAdapter.Fill(this.sGCDataSet.tblCartaoAssinatura, nrCartao);
 
             System.Drawing.Printing.PageSettings pageSettings = new System.Drawing.Printing.PageSettings();
 
             pageSettings.Margins = new System.Drawing.Printing.Margins(5, 5, 5, 5);
+
+            reportViewer1.LocalReport.ReportEmbeddedResource = "sgc.relatorios.relImpressaoRG.rdlc";
+
+            if (qtdImg == 1)
+            {
+                reportViewer1.LocalReport.ReportEmbeddedResource = "sgc.relatorios.relImpressaoCNH.rdlc";
+            }
+            
             reportViewer1.SetPageSettings(pageSettings);
             
             this.reportViewer1.RefreshReport();

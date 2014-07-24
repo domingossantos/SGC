@@ -8,25 +8,9 @@
         <MIMEType>image/jpeg</MIMEType>
         <Sizing>Fit</Sizing>
         <Top>0.55245cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>5.60104cm</Height>
-        <Width>11.2864cm</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
-      <Image Name="Image2">
-        <Source>Database</Source>
-        <Value>=First(Fields!biRgVerso.Value, "dsImagemRG")</Value>
-        <MIMEType>image/jpeg</MIMEType>
-        <Sizing>Fit</Sizing>
-        <Top>6.83209cm</Top>
-        <Left>0.34078cm</Left>
-        <Height>5.91854cm</Height>
-        <Width>11.26312cm</Width>
-        <ZIndex>1</ZIndex>
+        <Left>0.65828cm</Left>
+        <Height>11.87166cm</Height>
+        <Width>10.23125cm</Width>
         <Style>
           <Border>
             <Style>None</Style>

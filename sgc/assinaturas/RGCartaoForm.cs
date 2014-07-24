@@ -21,6 +21,7 @@ namespace sgc.assinaturas
         private byte[] imageByte;
         private Vintasoft.Twain.Device device;
         private Vintasoft.Twain.DeviceManager deviceManager;
+        private sbyte qtdImg = 2;
         public RGCartaoForm(String _nrCartao)
         {
             nrCartao = _nrCartao;
@@ -38,6 +39,8 @@ namespace sgc.assinaturas
         {
             carregaImagem(pbxRG1, 1);
             carregaImagem(pbxRG2, 2);
+
+            
         }
 
         private void digitalizar(sbyte lado) {
@@ -148,13 +151,17 @@ namespace sgc.assinaturas
                 imgByte = assinaturaBLL.getRG(nrCartao, campoLado);
                 if (imgByte != null)
                 {
+                    
+                    
                     ms = new MemoryStream(imgByte, 0, imgByte.Length);
+
 
                     ms.Write(imgByte, 0, imgByte.Length);
                     img.Image = Image.FromStream(ms, true);
                 }
                 else {
                     img.Image = Image.FromFile(utils.sessao.PathApp + "\\no-img.jpg");
+                    qtdImg = 1;
                 }
                 
             }
@@ -183,7 +190,7 @@ namespace sgc.assinaturas
 
         private void btnImpressao_Click(object sender, EventArgs e)
         {
-            ImpressaoRGForm oImpressaoRGForm = new ImpressaoRGForm(nrCartao);
+            ImpressaoRGForm oImpressaoRGForm = new ImpressaoRGForm(nrCartao,qtdImg);
             oImpressaoRGForm.ShowDialog();
         }
     }

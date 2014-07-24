@@ -19,7 +19,7 @@ namespace DAO
 
         public byte[] getAssinatura(String nrCartao, DateTime data)
         {
-            String sql = "select biAssinatura from SGCCartao..tblAssinaturas ";
+            String sql = "select top 5 biAssinatura from SGCCartao..tblAssinaturas ";
                    sql += " where nrCartao = '"+nrCartao.PadLeft(7,'0')+"'";
                    sql += "and DateAdd (ms,-DatePart (ms, [dtAssinatura] ), [dtAssinatura] ) ";
                    sql += " =  CONVERT(datetime,'" + formatoData(data.ToString()) + "',20) ";
@@ -191,7 +191,7 @@ namespace DAO
         {
             try
             {
-                String sql = "select dtAssinatura from SGCCartao..tblAssinaturas where nrCartao = '" + nrCartao.PadLeft(7, '0') + "' order by dtAssinatura desc";
+                String sql = "select top 5 dtAssinatura from SGCCartao..tblAssinaturas where nrCartao = '" + nrCartao.PadLeft(7, '0') + "' order by dtAssinatura desc";
                 DataTable dados = new DataTable();
 
                 //SqlCommand cmd = new SqlCommand(sql,con);

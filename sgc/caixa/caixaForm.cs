@@ -308,6 +308,8 @@ namespace sgc.caixa
             txDtResgate.Text = "";
             txRG.Text = "";
             ckPedidosMulti.Checked = false;
+            dsLoginDesconto = "";
+            
 
             txPedido.Focus();
         }

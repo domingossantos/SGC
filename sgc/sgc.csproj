@@ -743,6 +743,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="relatorios\relImpressaoCNH.rdlc" />
     <EmbeddedResource Include="relatorios\fichaCliente.rdlc" />
     <EmbeddedResource Include="relatorios\listaEscrituras.rdlc" />
     <EmbeddedResource Include="relatorios\listaProvimentoCep.rdlc" />

@@ -187,11 +187,11 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.PictureBox pbxRG1;
-        private System.Windows.Forms.PictureBox pbxRG2;
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnRG1;
         private System.Windows.Forms.Button btnImpressao;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.PictureBox pbxRG2;
     }
 }
