@@ -148,7 +148,6 @@
             this.grid.RowHeadersVisible = false;
             this.grid.Size = new System.Drawing.Size(402, 206);
             this.grid.TabIndex = 9;
-            this.grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.D0m1ng02);
             this.grid.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellEnter);
             this.grid.DoubleClick += new System.EventHandler(this.grid_DoubleClick);
             // 

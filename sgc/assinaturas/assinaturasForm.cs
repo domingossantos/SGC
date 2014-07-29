@@ -833,10 +833,5 @@ namespace sgc.assinaturas
             pesquisaCartao();
         }
 
-        private void D0m1ng02(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
     }
 }

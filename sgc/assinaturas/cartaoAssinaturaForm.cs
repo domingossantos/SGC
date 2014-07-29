@@ -123,7 +123,9 @@ namespace sgc.assinaturas
                     imgOriginal = assinatura.Image;
                 }
                 catch (Exception ex) {
-                    MessageBox.Show("Erro ao carregar Imagem\n" + ex.Message);
+
+                    assinatura.Image = Image.FromFile(utils.sessao.PathApp + "\\no-img.jpg");
+                    //MessageBox.Show("Erro ao carregar Imagem\n" + ex.Message);
                 }
             }
         }
@@ -144,6 +146,9 @@ namespace sgc.assinaturas
                         carregaImagem(txNrCartao.Text, data);
                     }
                 }
+            }
+            catch(Exception ex){
+                throw new Exception(ex.Message);
             }
             finally { 
                 
@@ -241,7 +246,7 @@ namespace sgc.assinaturas
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Não há mas registros a exibir"+ ex.Message);
+                MessageBox.Show("Não há mas registros a exibir "+ ex.Message);
 
             }
         }
@@ -533,8 +538,8 @@ namespace sgc.assinaturas
 
                     panel1.BackColor = this.BackColor;
                     panel2.BackColor = this.BackColor;
-                    op = 'I';
-                    limparCampos();
+                    op = 'P';
+                    //limparCampos();
                 }
                 catch (Exception ex)
                 {

@@ -11670,7 +11670,7 @@ where
             this._commandCollection[0].CommandText = @"SELECT     nrCartao, nmCartao, nrCPF, dsEndereco, dsBairro, nmCidade, nrCEP, sgUF,dsProfissao,biRgFrente,biRgVerso
 , CONVERT(varchar(10), dtNascimento,103) as dtNascimento, nrRG,
  dtExpRG, nrFones, dsEstadoCivil
-FROM        sgccartao..tblCartaoAssinatura c
+FROM        tblCartaoAssinatura c
 inner join tblEstadoCivil e on e.idEstadoCivil = c.idEstadoCivil
 WHERE nrCartao = @nrCartao";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
