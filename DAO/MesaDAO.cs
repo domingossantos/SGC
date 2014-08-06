@@ -19,7 +19,7 @@ namespace DAO
         public DataTable getMesa()
         {
             String sql = "select m.nrCartao, c.nmCartao, m.dtInclusao, u.nmUsuario"
-                        + " from tblMesa m inner join tblCartaoAssinatura c on m.nrCartao = c.nrCartao"
+                        + " from tblMesa m inner join vwCartaoAssinatura c on m.nrCartao = c.nrCartao"
                         + " inner join tblUsuario u on m.dsLogin = u.dsLogin"
                         + " order by m.dtInclusao desc";
             try

@@ -533,13 +533,11 @@ namespace sgc.assinaturas
                     txDtCadastro.Text = cartao.DtCadastro.ToString();
                     preencheGridAssinaturas(cartao.NrCartao);
 
-
                     MessageBox.Show("Cartão Salvo!");
 
                     panel1.BackColor = this.BackColor;
                     panel2.BackColor = this.BackColor;
                     op = 'P';
-                    //limparCampos();
                 }
                 catch (Exception ex)
                 {

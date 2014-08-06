@@ -886,7 +886,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menu01;
             this.Name = "mainForm";
-            this.Text = "Sistema de Gestão do Cartório Conduru - SGC - V1.7.4";
+            this.Text = "Sistema de Gestão do Cartório Conduru - SGC - V1.7.5";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainForm_KeyDown);

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbScanner = new System.Windows.Forms.ComboBox();
             this.btApagar = new System.Windows.Forms.Button();
             this.btZoomOut = new System.Windows.Forms.Button();
             this.btZoomIn = new System.Windows.Forms.Button();
@@ -38,6 +37,7 @@
             this.btNovo = new System.Windows.Forms.Button();
             this.btDelImagem = new System.Windows.Forms.Button();
             this.btAddImagem = new System.Windows.Forms.Button();
+            this.cbScanner = new System.Windows.Forms.ComboBox();
             this.btEditar = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btCartaoPrint = new System.Windows.Forms.Button();
@@ -122,15 +122,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(861, 41);
             this.panel1.TabIndex = 0;
-            // 
-            // cbScanner
-            // 
-            this.cbScanner.FormattingEnabled = true;
-            this.cbScanner.Location = new System.Drawing.Point(292, 8);
-            this.cbScanner.Name = "cbScanner";
-            this.cbScanner.Size = new System.Drawing.Size(131, 21);
-            this.cbScanner.TabIndex = 26;
-            this.cbScanner.Visible = false;
             // 
             // btApagar
             // 
@@ -237,6 +228,15 @@
             this.btAddImagem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btAddImagem.UseVisualStyleBackColor = false;
             this.btAddImagem.Click += new System.EventHandler(this.btAddImagem_Click);
+            // 
+            // cbScanner
+            // 
+            this.cbScanner.FormattingEnabled = true;
+            this.cbScanner.Location = new System.Drawing.Point(292, 8);
+            this.cbScanner.Name = "cbScanner";
+            this.cbScanner.Size = new System.Drawing.Size(131, 21);
+            this.cbScanner.TabIndex = 26;
+            this.cbScanner.Visible = false;
             // 
             // btEditar
             // 
@@ -375,7 +375,7 @@
             this.txProfissao.Location = new System.Drawing.Point(257, 71);
             this.txProfissao.Name = "txProfissao";
             this.txProfissao.Size = new System.Drawing.Size(172, 20);
-            this.txProfissao.TabIndex = 12;
+            this.txProfissao.TabIndex = 3;
             // 
             // label23
             // 
@@ -542,14 +542,14 @@
             this.cbEsrtadoCivil.Location = new System.Drawing.Point(103, 99);
             this.cbEsrtadoCivil.Name = "cbEsrtadoCivil";
             this.cbEsrtadoCivil.Size = new System.Drawing.Size(121, 21);
-            this.cbEsrtadoCivil.TabIndex = 46;
+            this.cbEsrtadoCivil.TabIndex = 6;
             // 
             // txEmail
             // 
             this.txEmail.Location = new System.Drawing.Point(51, 160);
             this.txEmail.Name = "txEmail";
             this.txEmail.Size = new System.Drawing.Size(379, 20);
-            this.txEmail.TabIndex = 11;
+            this.txEmail.TabIndex = 12;
             // 
             // label20
             // 
@@ -575,7 +575,7 @@
             this.txObservacao.Multiline = true;
             this.txObservacao.Name = "txObservacao";
             this.txObservacao.Size = new System.Drawing.Size(420, 41);
-            this.txObservacao.TabIndex = 12;
+            this.txObservacao.TabIndex = 13;
             // 
             // label19
             // 
@@ -601,7 +601,7 @@
             this.cbTipoRG.Location = new System.Drawing.Point(13, 134);
             this.cbTipoRG.Name = "cbTipoRG";
             this.cbTipoRG.Size = new System.Drawing.Size(99, 21);
-            this.cbTipoRG.TabIndex = 7;
+            this.cbTipoRG.TabIndex = 8;
             // 
             // txDtRenovacao
             // 
@@ -618,7 +618,7 @@
             this.cbCartorio.Location = new System.Drawing.Point(230, 99);
             this.cbCartorio.Name = "cbCartorio";
             this.cbCartorio.Size = new System.Drawing.Size(194, 21);
-            this.cbCartorio.TabIndex = 6;
+            this.cbCartorio.TabIndex = 7;
             // 
             // label17
             // 
@@ -635,7 +635,7 @@
             this.txDataExpRG.Mask = "00/00/0000";
             this.txDataExpRG.Name = "txDataExpRG";
             this.txDataExpRG.Size = new System.Drawing.Size(80, 20);
-            this.txDataExpRG.TabIndex = 10;
+            this.txDataExpRG.TabIndex = 11;
             this.txDataExpRG.ValidatingType = typeof(System.DateTime);
             // 
             // txCPF
@@ -671,7 +671,7 @@
             this.txOrgExpRG.Location = new System.Drawing.Point(221, 135);
             this.txOrgExpRG.Name = "txOrgExpRG";
             this.txOrgExpRG.Size = new System.Drawing.Size(123, 20);
-            this.txOrgExpRG.TabIndex = 9;
+            this.txOrgExpRG.TabIndex = 10;
             // 
             // label7
             // 
@@ -688,7 +688,7 @@
             this.txNrRG.Location = new System.Drawing.Point(116, 135);
             this.txNrRG.Name = "txNrRG";
             this.txNrRG.Size = new System.Drawing.Size(100, 20);
-            this.txNrRG.TabIndex = 8;
+            this.txNrRG.TabIndex = 9;
             // 
             // label6
             // 
@@ -789,7 +789,7 @@
             this.grid.Name = "grid";
             this.grid.ReadOnly = true;
             this.grid.Size = new System.Drawing.Size(407, 124);
-            this.grid.TabIndex = 22;
+            this.grid.TabIndex = 0;
             this.grid.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellEnter);
             // 
             // panel2

@@ -20,7 +20,7 @@ namespace DAO
         public byte[] getAssinatura(String nrCartao, DateTime data)
         {
             //String sql = "select top 5 biAssinatura from tblAssinaturas ";
-            String sql = "select top 5 biAssinatura from tblAssinaturas ";
+            String sql = "select top 5 biAssinatura from vwAssinaturas ";
                    sql += " where nrCartao = '"+nrCartao.PadLeft(7,'0')+"'";
                    sql += "and DateAdd (ms,-DatePart (ms, [dtAssinatura] ), [dtAssinatura] ) ";
                    sql += " =  CONVERT(datetime,'" + formatoData(data.ToString()) + "',20) ";
@@ -82,9 +82,9 @@ namespace DAO
 
         public byte[] getUltimaAssinatura(String nrCartao)
         {
-            String sql = "select biAssinatura from  tblAssinaturas ";
+            String sql = "select biAssinatura from  vwAssinaturas ";
             sql += " where nrCartao = '"+nrCartao+"' and dtAssinatura = ";
-            sql += " (select MAX(dtAssinatura) from  tblAssinaturas ";
+            sql += " (select MAX(dtAssinatura) from  vwAssinaturas ";
             sql += " where nrCartao = '" + nrCartao + "') ";
 
             try
@@ -139,7 +139,7 @@ namespace DAO
 
         public DateTime getDataUltimaAssinatura(String nrCartao)
         {
-            String sql = "select MAX(dtAssinatura) data from  tblAssinaturas "
+            String sql = "select MAX(dtAssinatura) data from  vwAssinaturas "
                         + " where nrCartao = '" + nrCartao + "' ";
 
             try
@@ -193,7 +193,7 @@ namespace DAO
             try
             {
                 //String sql = "select top 5 dtAssinatura from  tblAssinaturas where nrCartao = '" + nrCartao.PadLeft(7, '0') + "' order by dtAssinatura desc";
-                String sql = "select dtAssinatura  from  tblAssinaturas ";
+                String sql = "select dtAssinatura  from  vwAssinaturas ";
                 sql += " where nrCartao = '" + nrCartao+"' "; /*+"' and dtAssinatura = ";
                 sql += " (select MAX(dtAssinatura) from  vwAssinaturas ";
                 sql += " where nrCartao = '" + nrCartao + "')"; */
@@ -218,7 +218,7 @@ namespace DAO
         {
             try
             {
-                String sql = "select  distinct nrCartao from  tblCartaoAssinatura where nrCartao between '" + nrCartaoIni + "' and '" + nrCartoesFim + "'";
+                String sql = "select  distinct nrCartao from tblCartaoAssinatura where nrCartao between '" + nrCartaoIni + "' and '" + nrCartoesFim + "'";
                 DataTable dados = new DataTable();
 
                 //SqlCommand cmd = new SqlCommand(sql, con);

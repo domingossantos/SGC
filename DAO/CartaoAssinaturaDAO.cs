@@ -86,8 +86,8 @@ namespace DAO
         {
             DataTable dados = new DataTable();
             String sql = "select nrCartao,nmCartao,nrCPF,dtRenovacao,dsObservacao,dtCadastro ";
-            sql += " from  tblCartaoAssinatura where nmCartao like '" + nome + "%'";
-            sql += " order by nmCartao";
+            sql += " from  vwCartaoAssinatura where nmCartao like '" + nome + "%'";
+            sql += " order by origem, nmCartao";
 
             try
             {
@@ -106,8 +106,8 @@ namespace DAO
         {
             DataTable dados = new DataTable();
             String sql = "select nrCartao,nmCartao,nrCPF,dtRenovacao,dsObservacao,dtCadastro";
-            sql += " from  tblCartaoAssinatura where nrCPF = '" + nrCPF + "'";
-            sql += " order by nmCartao";
+            sql += " from  vwCartaoAssinatura where nrCPF = '" + nrCPF + "'";
+            sql += " order by origem, nmCartao";
 
             try
             {
@@ -125,8 +125,8 @@ namespace DAO
         {
             DataTable dados = new DataTable();
             String sql = "select nrCartao,nmCartao,nrCPF,dtRenovacao,dsObservacao,dtCadastro";
-            sql += " from  tblCartaoAssinatura where nrRG = '" + nrRG + "'";
-            sql += " order by nmCartao";
+            sql += " from  vwCartaoAssinatura where nrRG = '" + nrRG + "'";
+            sql += " order by origem, nmCartao";
 
             try
             {
@@ -146,9 +146,9 @@ namespace DAO
             DataTable dados = new DataTable();
             String sql = "select ca.nrCartao,ca.nmCartao,c.nmCartorio,c.dsCidade,c.dsObservacao,"
                     + "ca.dtCadastro,ca.dtRenovacao,ca.nrCPF "
-                    + "from  tblCartaoAssinatura ca "
+                    + "from  vwCartaoAssinatura ca "
                     + "inner join  tblCartorio c on ca.idCartorio = c.idCartorio "
-                    + "where c.dsCidade like '"+Cidade+"%' order by  ca.nmCartao";
+                    + "where c.dsCidade like '"+Cidade+"%' order by ca.origem,  ca.nmCartao";
 
             try
             {
@@ -167,9 +167,9 @@ namespace DAO
             DataTable dados = new DataTable();
             String sql = "select ca.nrCartao,ca.nmCartao,c.nmCartorio,c.dsCidade,c.dsObservacao,"
                     + "ca.dtCadastro,ca.dtRenovacao,ca.nrCPF "
-                    + "from  tblCartaoAssinatura ca "
+                    + "from  vwCartaoAssinatura ca "
                     + "inner join  tblCartorio c on ca.idCartorio = c.idCartorio "
-                    + "where c.nmCartorio like '" + Cartorio + "%' order by c.nmCartorio";
+                    + "where c.nmCartorio like '" + Cartorio + "%' order by ca.origem, c.nmCartorio";
 
             try
             {
