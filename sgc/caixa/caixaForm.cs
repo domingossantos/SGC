@@ -309,6 +309,9 @@ namespace sgc.caixa
             txRG.Text = "";
             ckPedidosMulti.Checked = false;
             dsLoginDesconto = "";
+            txLogin.Text = "";
+            txValorDesconto.Text = "";
+            txSenha.Text = "";
             
 
             txPedido.Focus();

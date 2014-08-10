@@ -55,7 +55,13 @@ namespace sgc.assinaturas
         private void btPesquisa_Click(object sender, EventArgs e)
         {
             pesquisaRemota = false;
-            pesquisaCartao();
+            try
+            {
+                pesquisaCartao();
+            }
+            catch (Exception ex) {
+                utils.MessagensExcept.funMsgSistema("Erro ao pesquisar.\n" + ex.Message, 1);
+            }
         }
 
         private void carregaImagem(String cartao,int posicao = 0)
@@ -185,9 +191,9 @@ namespace sgc.assinaturas
                     MessageBox.Show("Erro ao consultar assinatura.\nErro na base de dados!");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Erro na consulta de assinaturas");
+                MessageBox.Show("Erro na consulta de assinaturas"+ex.Message);
             }
             
             

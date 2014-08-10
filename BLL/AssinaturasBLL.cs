@@ -48,6 +48,7 @@ namespace BLL
                 }
                 try
                 {
+                    /*
                     switch (tipo)
                     {
                         case 1:
@@ -68,6 +69,12 @@ namespace BLL
                         case 6:
                             dados = cartaoDAO.pesquisaCartaoCartorio(arg);
                             break;
+                    }
+                     */
+                    dados = cartaoDAO.pesquisaCartaoSGC(arg,tipo);
+
+                    if (dados.Rows.Count < 1) {
+                        dados = cartaoDAO.pesquisaCartaoCartorioNew(arg, tipo);
                     }
                 }
                 catch (Exception e)
@@ -264,7 +271,7 @@ namespace BLL
             }
         }
 
-        public DataTable getCartaoPorArgumento(string arg,int tipo)
+        public DataTable getCartaoPorArgumento(string arg,int tipo, ref char op)
         {
             try
             {
@@ -273,21 +280,46 @@ namespace BLL
                 {
                     con.ObjCon.Open();
                 }
-                //CartaoAssinaturaDAO cartaoDAO = new CartaoAssinaturaDAO(con.ObjCon);
 
+                String filtro = "";
                 switch (tipo)
                 {
                     case 1:
-                        dados = cartaoDAO.getCartao(" and nrCartao = '" + arg.Trim() + "'");
+                        filtro = " and nrCartao = '" + arg.Trim() + "'";
                         break;
                     case 2:
-                        dados = cartaoDAO.getCartao(" and nrCPF = '" + arg + "'");
+                        filtro = " and nrCPF = '" + arg + "'";
                         break;
                     case 3:
-                        dados = cartaoDAO.getCartao(" and nmCartao like '" + arg + "%'");
+                        filtro = " and nmCartao like '" + arg + "%'";
                         break;
                 }
 
+
+                dados = cartaoDAO.getCartao(filtro);
+
+                if(dados.Rows.Count <= 0){
+
+                    switch (tipo)
+                    {
+                        case 1:
+                            filtro = " and CLI_FICHA = '" + arg.Trim() + "'";
+                            break;
+                        case 2:
+                            filtro = " and CLI_CPF = '" + arg + "'";
+                            break;
+                        case 3:
+                            filtro = " and CLI_NOME like '" + arg + "%'";
+                            break;
+                           
+                    }
+                    
+                    dados = cartaoDAO.getCartaoCartorioNew(filtro);
+
+                    if (dados.Rows.Count > 0) {
+                        op = 'N';
+                    }
+                }
 
                 return dados;
             }
@@ -401,8 +433,14 @@ namespace BLL
                 }
                 CartaoAssinatura cartao = null;
 
-                DataTable dados = cartaoDAO.getCartao(" and nrCartao = '" + nrCartao + "'");
+                cartao = cartaoDAO.getCartaoPorNumero(nrCartao);
 
+                if (cartao == null) {
+                    cartao = cartaoDAO.getCartaoPorNumeroCartorioNew(nrCartao);
+                }
+                //DataTable dados = cartaoDAO.getCartao(" and nrCartao = '" + nrCartao + "'");
+                
+                /*
                 if (dados.Rows.Count > 0)
                 {
                     cartao = new CartaoAssinatura();
@@ -436,7 +474,7 @@ namespace BLL
 
                     cartao.DsEmail = dados.Rows[0]["dsEmail"].ToString();
                 }
-
+                */
 
                 return cartao;
             }

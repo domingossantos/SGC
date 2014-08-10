@@ -63,23 +63,28 @@ namespace sgc.assinaturas
         private void pesquisar()
         {
 
+            char param = 'P';
             if (op.Equals('P'))
             {
+                
                 if (!txNrCartao.Text.Equals(""))
                 {
-                    dados = assinaturaBLL.getCartaoPorArgumento(txNrCartao.Text.Trim().PadLeft(7,'0'), 1);
+                    dados = assinaturaBLL.getCartaoPorArgumento(txNrCartao.Text.Trim().PadLeft(7,'0'), 1, ref param);
                     atualizaDados();
+                    op = param;
                     return;
                 }
 
                 if (!txNome.Text.Equals(""))
                 {
-                    dados = assinaturaBLL.getCartaoPorArgumento(txNome.Text, 3);
+                    dados = assinaturaBLL.getCartaoPorArgumento(txNome.Text, 3, ref param);
                     atualizaDados();
+                    op = param;
                     return;
                 }
             }
 
+            
         }
 
         private void atualizaDados() {
@@ -199,7 +204,13 @@ namespace sgc.assinaturas
                 txOrgExpRG.Text = linha["dsOrgaoExpRG"].ToString();
                 txDataExpRG.Text = linha["dtExpRG"].ToString();
                 txFones.Text = linha["nrFones"].ToString();
-                cbCartorio.SelectedValue = Convert.ToInt32(linha["idCartorio"].ToString());
+                if (linha["idCartorio"].ToString() != "")
+                {
+                    cbCartorio.SelectedValue = Convert.ToInt32(linha["idCartorio"].ToString());
+                }
+                else {
+                    cbCartorio.SelectedValue = 1;
+                }
 
                 if (!linha["cdTipoRG"].ToString().Equals(""))
                     cbTipoRG.SelectedValue = Convert.ToInt32(linha["cdTipoRG"].ToString());
@@ -233,7 +244,7 @@ namespace sgc.assinaturas
                 if (!linha["dtExpRG"].ToString().Equals(""))
                     cartao.DtExpedicao = Convert.ToDateTime(linha["dtExpRG"].ToString());
 
-                cartao.IdCartorio = Convert.ToInt32(linha["idCartorio"].ToString());
+                //cartao.IdCartorio = Convert.ToInt32(linha["idCartorio"].ToString());
                 cartao.DsObservacao = linha["dsObservacao"].ToString();
                 if (!linha["cdTipoRG"].ToString().Equals(""))
                     cartao.CdTipoRG = Convert.ToInt32(linha["cdTipoRG"].ToString());
@@ -856,7 +867,7 @@ namespace sgc.assinaturas
             {
                 if (utils.formatos.limpaStr(txCPF.Text).Trim().Length > 0)
                 {
-                    dados = assinaturaBLL.getCartaoPorArgumento(utils.formatos.limpaStr(txCPF.Text), 2);
+                    dados = assinaturaBLL.getCartaoPorArgumento(utils.formatos.limpaStr(txCPF.Text), 2, ref op);
                     atualizaDados();
                     return;
                 }

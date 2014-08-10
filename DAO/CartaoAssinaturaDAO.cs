@@ -82,6 +82,94 @@ namespace DAO
             }
         }
 
+
+        public DataTable pesquisaCartaoSGC(String argumento, int tipo) {
+            DataTable dados = new DataTable();
+            String sql = "select nrCartao,nmCartao,nrCPF,dtRenovacao,dsObservacao,dtCadastro ";
+            sql += " from  tblCartaoAssinatura where 1 = 1 and ";
+
+            switch (tipo)
+            {
+                case 1:
+                    sql += "  nmCartao like '" + argumento + "%' ";
+
+                    break;
+                case 2:
+                    sql += "  nrCPF = '" + argumento + "'";
+                    break;
+                case 3:
+                    sql += "  nrRG = '" + argumento + "'";
+                    break;
+                case 4:
+                    sql += "   nrCartao like '" + argumento + "%'";
+                    break;
+                case 5:
+                    dados = pesquisaCartaoCidade(argumento);
+                    break;
+                case 6:
+                    dados = pesquisaCartaoCartorio(argumento);
+                    break;
+            }
+
+            if (tipo == 4)
+            {
+                sql += " order by nrCartao";
+            }
+            else {
+                sql += " order by nmCartao";
+            }
+
+
+            if (tipo <= 4) {
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+                da.Fill(dados);
+            }
+
+            return dados;
+        }
+
+        public DataTable pesquisaCartaoCartorioNew(String argumento, int tipo)
+        {
+            DataTable dados = new DataTable();
+            String sql = "SELECT CLI_FICHA as nrCartao ,CLI_NOME as nmCartao, CLI_CPF as nrCpf, CLI_DATARENOVACAO as dtRenovacao "
+	                    +",CLI_OBSERVACAO as dsObservacao, CLI_DATACADASTRO as dtCadastro  "
+                        +"FROM CartorioNew.dbo.Cart_Clientes where 1 = 1 and "; 
+
+            switch (tipo)
+            {
+                case 1:
+                    sql += "  CLI_NOME like '" + argumento + "%' ";
+
+                    break;
+                case 2:
+                    sql += "  CLI_CPF = '" + argumento + "'";
+                    break;
+                case 3:
+                    sql += "  CLI_IDNUMERO = '" + argumento + "'";
+                    break;
+                case 4:
+                    sql += "   CLI_FICHA like '" + argumento + "%'";
+                    break;
+            }
+
+            if (tipo == 4)
+            {
+                sql += " order by CLI_FICHA";
+            }
+            else
+            {
+                sql += " order by CLI_NOME";
+            }
+
+
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            da.Fill(dados);
+            
+
+            return dados;
+        }
+
+
         public DataTable pesquisaCartaoNome(String nome)
         {
             DataTable dados = new DataTable();
@@ -167,7 +255,7 @@ namespace DAO
             DataTable dados = new DataTable();
             String sql = "select ca.nrCartao,ca.nmCartao,c.nmCartorio,c.dsCidade,c.dsObservacao,"
                     + "ca.dtCadastro,ca.dtRenovacao,ca.nrCPF "
-                    + "from  vwCartaoAssinatura ca "
+                    + "from  tblCartaoAssinatura ca "
                     + "inner join  tblCartorio c on ca.idCartorio = c.idCartorio "
                     + "where c.nmCartorio like '" + Cartorio + "%' order by ca.origem, c.nmCartorio";
 
@@ -210,6 +298,52 @@ namespace DAO
             }
         }
 
+        public DataTable getCartaoCartorioNew(string filtro = "")
+        {
+            String sql = "SELECT CLI_FICHA as nrCartao "
+                         + ",CAR_CODIGO as idCartorio "
+                         + ",CLI_DATACADASTRO as dtCadastro "
+                         + ",CLI_NOME as nmCartao "
+                         + ",CLI_CPF as nrCpf "
+                         + ",CLI_ENDERECO as dsEndereco "
+                         + ",CLI_BAIRRO as dsBairro "
+                         + ",CLI_CIDADE as nmCidade "
+                         + ",CLI_CEP as nrCEP "
+                         + ",CLI_UF as sgUF "
+                         + ",CLI_DATANASCIMENTO as dtNascimento "
+                         + ",CLI_IDNUMERO as nrRG "
+                         + ",CLI_IDDATAEXP as  dtExpRG "
+                         + ",CLI_IDIMAGEMFRENTE as biRGFrente "
+                         + ",CLI_IDIMAGEMVERSO as biRGVerso "
+                         + ",CLI_IDORGAOEXP as dsOrgaoExpRG "
+                         + ",CLI_FONES as nrFones "
+                         + ",'C' as tpCartao "
+                         + ",CLI_DATARENOVACAO as dtRenovacao "
+                         + ",NULL as biFotoCartao "
+                         + ",'S' as stCopia "
+                         + ",1 as cdTipoRG "
+                         + ",CLI_OBSERVACAO as dsObservacao "
+                         + ",CLI_EMAIL as dsEmail "
+                         + ",1 as idEstadoCivil "
+                         + ",NULL as dsProfissao "
+                     + " FROM CartorioNew.dbo.Cart_Clientes "
+                     + " where 1 = 1 " + filtro + " order by CLI_FICHA";
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);
+                DataTable dados = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+                da.Fill(dados);
+
+                return dados;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Erro ao consultar cartão " + ex.Message);
+            }
+        }
+
         public CartaoAssinatura getCartaoPorNumero(string nrCartao)
         {
 
@@ -219,13 +353,14 @@ namespace DAO
             sql += ",dsEmail,idEstadoCivil,dsProfissao from  tblCartaoAssinatura where nrCartao = '" + nrCartao + "' ";
             
             CartaoAssinatura cartao = null;
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+
+            cmd.CommandText = sql;
+            SqlDataReader dr = cmd.ExecuteReader();
             try
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-
-                cmd.CommandText = sql;
-                SqlDataReader dr = cmd.ExecuteReader();
+                
                 if (dr.HasRows)
                 {
                     dr.Read();
@@ -238,11 +373,11 @@ namespace DAO
                     cartao.NrCEP = (dr["nrCEP"].ToString());
                     cartao.NrRG = (dr["nrRG"].ToString());
                     cartao.DsOrgaoEmissor = (dr["dsOrgaoExpRG"].ToString());
-                    cartao.IdEstadoCivil =  Convert.ToInt32(dr["idEstadoCivil"].ToString());
+                    cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
 
                     if (dr["dtExpRG"].ToString() != "")
                         cartao.DtExpedicao = DateTime.Parse(dr["dtExpRG"].ToString());
-                    
+
                     cartao.NrCPF = (dr["nrCPF"].ToString());
                     cartao.NrFones = (dr["nrFones"].ToString());
                     //cartao.TpCartao = Convert.ToChar(dr["tpCartao"].ToString());
@@ -252,7 +387,99 @@ namespace DAO
                     if (dr["dtRenovacao"].ToString() != "")
                         cartao.DtRenovacao = DateTime.Parse(dr["dtRenovacao"].ToString());
 
-                    cartao.IdCartorio = Convert.ToInt32( dr["idCartorio"].ToString());
+                    cartao.IdCartorio = Convert.ToInt32(dr["idCartorio"].ToString());
+                    cartao.DsObservacao = dr["dsObservacao"].ToString();
+                    cartao.DsEmail = dr["dsEmail"].ToString();
+                    cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
+                    cartao.DsProfissao = dr["dsProfissao"].ToString();
+                    
+
+                }
+                return cartao;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Erro ao consultar cartão " + ex.Message);
+            }
+            finally {
+                dr.Close();
+            }
+        }
+
+        public CartaoAssinatura getCartaoPorNumeroCartorioNew(string nrCartao)
+        {
+
+            String sql = "SELECT CLI_FICHA as nrCartao "
+	                      +",CAR_CODIGO as idCartorio "
+	                      +",CLI_DATACADASTRO as dtCadastro "
+	                      +",CLI_NOME as nmCartao "
+	                      +",CLI_CPF as nrCpf "
+	                      +",CLI_ENDERECO as dsEndereco "
+                          +",CLI_BAIRRO as dsBairro "
+                          +",CLI_CIDADE as nmCidade "
+                          +",CLI_CEP as nrCEP "
+                          +",CLI_UF as sgUF "
+                          +",CLI_DATANASCIMENTO as dtNascimento "
+                          +",CLI_IDNUMERO as nrRG "
+                          +",CLI_IDDATAEXP as  dtExpRG "
+                          +",CLI_IDIMAGEMFRENTE as biRGFrente "
+                          +",CLI_IDIMAGEMVERSO as biRGVerso "
+                          +",CLI_IDORGAOEXP as dsOrgaoExpRG "
+                          +",CLI_FONES as nrFones "
+                          +",'C' as tpCartao "
+                          +",CLI_DATARENOVACAO as dtRenovacao "
+                          +",NULL as biFotoCartao "
+                          +",'S' as stCopia "
+                          +",1 as cdTipoRG "
+                          +",CLI_OBSERVACAO as dsObservacao "
+                          +",CLI_EMAIL as dsEmail "
+                          +",1 as idEstadoCivil "
+                          +",NULL as dsProfissao "
+                      +" FROM CartorioNew.dbo.Cart_Clientes "
+                      + "WHERE CLI_FICHA = '" + nrCartao + "' ";
+
+            CartaoAssinatura cartao = null;
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+
+            cmd.CommandText = sql;
+            SqlDataReader dr = cmd.ExecuteReader();
+            try
+            {
+
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    cartao = new CartaoAssinatura();
+                    cartao.NrCartao = dr["nrCartao"].ToString();
+                    cartao.NmCartao = (dr["nmCartao"].ToString());
+                    cartao.DsEndereco = (dr["dsEndereco"].ToString());
+                    cartao.DsBairro = (dr["dsBairro"].ToString());
+                    cartao.NmCidade = (dr["nmCidade"].ToString());
+                    cartao.NrCEP = (dr["nrCEP"].ToString());
+                    cartao.NrRG = (dr["nrRG"].ToString());
+                    cartao.DsOrgaoEmissor = (dr["dsOrgaoExpRG"].ToString());
+                    cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
+
+                    if (dr["dtExpRG"].ToString() != "")
+                        cartao.DtExpedicao = DateTime.Parse(dr["dtExpRG"].ToString());
+
+                    cartao.NrCPF = (dr["nrCPF"].ToString());
+                    cartao.NrFones = (dr["nrFones"].ToString());
+                    //cartao.TpCartao = Convert.ToChar(dr["tpCartao"].ToString());
+                    cartao.SgUF = (dr["sgUF"].ToString());
+                    if (dr["dtNascimento"].ToString() != "")
+                        cartao.DtNascimento = DateTime.Parse(dr["dtNascimento"].ToString());
+                    if (dr["dtRenovacao"].ToString() != "")
+                        cartao.DtRenovacao = DateTime.Parse(dr["dtRenovacao"].ToString());
+
+                    if (dr["idCartorio"].ToString().ToString() != "")
+                    {
+                        cartao.IdCartorio = Convert.ToInt32(dr["idCartorio"].ToString());
+                    }
+                    else {
+                        cartao.IdCartorio = 1;
+                    }
                     cartao.DsObservacao = dr["dsObservacao"].ToString();
                     cartao.DsEmail = dr["dsEmail"].ToString();
                     cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
@@ -265,6 +492,9 @@ namespace DAO
             catch (SqlException ex)
             {
                 throw new Exception("Erro ao consultar cartão " + ex.Message);
+            }
+            finally {
+                dr.Close();
             }
         }
 
