@@ -647,7 +647,7 @@ namespace sgc.caixa
                 }
                     
                 
-
+                
                 /*
                 bool stPgtoPedido = caixaBLL.registraPagamentoPedido(vlPago
                                                 , lPedidos
@@ -766,7 +766,7 @@ namespace sgc.caixa
 
 
 
-
+                    pedidoBLL.imprimeEtiqueta(lPedidos, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
                     
                 }
                 
@@ -776,6 +776,10 @@ namespace sgc.caixa
             }
                 
         }
+
+
+        
+
 
         private void caixaForm_Load(object sender, EventArgs e)
         {

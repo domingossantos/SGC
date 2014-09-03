@@ -105,7 +105,7 @@ namespace BLL
                 p.TpPessoa = (p.NrCpfCnpj.Length == 11) ? Convert.ToChar("F") : Convert.ToChar("J");
 
                 con.ObjCon.Open();
-                pessoaADO.savePessoa(p);
+                pessoaADO.savePessoaMinimo(p);
             }
             finally
             {

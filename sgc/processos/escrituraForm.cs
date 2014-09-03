@@ -187,7 +187,8 @@ namespace sgc.processos
             lbSaldoCliente.Text = String.Format("R$ {0:N2}", escrituraBLL.getValorCliente(escritura.IdEscritura, 'C') - escrituraBLL.getValorCliente(escritura.IdEscritura, 'D'));
         }
         public void carregaTodosDados(){
-        
+
+            escritura = escrituraBLL.getEscritura(Convert.ToInt32(lbNumFicha.Text));
             carregaItensOrcamento();
             carregaTipoPessoa();
             carregaPessoaEscritura();
@@ -215,7 +216,7 @@ namespace sgc.processos
                 
                 btAddPessoa.Enabled = false;
                 brDelPessoa.Enabled = false;
-                btAndamento.Enabled = false;
+                //btAndamento.Enabled = false;
                 btFecharEscritura.Enabled = false;
                 btPagamento.Enabled = false;
                 btRecebimento.Enabled = false;
@@ -952,6 +953,7 @@ namespace sgc.processos
                     
                 }
             }
+
             
         }
        

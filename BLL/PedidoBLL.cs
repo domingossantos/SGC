@@ -690,7 +690,82 @@ namespace BLL
 
             return dt;
         }
-        
+
+        public void imprimeEtiqueta(List<int> nrPedidos, string pathIniFile,string nmUsuario)
+        {
+
+            String pedidos = "";
+            for (int i = 0; i < nrPedidos.Count; i++) {
+                pedidos += nrPedidos[i] + ",";
+            }
+
+            pedidos = pedidos.Substring(0, (pedidos.Length - 1));
+
+            String sql = "select i.tpReconhecimento, i.nrSelo,t.nrSerie,i.nrCartao,c.nmCartao  from tblItensPedido i "
+                        + "inner join tblTipoSelo t on i.cdTipoSelo = t.cdTipoSelo "
+                        + "inner join tblCartaoAssinatura c on c.nrCartao = i.nrCartao "
+                        + "where cdAto in(60,61) "
+                        + "and nrPedido in("+pedidos+") "
+                        + "order by i.tpReconhecimento desc ";
+
+            IniFile iniFile = new IniFile(pathIniFile);
+            bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
+
+            if (arquivo)
+            {
+                if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA")))
+                {
+                    File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA"));
+                }
+            }
+
+            DataTable tbPedidos = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(sql, con.ObjCon);
+            da.Fill(tbPedidos);
+           
+            DataView vPedidos = new DataView(tbPedidos);
+            DataRow pedidoRow;
+            int x = 1;
+            imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA");
+            imp.StartJob();
+            string strTipo = "";
+            int count = 1;
+            for (int a = 0; a < vPedidos.Count; a++)
+            {
+                pedidoRow = vPedidos[a].Row;
+
+                if (pedidoRow[0].ToString() == "1") {
+                    strTipo = "AUTENTICIDADE";
+                }
+
+                if (pedidoRow[0].ToString() == "2")
+                {
+                    strTipo = "SEMELHANÇA";
+                }
+
+                if (pedidoRow[0].ToString() == "1")
+                {
+                    strTipo = "DOCUMENTO";
+                }
+
+                if (count == 1)
+                {
+                    imp.PrintText(x, 1, "RECONHECO POR " + strTipo + " A(S) FIRMA(S)");
+                }
+                imp.PrintText(x, 1, "SELO NO. " + pedidoRow[1].ToString() + " " + pedidoRow[2].ToString() + "   " + pedidoRow[3].ToString() + "   " + pedidoRow[4].ToString());
+                if (count == 4) {
+                    imp.PrintText(x, 1, "ESCREVENTE "+nmUsuario);
+                    imp.PrintText(x, 1, "BELEM/PA, " + DateTime.Now.ToShortDateString());
+                    count = 0;
+
+                }
+                count++;
+            }
+
+            imp.PrintJob();
+
+        }
+
         public void imprimePedido(List<int> nrPedidos, int nrCaixa, string nomeBoleto, string pathIniFile, string nmUsuario, int forpaPagto, double vlPago = 0, string nmCorrentista = "", bool reimpressao = false,double vlDesconto = 0)
         {
             try

@@ -111,6 +111,22 @@ namespace DAO
             return pessoa;
         }
 
+        public void savePessoaMinimo(Pessoa p) {
+            try
+            {
+                String sql = "insert into tblPessoas (nrCpfCnpj,tpPessoa,nmPessoa) values (@nrCpfCnpj,@tipo,@nome)";
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@nrCpfCnpj", p.NrCpfCnpj);
+                cmd.Parameters.AddWithValue("@tipo", p.TpPessoa);
+                cmd.Parameters.AddWithValue("@nome", p.NmPessoa);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex) {
+                throw new Exception("Erro ao registrar pessoa\n" + ex.Message);
+            }
+        }
+
         public void savePessoa(Pessoa p)
         {
             try
@@ -119,7 +135,7 @@ namespace DAO
                             + " nrRg,dsOrgaoEmissor,nmPai,nmMae,dtNascimento,dsUf,tpDocumento, "
                             + " idCidade,dtRgExpedicao,nrDocumento,dsUfDocumento,dtExpedicaoDocumento,dsBairro, "
                             + " dsUfNascimento,dsPaisNascimento,dsSexo) "
-                            + " values (@nrCpfCnpj,@tpPessoa,@nmPessoa,@dsEndereco,@nrFones,@dsEndereco,@nrRg,"
+                            + " values (@nrCpfCnpj,@tpPessoa,@nmPessoa,@dsEndereco,@nrFones,@dsEmail,@nrRg,"
                             + "@dsOrgaoEmissor,@nmPai,@nmMae,@dtNascimento,@dsUf,@tpDocumento, "
                             + "@idCidade,@dtRgExpedicao,@nrDocumento,@dsUfDocumento,@dtExpedicaoDocumento, "
                             + "@dsBairro,@dsUfNascimento,@dsPaisNascimento,@dsSexo)";
@@ -129,8 +145,8 @@ namespace DAO
                 cmd.Parameters.AddWithValue("@nrCpfCnpj", p.NrCpfCnpj);
                 cmd.Parameters.AddWithValue("@tpPessoa", p.TpPessoa);
                 cmd.Parameters.AddWithValue("@nmPessoa", p.NmPessoa);
-                cmd.Parameters.AddWithValue("@dsEmail", p.DsEmail);
                 cmd.Parameters.AddWithValue("@dsEndereco", p.DsEndereco);
+                cmd.Parameters.AddWithValue("@dsEmail", p.DsEmail);
                 cmd.Parameters.AddWithValue("@nrFones", p.NrFones);
                 cmd.Parameters.AddWithValue("@nrRg", p.NrRg);
                 cmd.Parameters.AddWithValue("@dsOrgaoEmissor", p.DsOrgaoEmissor);
@@ -140,7 +156,8 @@ namespace DAO
                 cmd.Parameters.AddWithValue("@dsUf", p.DsUf);
                 cmd.Parameters.AddWithValue("@tpDocumento", p.TpDocumento);
 
-                if (p.IdCidade.Equals(null))
+
+                if (p.IdCidade <= 0)
                 {
                     cmd.Parameters.AddWithValue("@idCidade", DBNull.Value);
                 }

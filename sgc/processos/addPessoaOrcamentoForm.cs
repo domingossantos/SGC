@@ -68,6 +68,8 @@ namespace sgc.processos
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try
+                {
             if (op.Equals('N')) {
                 if (txNome.Text.Equals("")) {
                     MessageBox.Show("Digite o nome do cliente!");
@@ -75,15 +77,16 @@ namespace sgc.processos
                     return;
                 }
 
+                
+                    pessoaBll.salvaNomePessoa(txCpfCnpj.Text, txNome.Text);
 
-                pessoaBll.salvaNomePessoa(txCpfCnpj.Text, txNome.Text);
+                    pessoaBll.salvaPessoaOrcamento(txCpfCnpj.Text,
+                                    oFormOrcamento.oOrcamento.IdOrcamento,
+                                    Convert.ToInt32(cbTipoPessoa.SelectedValue.ToString()));
 
-                pessoaBll.salvaPessoaOrcamento(txCpfCnpj.Text,
-                                oFormOrcamento.oOrcamento.IdOrcamento,
-                                Convert.ToInt32(cbTipoPessoa.SelectedValue.ToString()));
-
-                oFormOrcamento.atualizaGridClientes();
-                this.Close();
+                    oFormOrcamento.atualizaGridClientes();
+                    this.Close();
+                
             }
 
             if (op.Equals('I')) {
@@ -93,6 +96,11 @@ namespace sgc.processos
 
                 oFormOrcamento.atualizaGridClientes();
                 this.Close();
+            }
+                }
+            catch (Exception ex)
+            {
+                utils.MessagensExcept.funMsgSistema("Erro ao registrar pessoa\n" + ex.Message, 1);
             }
         }
 

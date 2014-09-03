@@ -28,6 +28,7 @@ namespace sgc.assinaturas
         private Size tamanhoModificado;
         private int imgWidth;
         private int imgHeigth;
+        private int idTipoReconhecimento;
 
         private bool _pesquisaRemota;
 
@@ -44,6 +45,7 @@ namespace sgc.assinaturas
             imgHeigth = 0;
             imgWidth = 0;
             idxItens = 0;
+            idTipoReconhecimento = 0;
             InitializeComponent();
             pesquisaRemota = false;
         }
@@ -222,16 +224,23 @@ namespace sgc.assinaturas
 
         private char getTipoReconhecimento()
         {
-            char r;
-            if (rbAutentico.Checked)
+            char r = 'S';
+            if (idTipoReconhecimento == 1)
+            {
                 r = '1';
-            else if (rbSemelhante.Checked)
+                rbAutentico.Checked = true;
+            }
+            else if (idTipoReconhecimento == 2)
+            {
                 r = '2';
-            else if (rbDoc.Checked)
+                rbSemelhante.Checked = true;
+            }
+            else if (idTipoReconhecimento == 3)
+            {
                 r = '3';
-            else
-                r = 'S';
-
+                rbDoc.Checked = true;
+            }
+            
             return r;
         }
 
@@ -438,13 +447,6 @@ namespace sgc.assinaturas
 
         private void btInserirPedido_Click(object sender, EventArgs e)
         {
-            /*
-            if (pedidoBLL.checaExistePedidoAberto(utils.sessao.UsuarioSessao.DsLogin).Rows.Count > 0) {
-                MessageBox.Show("Há pedidos em aberto no seu caixa.\nFavor confira esses pedidos para poder abrir outro.","Atenção",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                return;
-            }
-            */
-
             if (cbOperacao.SelectedValue == null)
             {
                 MessageBox.Show("Selecione uma operação");
@@ -455,37 +457,9 @@ namespace sgc.assinaturas
 
             int qtd = 0;
             String strQtd = "";
+            String strTipoRec = "";
             Selo selo = null;
             string nrCartao = "0";
-
-            //checa item do pedido
-            /*
-            switch (cbOperacao.SelectedValue.ToString())
-	        {
-                case "62": 
-                case "63":
-                case "64":
-                case "66":
-                case "67":
-                case "68":
-                case "69":
-                    strQtd = (Microsoft.VisualBasic.Interaction.InputBox("Quantidade", "Cartorio Conduru", "1", 150, 150));
-                    if (strQtd.Equals("") || strQtd.Equals("0"))
-                    {
-                        MessageBox.Show("Informe uma quantidade");
-                        return;
-                    }
-                    else 
-                    {
-                        qtd = Convert.ToInt32(strQtd);
-                    }
-                    break;
-                default:
-
-                    qtd = 1;
-                    break;
-	        }
-             */
 
             AtoOperacao ato = pedidoBLL.getAtoOperacao(Convert.ToInt32(cbOperacao.SelectedValue));
             if (ato.StRepeticao == 'S')
@@ -522,6 +496,26 @@ namespace sgc.assinaturas
                     }
                     break;
             }
+
+
+            if(cbOperacao.SelectedValue.ToString() == "60" || cbOperacao.SelectedValue.ToString() == "61"){
+                strTipoRec = (Microsoft.VisualBasic.Interaction.InputBox("1 - Autentico\n2 - Semelhante\n3 - Documento", "Tipo Reconhecimento", "1", 150, 150));
+
+                try
+                {
+                    idTipoReconhecimento = Convert.ToInt16(strTipoRec);
+                    if (idTipoReconhecimento < 1 && idTipoReconhecimento > 3) {
+                        MessageBox.Show("Digite 1 - Autentico\n2 - Semelhante\n3 - Documento");
+                        return;
+                    }
+                }
+                catch (Exception ex) { 
+                    MessageBox.Show("Digite um numero válido");
+                    return;
+                }
+                
+            }
+
 
             // Checar ultimo pedido
             pedido = pedidoBLL.getUltimoPedido(utils.sessao.NrPedido.ToString());

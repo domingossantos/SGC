@@ -156,6 +156,7 @@ namespace DAO
 
 
                 cmd.Parameters.AddWithValue("@idOrcamento", esc.IdOrcamento);
+
                 if (esc.NrSelo == null || esc.NrSelo.Equals(0))
                 {
                     cmd.Parameters.AddWithValue("@nrSelo", DBNull.Value);
