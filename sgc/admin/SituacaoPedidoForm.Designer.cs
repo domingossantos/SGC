@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btEstorno = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.lbValor = new System.Windows.Forms.Label();
             this.lbStatus = new System.Windows.Forms.Label();
@@ -50,7 +51,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.apagarMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarValorMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btEstorno = new System.Windows.Forms.Button();
+            this.btEtiqueta = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPedido)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPagto)).BeginInit();
@@ -59,6 +60,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btEtiqueta);
             this.panel1.Controls.Add(this.btEstorno);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.lbValor);
@@ -79,6 +81,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(733, 97);
             this.panel1.TabIndex = 0;
+            // 
+            // btEstorno
+            // 
+            this.btEstorno.Location = new System.Drawing.Point(8, 33);
+            this.btEstorno.Name = "btEstorno";
+            this.btEstorno.Size = new System.Drawing.Size(75, 23);
+            this.btEstorno.TabIndex = 34;
+            this.btEstorno.Text = "Estornar";
+            this.btEstorno.UseVisualStyleBackColor = true;
+            this.btEstorno.Click += new System.EventHandler(this.btEstorno_Click);
             // 
             // label8
             // 
@@ -185,7 +197,7 @@
             // 
             // btPesquisar
             // 
-            this.btPesquisar.Location = new System.Drawing.Point(89, 33);
+            this.btPesquisar.Location = new System.Drawing.Point(168, 33);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(75, 23);
             this.btPesquisar.TabIndex = 22;
@@ -243,31 +255,31 @@
             this.apagarMovimentoToolStripMenuItem,
             this.alterarValorMovimentoToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(190, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(205, 48);
             // 
             // apagarMovimentoToolStripMenuItem
             // 
             this.apagarMovimentoToolStripMenuItem.Name = "apagarMovimentoToolStripMenuItem";
-            this.apagarMovimentoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.apagarMovimentoToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.apagarMovimentoToolStripMenuItem.Text = "Apagar Movimento";
             this.apagarMovimentoToolStripMenuItem.Click += new System.EventHandler(this.apagarMovimentoToolStripMenuItem_Click);
             // 
             // alterarValorMovimentoToolStripMenuItem
             // 
             this.alterarValorMovimentoToolStripMenuItem.Name = "alterarValorMovimentoToolStripMenuItem";
-            this.alterarValorMovimentoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.alterarValorMovimentoToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.alterarValorMovimentoToolStripMenuItem.Text = "Alterar Valor Movimento";
             this.alterarValorMovimentoToolStripMenuItem.Click += new System.EventHandler(this.alterarValorMovimentoToolStripMenuItem_Click);
             // 
-            // btEstorno
+            // btEtiqueta
             // 
-            this.btEstorno.Location = new System.Drawing.Point(8, 33);
-            this.btEstorno.Name = "btEstorno";
-            this.btEstorno.Size = new System.Drawing.Size(75, 23);
-            this.btEstorno.TabIndex = 34;
-            this.btEstorno.Text = "Estornar";
-            this.btEstorno.UseVisualStyleBackColor = true;
-            this.btEstorno.Click += new System.EventHandler(this.btEstorno_Click);
+            this.btEtiqueta.Location = new System.Drawing.Point(89, 33);
+            this.btEtiqueta.Name = "btEtiqueta";
+            this.btEtiqueta.Size = new System.Drawing.Size(73, 23);
+            this.btEtiqueta.TabIndex = 35;
+            this.btEtiqueta.Text = "Etiqueta";
+            this.btEtiqueta.UseVisualStyleBackColor = true;
+            this.btEtiqueta.Click += new System.EventHandler(this.btEtiqueta_Click);
             // 
             // SituacaoPedidoForm
             // 
@@ -313,5 +325,6 @@
         private System.Windows.Forms.ToolStripMenuItem apagarMovimentoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alterarValorMovimentoToolStripMenuItem;
         private System.Windows.Forms.Button btEstorno;
+        private System.Windows.Forms.Button btEtiqueta;
     }
 }

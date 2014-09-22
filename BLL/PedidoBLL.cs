@@ -691,8 +691,10 @@ namespace BLL
             return dt;
         }
 
-        public void imprimeEtiqueta(List<int> nrPedidos, string pathIniFile,string nmUsuario)
+        public List<string> geraDadosEtiqueta(List<int> nrPedidos, string pathIniFile,string nmUsuario)
         {
+
+            List<string> retorno = new List<string>();
 
             String pedidos = "";
             for (int i = 0; i < nrPedidos.Count; i++) {
@@ -701,33 +703,22 @@ namespace BLL
 
             pedidos = pedidos.Substring(0, (pedidos.Length - 1));
 
-            String sql = "select i.tpReconhecimento, i.nrSelo,t.nrSerie,i.nrCartao,c.nmCartao  from tblItensPedido i "
+            String sql = "select i.tpReconhecimento, i.nrSelo,t.nrSerie,i.nrCartao,  "
+                        + " (select c.nmCartao from tblCartaoAssinatura c where c.nrCartao = i.nrCartao ) as nrCartao  "
+                        + " from tblItensPedido i "
                         + "inner join tblTipoSelo t on i.cdTipoSelo = t.cdTipoSelo "
-                        + "inner join tblCartaoAssinatura c on c.nrCartao = i.nrCartao "
                         + "where cdAto in(60,61) "
                         + "and nrPedido in("+pedidos+") "
                         + "order by i.tpReconhecimento desc ";
 
-            IniFile iniFile = new IniFile(pathIniFile);
-            bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
-
-            if (arquivo)
-            {
-                if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA")))
-                {
-                    File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA"));
-                }
-            }
-
+            
             DataTable tbPedidos = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(sql, con.ObjCon);
             da.Fill(tbPedidos);
            
             DataView vPedidos = new DataView(tbPedidos);
             DataRow pedidoRow;
-            int x = 1;
-            imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA");
-            imp.StartJob();
+            
             string strTipo = "";
             int count = 1;
             for (int a = 0; a < vPedidos.Count; a++)
@@ -750,19 +741,20 @@ namespace BLL
 
                 if (count == 1)
                 {
-                    imp.PrintText(x, 1, "RECONHECO POR " + strTipo + " A(S) FIRMA(S)");
+                    retorno.Add("ESCREVENTE " + nmUsuario);
+                    retorno.Add("BELEM/PA, " + DateTime.Now.ToShortDateString());
                 }
-                imp.PrintText(x, 1, "SELO NO. " + pedidoRow[1].ToString() + " " + pedidoRow[2].ToString() + "   " + pedidoRow[3].ToString() + "   " + pedidoRow[4].ToString());
+                retorno.Add("SELO " + pedidoRow[1].ToString() + " " + pedidoRow[2].ToString() + " " + pedidoRow[4].ToString());
+                
                 if (count == 4) {
-                    imp.PrintText(x, 1, "ESCREVENTE "+nmUsuario);
-                    imp.PrintText(x, 1, "BELEM/PA, " + DateTime.Now.ToShortDateString());
+                    retorno.Add("RECONHECO POR " + strTipo + " A(S) FIRMA(S):");
                     count = 0;
-
+                    //retorno.Add("#");
                 }
                 count++;
             }
 
-            imp.PrintJob();
+            return retorno;
 
         }
 
