@@ -288,6 +288,37 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="dsOrgEmissor">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!dsOrgaoExpRG.Value, "dsCartao")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>4.11903cm</Top>
+        <Left>2.88242cm</Left>
+        <Height>0.5cm</Height>
+        <Width>2.5cm</Width>
+        <ZIndex>9</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>4.21875in</Height>
     <Style />
@@ -376,10 +407,22 @@
           <DataField>dsProfissao</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="biRGFrente">
+          <DataField>biRGFrente</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="biRGVerso">
+          <DataField>biRGVerso</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="dsOrgaoExpRG">
+          <DataField>dsOrgaoExpRG</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>SGCDataSet</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Desenv\Documents\GitHub\SGC\sgc\SGCDataSet.xsd</rd:SchemaPath>
+        <rd:SchemaPath>\\psf\Home\Documents\Projetos\SGC\sgc\SGCDataSet.xsd</rd:SchemaPath>
         <rd:TableName>tblCartaoAssinatura</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

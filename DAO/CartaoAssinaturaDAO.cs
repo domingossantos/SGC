@@ -373,7 +373,11 @@ namespace DAO
                     cartao.NrCEP = (dr["nrCEP"].ToString());
                     cartao.NrRG = (dr["nrRG"].ToString());
                     cartao.DsOrgaoEmissor = (dr["dsOrgaoExpRG"].ToString());
-                    cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
+
+                    if (dr["dtExpRG"].ToString() != "") {
+                        cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
+                    }
+                    
 
                     if (dr["dtExpRG"].ToString() != "")
                         cartao.DtExpedicao = DateTime.Parse(dr["dtExpRG"].ToString());
@@ -390,7 +394,7 @@ namespace DAO
                     cartao.IdCartorio = Convert.ToInt32(dr["idCartorio"].ToString());
                     cartao.DsObservacao = dr["dsObservacao"].ToString();
                     cartao.DsEmail = dr["dsEmail"].ToString();
-                    cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
+                    //cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
                     cartao.DsProfissao = dr["dsProfissao"].ToString();
                     
 

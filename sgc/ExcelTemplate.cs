@@ -916,7 +916,7 @@ namespace MSDN.Sample.XMLToExcel
             A.NoBullet noBullet1 = new A.NoBullet();
             A.TabStopList tabStopList1 = new A.TabStopList();
 
-            A.DefaultRunProperties defaultRunProperties1 = new A.DefaultRunProperties() { Kumimoji = false, Language = "en-GB", FontSize = 2000, Bold = false, Italic = false, Underline = A.TextUnderlineValues.None, Strike = A.TextStrikeValues.NoStrike, Capital = A.TextCapsValues.None, NormalizeHeight = false, Baseline = 0, SmartTagClean = false };
+            A.DefaultRunProperties defaultRunProperties1 = new A.DefaultRunProperties() { Kumimoji = false, Language = "en-GB", FontSize = 2000, Bold = false, Italic = false, Underline = A.TextUnderlineValues.None, Strike = A.TextStrikeValues.NoStrike, Capital = A.TextCapsValues.None, NormalizeHeight = false, Baseline = 0 };
 
             A.Outline outline5 = new A.Outline();
             A.NoFill noFill3 = new A.NoFill();
@@ -1033,7 +1033,7 @@ namespace MSDN.Sample.XMLToExcel
             A.NoBullet noBullet2 = new A.NoBullet();
             A.TabStopList tabStopList2 = new A.TabStopList();
 
-            A.DefaultRunProperties defaultRunProperties2 = new A.DefaultRunProperties() { Kumimoji = false, Language = "en-GB", FontSize = 2000, Bold = false, Italic = false, Underline = A.TextUnderlineValues.None, Strike = A.TextStrikeValues.NoStrike, Capital = A.TextCapsValues.None, NormalizeHeight = false, Baseline = 0, SmartTagClean = false };
+            A.DefaultRunProperties defaultRunProperties2 = new A.DefaultRunProperties() { Kumimoji = false, Language = "en-GB", FontSize = 2000, Bold = false, Italic = false, Underline = A.TextUnderlineValues.None, Strike = A.TextStrikeValues.NoStrike, Capital = A.TextCapsValues.None, NormalizeHeight = false, Baseline = 0};
 
             A.Outline outline7 = new A.Outline();
             A.NoFill noFill6 = new A.NoFill();
