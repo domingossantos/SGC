@@ -11,6 +11,7 @@ using DAO;
 using BLL;
 using sgc.utils;
 using System.Runtime.InteropServices;
+using System.Drawing.Printing;
 
 namespace sgc.admin
 {
@@ -19,6 +20,11 @@ namespace sgc.admin
         public Conexao con = new Conexao(Dados.strConexao);
         ConexaoDB conexao = new ConexaoDB(Dados.strConexao);
         public PedidoBLL pedidoBll;
+
+        private PrintDocument printDoc = new PrintDocument();
+        private PageSettings pgSettings = new PageSettings();
+        private PrinterSettings prtSettings = new PrinterSettings();
+        private List<string> linhasImpressao = new List<string>();
 
         // Importar DLL da Impressora de Etiquetas
         const uint IMAGE_BITMAP = 0;
@@ -200,6 +206,7 @@ namespace sgc.admin
         public SituacaoPedidoForm()
         {
             pedidoBll = new PedidoBLL(con);
+            printDoc.PrintPage += new PrintPageEventHandler(printDoc_PrintPage); 
             InitializeComponent();
         }
 
@@ -426,13 +433,56 @@ namespace sgc.admin
 
             List<int> item = new List<int>();
             item.Add(Convert.ToInt32(txNrPedido.Text));
+            linhasImpressao = this.pedidoBll.geraDadosEtiqueta(item, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
+
+            printDoc.DefaultPageSettings = pgSettings;
+            PrintDialog dlg = new PrintDialog();
+            dlg.Document = printDoc;
+            printDoc.Print();
+            /*
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                printDoc.Print();
+            }
+            */
+
+            
+        }
+
+        
+
+        private void printDoc_PrintPage(Object sender, PrintPageEventArgs e)
+        {
+            
+            Font printFont = new Font("Courier New", 9);
+            int leftMargin = 5; // e.MarginBounds.Left;
+            int topMargin = 1; // e.MarginBounds.Top;
+
+            int Y = 15;
+
+            for (int a = 0; a <= 4;a++ ) {
+                e.Graphics.DrawString("   " , printFont, Brushes.Black,leftMargin, Y);
+                Y = Y + 15;
+            }
 
 
-            imprimeEtiqueta(this.pedidoBll.geraDadosEtiqueta(item, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario));
+            //print text, true type text.
+            for (int x = 0; x < linhasImpressao.Count; x++)
+            {
+                e.Graphics.DrawString("  "+linhasImpressao[x].ToString(), printFont, Brushes.Black,
+                  leftMargin, Y);
+                
+                Y = Y + 15;
+            }
+
+            
         }
 
         public void imprimeEtiqueta(List<string> linhas)
         {
+
+            
+            /*
             int nLen, ret, sw;
             byte[] pbuf = new byte[128];
             string strmsg;
@@ -542,6 +592,7 @@ namespace sgc.admin
 
             // close port.
             A_ClosePrn();
+             * */
         }
         
     }

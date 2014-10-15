@@ -741,13 +741,14 @@ namespace BLL
 
                 if (count == 1)
                 {
-                    retorno.Add("ESCREVENTE " + nmUsuario);
-                    retorno.Add("BELEM/PA, " + DateTime.Now.ToShortDateString());
+                    retorno.Add("RECONHECO POR " + strTipo + " A(S) FIRMA(S):");
+                    
                 }
                 retorno.Add("SELO " + pedidoRow[1].ToString() + " " + pedidoRow[2].ToString() + " " + pedidoRow[4].ToString());
                 
                 if (count == 4) {
-                    retorno.Add("RECONHECO POR " + strTipo + " A(S) FIRMA(S):");
+                    retorno.Add("ESCREVENTE " + nmUsuario);
+                    retorno.Add("BELEM/PA, " + DateTime.Now.ToShortDateString());
                     count = 0;
                     //retorno.Add("#");
                 }
