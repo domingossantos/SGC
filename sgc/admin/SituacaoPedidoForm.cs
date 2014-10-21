@@ -12,6 +12,8 @@ using BLL;
 using sgc.utils;
 using System.Runtime.InteropServices;
 using System.Drawing.Printing;
+using MatrixReporter;
+using System.IO;
 
 namespace sgc.admin
 {
@@ -435,11 +437,41 @@ namespace sgc.admin
             item.Add(Convert.ToInt32(txNrPedido.Text));
             linhasImpressao = this.pedidoBll.geraDadosEtiqueta(item, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
 
+            utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);
+            Reporter imp = new Reporter();
+            bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
+
+            if (arquivo)
+            {
+                if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA")))
+                {
+                    File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA"));
+                }
+            }
+
+
+            imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA");
+            imp.StartJob();
+
+            sbyte i = 1;
+            imp.PrintText(i,1,"");
+            
+            for (int x = 0; x < linhasImpressao.Count; x++)
+            {
+                imp.PrintText((i++), 1, linhasImpressao[x]);
+            }
+
+
+            imp.PrintJob();
+            /*
+            Margins margens = new Margins(10,10,10,10);
+            //pgSettings.Margins = margens;
             printDoc.DefaultPageSettings = pgSettings;
+            printDoc.DefaultPageSettings.Margins = margens;
             PrintDialog dlg = new PrintDialog();
             dlg.Document = printDoc;
             printDoc.Print();
-            /*
+            
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 printDoc.Print();
@@ -455,8 +487,8 @@ namespace sgc.admin
         {
             
             Font printFont = new Font("Courier New", 9);
-            int leftMargin = 5; // e.MarginBounds.Left;
-            int topMargin = 1; // e.MarginBounds.Top;
+            int leftMargin = e.MarginBounds.Left;
+            int topMargin =  e.MarginBounds.Top;
 
             int Y = 15;
 

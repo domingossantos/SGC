@@ -721,6 +721,14 @@ namespace BLL
             
             string strTipo = "";
             int count = 1;
+            int start = 1;
+
+            // Quantos Blocos de 4
+            float div = vPedidos.Count / 4;
+            int blocos = (int)div;
+            if(blocos < 1) {blocos = 1;}
+
+            int passagemBloco = 1;
             for (int a = 0; a < vPedidos.Count; a++)
             {
                 pedidoRow = vPedidos[a].Row;
@@ -741,18 +749,38 @@ namespace BLL
 
                 if (count == 1)
                 {
+                    /*if (start == 1) {
+                        retorno.Add("");
+                        start = 0;
+                    }*/
                     retorno.Add("RECONHECO POR " + strTipo + " A(S) FIRMA(S):");
                     
                 }
+                
                 retorno.Add("SELO " + pedidoRow[1].ToString() + " " + pedidoRow[2].ToString() + " " + pedidoRow[4].ToString());
                 
-                if (count == 4) {
-                    retorno.Add("ESCREVENTE " + nmUsuario);
-                    retorno.Add("BELEM/PA, " + DateTime.Now.ToShortDateString());
-                    count = 0;
-                    //retorno.Add("#");
+                if(passagemBloco <= blocos){
+                    if (count == 4) {
+                        retorno.Add("ESCREVENTE " + nmUsuario);
+                        retorno.Add("BELEM/PA, " + DateTime.Now.ToShortDateString());
+                        retorno.Add("");
+                        retorno.Add("");
+                        retorno.Add("");
+                        count = 0;
+                        passagemBloco++;
+                        //retorno.Add("#");
+                    }
+
                 }
                 count++;
+                
+
+            }
+
+            if (!retorno[retorno.Count - 1].Contains("BELEM/PA"))
+            {
+                retorno.Add("ESCREVENTE " + nmUsuario);
+                retorno.Add("BELEM/PA, " + DateTime.Now.ToShortDateString());
             }
 
             return retorno;
