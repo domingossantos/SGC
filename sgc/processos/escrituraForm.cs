@@ -187,8 +187,10 @@ namespace sgc.processos
             lbSaldoCliente.Text = String.Format("R$ {0:N2}", escrituraBLL.getValorCliente(escritura.IdEscritura, 'C') - escrituraBLL.getValorCliente(escritura.IdEscritura, 'D'));
         }
         public void carregaTodosDados(){
-
-            escritura = escrituraBLL.getEscritura(Convert.ToInt32(lbNumFicha.Text));
+            if (escritura == null)
+            {
+                escritura = escrituraBLL.getEscritura(Convert.ToInt32(lbNumFicha.Text));
+            }
             carregaItensOrcamento();
             carregaTipoPessoa();
             carregaPessoaEscritura();
@@ -416,9 +418,13 @@ namespace sgc.processos
         }
 
         public void carregaItensOrcamento() {
-            
-            gridItensOrcamento.DataSource = escrituraBLL.listaItensOrcamento(escritura.IdEscritura);
-            
+            try
+            {
+                gridItensOrcamento.DataSource = escrituraBLL.listaItensOrcamento(escritura.IdEscritura);
+            }
+            catch (Exception e) {
+                utils.MessagensExcept.funMsgSistema("Verifique os dados do Orcamento",1);
+            }
         }
 
         // Metodos de ação

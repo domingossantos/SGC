@@ -439,6 +439,7 @@ namespace sgc.admin
 
             utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);
             Reporter imp = new Reporter();
+            EpsonCodes iCodes = new EpsonCodes();
             bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
 
             if (arquivo)
@@ -455,13 +456,14 @@ namespace sgc.admin
 
             sbyte i = 1;
             imp.PrintText(i,1,"");
-            
+            imp.PrintText(i++, 1, "");
             for (int x = 0; x < linhasImpressao.Count; x++)
             {
-                imp.PrintText((i++), 1, linhasImpressao[x]);
+                imp.PrintText((i++), 1, iCodes.CondensedOn + linhasImpressao[x]+iCodes.CondensedOff);
             }
 
-
+            imp.PutText(iCodes.UnderlineOff);
+            imp.EndJob();
             imp.PrintJob();
             /*
             Margins margens = new Margins(10,10,10,10);

@@ -279,4 +279,6 @@ namespace sgc.utils
             return valor.Replace("R$", "");
         }
     }
+
+    
 }

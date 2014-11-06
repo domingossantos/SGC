@@ -13,6 +13,7 @@ using DAO;
 using BLL;
 using MatrixReporter;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace sgc.caixa
 {
@@ -943,9 +944,11 @@ namespace sgc.caixa
                                             ,false
                                             , Convert.ToDouble(txDesconto.Text.Replace("R$", "")));
 
-
-
-                    //imprimeEtiqueta(pedidoBLL.geraDadosEtiqueta(lPedidos, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario));
+                    /*
+                    if (MessageBox.Show("Deseja Imprimir etiqueta?", "Atenção!", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString().Equals("Yes"))
+                    {
+                        imprimeEtiqueta(lPedidos);
+                    }*/
                     
                 }
                 
@@ -957,7 +960,43 @@ namespace sgc.caixa
         }
 
 
-        public void imprimeEtiqueta(StringBuilder linhas) {
+        public void imprimeEtiqueta(List<int> pedidos) {
+
+       
+            List<String> linhasImpressao = new List<string>();
+            linhasImpressao = pedidoBLL.geraDadosEtiqueta(pedidos, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
+
+            utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);
+            Reporter imp = new Reporter();
+            EpsonCodes iCodes = new EpsonCodes();
+            bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
+
+            if (arquivo)
+            {
+                if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA")))
+                {
+                    File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA"));
+                }
+            }
+
+
+            imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA");
+            imp.StartJob();
+
+            sbyte i = 1;
+            imp.PrintText(i, 1, "");
+            imp.PrintText(i++, 1, "");
+            for (int x = 0; x < linhasImpressao.Count; x++)
+            {
+                imp.PrintText((i++), 1, iCodes.CondensedOn +linhasImpressao[x]+iCodes.CondensedOff);
+            }
+
+            imp.PutText(iCodes.Eject);
+            imp.EndJob();
+            imp.PrintJob();
+
+
+            /*
             int nLen, ret, sw;
             byte[] pbuf = new byte[128];
             string strmsg;
@@ -1067,6 +1106,7 @@ namespace sgc.caixa
 
             // close port.
             A_ClosePrn();
+             * */
         }
 
 

@@ -499,13 +499,13 @@ namespace sgc.assinaturas
 
 
             if(cbOperacao.SelectedValue.ToString() == "60" || cbOperacao.SelectedValue.ToString() == "61"){
-                strTipoRec = (Microsoft.VisualBasic.Interaction.InputBox("1 - Autentico\n2 - Semelhante\n3 - Documento", "Tipo Reconhecimento", "1", 150, 150));
+                strTipoRec = (Microsoft.VisualBasic.Interaction.InputBox("1 - Autentico\n2 - Semelhante\n3 - Endoco", "Tipo Reconhecimento", "1", 150, 150));
 
                 try
                 {
                     idTipoReconhecimento = Convert.ToInt16(strTipoRec);
                     if (idTipoReconhecimento < 1 && idTipoReconhecimento > 3) {
-                        MessageBox.Show("Digite 1 - Autentico\n2 - Semelhante\n3 - Documento");
+                        MessageBox.Show("Digite 1 - Autentico\n2 - Semelhante\n3 - Endoco");
                         return;
                     }
                 }

@@ -709,7 +709,7 @@ namespace BLL
                         + "inner join tblTipoSelo t on i.cdTipoSelo = t.cdTipoSelo "
                         + "where cdAto in(60,61) "
                         + "and nrPedido in("+pedidos+") "
-                        + "order by i.tpReconhecimento desc ";
+                        + "order by i.tpReconhecimento desc, i.nrSelo asc ";
 
             
             DataTable tbPedidos = new DataTable();
@@ -719,73 +719,112 @@ namespace BLL
             DataView vPedidos = new DataView(tbPedidos);
             DataRow pedidoRow;
             
-            string strTipo = "";
-            int count = 1;
-            int start = 1;
+            string strTipoReconhecimento = "";
+            int linhas = 0;
+            int espacamento = 3;
+            bool novaPagina = false;
 
-            // Quantos Blocos de 4
-            float div = vPedidos.Count / 4;
-            int blocos = (int)div;
-            if(blocos < 1) {blocos = 1;}
-
-            int passagemBloco = 1;
+            int tipoRec = 0;
             for (int a = 0; a < vPedidos.Count; a++)
             {
                 pedidoRow = vPedidos[a].Row;
+                strTipoReconhecimento = getTipoReconhecimento(pedidoRow, strTipoReconhecimento);
 
-                if (pedidoRow[0].ToString() == "1") {
-                    strTipo = "AUTENTICIDADE";
-                }
-
-                if (pedidoRow[0].ToString() == "2")
+                if (a == 0)
                 {
-                    strTipo = "SEMELHANÇA";
+                    tipoRec = Convert.ToInt16(pedidoRow[0].ToString());
+                    retorno.Add("RECONHECO POR " + strTipoReconhecimento + " A(S) FIRMA(S):");
                 }
+               
 
-                if (pedidoRow[0].ToString() == "1")
+                if (tipoRec != Convert.ToInt16(pedidoRow[0].ToString()))
                 {
-                    strTipo = "DOCUMENTO";
-                }
+                    novaPagina = true;
 
-                if (count == 1)
-                {
-                    /*if (start == 1) {
-                        retorno.Add("");
-                        start = 0;
-                    }*/
-                    retorno.Add("RECONHECO POR " + strTipo + " A(S) FIRMA(S):");
-                    
-                }
-                
-                retorno.Add("SELO " + pedidoRow[1].ToString() + " " + pedidoRow[2].ToString() + " " + pedidoRow[4].ToString());
-                
-                if(passagemBloco <= blocos){
-                    if (count == 4) {
-                        retorno.Add("ESCREVENTE " + nmUsuario);
-                        retorno.Add("BELEM/PA, " + DateTime.Now.ToShortDateString());
-                        retorno.Add("");
-                        retorno.Add("");
-                        retorno.Add("");
-                        count = 0;
-                        passagemBloco++;
-                        //retorno.Add("#");
+                    if (linhas == 1)
+                    {
+                        //retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
+                        retorno.Add("##########");
+                        retorno.Add("##########");
                     }
 
+                    if (linhas == 2)
+                    {
+                        retorno.Add("##########");
+                    }
+
+                    retorno.Add("ESCREVENTE " + nmUsuario);
+                    retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
+                    retorno.Add("");
+                    retorno.Add("");
+                    retorno.Add("");
+                    novaPagina = true;
+                    linhas = 1;
                 }
-                count++;
+                else {
+                    linhas++;
+
+                    if (linhas == 3)
+                    {
+                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
+                        retorno.Add("ESCREVENTE " + nmUsuario);
+                        retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
+                        retorno.Add("");
+                        retorno.Add("");
+                        retorno.Add("");
+                        novaPagina = true;
+                        linhas = 0;
+                    }
+                    else {
+                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
+                    }
+                }
                 
 
-            }
+                if (novaPagina) {
+                    novaPagina = false;
+                    retorno.Add("RECONHECO POR " + strTipoReconhecimento + " A(S) FIRMA(S):");
 
+                    if (tipoRec != Convert.ToInt16(pedidoRow[0].ToString()))
+                    {
+                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
+                    }
+                    tipoRec = Convert.ToInt16(pedidoRow[0].ToString());
+                }
+
+                
+            }
+            
             if (!retorno[retorno.Count - 1].Contains("BELEM/PA"))
             {
                 retorno.Add("ESCREVENTE " + nmUsuario);
-                retorno.Add("BELEM/PA, " + DateTime.Now.ToShortDateString());
+                retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
             }
-
+            
             return retorno;
 
         }
+
+        private static string getTipoReconhecimento(DataRow pedidoRow, string strTipo)
+        {
+            if (pedidoRow[0].ToString() == "1")
+            {
+                strTipo = "AUTENTICIDADE";
+            }
+
+            if (pedidoRow[0].ToString() == "2")
+            {
+                strTipo = "SEMELHANÇA";
+            }
+
+            if (pedidoRow[0].ToString() == "3")
+            {
+                strTipo = "ENDOÇO";
+            }
+            return strTipo;
+        }
+
+         
 
         public void imprimePedido(List<int> nrPedidos, int nrCaixa, string nomeBoleto, string pathIniFile, string nmUsuario, int forpaPagto, double vlPago = 0, string nmCorrentista = "", bool reimpressao = false,double vlDesconto = 0)
         {
@@ -1996,6 +2035,51 @@ namespace BLL
         {
             return pedidoDAO.getPedidos(" and stPedido in('A','F') and dsLogin = '" + login + "'");
         }
+
+        public string Preencher(string PVal, string PIns, int PLado, int PNum)
+        //{PVal: string que será completada com o caracter PIns
+        //PIns: o caracter que será inserido a PVal
+        //PLado: O Lado em que o caracter PIns será inserido. Podendo ser o lado direiro ou esquerdo da string PVal
+        // PNum: O número de vezes que o caracter PIns será inserido
+        //var //i : Integer;
+        {
+            string Aux;
+            if (PVal == null)
+            {
+                PVal = "";
+            }
+
+            Aux = PVal;
+
+            if (Aux.Length < PNum)
+            {
+                while (Aux.Length < PNum)
+                {
+                    if (PLado == 1)
+                    {
+                        Aux = Aux + PIns;
+                    }
+                    else
+                    {
+                        if (PLado == 0)
+                        {
+                            Aux = PIns + Aux;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (Aux.Length >= PNum)
+                {
+                    Aux = Aux.Substring(0, PNum);
+                }
+            }
+            //Aux.CopyTo(1,Aux,1,10);
+            return Aux;
+        }
     }
+
+    
 }
 
