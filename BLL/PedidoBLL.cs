@@ -797,6 +797,17 @@ namespace BLL
             
             if (!retorno[retorno.Count - 1].Contains("BELEM/PA"))
             {
+                if (linhas == 1)
+                {
+                    //retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
+                    retorno.Add("##########");
+                    retorno.Add("##########");
+                }
+
+                if (linhas == 2)
+                {
+                    retorno.Add("##########");
+                }
                 retorno.Add("ESCREVENTE " + nmUsuario);
                 retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
             }

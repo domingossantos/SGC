@@ -944,11 +944,11 @@ namespace sgc.caixa
                                             ,false
                                             , Convert.ToDouble(txDesconto.Text.Replace("R$", "")));
 
-                    /*
+                    
                     if (MessageBox.Show("Deseja Imprimir etiqueta?", "Atenção!", MessageBoxButtons.YesNo, MessageBoxIcon.Question).ToString().Equals("Yes"))
                     {
                         imprimeEtiqueta(lPedidos);
-                    }*/
+                    }
                     
                 }
                 
