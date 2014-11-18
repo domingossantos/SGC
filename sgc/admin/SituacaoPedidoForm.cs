@@ -434,7 +434,10 @@ namespace sgc.admin
         {
 
             List<int> item = new List<int>();
-            item.Add(Convert.ToInt32(txNrPedido.Text));
+            String[] campos = txNrPedido.Text.Split(',');
+
+            item.Add(Convert.ToInt32(campos[0]));
+            item.Add(Convert.ToInt32(campos[1]));
             linhasImpressao = this.pedidoBll.geraDadosEtiqueta(item, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
 
             utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);

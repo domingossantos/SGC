@@ -349,6 +349,12 @@
       <DependentUpon>tipoSeloForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ExcelTemplate.cs" />
+    <Compile Include="financeiro\relAtendimentoLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="financeiro\relAtendimentoLoginForm.Designer.cs">
+      <DependentUpon>relAtendimentoLoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="financeiro\resumoAtosPeriodoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -667,6 +673,9 @@
     <EmbeddedResource Include="controleSelos\tipoSeloForm.resx">
       <DependentUpon>tipoSeloForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="financeiro\relAtendimentoLoginForm.resx">
+      <DependentUpon>relAtendimentoLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="financeiro\resumoAtosPeriodoForm.resx">
       <DependentUpon>resumoAtosPeriodoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -750,6 +759,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="relatorios\relAtendimentoLogin.rdlc" />
+    <EmbeddedResource Include="relatorios\relAtendimentosLogin.rdlc" />
     <EmbeddedResource Include="relatorios\relImpressaoCNH.rdlc" />
     <EmbeddedResource Include="relatorios\fichaCliente.rdlc" />
     <EmbeddedResource Include="relatorios\listaEscrituras.rdlc" />

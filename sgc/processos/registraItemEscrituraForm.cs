@@ -46,12 +46,12 @@ namespace sgc.processos
                 movimento.DtMovimento = DateTime.Now;
                 movimento.DsLogin = utils.sessao.UsuarioSessao.DsLogin;
                 movimento.TpMovimento = 'C';
-                movimento.StRegistro = 'A';
-                escrituraBLL.gravaPagamento(movimento, ref p);
+                movimento.StRegistro = 'P';
+                escrituraBLL.gravaPagamentoEscritura(movimento, ref p);
 
                 MessageBox.Show("Pagamento gravado com sucesso!\nImprimindo pedido Nº " + p.NrPedido);
-                string nmBoleto = (Microsoft.VisualBasic.Interaction.InputBox("Informações para o Boleto:", "Cartorio Conduru", "0", 150, 150));
-                escrituraBLL.imprimePedido(escritura.IdEscritura.ToString(), p.NrPedido.ToString(), p.VlPedido.ToString(), utils.sessao.PathIniFile,nmBoleto);
+                string nmBoleto = (Microsoft.VisualBasic.Interaction.InputBox("Nome para o Recibo:", "Cartorio Conduru", "0", 150, 150));
+                escrituraBLL.imprimeReciboPedidoEscritura(escritura.IdEscritura.ToString(), p.NrPedido.ToString(), p.VlPedido.ToString(), utils.sessao.PathIniFile,nmBoleto);
             }
             catch (Exception ex)
             {

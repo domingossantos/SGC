@@ -709,7 +709,7 @@ namespace BLL
                         + "inner join tblTipoSelo t on i.cdTipoSelo = t.cdTipoSelo "
                         + "where cdAto in(60,61) "
                         + "and nrPedido in("+pedidos+") "
-                        + "order by i.tpReconhecimento desc, i.nrSelo asc ";
+                        + "order by i.tpReconhecimento , i.nrSelo asc ";
 
             
             DataTable tbPedidos = new DataTable();
@@ -720,8 +720,8 @@ namespace BLL
             DataRow pedidoRow;
             
             string strTipoReconhecimento = "";
+            String nome = "";
             int linhas = 0;
-            int espacamento = 3;
             bool novaPagina = false;
 
             int tipoRec = 0;
@@ -729,21 +729,18 @@ namespace BLL
             {
                 pedidoRow = vPedidos[a].Row;
                 strTipoReconhecimento = getTipoReconhecimento(pedidoRow, strTipoReconhecimento);
-
+                nome = pedidoRow[4].ToString();
                 if (a == 0)
                 {
                     tipoRec = Convert.ToInt16(pedidoRow[0].ToString());
-                    retorno.Add("RECONHECO POR " + strTipoReconhecimento + " A(S) FIRMA(S):");
                 }
-               
-
+            
                 if (tipoRec != Convert.ToInt16(pedidoRow[0].ToString()))
                 {
                     novaPagina = true;
 
                     if (linhas == 1)
                     {
-                        //retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
                         retorno.Add("##########");
                         retorno.Add("##########");
                     }
@@ -753,12 +750,14 @@ namespace BLL
                         retorno.Add("##########");
                     }
 
-                    retorno.Add("ESCREVENTE " + nmUsuario);
-                    retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
-                    retorno.Add("");
-                    retorno.Add("");
-                    retorno.Add("");
-                    novaPagina = true;
+                    if (linhas != 0)
+                    {
+                        retorno.Add("ESCREVENTE " + nmUsuario);
+                        retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
+                        retorno.Add("");
+                        retorno.Add("");
+                        retorno.Add("");
+                    }
                     linhas = 1;
                 }
                 else {
@@ -766,7 +765,7 @@ namespace BLL
 
                     if (linhas == 3)
                     {
-                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
+                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + nome);
                         retorno.Add("ESCREVENTE " + nmUsuario);
                         retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
                         retorno.Add("");
@@ -776,20 +775,29 @@ namespace BLL
                         linhas = 0;
                     }
                     else {
-                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
-                    }
+                        if (linhas == 1) {
+                            retorno.Add("RECONHECO POR " + strTipoReconhecimento + " A(S) FIRMA(S):" + linhas.ToString());
+                        }
+                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + nome);
+                        
+                   }
                 }
                 
 
                 if (novaPagina) {
-                    novaPagina = false;
-                    retorno.Add("RECONHECO POR " + strTipoReconhecimento + " A(S) FIRMA(S):");
 
                     if (tipoRec != Convert.ToInt16(pedidoRow[0].ToString()))
                     {
-                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
+                        strTipoReconhecimento = getTipoReconhecimento(pedidoRow, strTipoReconhecimento);
+                        retorno.Add("RECONHECO POR " + strTipoReconhecimento + " A(S) FIRMA(S):" + linhas.ToString());
+                        retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + nome);
                     }
+                    
+
+                        
+                    novaPagina = false;
                     tipoRec = Convert.ToInt16(pedidoRow[0].ToString());
+                    
                 }
 
                 
@@ -799,7 +807,6 @@ namespace BLL
             {
                 if (linhas == 1)
                 {
-                    //retorno.Add(Preencher(pedidoRow[1].ToString(), "0", 0, 7) + pedidoRow[2].ToString() + pedidoRow[4].ToString());
                     retorno.Add("##########");
                     retorno.Add("##########");
                 }
@@ -808,8 +815,11 @@ namespace BLL
                 {
                     retorno.Add("##########");
                 }
-                retorno.Add("ESCREVENTE " + nmUsuario);
-                retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
+                if (linhas != 0)
+                {
+                    retorno.Add("ESCREVENTE " + nmUsuario);
+                    retorno.Add("BELEM/PARA, ###                            ### " + DateTime.Now.ToShortDateString());
+                }
             }
             
             return retorno;

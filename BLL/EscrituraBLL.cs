@@ -529,6 +529,39 @@ namespace BLL
             }
         }
 
+
+        public void gravaPagamentoEscritura(MovimentoDeposito movimento, ref Pedido p)
+        {
+            con.ObjCon.Open();
+            SqlTransaction trans = con.ObjCon.BeginTransaction();
+            try
+            {
+                movimentoDepositoDAO.addMovimento(movimento, trans);
+
+                ItemPedido i = new ItemPedido();
+                p = pedidoDAO.getNovoPedido(movimento.DsLogin, trans);
+
+                i.CdAto = movimento.CdAto;
+                i.IdMovimentoBanco = movimento.IdMovimentoBanco;
+                i.NrPedido = p.NrPedido;
+                i.VlItem = movimento.VlMovimento;
+
+                itemPedidoDAO.addItemPedido(i, trans);
+
+                pedidoDAO.atualizaPedido(p.NrPedido, 'E', trans);
+                trans.Commit();
+            }
+            catch (Exception ex)
+            {
+                trans.Rollback();
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                con.ObjCon.Close();
+            }
+        }
         public void solicitaPagamento(MovimentoDeposito movimento,bool forcar = false)
         {
             con.ObjCon.Open();
@@ -709,6 +742,70 @@ namespace BLL
             }
         }
 
+
+        public void imprimeReciboPedidoEscritura(string nrFicha, string nrPedido, string valor, string pathIniFile, string informacao = "")
+        {
+            try
+            {
+                IniFile iniFile = new IniFile(pathIniFile);
+
+                bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
+
+                if (arquivo)
+                {
+                    if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA")))
+                        File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA"));
+                }
+
+                imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRESSORA");
+                imp.StartJob();
+                imp.PrintText(1, 1, iniFile.IniReadValue("HBOLETO", "LINHA1"));
+                imp.PrintText(2, 1, iniFile.IniReadValue("HBOLETO", "LINHA2"));
+                imp.PrintText(3, 1, iniFile.IniReadValue("HBOLETO", "LINHA3"));
+                imp.PrintText(4, 1, iniFile.IniReadValue("HBOLETO", "LINHA4"));
+                imp.PrintText(5, 1, iniFile.IniReadValue("HBOLETO", "LINHA5"));
+                imp.PrintText(6, 1, "################### RECIBO ####################");
+                //imp.PrintText(7, 1, "No. PEDIDO:......................" + nrPedido.PadLeft(7, '0').PadLeft(14, ' '));
+                imp.PrintText(8, 1, "No. FICHA:......................" + nrFicha.PadLeft(7, '0').PadLeft(14, ' '));
+                //imp.PrintText(9, 1, "Valor PEDIDO:...................." + String.Format("{0:N2}", Convert.ToDouble(valor)).PadLeft(14, ' '));
+                imp.PrintText(10, 1, "Cliente: " + informacao);
+                imp.PrintText(11, 1, "#################### ITENS ####################");
+
+                DataTable dados = itemPedidoDAO.getItensPedidoImpressao(nrPedido);
+                DataView dvDados = new DataView(dados);
+                DataRow drDados;
+                int x = 12;
+                for (int i = 0; i < dvDados.Count; i++)
+                {
+                    drDados = dvDados[i].Row;
+
+                    imp.PrintText(x, 1, drDados[0].ToString().PadLeft(3, '0'));
+
+                    imp.PrintText(x, 6, drDados[1].ToString());
+                    if (drDados[1].ToString().Length > 33)
+                        x++;
+                    imp.PrintText(x, 33, String.Format("{0:N2}", drDados[2]).PadLeft(5, ' '));
+                    imp.PrintText(x, 40, String.Format("{0:N2}", drDados[3]).PadLeft(8, ' '));
+                    x++;
+
+                }
+
+                imp.PrintText(x, 1, iniFile.IniReadValue("FBOLETO", "LINHA1"));
+
+                int qtdLinhas = Convert.ToInt32(iniFile.IniReadValue("FBOLETO", "QTDFIM"));
+                x++;
+                for (int i = 0; i < qtdLinhas; i++)
+                {
+                    imp.PrintText(x++, 1, "");
+                }
+                imp.EndJob();
+                imp.PrintJob();
+            }
+            finally
+            {
+                con.ObjCon.Close();
+            }
+        }
         public double getValorAto(int idAto) {
             try
             {
