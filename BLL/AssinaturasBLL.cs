@@ -438,43 +438,7 @@ namespace BLL
                 if (cartao == null) {
                     cartao = cartaoDAO.getCartaoPorNumeroCartorioNew(nrCartao);
                 }
-                //DataTable dados = cartaoDAO.getCartao(" and nrCartao = '" + nrCartao + "'");
-                
-                /*
-                if (dados.Rows.Count > 0)
-                {
-                    cartao = new CartaoAssinatura();
-                    cartao.NrCartao = dados.Rows[0]["nrCartao"].ToString();
-                    cartao.NmCartao = dados.Rows[0]["nmCartao"].ToString();
-                    cartao.NmCidade = dados.Rows[0]["nmCidade"].ToString();
-                    cartao.NrCEP = dados.Rows[0]["nrCEP"].ToString();
-                    cartao.NrCPF = dados.Rows[0]["nrCPF"].ToString();
-                    cartao.NrFones = dados.Rows[0]["nrFones"].ToString();
-                    cartao.NrRG = dados.Rows[0]["nrRG"].ToString();
-                    cartao.SgUF = dados.Rows[0]["sgUF"].ToString();
-                    cartao.DsBairro = dados.Rows[0]["dsBairro"].ToString();
-                    cartao.DsEndereco = dados.Rows[0]["dsEndereco"].ToString();
-                    cartao.DsOrgaoEmissor = dados.Rows[0]["dsOrgaoExpRG"].ToString();
 
-                    if (!dados.Rows[0]["dtCadastro"].ToString().Equals(""))
-                        cartao.DtCadastro = DateTime.Parse(dados.Rows[0]["dtCadastro"].ToString());
-
-                    if (!dados.Rows[0]["dtExpRG"].ToString().Equals(""))
-                        cartao.DtExpedicao = DateTime.Parse(dados.Rows[0]["dtExpRG"].ToString());
-
-                    if (!dados.Rows[0]["dtNascimento"].ToString().Equals(""))
-                        cartao.DtNascimento = DateTime.Parse(dados.Rows[0]["dtNascimento"].ToString());
-
-                    if (!dados.Rows[0]["dtRenovacao"].ToString().Equals(""))
-                        cartao.DtRenovacao = DateTime.Parse(dados.Rows[0]["dtRenovacao"].ToString());
-
-                    cartao.DsObservacao = dados.Rows[0]["dsObservacao"].ToString();
-                    if (!dados.Rows[0]["cdTipoRG"].ToString().Equals(""))
-                        cartao.CdTipoRG = Convert.ToInt32(dados.Rows[0]["cdTipoRG"].ToString());
-
-                    cartao.DsEmail = dados.Rows[0]["dsEmail"].ToString();
-                }
-                */
 
                 return cartao;
             }

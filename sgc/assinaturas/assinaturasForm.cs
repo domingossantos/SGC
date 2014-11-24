@@ -821,10 +821,16 @@ namespace sgc.assinaturas
 
         private void grid_DoubleClick(object sender, EventArgs e)
         {
-            CartaoAssinatura cartao = assinaturaBLL.getCartao(grid[0, grid.CurrentRow.Index].Value.ToString());
+            try
+            {
+                CartaoAssinatura cartao = assinaturaBLL.getCartao(grid[0, grid.CurrentRow.Index].Value.ToString());
 
-            detalheCartaoAssinaturaForm detalheCartao = new detalheCartaoAssinaturaForm(cartao);
-            detalheCartao.Show();
+                detalheCartaoAssinaturaForm detalheCartao = new detalheCartaoAssinaturaForm(cartao);
+                detalheCartao.Show();
+            }
+            catch (Exception ex) {
+                utils.MessagensExcept.funMsgSistema("Erro ao visualizar cartão.\n" + ex.Message, 1);
+            }
         }
 
         private void btOutraBase_Click(object sender, EventArgs e)

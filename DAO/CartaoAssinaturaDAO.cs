@@ -374,7 +374,8 @@ namespace DAO
                     cartao.NrRG = (dr["nrRG"].ToString());
                     cartao.DsOrgaoEmissor = (dr["dsOrgaoExpRG"].ToString());
 
-                    if (dr["dtExpRG"].ToString() != "") {
+                    if (dr["idEstadoCivil"].ToString() != "")
+                    {
                         cartao.IdEstadoCivil = Convert.ToInt32(dr["idEstadoCivil"].ToString());
                     }
                     

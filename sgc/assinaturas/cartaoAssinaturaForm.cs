@@ -231,7 +231,9 @@ namespace sgc.assinaturas
                 if (!linha["dtNascimento"].ToString().Equals(""))
                     cartao.DtNascimento = Convert.ToDateTime(linha["dtNascimento"].ToString());
 
-                cartao.IdEstadoCivil = Convert.ToInt32(linha["idEstadoCivil"].ToString());
+
+                if (!linha["idEstadoCivil"].ToString().Equals(""))
+                    cartao.IdEstadoCivil = Convert.ToInt32(linha["idEstadoCivil"].ToString());
 
                 cartao.NmCartao = linha["nmCartao"].ToString();
                 cartao.DsEndereco = linha["dsEndereco"].ToString();

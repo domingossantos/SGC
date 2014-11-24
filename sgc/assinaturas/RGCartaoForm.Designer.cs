@@ -54,17 +54,19 @@
             this.panel1.Controls.Add(this.btnRG1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(696, 38);
+            this.panel1.Size = new System.Drawing.Size(1044, 58);
             this.panel1.TabIndex = 0;
             // 
             // btnImpressao
             // 
             this.btnImpressao.Image = global::sgc.Properties.Resources.page_preview;
             this.btnImpressao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImpressao.Location = new System.Drawing.Point(296, 5);
+            this.btnImpressao.Location = new System.Drawing.Point(443, 8);
+            this.btnImpressao.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnImpressao.Name = "btnImpressao";
-            this.btnImpressao.Size = new System.Drawing.Size(106, 27);
+            this.btnImpressao.Size = new System.Drawing.Size(159, 42);
             this.btnImpressao.TabIndex = 29;
             this.btnImpressao.Text = "Imprimir RG";
             this.btnImpressao.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -77,9 +79,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFechar.Image = global::sgc.Properties.Resources.close16;
             this.btnFechar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFechar.Location = new System.Drawing.Point(618, 5);
+            this.btnFechar.Location = new System.Drawing.Point(928, 6);
+            this.btnFechar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(75, 27);
+            this.btnFechar.Size = new System.Drawing.Size(112, 42);
             this.btnFechar.TabIndex = 2;
             this.btnFechar.Text = "Fechar";
             this.btnFechar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -90,9 +93,10 @@
             // 
             this.button2.Image = global::sgc.Properties.Resources.report;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(154, 5);
+            this.button2.Location = new System.Drawing.Point(231, 8);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(136, 27);
+            this.button2.Size = new System.Drawing.Size(204, 42);
             this.button2.TabIndex = 1;
             this.button2.Text = "Digitalizar Verso RG";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -103,9 +107,10 @@
             // 
             this.btnRG1.Image = global::sgc.Properties.Resources.report;
             this.btnRG1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRG1.Location = new System.Drawing.Point(12, 5);
+            this.btnRG1.Location = new System.Drawing.Point(18, 8);
+            this.btnRG1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRG1.Name = "btnRG1";
-            this.btnRG1.Size = new System.Drawing.Size(136, 27);
+            this.btnRG1.Size = new System.Drawing.Size(204, 42);
             this.btnRG1.TabIndex = 0;
             this.btnRG1.Text = "Digitalizar Frente RG ";
             this.btnRG1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -115,7 +120,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 38);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 58);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -125,16 +131,18 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pbxRG2);
-            this.splitContainer1.Size = new System.Drawing.Size(696, 348);
-            this.splitContainer1.SplitterDistance = 352;
+            this.splitContainer1.Size = new System.Drawing.Size(1044, 536);
+            this.splitContainer1.SplitterDistance = 528;
+            this.splitContainer1.SplitterWidth = 6;
             this.splitContainer1.TabIndex = 1;
             // 
             // pbxRG1
             // 
             this.pbxRG1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxRG1.Location = new System.Drawing.Point(0, 0);
+            this.pbxRG1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbxRG1.Name = "pbxRG1";
-            this.pbxRG1.Size = new System.Drawing.Size(352, 348);
+            this.pbxRG1.Size = new System.Drawing.Size(528, 536);
             this.pbxRG1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxRG1.TabIndex = 0;
             this.pbxRG1.TabStop = false;
@@ -143,29 +151,32 @@
             // 
             this.pbxRG2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxRG2.Location = new System.Drawing.Point(0, 0);
+            this.pbxRG2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbxRG2.Name = "pbxRG2";
-            this.pbxRG2.Size = new System.Drawing.Size(340, 348);
+            this.pbxRG2.Size = new System.Drawing.Size(510, 536);
             this.pbxRG2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxRG2.TabIndex = 0;
             this.pbxRG2.TabStop = false;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 364);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 572);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(696, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1044, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // RGCartaoForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 386);
+            this.ClientSize = new System.Drawing.Size(1044, 594);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "RGCartaoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RG Cartão No. ";

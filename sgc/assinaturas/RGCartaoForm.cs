@@ -64,6 +64,9 @@ namespace sgc.assinaturas
                 //device.ImageLayout.Set(0f, 2.9f, 4.72f, 2.7f);
 
                 System.IO.MemoryStream msImg = null;
+                System.IO.MemoryStream msImgVerso = null;
+
+                sbyte controle = 1;
 
 
                 AcquireModalState acquireModalState = AcquireModalState.None;
@@ -72,28 +75,16 @@ namespace sgc.assinaturas
                     acquireModalState = device.AcquireModal();
 
                     if (acquireModalState == AcquireModalState.ImageAcquired){
-                        msImg = device.AcquiredImages.Last.GetAsStream(ImageFileFormat.JPEG);
+                        if (controle == 1)
+                        {
+                            msImg = device.AcquiredImages.Last.GetAsStream(ImageFileFormat.JPEG);
+                        }
+                        if (controle == 2)
+                        {
+                            msImgVerso = device.AcquiredImages.Last.GetAsStream(ImageFileFormat.JPEG);
+                        }
                     }
-                    /*
-                    switch (acquireModalState)
-                    {
-                        case :
-                            
-                            break;
-                        case AcquireModalState.ScanCompleted:
-                            device.Close();
-                            deviceManager.Close();
-                            break;
-                        case AcquireModalState.ScanCanceled:
-                            device.Close();
-                            deviceManager.Close();
-                            break;
-                        case AcquireModalState.ScanFailed:
-                            device.Close();
-                            deviceManager.Close();
-                            break;
-                    }
-                     */
+                    controle++;
                 }
                 while (acquireModalState != AcquireModalState.None);
 
@@ -111,6 +102,18 @@ namespace sgc.assinaturas
                         }
                         assinaturaBLL.salvaRgCartao(nrCartao, campo, imageByte);
                         utils.MessagensExcept.funMsgSistema("Imagem Salva!", 2);
+                    }
+
+
+                    if (msImgVerso != null) {
+                        imageByte = (byte[])msImgVerso.GetBuffer();  //img.FileData.get_BinaryData();
+
+                        if (imageByte != null)
+                        {
+
+                            assinaturaBLL.salvaRgCartao(nrCartao, "biRGVerso", imageByte);
+                            utils.MessagensExcept.funMsgSistema("Imagem Verso Salva!", 2);
+                        }
                     }
 
                 }
@@ -142,7 +145,7 @@ namespace sgc.assinaturas
                 byte[] imgByte = null;
                 img.Image = null;
                 String campoLado = "biRGFrente";
-
+                qtdImg = lado;
                 if (lado == 2)
                 {
                     campoLado = "biRGVerso";
@@ -161,7 +164,7 @@ namespace sgc.assinaturas
                 }
                 else {
                     img.Image = Image.FromFile(utils.sessao.PathApp + "\\no-img.jpg");
-                    qtdImg = 1;
+                    
                 }
                 
             }
@@ -180,6 +183,8 @@ namespace sgc.assinaturas
         {
             digitalizar(1);
             carregaImagem(pbxRG1, 1);
+            carregaImagem(pbxRG2, 2);
+
         }
 
         private void button2_Click(object sender, EventArgs e)
