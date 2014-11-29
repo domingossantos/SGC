@@ -691,27 +691,76 @@ namespace BLL
             return dt;
         }
 
-        public List<string> geraDadosEtiqueta(List<int> nrPedidos, string pathIniFile,string nmUsuario)
+        public List<string> geraDadosEtiqueta(int nrPedido, string pathIniFile,string nmUsuario)
         {
 
-            List<string> retorno = new List<string>();
-
-            String pedidos = "";
-            for (int i = 0; i < nrPedidos.Count; i++) {
-                pedidos += nrPedidos[i] + ",";
-            }
-
-            pedidos = pedidos.Substring(0, (pedidos.Length - 1));
-
-            String sql = "select i.tpReconhecimento, i.nrSelo,t.nrSerie,i.nrCartao,  "
+            String sql = "";
+                
+                /*"select i.tpReconhecimento, i.nrSelo,t.nrSerie,i.nrCartao,  "
                         + " (select c.nmCartao from tblCartaoAssinatura c where c.nrCartao = i.nrCartao ) as nrCartao  "
                         + " from tblItensPedido i "
                         + "inner join tblTipoSelo t on i.cdTipoSelo = t.cdTipoSelo "
                         + "where cdAto in(60,61) "
-                        + "and nrPedido in("+pedidos+") "
+                        + "and nrPedido = "+nrPedido.ToString()+" "
                         + "order by i.tpReconhecimento , i.nrSelo asc ";
+                */
 
-            
+            sql = sql + "  \n ";
+            sql = sql + " declare @linhas table( \n ";
+            sql = sql + " 	tipo char(1), \n ";
+            sql = sql + " 	selo int, \n ";
+            sql = sql + " 	serie char(1), \n ";
+            sql = sql + " 	cartao varchar(15), \n ";
+            sql = sql + " 	nome varchar(100) \n ";
+            sql = sql + " ) \n ";
+            sql = sql + "  \n ";
+            sql = sql + " declare @tipo char(1), \n ";
+            sql = sql + " 		@selo int, \n ";
+            sql = sql + " 		@serie char(1), \n ";
+            sql = sql + " 		@cartao varchar(15), \n ";
+            sql = sql + " 		@nome varchar(100) \n ";
+            sql = sql + "  \n ";
+            sql = sql + "  \n ";
+            sql = sql + " declare cDados cursor static for \n ";
+            sql = sql + " 	select i.tpReconhecimento, i.nrSelo,t.nrSerie,i.nrCartao,   \n ";
+            sql = sql + " 	(select c.nmCartao from tblCartaoAssinatura c where c.nrCartao = i.nrCartao ) as nmCartao   \n ";
+            sql = sql + " 	from tblItensPedido i  \n ";
+            sql = sql + " 	inner join tblTipoSelo t on i.cdTipoSelo = t.cdTipoSelo  \n ";
+            sql = sql + " 	where cdAto in(60,61)  \n ";
+            sql = sql + " 	and nrPedido = " + nrPedido.ToString() + "  \n ";
+            sql = sql + " 	order by i.tpReconhecimento , i.nrSelo asc \n ";
+            sql = sql + " 	 \n ";
+            sql = sql + " open cDados \n ";
+            sql = sql + "  \n ";
+            sql = sql + " fetch cDados into @tipo, @selo, @serie, @cartao, @nome \n ";
+            sql = sql + "  \n ";
+            sql = sql + " while (@@FETCH_STATUS <> - 1) \n ";
+            sql = sql + " begin \n ";
+            sql = sql + " 	if(LEN(@nome) > 44) \n ";
+            sql = sql + " 	begin \n ";
+            sql = sql + " 		insert into @linhas (tipo,selo,serie,cartao,nome)  \n ";
+            sql = sql + " 			values (@tipo,@selo,@serie,@cartao, SUBSTRING(@nome,1,45)) \n ";
+            sql = sql + " 			 \n ";
+            sql = sql + " 		insert into @linhas (tipo,selo,serie,cartao,nome)  \n ";
+            sql = sql + " 			values (@tipo,@selo,@serie,@cartao, SUBSTRING(@nome,46,LEN(@nome)))	 \n ";
+            sql = sql + " 	end \n ";
+            sql = sql + " 	else \n ";
+            sql = sql + " 	begin \n ";
+            sql = sql + " 		insert into @linhas (tipo,selo,serie,cartao,nome)  \n ";
+            sql = sql + " 			values (@tipo,@selo,@serie,@cartao, @nome)	 \n ";
+            sql = sql + "  \n ";
+            sql = sql + " 	end \n ";
+            sql = sql + "  \n ";
+            sql = sql + " 	fetch cDados into @tipo, @selo, @serie, @cartao, @nome \n ";
+            sql = sql + " end \n ";
+            sql = sql + "  \n ";
+            sql = sql + " close cDados \n ";
+            sql = sql + " deallocate cDados \n ";
+            sql = sql + "  \n ";
+            sql = sql + "  \n ";
+            sql = sql + " select * from @linhas \n ";
+
+            List<string> retorno = new List<string>();
             DataTable tbPedidos = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(sql, con.ObjCon);
             da.Fill(tbPedidos);
@@ -729,7 +778,7 @@ namespace BLL
             {
                 pedidoRow = vPedidos[a].Row;
                 strTipoReconhecimento = getTipoReconhecimento(pedidoRow, strTipoReconhecimento);
-                nome = pedidoRow[4].ToString();
+                nome = " "+pedidoRow[4].ToString();
                 if (a == 0)
                 {
                     tipoRec = Convert.ToInt16(pedidoRow[0].ToString());
@@ -1844,7 +1893,7 @@ namespace BLL
             SqlTransaction trans = con.ObjCon.BeginTransaction();
 
             Pedido pedido = new Pedido();
-            pedido = pedidoDAO.getNovoPedido(dsLogin, trans);
+            
 
             double valor = 0;
             DataTable dados = itemPedidoDAO.getItensPedido(nrPedido, trans);
@@ -1855,15 +1904,18 @@ namespace BLL
 
             try
             {
-                for (int i = 0; i < dvDados.Count; i++)
+                for (int rep = 0; rep < nrRepeticoes; rep++)
                 {
-                    drDados = dvDados[i].Row;
-                    string nselo = drDados["nrSelo"].ToString();
-                    int ato = Convert.ToInt16(drDados["cdAto"].ToString());
-                    if (drDados["nrSelo"].ToString() != "")
+                    pedido = pedidoDAO.getNovoPedido(dsLogin, trans);
+                    for (int i = 0; i < dvDados.Count; i++)
                     {
-                        for (int rep = 0; rep < nrRepeticoes; rep++)
+                        drDados = dvDados[i].Row;
+                        string nselo = drDados["nrSelo"].ToString();
+                        int ato = Convert.ToInt16(drDados["cdAto"].ToString());
+                        if (drDados["nrSelo"].ToString() != "")
                         {
+                            //for (int rep = 0; rep < nrRepeticoes; rep++)
+                            //{
                             selo = seloDAO.getUltimoSelo(atoDAO.getAtoOperacao(ato, trans).CdTipoDocumento, dsLogin, trans);
                             if (selo != null)
                             {
@@ -1886,15 +1938,16 @@ namespace BLL
                                 con.ObjCon.Close();
                                 throw new Exception("Não há selo disponível para esta operação!");
                             }
+                            //}
+
                         }
 
+                        valor += Convert.ToDouble(drDados["vlItem"].ToString());
+
                     }
-
-                    valor += Convert.ToDouble(drDados["vlItem"].ToString());
-
+                    pedidoDAO.atualizaPedido(pedido.NrPedido, 'F', trans);
                 }
-
-                pedidoDAO.atualizaPedido(pedido.NrPedido, 'F', trans);
+                
 
                 trans.Commit();
             }

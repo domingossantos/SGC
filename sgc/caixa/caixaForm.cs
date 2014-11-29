@@ -962,39 +962,42 @@ namespace sgc.caixa
 
         public void imprimeEtiqueta(List<int> pedidos) {
 
-       
             List<String> linhasImpressao = new List<string>();
-            linhasImpressao = pedidoBLL.geraDadosEtiqueta(pedidos, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
 
-            utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);
-            Reporter imp = new Reporter();
-            EpsonCodes iCodes = new EpsonCodes();
-            bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
 
-            if (arquivo)
+            foreach (int pedido in pedidos)
             {
-                if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA")))
+                linhasImpressao = pedidoBLL.geraDadosEtiqueta(pedido, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
+
+                utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);
+                Reporter imp = new Reporter();
+                EpsonCodes iCodes = new EpsonCodes();
+                bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
+
+                if (arquivo)
                 {
-                    File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA"));
+                    if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA")))
+                    {
+                        File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA"));
+                    }
                 }
+
+
+                imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA");
+                imp.StartJob();
+
+                sbyte i = 1;
+                imp.PrintText(i, 1, "");
+                imp.PrintText(i++, 1, "");
+                for (int x = 0; x < linhasImpressao.Count; x++)
+                {
+                    imp.PrintText((i++), 1, iCodes.CondensedOn + linhasImpressao[x] + iCodes.CondensedOff);
+                }
+
+                imp.PutText(iCodes.Eject);
+                imp.EndJob();
+                imp.PrintJob();
             }
-
-
-            imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA");
-            imp.StartJob();
-
-            sbyte i = 1;
-            imp.PrintText(i, 1, "");
-            imp.PrintText(i++, 1, "");
-            for (int x = 0; x < linhasImpressao.Count; x++)
-            {
-                imp.PrintText((i++), 1, iCodes.CondensedOn +linhasImpressao[x]+iCodes.CondensedOff);
-            }
-
-            imp.PutText(iCodes.Eject);
-            imp.EndJob();
-            imp.PrintJob();
-
 
             /*
             int nLen, ret, sw;
