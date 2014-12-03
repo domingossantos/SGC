@@ -963,30 +963,28 @@ namespace sgc.caixa
         public void imprimeEtiqueta(List<int> pedidos) {
 
             List<String> linhasImpressao = new List<string>();
+            utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);
+            Reporter imp = new Reporter();
+            EpsonCodes iCodes = new EpsonCodes();
+            bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
+
+            if (arquivo)
+            {
+                if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA")))
+                {
+                    File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA"));
+                }
+            }
 
 
+            imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA");
+            imp.StartJob();
+            int i = 1;
             foreach (int pedido in pedidos)
             {
                 linhasImpressao = pedidoBLL.geraDadosEtiqueta(pedido, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
 
-                utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);
-                Reporter imp = new Reporter();
-                EpsonCodes iCodes = new EpsonCodes();
-                bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
-
-                if (arquivo)
-                {
-                    if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA")))
-                    {
-                        File.Delete(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA"));
-                    }
-                }
-
-
-                imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA");
-                imp.StartJob();
-
-                sbyte i = 1;
+                
                 imp.PrintText(i, 1, "");
                 imp.PrintText(i++, 1, "");
                 for (int x = 0; x < linhasImpressao.Count; x++)
@@ -994,11 +992,12 @@ namespace sgc.caixa
                     imp.PrintText((i++), 1, iCodes.CondensedOn + linhasImpressao[x] + iCodes.CondensedOff);
                 }
 
-                imp.PutText(iCodes.Eject);
-                imp.EndJob();
-                imp.PrintJob();
+                
             }
 
+            imp.PutText(iCodes.Eject);
+            imp.EndJob();
+            imp.PrintJob();
             /*
             int nLen, ret, sw;
             byte[] pbuf = new byte[128];
