@@ -432,7 +432,7 @@ namespace sgc.admin
 
         private void btEtiqueta_Click(object sender, EventArgs e)
         {
-            int item = Convert.ToInt32(txNrPedido.Text);
+            String item = txNrPedido.Text;
             linhasImpressao = this.pedidoBll.geraDadosEtiqueta(item, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
 
             utils.IniFile iniFile = new utils.IniFile(sessao.PathIniFile);

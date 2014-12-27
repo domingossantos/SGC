@@ -967,7 +967,7 @@ namespace sgc.caixa
             Reporter imp = new Reporter();
             EpsonCodes iCodes = new EpsonCodes();
             bool arquivo = Convert.ToBoolean(iniFile.IniReadValue("CONFIGCAIXA", "FLAGARQUIVO"));
-
+            String strPedidos = "";
             if (arquivo)
             {
                 if (File.Exists(iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA")))
@@ -980,19 +980,28 @@ namespace sgc.caixa
             imp.Output = iniFile.IniReadValue("CONFIGCAIXA", "IMPRETIQUETA");
             imp.StartJob();
             int i = 1;
+            sbyte count = 0;
             foreach (int pedido in pedidos)
             {
-                linhasImpressao = pedidoBLL.geraDadosEtiqueta(pedido, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
+                strPedidos += pedido.ToString() + ",";
+            }
 
-                
+            strPedidos = strPedidos.Substring(0, (strPedidos.Length - 1));
+
+            linhasImpressao = pedidoBLL.geraDadosEtiqueta(strPedidos, sessao.PathIniFile, sessao.UsuarioSessao.NmUsuario);
+
+            if (count == 0)
+            {
                 imp.PrintText(i, 1, "");
                 imp.PrintText(i++, 1, "");
-                for (int x = 0; x < linhasImpressao.Count; x++)
-                {
-                    imp.PrintText((i++), 1, iCodes.CondensedOn + linhasImpressao[x] + iCodes.CondensedOff);
-                }
-
-                
+            }
+            else
+            {
+                imp.PrintText(i++, 1, "");
+            }
+            for (int x = 0; x < linhasImpressao.Count; x++)
+            {
+                imp.PrintText((i++), 1, iCodes.CondensedOn + linhasImpressao[x] + iCodes.CondensedOff);
             }
 
             imp.PutText(iCodes.Eject);

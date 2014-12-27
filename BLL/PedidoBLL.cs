@@ -691,7 +691,7 @@ namespace BLL
             return dt;
         }
 
-        public List<string> geraDadosEtiqueta(int nrPedido, string pathIniFile,string nmUsuario)
+        public List<string> geraDadosEtiqueta(String nrPedidos, string pathIniFile,string nmUsuario)
         {
 
             String sql = "";
@@ -727,8 +727,8 @@ namespace BLL
             sql = sql + " 	from tblItensPedido i  \n ";
             sql = sql + " 	inner join tblTipoSelo t on i.cdTipoSelo = t.cdTipoSelo  \n ";
             sql = sql + " 	where cdAto in(60,61)  \n ";
-            sql = sql + " 	and nrPedido = " + nrPedido.ToString() + "  \n ";
-            sql = sql + " 	order by i.tpReconhecimento , i.nrSelo asc \n ";
+            sql = sql + " 	and nrPedido in (" + nrPedidos + ")  \n ";
+            sql = sql + " 	order by i.nrPedido, i.tpReconhecimento , i.nrSelo asc \n ";
             sql = sql + " 	 \n ";
             sql = sql + " open cDados \n ";
             sql = sql + "  \n ";
