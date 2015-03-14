@@ -950,7 +950,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 252F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1064, 542);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1064, 479);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // tableLayoutPanel2
@@ -974,14 +974,14 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 185F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1058, 361);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1058, 298);
             this.tableLayoutPanel2.TabIndex = 12;
             // 
             // gridItensOrcamento
             // 
             this.gridItensOrcamento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridItensOrcamento.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridItensOrcamento.Location = new System.Drawing.Point(3, 179);
+            this.gridItensOrcamento.Location = new System.Drawing.Point(3, 116);
             this.gridItensOrcamento.Name = "gridItensOrcamento";
             this.gridItensOrcamento.Size = new System.Drawing.Size(343, 179);
             this.gridItensOrcamento.TabIndex = 28;
@@ -990,7 +990,7 @@
             // 
             this.gridItensPgto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridItensPgto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridItensPgto.Location = new System.Drawing.Point(352, 179);
+            this.gridItensPgto.Location = new System.Drawing.Point(352, 116);
             this.gridItensPgto.Name = "gridItensPgto";
             this.gridItensPgto.Size = new System.Drawing.Size(353, 179);
             this.gridItensPgto.TabIndex = 27;
@@ -999,7 +999,7 @@
             // 
             this.gridRecebe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridRecebe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridRecebe.Location = new System.Drawing.Point(711, 179);
+            this.gridRecebe.Location = new System.Drawing.Point(711, 116);
             this.gridRecebe.Name = "gridRecebe";
             this.gridRecebe.Size = new System.Drawing.Size(344, 179);
             this.gridRecebe.TabIndex = 26;
@@ -1014,7 +1014,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(343, 170);
+            this.panel2.Size = new System.Drawing.Size(343, 107);
             this.panel2.TabIndex = 10;
             // 
             // brImportOrcamento
@@ -1071,7 +1071,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(352, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(353, 170);
+            this.panel3.Size = new System.Drawing.Size(353, 107);
             this.panel3.TabIndex = 11;
             // 
             // btPagamento
@@ -1128,7 +1128,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(711, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(344, 170);
+            this.panel4.Size = new System.Drawing.Size(344, 107);
             this.panel4.TabIndex = 12;
             // 
             // btRecebimento
@@ -1180,7 +1180,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(1064, 741);
+            this.ClientSize = new System.Drawing.Size(1064, 678);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);

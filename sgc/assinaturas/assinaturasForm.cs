@@ -509,7 +509,7 @@ namespace sgc.assinaturas
                         return;
                     }
                 }
-                catch (Exception ex) { 
+                catch (Exception) { 
                     MessageBox.Show("Digite um numero válido");
                     return;
                 }

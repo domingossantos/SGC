@@ -76,7 +76,6 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -97,9 +96,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.btZoomOut);
             this.splitContainer1.Panel2.Controls.Add(this.btZoomIn);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1710, 998);
-            this.splitContainer1.SplitterDistance = 850;
-            this.splitContainer1.SplitterWidth = 8;
+            this.splitContainer1.Size = new System.Drawing.Size(859, 474);
+            this.splitContainer1.SplitterDistance = 426;
             this.splitContainer1.TabIndex = 0;
             // 
             // btOutraBase
@@ -107,10 +105,9 @@
             this.btOutraBase.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btOutraBase.Image = global::sgc.Properties.Resources.search;
             this.btOutraBase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btOutraBase.Location = new System.Drawing.Point(672, 85);
-            this.btOutraBase.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btOutraBase.Location = new System.Drawing.Point(336, 44);
             this.btOutraBase.Name = "btOutraBase";
-            this.btOutraBase.Size = new System.Drawing.Size(150, 44);
+            this.btOutraBase.Size = new System.Drawing.Size(75, 23);
             this.btOutraBase.TabIndex = 9;
             this.btOutraBase.Text = "Outra";
             this.btOutraBase.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -124,11 +121,9 @@
             this.groupBox1.Controls.Add(this.txObservacao);
             this.groupBox1.Controls.Add(this.grid);
             this.groupBox1.Controls.Add(this.txPesquisa);
-            this.groupBox1.Location = new System.Drawing.Point(16, 127);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Location = new System.Drawing.Point(8, 66);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.groupBox1.Size = new System.Drawing.Size(828, 596);
+            this.groupBox1.Size = new System.Drawing.Size(415, 310);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Argumentos para Pesquisa";
@@ -138,22 +133,20 @@
             this.txObservacao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txObservacao.ForeColor = System.Drawing.Color.Red;
-            this.txObservacao.Location = new System.Drawing.Point(8, 519);
-            this.txObservacao.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txObservacao.Location = new System.Drawing.Point(4, 270);
             this.txObservacao.Multiline = true;
             this.txObservacao.Name = "txObservacao";
-            this.txObservacao.Size = new System.Drawing.Size(798, 62);
+            this.txObservacao.Size = new System.Drawing.Size(402, 34);
             this.txObservacao.TabIndex = 10;
             // 
             // grid
             // 
             this.grid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.grid.Location = new System.Drawing.Point(12, 112);
-            this.grid.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grid.Location = new System.Drawing.Point(6, 58);
             this.grid.Name = "grid";
             this.grid.ReadOnly = true;
             this.grid.RowHeadersVisible = false;
-            this.grid.Size = new System.Drawing.Size(804, 396);
+            this.grid.Size = new System.Drawing.Size(403, 206);
             this.grid.TabIndex = 9;
             this.grid.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellEnter);
             this.grid.DoubleClick += new System.EventHandler(this.grid_DoubleClick);
@@ -162,10 +155,9 @@
             // 
             this.txPesquisa.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txPesquisa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txPesquisa.Location = new System.Drawing.Point(14, 37);
-            this.txPesquisa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txPesquisa.Location = new System.Drawing.Point(7, 19);
             this.txPesquisa.Name = "txPesquisa";
-            this.txPesquisa.Size = new System.Drawing.Size(792, 44);
+            this.txPesquisa.Size = new System.Drawing.Size(398, 26);
             this.txPesquisa.TabIndex = 7;
             this.txPesquisa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txPesquisa_KeyPress);
             // 
@@ -176,11 +168,9 @@
             this.groupBox2.Controls.Add(this.rbDoc);
             this.groupBox2.Controls.Add(this.rbSemelhante);
             this.groupBox2.Controls.Add(this.rbAutentico);
-            this.groupBox2.Location = new System.Drawing.Point(16, 735);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Location = new System.Drawing.Point(8, 382);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.groupBox2.Size = new System.Drawing.Size(828, 85);
+            this.groupBox2.Size = new System.Drawing.Size(415, 44);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tipo de Reconhecimento";
@@ -188,10 +178,9 @@
             // rbDoc
             // 
             this.rbDoc.AutoSize = true;
-            this.rbDoc.Location = new System.Drawing.Point(514, 31);
-            this.rbDoc.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbDoc.Location = new System.Drawing.Point(257, 16);
             this.rbDoc.Name = "rbDoc";
-            this.rbDoc.Size = new System.Drawing.Size(184, 30);
+            this.rbDoc.Size = new System.Drawing.Size(92, 17);
             this.rbDoc.TabIndex = 2;
             this.rbDoc.Text = "Endo (Ctrl + 0)";
             this.rbDoc.UseVisualStyleBackColor = true;
@@ -200,10 +189,9 @@
             // 
             this.rbSemelhante.AutoSize = true;
             this.rbSemelhante.Checked = true;
-            this.rbSemelhante.Location = new System.Drawing.Point(248, 31);
-            this.rbSemelhante.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbSemelhante.Location = new System.Drawing.Point(124, 16);
             this.rbSemelhante.Name = "rbSemelhante";
-            this.rbSemelhante.Size = new System.Drawing.Size(250, 30);
+            this.rbSemelhante.Size = new System.Drawing.Size(123, 17);
             this.rbSemelhante.TabIndex = 1;
             this.rbSemelhante.TabStop = true;
             this.rbSemelhante.Text = "Semelhante (Ctrl + 9)";
@@ -212,10 +200,9 @@
             // rbAutentico
             // 
             this.rbAutentico.AutoSize = true;
-            this.rbAutentico.Location = new System.Drawing.Point(12, 31);
-            this.rbAutentico.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbAutentico.Location = new System.Drawing.Point(6, 16);
             this.rbAutentico.Name = "rbAutentico";
-            this.rbAutentico.Size = new System.Drawing.Size(224, 30);
+            this.rbAutentico.Size = new System.Drawing.Size(112, 17);
             this.rbAutentico.TabIndex = 0;
             this.rbAutentico.Text = "Autentico (Ctrl + 8)";
             this.rbAutentico.UseVisualStyleBackColor = true;
@@ -225,10 +212,9 @@
             this.btPesquisa.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btPesquisa.Image = global::sgc.Properties.Resources.search;
             this.btPesquisa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btPesquisa.Location = new System.Drawing.Point(672, 23);
-            this.btPesquisa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btPesquisa.Location = new System.Drawing.Point(336, 12);
             this.btPesquisa.Name = "btPesquisa";
-            this.btPesquisa.Size = new System.Drawing.Size(154, 50);
+            this.btPesquisa.Size = new System.Drawing.Size(77, 26);
             this.btPesquisa.TabIndex = 8;
             this.btPesquisa.Text = "Pesquisar";
             this.btPesquisa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -243,11 +229,9 @@
             this.grbPesquisa.Controls.Add(this.rbRG);
             this.grbPesquisa.Controls.Add(this.rbCPF);
             this.grbPesquisa.Controls.Add(this.rbNome);
-            this.grbPesquisa.Location = new System.Drawing.Point(16, 13);
-            this.grbPesquisa.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grbPesquisa.Location = new System.Drawing.Point(8, 7);
             this.grbPesquisa.Name = "grbPesquisa";
-            this.grbPesquisa.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.grbPesquisa.Size = new System.Drawing.Size(632, 102);
+            this.grbPesquisa.Size = new System.Drawing.Size(316, 53);
             this.grbPesquisa.TabIndex = 1;
             this.grbPesquisa.TabStop = false;
             this.grbPesquisa.Text = "Pesquisar por:";
@@ -256,10 +240,9 @@
             // 
             this.rbCartorio.AutoSize = true;
             this.rbCartorio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbCartorio.Location = new System.Drawing.Point(222, 60);
-            this.rbCartorio.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbCartorio.Location = new System.Drawing.Point(111, 31);
             this.rbCartorio.Name = "rbCartorio";
-            this.rbCartorio.Size = new System.Drawing.Size(210, 30);
+            this.rbCartorio.Size = new System.Drawing.Size(103, 17);
             this.rbCartorio.TabIndex = 5;
             this.rbCartorio.TabStop = true;
             this.rbCartorio.Text = "Cartório (Ctrl + 6)";
@@ -270,10 +253,9 @@
             // 
             this.rbCidade.AutoSize = true;
             this.rbCidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbCidade.Location = new System.Drawing.Point(10, 60);
-            this.rbCidade.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbCidade.Location = new System.Drawing.Point(5, 31);
             this.rbCidade.Name = "rbCidade";
-            this.rbCidade.Size = new System.Drawing.Size(202, 30);
+            this.rbCidade.Size = new System.Drawing.Size(100, 17);
             this.rbCidade.TabIndex = 4;
             this.rbCidade.TabStop = true;
             this.rbCidade.Text = "Cidade (Ctrl + 5)";
@@ -284,10 +266,9 @@
             // 
             this.rbCartao.AutoSize = true;
             this.rbCartao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbCartao.Location = new System.Drawing.Point(432, 58);
-            this.rbCartao.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbCartao.Location = new System.Drawing.Point(216, 30);
             this.rbCartao.Name = "rbCartao";
-            this.rbCartao.Size = new System.Drawing.Size(186, 30);
+            this.rbCartao.Size = new System.Drawing.Size(93, 17);
             this.rbCartao.TabIndex = 3;
             this.rbCartao.TabStop = true;
             this.rbCartao.Text = "Ficha (Ctrl + 4)";
@@ -298,10 +279,9 @@
             // 
             this.rbRG.AutoSize = true;
             this.rbRG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbRG.Location = new System.Drawing.Point(434, 25);
-            this.rbRG.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbRG.Location = new System.Drawing.Point(217, 13);
             this.rbRG.Name = "rbRG";
-            this.rbRG.Size = new System.Drawing.Size(160, 30);
+            this.rbRG.Size = new System.Drawing.Size(80, 17);
             this.rbRG.TabIndex = 2;
             this.rbRG.TabStop = true;
             this.rbRG.Text = "RG (Ctrl+ 3)";
@@ -312,10 +292,9 @@
             // 
             this.rbCPF.AutoSize = true;
             this.rbCPF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbCPF.Location = new System.Drawing.Point(222, 25);
-            this.rbCPF.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbCPF.Location = new System.Drawing.Point(111, 13);
             this.rbCPF.Name = "rbCPF";
-            this.rbCPF.Size = new System.Drawing.Size(177, 30);
+            this.rbCPF.Size = new System.Drawing.Size(87, 17);
             this.rbCPF.TabIndex = 1;
             this.rbCPF.TabStop = true;
             this.rbCPF.Text = "CPF (Ctrl + 2)";
@@ -327,10 +306,9 @@
             this.rbNome.AutoSize = true;
             this.rbNome.Checked = true;
             this.rbNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbNome.Location = new System.Drawing.Point(10, 25);
-            this.rbNome.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.rbNome.Location = new System.Drawing.Point(5, 13);
             this.rbNome.Name = "rbNome";
-            this.rbNome.Size = new System.Drawing.Size(192, 30);
+            this.rbNome.Size = new System.Drawing.Size(95, 17);
             this.rbNome.TabIndex = 0;
             this.rbNome.TabStop = true;
             this.rbNome.Text = "Nome (Ctrl + 1)";
@@ -342,20 +320,18 @@
             this.lbRenovacao.AutoSize = true;
             this.lbRenovacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRenovacao.ForeColor = System.Drawing.Color.Red;
-            this.lbRenovacao.Location = new System.Drawing.Point(132, 569);
-            this.lbRenovacao.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbRenovacao.Location = new System.Drawing.Point(66, 296);
             this.lbRenovacao.Name = "lbRenovacao";
-            this.lbRenovacao.Size = new System.Drawing.Size(177, 36);
+            this.lbRenovacao.Size = new System.Drawing.Size(90, 18);
             this.lbRenovacao.TabIndex = 8;
             this.lbRenovacao.Text = "00/00/0000";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 577);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Location = new System.Drawing.Point(3, 300);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 26);
+            this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Renovação";
             // 
@@ -363,12 +339,11 @@
             // 
             this.txPedido.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txPedido.FormattingEnabled = true;
-            this.txPedido.ItemHeight = 24;
-            this.txPedido.Location = new System.Drawing.Point(6, 619);
-            this.txPedido.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txPedido.ItemHeight = 14;
+            this.txPedido.Location = new System.Drawing.Point(3, 322);
             this.txPedido.Name = "txPedido";
             this.txPedido.ScrollAlwaysVisible = true;
-            this.txPedido.Size = new System.Drawing.Size(828, 268);
+            this.txPedido.Size = new System.Drawing.Size(416, 130);
             this.txPedido.TabIndex = 6;
             // 
             // btZoomOut
@@ -376,10 +351,9 @@
             this.btZoomOut.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btZoomOut.Image = global::sgc.Properties.Resources.search;
             this.btZoomOut.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btZoomOut.Location = new System.Drawing.Point(638, 565);
-            this.btZoomOut.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btZoomOut.Location = new System.Drawing.Point(319, 294);
             this.btZoomOut.Name = "btZoomOut";
-            this.btZoomOut.Size = new System.Drawing.Size(200, 48);
+            this.btZoomOut.Size = new System.Drawing.Size(100, 25);
             this.btZoomOut.TabIndex = 4;
             this.btZoomOut.Text = "Afastar (F12)";
             this.btZoomOut.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -391,10 +365,9 @@
             this.btZoomIn.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btZoomIn.Image = global::sgc.Properties.Resources.search;
             this.btZoomIn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btZoomIn.Location = new System.Drawing.Point(416, 565);
-            this.btZoomIn.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btZoomIn.Location = new System.Drawing.Point(208, 294);
             this.btZoomIn.Name = "btZoomIn";
-            this.btZoomIn.Size = new System.Drawing.Size(200, 48);
+            this.btZoomIn.Size = new System.Drawing.Size(100, 25);
             this.btZoomIn.TabIndex = 2;
             this.btZoomIn.Text = "Aproximar (F11)";
             this.btZoomIn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -406,10 +379,9 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.imagem);
-            this.panel1.Location = new System.Drawing.Point(6, 13);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel1.Location = new System.Drawing.Point(3, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(832, 546);
+            this.panel1.Size = new System.Drawing.Size(418, 286);
             this.panel1.TabIndex = 5;
             // 
             // imagem
@@ -418,10 +390,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imagem.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.imagem.Location = new System.Drawing.Point(0, -4);
-            this.imagem.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.imagem.Location = new System.Drawing.Point(0, -2);
             this.imagem.Name = "imagem";
-            this.imagem.Size = new System.Drawing.Size(828, 540);
+            this.imagem.Size = new System.Drawing.Size(414, 281);
             this.imagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagem.TabIndex = 2;
             this.imagem.TabStop = false;
@@ -432,10 +403,9 @@
             this.btCancelarPedido.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCancelarPedido.Image = global::sgc.Properties.Resources.delete;
             this.btCancelarPedido.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btCancelarPedido.Location = new System.Drawing.Point(1412, 19);
-            this.btCancelarPedido.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btCancelarPedido.Location = new System.Drawing.Point(706, 10);
             this.btCancelarPedido.Name = "btCancelarPedido";
-            this.btCancelarPedido.Size = new System.Drawing.Size(294, 58);
+            this.btCancelarPedido.Size = new System.Drawing.Size(147, 30);
             this.btCancelarPedido.TabIndex = 16;
             this.btCancelarPedido.Text = "Cancelar Pedido (Ctrl+del)";
             this.btCancelarPedido.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -448,10 +418,9 @@
             this.btFecharPedido.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btFecharPedido.Image = global::sgc.Properties.Resources.alert;
             this.btFecharPedido.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btFecharPedido.Location = new System.Drawing.Point(1110, 19);
-            this.btFecharPedido.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btFecharPedido.Location = new System.Drawing.Point(555, 10);
             this.btFecharPedido.Name = "btFecharPedido";
-            this.btFecharPedido.Size = new System.Drawing.Size(294, 58);
+            this.btFecharPedido.Size = new System.Drawing.Size(147, 30);
             this.btFecharPedido.TabIndex = 15;
             this.btFecharPedido.Text = "Fechar Pedido (Ctrl+F)";
             this.btFecharPedido.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -464,10 +433,9 @@
             this.btInserirPedido.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btInserirPedido.Image = global::sgc.Properties.Resources.package_editors;
             this.btInserirPedido.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btInserirPedido.Location = new System.Drawing.Point(808, 19);
-            this.btInserirPedido.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btInserirPedido.Location = new System.Drawing.Point(404, 10);
             this.btInserirPedido.Name = "btInserirPedido";
-            this.btInserirPedido.Size = new System.Drawing.Size(294, 58);
+            this.btInserirPedido.Size = new System.Drawing.Size(147, 30);
             this.btInserirPedido.TabIndex = 14;
             this.btInserirPedido.Text = "Inserir Pedido (Insert)";
             this.btInserirPedido.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -482,10 +450,9 @@
             this.cbOperacao.FormattingEnabled = true;
             this.cbOperacao.Items.AddRange(new object[] {
             "Selecione"});
-            this.cbOperacao.Location = new System.Drawing.Point(6, 31);
-            this.cbOperacao.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cbOperacao.Location = new System.Drawing.Point(3, 16);
             this.cbOperacao.Name = "cbOperacao";
-            this.cbOperacao.Size = new System.Drawing.Size(764, 37);
+            this.cbOperacao.Size = new System.Drawing.Size(384, 24);
             this.cbOperacao.TabIndex = 13;
             this.cbOperacao.Text = "Selecione";
             // 
@@ -493,10 +460,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(10, 2);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label2.Location = new System.Drawing.Point(5, 1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 24);
+            this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 12;
             this.label2.Text = "Operação(+):";
             // 
@@ -508,21 +474,19 @@
             this.panel2.Controls.Add(this.btFecharPedido);
             this.panel2.Controls.Add(this.btInserirPedido);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 915);
-            this.panel2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel2.Location = new System.Drawing.Point(0, 431);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1710, 83);
+            this.panel2.Size = new System.Drawing.Size(859, 43);
             this.panel2.TabIndex = 1;
             // 
             // assinaturasForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1710, 998);
+            this.ClientSize = new System.Drawing.Size(859, 474);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.splitContainer1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "assinaturasForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Assinaturas";

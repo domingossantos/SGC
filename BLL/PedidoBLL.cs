@@ -1194,6 +1194,9 @@ namespace BLL
                 imp.PrintText(9, 1, "Data/Hora (Inicio)..: " + historico.DtAbertura.ToString());
                 imp.PrintText(10, 1, "Data/Hora (Fim).....: " + historico.DtFechamento.ToString());
 
+                MatrixReporter.EpsonCodes e = new EpsonCodes();
+                
+
                 #region Lista de Selos Utilizados
                 DataTable selosUsados = pedidoDAO.selosUtilizados(historico.DtAbertura.ToShortDateString()
                         , historico.IdHistoricocaixa, 0);
