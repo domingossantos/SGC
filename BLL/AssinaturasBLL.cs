@@ -39,7 +39,7 @@ namespace BLL
         public DataTable pesquisaCartao(String arg, int tipo,bool remoto = false)
         {
             DataTable dados = new DataTable();
-
+            remoto = false;
             if (!remoto)
             {
                 if (con.ObjCon.State == ConnectionState.Closed)
@@ -74,7 +74,7 @@ namespace BLL
                     dados = cartaoDAO.pesquisaCartaoSGC(arg,tipo);
 
                     if (dados.Rows.Count < 1) {
-                        dados = cartaoDAO.pesquisaCartaoCartorioNew(arg, tipo);
+                        //dados = cartaoDAO.pesquisaCartaoCartorioNew(arg, tipo);
                     }
                 }
                 catch (Exception e)

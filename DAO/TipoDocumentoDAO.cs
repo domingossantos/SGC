@@ -19,7 +19,7 @@ namespace DAO
 
         public DataTable getTiposDocumentos(String filtro = "")
         {
-            String sql = "Select cdTipoDocumento,nmTipoDocumento ";
+            String sql = "Select cdTipoDocumento, nmTipoDocumento ";
             sql += "from tblTipoDocumento where 1 = 1 " + filtro;
             sql += " order by nmTipoDocumento";
 

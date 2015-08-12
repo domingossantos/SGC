@@ -54,7 +54,7 @@ namespace sgc.processos
 
         public void carregaTipoDoc(int idx = 0)
         {
-            cbTipoDoc.DataSource = tipoDocDAO.getTiposDocumentos("and cdTipoDocumento between 2 and 6");
+            cbTipoDoc.DataSource = tipoDocDAO.getTiposDocumentos("and cdTipoDocumento between 2 and 6 ");
             cbTipoDoc.ValueMember = "cdTipoDocumento";
             cbTipoDoc.DisplayMember = "nmTipoDocumento";
 
@@ -330,15 +330,16 @@ namespace sgc.processos
                      */
                     #endregion
 
-                    if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 4)
+                    /*if (Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()) == 4)
                     {
                         selo = seloBLL.getSeloTipo(2,getGratuidade());
                     }
                     else
                     {
                         selo = seloBLL.getSeloTipo(Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()),getGratuidade());
-                    }
+                    }*/
 
+                    selo = seloBLL.getSeloTipo(Convert.ToInt32(cbTipoDoc.SelectedValue.ToString()), getGratuidade());
 
                     if (selo == null)
                     {
